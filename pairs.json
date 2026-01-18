@@ -1,0 +1,175 @@
+[
+  {
+    "ticker": "VTI",
+    "name": "Vanguard Total Stock Market Index Fund ETF Shares",
+    "sector": "Large Blend",
+    "price": 342.05,
+    "partners": [
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9988,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SCHB",
+        "correlation": 0.9981,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9962,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VOO",
+    "name": "Vanguard S&P 500 ETF",
+    "sector": "Large Blend",
+    "price": 636.62,
+    "partners": [
+      {
+        "ticker": "IVV",
+        "correlation": 0.9995,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SPLG",
+        "correlation": 0.9982,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9966,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "QQQ",
+    "name": "Invesco QQQ Trust",
+    "sector": "Large Growth",
+    "price": 621.78,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9998,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9906,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9612,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "ARKK",
+    "name": "ARK Innovation ETF",
+    "sector": "Mid-Cap Growth",
+    "price": 81.93,
+    "partners": []
+  },
+  {
+    "ticker": "SMH",
+    "name": "VanEck Semiconductor ETF",
+    "sector": "Technology",
+    "price": 396.545,
+    "partners": [
+      {
+        "ticker": "SOXX",
+        "correlation": 0.9804,
+        "overlap_estimate": 63,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "PSI",
+        "correlation": 0.9589,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9018,
+        "overlap_estimate": 58,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VNQ",
+    "name": "Vanguard Real Estate Index Fund ETF Shares",
+    "sector": "Real Estate",
+    "price": 91.5,
+    "partners": [
+      {
+        "ticker": "SCHH",
+        "correlation": 0.9922,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "GLD",
+    "name": "SPDR Gold Shares",
+    "sector": "Commodities Focused",
+    "price": 423.33,
+    "partners": [
+      {
+        "ticker": "IAU",
+        "correlation": 0.9996,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IWM",
+    "name": "iShares Russell 2000 ETF",
+    "sector": "Small Blend",
+    "price": 265.51,
+    "partners": []
+  },
+  {
+    "ticker": "EEM",
+    "name": "iShares MSCI Emerging Markets ETF",
+    "sector": "Diversified Emerging Mkts",
+    "price": 58.09,
+    "partners": [
+      {
+        "ticker": "IEMG",
+        "correlation": 0.9973,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "VWO",
+        "correlation": 0.9866,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "TLT",
+    "name": "iShares 20+ Year Treasury Bond ETF",
+    "sector": "Long Government",
+    "price": 88.31,
+    "partners": []
+  }
+]
