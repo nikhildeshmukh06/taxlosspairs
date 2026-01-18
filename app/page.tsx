@@ -14,12 +14,16 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       
-      {/* --- COMPLIANCE WARNING --- */}
+      {/* --- COMPLIANCE WARNING (SPLIT FOR CLARITY) --- */}
       <div className="bg-amber-50 border-b border-amber-100 p-3 text-center">
-        <p className="text-xs text-amber-900 font-medium">
-          ⚠️ <strong>Data Only. Not Investment Advice.</strong> This tool displays historical statistical correlations. 
-          It does not assess "Substantially Identical" status. You are responsible for your own tax compliance.
-        </p>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-xs text-amber-900 font-bold mb-1">
+            ⚠️ Data Only. Not investment or tax advice.
+          </p>
+          <p className="text-[11px] text-amber-800 opacity-90 leading-tight">
+             This tool shows historical correlations and estimated overlap. It does not determine wash sale compliance.
+          </p>
+        </div>
       </div>
 
       {/* --- HEADER --- */}
@@ -35,9 +39,13 @@ export default function Home() {
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
           ETF Correlation & <span className="text-blue-600">Overlap Data</span>
         </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          Analyze statistical relationships between ETFs for your Tax Loss Harvesting research.
-          <br/>View 2-year correlation coefficients and sector overlap estimates.
+        
+        {/* ACTION HOOK (Point 1) */}
+        <p className="text-lg font-medium text-gray-800 mb-2">
+          Use this tool to compare ETFs when researching potential alternatives during Tax Loss Harvesting.
+        </p>
+        <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-8">
+          View 2-year correlation coefficients and sector overlap estimates.
         </p>
 
         {/* SEARCH */}
@@ -53,8 +61,10 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="text-sm text-gray-400 mt-4">
-          Showing {filteredData.length} of {pairsData.length} Major ETFs
+        
+        {/* POPULAR SEARCHES (Point 8) */}
+        <div className="text-xs text-gray-400 mt-3">
+          Popular: <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VTI")}>VTI</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VOO")}>VOO</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("QQQ")}>QQQ</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VXUS")}>VXUS</span>
         </div>
       </div>
 
@@ -85,65 +95,62 @@ export default function Home() {
             {/* PARTNERS LIST */}
             <div className="p-6">
               <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Statistical Correlation Data</h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {etf.partners.map((partner) => (
-                  <div key={partner.ticker} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+                  <div key={partner.ticker} className="p-4 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-colors">
                     
-                    {/* Partner Info */}
-                    <div className="flex items-center gap-4">
-                      <div className="h-10 w-10 bg-white border border-gray-200 rounded-md flex items-center justify-center font-bold text-gray-600 shadow-sm">
-                        {partner.ticker}
+                    <div className="flex items-start justify-between">
+                      {/* Partner Info */}
+                      <div className="flex gap-4">
+                        <div className="h-10 w-10 bg-white border border-gray-200 rounded-md flex items-center justify-center font-bold text-gray-600 shadow-sm shrink-0">
+                          {partner.ticker}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-bold text-gray-900">{partner.ticker}</span>
+                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${partner.verdict === "Excellent Match" ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
+                              {partner.verdict === "Excellent Match" ? "High Correlation" : "Moderate Correlation"}
+                            </span>
+                          </div>
+                          
+                          {/* METRICS & EXPLAINER (Points 2 & 3) */}
+                          <div className="text-xs text-gray-600 font-medium">
+                            2-yr Daily Correlation: <span className="text-black">{(partner.correlation * 100).toFixed(1)}%</span> 
+                            <span className="mx-2">•</span> 
+                            Est. Holdings Overlap: <span className="text-black">~{partner.overlap_estimate}%</span>
+                          </div>
+                          <div className="text-[10px] text-gray-400 mt-1 leading-relaxed">
+                            Overlap estimates shared underlying holdings. Lower overlap may indicate different index composition.
+                          </div>
+                        </div>
                       </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="font-bold text-gray-900">{partner.ticker}</span>
-                          {/* UPDATED: Neutral Badges */}
-                          <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${partner.verdict === "Excellent Match" ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
-                            {partner.verdict === "Excellent Match" ? "High Correlation" : "Moderate Correlation"}
-                          </span>
-                        </div>
-                        {/* UPDATED: Metric Explainer */}
-                        <div className="text-xs text-gray-500 mt-1">
-                          Correlation: {(partner.correlation * 100).toFixed(1)}% • Overlap: ~{partner.overlap_estimate}%
-                        </div>
-                        {/* NEW: Dynamic SEO Sentence */}
-                        <div className="text-[10px] text-gray-400 mt-1 italic">
-                          {etf.ticker} and {partner.ticker} show {(partner.correlation * 100).toFixed(1)}% price alignment in the {etf.sector} sector.
-                        </div>
-                      </div>
-                    </div>
 
-                    <div className="flex items-center">
-                      {/* Share Button */}
-                      <a 
-                        href={`https://twitter.com/intent/tweet?text=Found a great tax loss pair: ${etf.ticker} ↔️ ${partner.ticker}. Checked correlation and overlap on taxlosspairs.com 📉`}
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="text-gray-400 hover:text-black text-xs font-medium flex items-center gap-1 transition-colors mr-4"
-                      >
-                         <span>Share</span>
-                      </a>
-                      
-                      {/* Action Button */}
-                      <a 
-                        href={`https://finance.yahoo.com/quote/${partner.ticker}`}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-blue-600 font-medium text-sm hover:underline"
-                      >
-                        Analyze ↗
-                      </a>
+                      {/* ACTIONS */}
+                      <div className="flex flex-col items-end gap-2">
+                         {/* View Details (Point 4) */}
+                        <a 
+                          href={`https://finance.yahoo.com/quote/${partner.ticker}`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-blue-600 font-semibold text-xs hover:underline whitespace-nowrap"
+                        >
+                          View Details ↗
+                        </a>
+                        
+                        {/* Share */}
+                        <a 
+                          href={`https://twitter.com/intent/tweet?text=Comparing ${etf.ticker} ↔️ ${partner.ticker} for tax loss harvesting. Found on taxlosspairs.com 📉`}
+                          target="_blank" 
+                          rel="noreferrer"
+                          className="text-gray-400 hover:text-black text-[10px] font-medium flex items-center gap-1 transition-colors"
+                        >
+                           <span>Share</span>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
-
-            {/* DISCLAIMER FOOTER */}
-            <div className="bg-gray-50 px-6 py-3 border-t border-gray-100">
-               <p className="text-xs text-gray-500 leading-relaxed">
-                 Data Note: Correlation reflects recent price movement similarity. Overlap estimates shared holdings based on latest disclosures. Always verify index methodology.
-               </p>
             </div>
           </div>
         ))}
@@ -165,7 +172,7 @@ export default function Home() {
             <p className="mb-4"><strong>No.</strong> The IRS "Wash Sale" rule relies on the term "substantially identical," which is not strictly defined. This tool provides data to help <em>you</em> make that decision, but it cannot decide for you.</p>
             
             <h4 className="font-semibold text-gray-800 mb-2">About</h4>
-            <p>Inspired by publicly documented tax-loss harvesting frameworks used by long-term index investors. Built by <a href="https://twitter.com/nikhildeshmukh" className="underline hover:text-blue-600">@nikhildeshmukh</a>.</p>
+            <p>Built using publicly available market data and methodologies commonly discussed in the Bogleheads community.</p>
           </div>
         </div>
       </section>
@@ -175,6 +182,7 @@ export default function Home() {
         <p className="mb-4">© 2026 TaxLossPairs.com • Not Investment Advice</p>
         <div className="flex justify-center gap-6">
            <a href="mailto:nikhil@taxlosspairs.com?subject=Feedback" className="hover:text-blue-600">Report an Issue</a>
+           <a href="https://twitter.com/nikhildeshmukh" target="_blank" className="hover:text-blue-600">@nikhildeshmukh</a>
         </div>
       </footer>
     </div>
