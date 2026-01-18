@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google"; // Changed from Geist to Inter (Standard)
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// Setup the Inter font
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
