@@ -1,9 +1,7 @@
 import React from 'react';
-import { Search, ArrowRight, AlertTriangle, CheckCircle, Info } from 'lucide-react';
-import pairsData from '../pairs.json'; // This reads your uploaded file
+import pairsData from '../pairs.json'; 
 
 export default function Home() {
-  // Simple state for search (in a real app, use useState, but for static MVP this works)
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
@@ -25,10 +23,10 @@ export default function Home() {
           <br/>Based on correlation, overlap, and index methodology.
         </p>
         
-        {/* --- SEARCH MOCKUP (Functional in V2) --- */}
+        {/* --- SEARCH MOCKUP --- */}
         <div className="max-w-md mx-auto relative group">
           <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <Search className="h-5 w-5 text-slate-400" />
+            <span className="text-xl">🔍</span>
           </div>
           <input 
             type="text" 
@@ -75,8 +73,8 @@ export default function Home() {
                           <div className="flex items-center space-x-2">
                              <span className="font-bold text-slate-900">{partner.ticker}</span>
                              {partner.verdict === "Excellent Match" ? 
-                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700">SAFE</span> : 
-                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-700">CHECK</span>
+                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700">SAFE ✅</span> : 
+                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-700">CHECK ⚠️</span>
                              }
                           </div>
                           <div className="text-xs text-slate-500 flex items-center mt-0.5">
@@ -92,7 +90,7 @@ export default function Home() {
 
                       {/* Right: CTA */}
                       <a href={`https://finance.yahoo.com/quote/${partner.ticker}`} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
-                        Analyze <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition" />
+                        Analyze ➡️
                       </a>
 
                     </div>
@@ -102,7 +100,7 @@ export default function Home() {
 
               {/* Compliance Footer */}
               <div className="bg-slate-50 px-6 py-3 border-t border-slate-100 text-xs text-slate-500 flex items-start gap-2">
-                <Info className="h-4 w-4 text-slate-400 shrink-0 mt-0.5" />
+                <span className="mt-0.5">ℹ️</span>
                 <p>
                   <strong>Compliance Note:</strong> {etf.ticker} and its partners track specific indices. 
                   Always verify index methodology (e.g. CRSP vs S&P) before trading to ensure they are not "substantially identical."
