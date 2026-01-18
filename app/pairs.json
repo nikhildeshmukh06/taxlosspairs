@@ -246,4 +246,27 @@
     "partners": [
       { "ticker": "VTI", "correlation": 0.9989, "overlap_estimate": 85, "verdict": "Excellent Match" },
       { "ticker": "ITOT", "correlation": 0.9990, "overlap_estimate": 86, "verdict": "Excellent Match" },
-      { "ticker": "SPT", "correlation": 0.998
+      { "ticker": "SPT", "correlation": 0.9980, "overlap_estimate": 84, "verdict": "Excellent Match" }
+    ]
+  },
+  {
+    "ticker": "SPLG",
+    "name": "SPDR Portfolio S&P 500",
+    "sector": "S&P 500",
+    "partners": [
+      { "ticker": "VOO", "correlation": 0.9998, "overlap_estimate": 98, "verdict": "Excellent Match" },
+      { "ticker": "IVV", "correlation": 0.9998, "overlap_estimate": 98, "verdict": "Excellent Match" },
+      { "ticker": "SPY", "correlation": 0.9998, "overlap_estimate": 98, "verdict": "Excellent Match" }
+    ]
+  },
+  {
+    "ticker": "VXUS",
+    "name": "Vanguard Total Intl Stock",
+    "sector": "Total International",
+    "partners": [
+      { "ticker": "IXUS", "correlation": 0.9960, "overlap_estimate": 90, "verdict": "Excellent Match" },
+      { "ticker": "VEU", "correlation": 0.9940, "overlap_estimate": 85, "verdict": "Excellent Match" },
+      { "ticker": "ACWX", "correlation": 0.9900, "overlap_estimate": 80, "verdict": "Excellent Match" }
+    ]
+  }
+]
