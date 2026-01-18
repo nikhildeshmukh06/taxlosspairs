@@ -16,7 +16,19 @@ export const metadata = {
   title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
   description: 'Instantly find mathematically safe ETF partners for tax loss harvesting. Avoid wash sales with correlation and sector analysis.',
   icons: {
-    icon: 'https://fav.farm/📉', // This gives you a free "Chart Down" emoji as a favicon!
+    icon: 'https://fav.farm/📉',
+  },
+  openGraph: {
+    title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
+    description: 'Instantly find mathematically safe ETF partners for tax loss harvesting. Avoid wash sales with correlation and sector analysis.',
+    siteName: 'TaxLossPairs',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
+    description: 'Instantly find mathematically safe ETF partners for tax loss harvesting.',
   },
 };
 
