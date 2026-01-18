@@ -2,7 +2,7 @@ import React from 'react';
 // We are importing the JSON file. 
 // Ensure 'pairs.json' is uploaded to the SAME folder as this file, 
 // OR inside the 'app' folder. If it fails, move the JSON file next to this file.
-import pairsData from '../pairs.json'; 
+import pairsData from './pairs.json'; 
 
 export default function Home() {
   return (
