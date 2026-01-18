@@ -1,135 +1,105 @@
 import React from 'react';
+// We are importing the JSON file. 
+// Ensure 'pairs.json' is uploaded to the SAME folder as this file, 
+// OR inside the 'app' folder. If it fails, move the JSON file next to this file.
 import pairsData from '../pairs.json'; 
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+    <div className="min-h-screen bg-white font-sans text-slate-900">
       
       {/* --- HEADER --- */}
-      <header className="bg-white border-b border-slate-200 sticky top-0 z-10">
-        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl tracking-tight text-blue-700">TaxLossPairs</div>
-          <div className="text-xs font-medium bg-blue-50 text-blue-700 px-2 py-1 rounded">BETA v1.0</div>
+      <header className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur z-10">
+        <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="font-bold text-xl text-blue-700">TaxLossPairs.com</div>
+          <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">BETA</span>
         </div>
       </header>
 
-      {/* --- HERO SECTION --- */}
-      <div className="bg-white pb-12 pt-16 px-4 text-center border-b border-slate-200">
-        <h1 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-          Don't trigger a <span className="text-red-600">Wash Sale</span>.
+      {/* --- HERO --- */}
+      <div className="text-center py-16 px-4 border-b border-gray-100 bg-gray-50">
+        <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
+          Avoid the <span className="text-red-600">Wash Sale</span> Rule.
         </h1>
-        <p className="text-lg text-slate-600 max-w-2xl mx-auto mb-8">
+        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
           Instantly find mathematically safe ETF partners for tax loss harvesting.
-          <br/>Based on correlation, overlap, and index methodology.
+          <br/>Based on 2-year correlation and sector overlap.
         </p>
-        
-        {/* --- SEARCH MOCKUP --- */}
-        <div className="max-w-md mx-auto relative group">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-xl">🔍</span>
-          </div>
-          <input 
-            type="text" 
-            placeholder="Search for an ETF (e.g. VTI, ARKK)..." 
-            className="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-lg leading-5 bg-slate-50 placeholder-slate-500 focus:outline-none focus:bg-white focus:ring-2 focus:ring-blue-500 transition shadow-sm"
-          />
+        <div className="text-sm text-gray-400">
+          Indexing {pairsData.length} Major ETFs • Updated for 2026
         </div>
-        <p className="text-xs text-slate-400 mt-2">Currently indexing {pairsData.length} major ETFs</p>
       </div>
 
-      {/* --- DATA DISPLAY LOOP --- */}
-      <main className="max-w-5xl mx-auto px-4 py-12">
-        <div className="grid gap-8">
-          
-          {pairsData.map((etf) => (
-            <div key={etf.ticker} className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-md transition">
-              
-              {/* Card Header */}
-              <div className="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
-                <div>
-                  <h2 className="text-2xl font-bold text-slate-800">{etf.ticker}</h2>
-                  <p className="text-sm text-slate-500">{etf.name}</p>
-                </div>
-                <div className="text-right">
-                  <div className="text-sm font-semibold text-slate-700">{etf.sector}</div>
-                  <div className="text-xs text-slate-400">Sector</div>
-                </div>
+      {/* --- MAIN CONTENT --- */}
+      <main className="max-w-4xl mx-auto px-4 py-12 space-y-8">
+        {pairsData.map((etf) => (
+          <div key={etf.ticker} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
+            
+            {/* CARD HEADER */}
+            <div className="bg-gray-50 px-6 py-4 flex justify-between items-center border-b border-gray-100">
+              <div>
+                <h2 className="text-2xl font-bold text-gray-800">{etf.ticker}</h2>
+                <div className="text-sm text-gray-500">{etf.name}</div>
               </div>
+              <div className="text-right">
+                <div className="text-sm font-semibold text-gray-700">{etf.sector}</div>
+                <div className="text-xs text-gray-400">Sector</div>
+              </div>
+            </div>
 
-              {/* Partners Table */}
-              <div className="px-6 py-4">
-                <h3 className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-4">Top Statistical Partners</h3>
-                
-                <div className="space-y-3">
-                  {etf.partners.map((partner) => (
-                    <div key={partner.ticker} className="flex items-center justify-between p-3 rounded-lg border border-slate-100 hover:bg-blue-50 hover:border-blue-100 transition group">
-                      
-                      {/* Left: Ticker Info */}
-                      <div className="flex items-center space-x-4">
-                        <div className="bg-white border border-slate-200 h-10 w-10 flex items-center justify-center rounded font-bold text-slate-700">
-                          {partner.ticker}
+            {/* PARTNERS LIST */}
+            <div className="p-6">
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Best Tax Loss Partners</h3>
+              <div className="space-y-3">
+                {etf.partners.map((partner) => (
+                  <div key={partner.ticker} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-colors">
+                    
+                    {/* Partner Info */}
+                    <div className="flex items-center gap-4">
+                      <div className="h-10 w-10 bg-white border border-gray-200 rounded-md flex items-center justify-center font-bold text-gray-600 shadow-sm">
+                        {partner.ticker}
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-bold text-gray-900">{partner.ticker}</span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+                            {partner.verdict === "Excellent Match" ? "HIGH MATCH" : "GOOD MATCH"}
+                          </span>
                         </div>
-                        <div>
-                          <div className="flex items-center space-x-2">
-                             <span className="font-bold text-slate-900">{partner.ticker}</span>
-                             {partner.verdict === "Excellent Match" ? 
-                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-green-100 text-green-700">SAFE ✅</span> : 
-                               <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-yellow-100 text-yellow-700">CHECK ⚠️</span>
-                             }
-                          </div>
-                          <div className="text-xs text-slate-500 flex items-center mt-0.5">
-                             <span className="flex items-center mr-3">
-                               Correlation: {(partner.correlation * 100).toFixed(1)}%
-                             </span>
-                             <span className="flex items-center">
-                               Overlap: ~{partner.overlap_estimate}%
-                             </span>
-                          </div>
+                        <div className="text-xs text-gray-500 mt-1">
+                          Correlation: {(partner.correlation * 100).toFixed(1)}% • Overlap: ~{partner.overlap_estimate}%
                         </div>
                       </div>
-
-                      {/* Right: CTA */}
-                      <a href={`https://finance.yahoo.com/quote/${partner.ticker}`} target="_blank" rel="noreferrer" className="text-blue-600 hover:text-blue-800 text-sm font-medium flex items-center">
-                        Analyze ➡️
-                      </a>
-
                     </div>
-                  ))}
-                </div>
-              </div>
 
-              {/* Compliance Footer */}
-              <div className="bg-slate-50 px-6 py-3 border-t border-slate-100 text-xs text-slate-500 flex items-start gap-2">
-                <span className="mt-0.5">ℹ️</span>
-                <p>
-                  <strong>Compliance Note:</strong> {etf.ticker} and its partners track specific indices. 
-                  Always verify index methodology (e.g. CRSP vs S&P) before trading to ensure they are not "substantially identical."
-                </p>
+                    {/* Action Button */}
+                    <a 
+                      href={`https://finance.yahoo.com/quote/${partner.ticker}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-blue-600 font-medium text-sm hover:underline"
+                    >
+                      Analyze ↗
+                    </a>
+                  </div>
+                ))}
               </div>
-
             </div>
-          ))}
 
-        </div>
+            {/* DISCLAIMER */}
+            <div className="bg-gray-50 px-6 py-3 border-t border-gray-100">
+              <p className="text-xs text-gray-500 leading-relaxed">
+                ⚠️ <strong>Compliance Check:</strong> {etf.ticker} and its partners track specific indices. Always verify the index methodology (e.g. CRSP vs S&P) yourself.
+              </p>
+            </div>
+          </div>
+        ))}
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="bg-white border-t border-slate-200 py-12 mt-12">
-        <div className="max-w-5xl mx-auto px-4 text-center">
-          <p className="text-sm text-slate-500 mb-4">
-            TaxLossPairs.com is a mathematical utility, not an investment advisor. 
-            <br/>Data provided by Yahoo Finance & FMP.
-          </p>
-          <div className="flex justify-center gap-4 text-sm font-medium text-slate-600">
-            <a href="#" className="hover:text-blue-600">Bogleheads Guide</a>
-            <span>•</span>
-            <a href="#" className="hover:text-blue-600">IRS Pub 550</a>
-            <span>•</span>
-            <a href="#" className="hover:text-blue-600">Privacy Policy</a>
-          </div>
-        </div>
+      <footer className="text-center py-12 text-gray-400 text-sm border-t border-gray-100">
+        <p>© 2026 TaxLossPairs.com • Not Investment Advice</p>
       </footer>
-
     </div>
   );
 }
