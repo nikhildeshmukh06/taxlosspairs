@@ -29,11 +29,11 @@ export default function Home() {
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            Tax Loss Harvesting <span className="text-blue-600">Partner Finder</span>
+            ETF Correlation & <span className="text-blue-600">Overlap Data</span>
           </h1>
           <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Instantly find mathematically safe ETF partners to avoid wash sales. 
-            Based on 10-year historical correlation and sector overlap.
+            Use this tool to compare ETFs when researching potential alternatives during Tax Loss Harvesting. 
+            View 2-year correlation coefficients and sector overlap estimates.
           </p>
 
           {/* SEARCH BAR */}
@@ -137,7 +137,7 @@ export default function Home() {
         )}
       </main>
 
-      {/* --- FAQ SECTION (RESTORED) --- */}
+      {/* --- FAQ SECTION --- */}
       <section className="bg-white border-t border-slate-200 py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
@@ -151,11 +151,10 @@ export default function Home() {
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">How are "Partners" selected?</h3>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">How is this data calculated?</h3>
               <p className="text-slate-600 leading-relaxed">
-                We analyze 10 years of historical price data to find ETFs with high correlation (typically &gt;0.98) 
-                and similar sector exposure. We prioritize funds that track <strong>different underlying indices</strong> 
-                (e.g., CRSP vs. Dow Jones) to minimize wash sale risk.
+                We calculate correlation coefficients using 2 years of historical daily price returns. 
+                Overlap estimates are based on the weight of shared holdings between the two funds.
               </p>
             </div>
             <div>
