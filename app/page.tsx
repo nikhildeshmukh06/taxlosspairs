@@ -22,17 +22,23 @@ export default function Home() {
           <div className="font-bold text-xl text-blue-700">TaxLossPairs.com</div>
           <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">BETA</span>
         </div>
-      </header>
+      </header> {/* --- COMPLIANCE WARNING --- */}
+<div className="bg-amber-50 border-b border-amber-100 p-3 text-center">
+  <p className="text-xs text-amber-800 font-medium">
+    ⚠️ <strong>Data Only. Not Investment Advice.</strong> This tool displays historical statistical correlations. 
+    It does not assess "Substantially Identical" status. You are responsible for your own tax compliance.
+  </p>
+</div>
 
       {/* --- HERO --- */}
       <div className="text-center py-16 px-4 border-b border-gray-100 bg-gray-50">
         <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
-          Avoid the <span className="text-red-600">Wash Sale</span> Rule.
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-          Instantly find mathematically safe ETF partners for tax loss harvesting.
-          <br/>Based on 2-year correlation and sector overlap.
-        </p>
+  ETF Correlation & <span className="text-blue-600">Overlap Data</span>
+</h1>
+<p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
+  Analyze statistical relationships between ETFs for your Tax Loss Harvesting research.
+  <br/>View 2-year correlation coefficients and sector overlap estimates.
+</p>
 
         {/* --- SEARCH BAR (NOW FUNCTIONAL) --- */}
         <div className="max-w-md mx-auto relative group">
@@ -86,7 +92,7 @@ export default function Home() {
 
             {/* PARTNERS LIST */}
             <div className="p-6">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Best Tax Loss Partners</h3>
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Statistical Correlation Data</h3>
               <div className="space-y-3">
                 {etf.partners.map((partner) => (
                   <div key={partner.ticker} className="flex items-center justify-between p-4 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-colors">
@@ -134,7 +140,26 @@ export default function Home() {
       </main>
 
       {/* --- FOOTER --- */}
-      <footer className="text-center py-12 text-gray-400 text-sm border-t border-gray-100">
+     {/* --- FAQ / METHODOLOGY --- */}
+      <section className="max-w-4xl mx-auto px-4 py-12 border-t border-gray-100">
+        <h3 className="text-lg font-bold text-gray-900 mb-6">Methodology & FAQ</h3>
+        <div className="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
+          <div>
+            <h4 className="font-semibold text-gray-800 mb-2">How is correlation calculated?</h4>
+            <p className="mb-4">We compare the daily price movement of both ETFs over a trailing 2-year period. A value of 100% means they moved in perfect lockstep historically.</p>
+            
+            <h4 className="font-semibold text-gray-800 mb-2">What is "Overlap"?</h4>
+            <p>Overlap estimates how many underlying holdings are shared between the two funds. A lower overlap suggests the funds track different indices or hold different stocks.</p>
+          </div>
+          <div>
+            <h4 className="font-semibold text-gray-800 mb-2">Is this legal advice?</h4>
+            <p className="mb-4"><strong>No.</strong> The IRS "Wash Sale" rule relies on the term "substantially identical," which is not strictly defined. This tool provides data to help <em>you</em> make that decision, but it cannot decide for you.</p>
+            
+            <h4 className="font-semibold text-gray-800 mb-2">Data Sources</h4>
+            <p>Pricing data is sourced from public market APIs (Yahoo Finance / FMP). Calculations are performed daily.</p>
+          </div>
+        </div>
+      </section> <footer className="text-center py-12 text-gray-400 text-sm border-t border-gray-100">
         <p>© 2026 TaxLossPairs.com • Not Investment Advice</p>
       </footer>
     </div>
