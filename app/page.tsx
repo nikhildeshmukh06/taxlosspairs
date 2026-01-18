@@ -1,193 +1,156 @@
-import Link from 'next/link';
 "use client";
 
 import React, { useState } from 'react';
-import pairsData from './pairs.json'; 
+import Link from 'next/link';
+import pairsData from './pairs.json';
 
 export default function Home() {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredData = pairsData.filter((etf) => 
-    etf.ticker.toLowerCase().includes(searchTerm.toLowerCase()) || 
-    etf.name.toLowerCase().includes(searchTerm.toLowerCase())
+  // Filter logic
+  const filteredPairs = pairsData.filter((pair) =>
+    pair.ticker.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pair.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    pair.sector.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
-    <div className="min-h-screen bg-white font-sans text-slate-900">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* --- COMPLIANCE WARNING (SPLIT FOR CLARITY) --- */}
+      {/* --- COMPLIANCE WARNING --- */}
       <div className="bg-amber-50 border-b border-amber-100 p-3 text-center">
-        <div className="max-w-4xl mx-auto">
-          <p className="text-xs text-amber-900 font-bold mb-1">
-            ⚠️ Data Only. Not investment or tax advice.
-          </p>
-          <p className="text-[11px] text-amber-800 opacity-90 leading-tight">
-             This tool shows historical correlations and estimated overlap. It does not determine wash sale compliance.
-          </p>
-        </div>
+        <p className="text-xs text-amber-800 font-medium">
+          ⚠️ For informational purposes only. Not financial or tax advice. Past correlation does not guarantee future results.
+        </p>
       </div>
 
-      {/* --- HEADER --- */}
-      <header className="border-b border-gray-200 sticky top-0 bg-white/95 backdrop-blur z-10">
-        <div className="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl text-blue-700">TaxLossPairs.com</div>
-          <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">BETA</span>
+      {/* --- HERO SECTION --- */}
+      <header className="bg-white border-b border-slate-200">
+        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
+          <div className="mb-6 inline-flex items-center justify-center bg-blue-50 rounded-full px-4 py-1.5 border border-blue-100">
+             <span className="text-blue-700 text-xs font-bold tracking-wide uppercase">Open Source • Free • Private</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+            Tax Loss Harvesting <span className="text-blue-600">Partner Finder</span>
+          </h1>
+          <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
+            Instantly find mathematically safe ETF partners to avoid wash sales. 
+            Based on 10-year historical correlation and sector overlap.
+          </p>
+
+          {/* SEARCH BAR */}
+          <div className="max-w-xl mx-auto relative group">
+            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
+            <input
+              type="text"
+              placeholder="Search ticker (e.g. VTI, QQQ, SMH)..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="relative w-full p-4 pl-6 rounded-lg border border-slate-200 text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 placeholder-slate-400"
+            />
+          </div>
+
+          {/* POPULAR SEARCHES (SEO Links) */}
+          <div className="text-xs text-gray-400 mt-4 flex gap-3 items-center justify-center">
+            <span className="font-semibold uppercase tracking-wider text-gray-300">Popular:</span>
+            <Link href="/pairs/VTI" className="hover:text-blue-600 hover:underline transition-colors">VTI</Link>
+            <Link href="/pairs/VOO" className="hover:text-blue-600 hover:underline transition-colors">VOO</Link>
+            <Link href="/pairs/QQQ" className="hover:text-blue-600 hover:underline transition-colors">QQQ</Link>
+            <Link href="/pairs/VXUS" className="hover:text-blue-600 hover:underline transition-colors">VXUS</Link>
+            <Link href="/pairs/SMH" className="hover:text-blue-600 hover:underline transition-colors">SMH</Link>
+          </div>
         </div>
       </header>
 
-      {/* --- HERO --- */}
-      <div className="text-center py-16 px-4 border-b border-gray-100 bg-gray-50">
-        <h1 className="text-4xl font-extrabold mb-4 text-gray-900">
-          ETF Correlation & <span className="text-blue-600">Overlap Data</span>
-        </h1>
-        
-        {/* ACTION HOOK (Point 1) */}
-        <p className="text-lg font-medium text-gray-800 mb-2">
-          Use this tool to compare ETFs when researching potential alternatives during Tax Loss Harvesting.
-        </p>
-        <p className="text-sm text-gray-500 max-w-2xl mx-auto mb-8">
-          View 2-year correlation coefficients and sector overlap estimates.
-        </p>
-
-        {/* SEARCH */}
-        <div className="max-w-md mx-auto relative group">
-          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span className="text-xl">🔍</span>
+      {/* --- RESULTS SECTION --- */}
+      <main className="max-w-4xl mx-auto px-6 py-12">
+        {filteredPairs.length === 0 ? (
+          <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
+             <p className="text-slate-400 text-lg">No ETF found matching "{searchTerm}"</p>
+             <button 
+               onClick={() => setSearchTerm('')}
+               className="mt-4 text-blue-600 font-bold hover:underline"
+             >
+               Clear Search
+             </button>
           </div>
-          <input 
-            type="text" 
-            placeholder="Search by Ticker (e.g. VTI, SCHD)..." 
-            className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        
-        {/* POPULAR SEARCHES (Updated for SEO) */}
-<div className="text-xs text-gray-400 mt-3 flex gap-2 items-center justify-center">
-  <span>Popular:</span>
-  <Link href="/pairs/VTI" className="hover:text-blue-600 underline decoration-dotted">VTI</Link>
-  <Link href="/pairs/VOO" className="hover:text-blue-600 underline decoration-dotted">VOO</Link>
-  <Link href="/pairs/QQQ" className="hover:text-blue-600 underline decoration-dotted">QQQ</Link>
-  <Link href="/pairs/VXUS" className="hover:text-blue-600 underline decoration-dotted">VXUS</Link>
-  <Link href="/pairs/SMH" className="hover:text-blue-600 underline decoration-dotted">SMH</Link>
-</div>
+        ) : (
+          <div className="grid gap-6">
+            {filteredPairs.map((etf) => (
+              <Link href={`/pairs/${etf.ticker}`} key={etf.ticker} className="block group">
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-200 cursor-pointer relative overflow-hidden">
+                  
+                  {/* Hover Accent */}
+                  <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-      {/* --- MAIN CONTENT --- */}
-      <main className="max-w-4xl mx-auto px-4 py-12 space-y-8">
-        {filteredData.length === 0 && (
-          <div className="text-center py-12 text-gray-500">
-            <p className="text-lg">No ETFs found matching "{searchTerm}"</p>
-            <button onClick={() => setSearchTerm("")} className="mt-4 text-blue-600 font-medium hover:underline">Clear Search</button>
+                  <div className="flex justify-between items-start mb-6">
+                    <div>
+                      <h2 className="text-3xl font-extrabold text-slate-900 group-hover:text-blue-700 transition-colors">
+                        {etf.ticker}
+                      </h2>
+                      <p className="text-slate-500 font-medium text-sm mt-1">{etf.name}</p>
+                    </div>
+                    <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider rounded-full border border-slate-200">
+                      {etf.sector}
+                    </span>
+                  </div>
+
+                  <div className="grid md:grid-cols-3 gap-4">
+                    {etf.partners.map((partner) => (
+                      <div key={partner.ticker} className="bg-slate-50 rounded-lg p-4 border border-slate-100 group-hover:bg-blue-50/50 transition-colors">
+                        <div className="flex justify-between items-center mb-2">
+                          <span className="font-bold text-slate-800 text-lg">{partner.ticker}</span>
+                          <span className={`text-[10px] px-2 py-0.5 rounded font-bold uppercase ${
+                            partner.verdict === 'Excellent Match' ? 'bg-emerald-100 text-emerald-700' : 
+                            partner.verdict === 'Good Match' ? 'bg-blue-100 text-blue-700' : 
+                            'bg-amber-100 text-amber-700'
+                          }`}>
+                            {partner.verdict === 'Excellent Match' ? 'Excellent' : 'Good'}
+                          </span>
+                        </div>
+                        <div className="flex items-end justify-between">
+                           <div>
+                             <div className="text-xs text-slate-400 font-medium uppercase">Correlation</div>
+                             <div className="text-sm font-mono font-bold text-slate-700">
+                               {(partner.correlation * 100).toFixed(1)}%
+                             </div>
+                           </div>
+                           <div className="text-right">
+                             <div className="text-xs text-slate-400 font-medium uppercase">Overlap</div>
+                             <div className="text-sm font-mono font-bold text-slate-700">
+                               ~{partner.overlap_estimate}%
+                             </div>
+                           </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <div className="mt-4 text-center">
+                    <span className="text-xs font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
+                      View Full Analysis →
+                    </span>
+                  </div>
+
+                </div>
+              </Link>
+            ))}
           </div>
         )}
-
-        {filteredData.map((etf) => (
-          <div key={etf.ticker} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
-            
-            {/* CARD HEADER */}
-            <div className="bg-gray-50 px-6 py-4 flex justify-between items-center border-b border-gray-100">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800">{etf.ticker}</h2>
-                <div className="text-sm text-gray-500">{etf.name}</div>
-              </div>
-              <div className="text-right">
-                <div className="text-sm font-semibold text-gray-700">{etf.sector}</div>
-                <div className="text-xs text-gray-400">Sector</div>
-              </div>
-            </div>
-
-            {/* PARTNERS LIST */}
-            <div className="p-6">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4">Statistical Correlation Data</h3>
-              <div className="space-y-4">
-                {etf.partners.map((partner) => (
-                  <div key={partner.ticker} className="p-4 rounded-lg border border-gray-100 hover:border-blue-300 hover:bg-blue-50 transition-colors">
-                    
-                    <div className="flex items-start justify-between">
-                      {/* Partner Info */}
-                      <div className="flex gap-4">
-                        <div className="h-10 w-10 bg-white border border-gray-200 rounded-md flex items-center justify-center font-bold text-gray-600 shadow-sm shrink-0">
-                          {partner.ticker}
-                        </div>
-                        <div>
-                          <div className="flex items-center gap-2 mb-1">
-                            <span className="font-bold text-gray-900">{partner.ticker}</span>
-                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${partner.verdict === "Excellent Match" ? "bg-green-100 text-green-800" : "bg-yellow-100 text-yellow-800"}`}>
-                              {partner.verdict === "Excellent Match" ? "High Correlation" : "Moderate Correlation"}
-                            </span>
-                          </div>
-                          
-                          {/* METRICS & EXPLAINER (Points 2 & 3) */}
-                          <div className="text-xs text-gray-600 font-medium">
-                            2-yr Daily Correlation: <span className="text-black">{(partner.correlation * 100).toFixed(1)}%</span> 
-                            <span className="mx-2">•</span> 
-                            Est. Holdings Overlap: <span className="text-black">~{partner.overlap_estimate}%</span>
-                          </div>
-                          <div className="text-[10px] text-gray-400 mt-1 leading-relaxed">
-                            Overlap estimates shared underlying holdings. Lower overlap may indicate different index composition.
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* ACTIONS */}
-                      <div className="flex flex-col items-end gap-2">
-                         {/* View Details (Point 4) */}
-                        <a 
-                          href={`https://finance.yahoo.com/quote/${partner.ticker}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-blue-600 font-semibold text-xs hover:underline whitespace-nowrap"
-                        >
-                          View Details ↗
-                        </a>
-                        
-                        {/* Share */}
-                        <a 
-                          href={`https://twitter.com/intent/tweet?text=Comparing ${etf.ticker} ↔️ ${partner.ticker} for tax loss harvesting. Found on taxlosspairs.com 📉`}
-                          target="_blank" 
-                          rel="noreferrer"
-                          className="text-gray-400 hover:text-black text-[10px] font-medium flex items-center gap-1 transition-colors"
-                        >
-                           <span>Share</span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
       </main>
 
-      {/* --- METHODOLOGY / FAQ --- */}
-      <section className="max-w-4xl mx-auto px-4 py-12 border-t border-gray-100">
-        <h3 className="text-lg font-bold text-gray-900 mb-6">Methodology & FAQ</h3>
-        <div className="grid md:grid-cols-2 gap-8 text-sm text-gray-600">
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-2">How is correlation calculated?</h4>
-            <p className="mb-4">We compare the daily price movement of both ETFs over a trailing 2-year period. A value of 100% means they moved in perfect lockstep historically.</p>
-            
-            <h4 className="font-semibold text-gray-800 mb-2">What is "Overlap"?</h4>
-            <p>Overlap estimates how many underlying holdings are shared between the two funds. A lower overlap suggests the funds track different indices or hold different stocks.</p>
-          </div>
-          <div>
-            <h4 className="font-semibold text-gray-800 mb-2">Is this legal advice?</h4>
-            <p className="mb-4"><strong>No.</strong> The IRS "Wash Sale" rule relies on the term "substantially identical," which is not strictly defined. This tool provides data to help <em>you</em> make that decision, but it cannot decide for you.</p>
-            
-            <h4 className="font-semibold text-gray-800 mb-2">About</h4>
-            <p>Built using publicly available market data and methodologies commonly discussed in the Bogleheads community.</p>
-          </div>
-        </div>
-      </section>
-
       {/* --- FOOTER --- */}
-      <footer className="text-center py-12 text-gray-400 text-sm border-t border-gray-100 bg-gray-50">
-        <p className="mb-4">© 2026 TaxLossPairs.com • Not Investment Advice</p>
-        <div className="flex justify-center gap-6">
-           <a href="mailto:nikhil@taxlosspairs.com?subject=Feedback" className="hover:text-blue-600">Report an Issue</a>
-           <a href="https://twitter.com/nikhildeshmukh" target="_blank" className="hover:text-blue-600">@nikhildeshmukh</a>
+      <footer className="bg-white border-t border-slate-200 mt-20 py-12">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-slate-400 text-sm mb-4">
+            Built for the Bogleheads community. Open Source. No Ads.
+          </p>
+          <div className="flex justify-center gap-6 text-sm font-medium text-slate-500">
+            <Link href="/" className="hover:text-blue-600">Home</Link>
+            <a href="https://github.com/nikhildeshmukh/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
+            <span className="text-slate-300">|</span>
+            <span>Data updated: Jan 2026</span>
+          </div>
         </div>
       </footer>
     </div>
