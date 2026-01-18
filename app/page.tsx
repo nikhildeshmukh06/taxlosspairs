@@ -1,10 +1,18 @@
-import React from 'react';
-// We are importing the JSON file. 
-// Ensure 'pairs.json' is uploaded to the SAME folder as this file, 
-// OR inside the 'app' folder. If it fails, move the JSON file next to this file.
-import pairsData from './pairs.json'; 
+"use client";
+
+import React, { useState } from 'react';
+import pairsData from './pairs.json'; // Ensure this matches your file location (./ or ../)
 
 export default function Home() {
+  // 1. Create a "State" to track what the user types
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // 2. Filter the data based on that search term
+  const filteredData = pairsData.filter((etf) => 
+    etf.ticker.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    etf.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-white font-sans text-slate-900">
       
@@ -25,14 +33,43 @@ export default function Home() {
           Instantly find mathematically safe ETF partners for tax loss harvesting.
           <br/>Based on 2-year correlation and sector overlap.
         </p>
-        <div className="text-sm text-gray-400">
-          Indexing {pairsData.length} Major ETFs • Updated for 2026
+
+        {/* --- SEARCH BAR (NOW FUNCTIONAL) --- */}
+        <div className="max-w-md mx-auto relative group">
+          <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span className="text-xl">🔍</span>
+          </div>
+          <input 
+            type="text" 
+            placeholder="Search by Ticker (e.g. VTI, SCHD)..." 
+            className="block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition shadow-sm"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        
+        <div className="text-sm text-gray-400 mt-4">
+          Showing {filteredData.length} of {pairsData.length} Major ETFs
         </div>
       </div>
 
       {/* --- MAIN CONTENT --- */}
       <main className="max-w-4xl mx-auto px-4 py-12 space-y-8">
-        {pairsData.map((etf) => (
+        {/* If no results found */}
+        {filteredData.length === 0 && (
+          <div className="text-center py-12 text-gray-500">
+            <p className="text-lg">No ETFs found matching "{searchTerm}"</p>
+            <button 
+              onClick={() => setSearchTerm("")}
+              className="mt-4 text-blue-600 font-medium hover:underline"
+            >
+              Clear Search
+            </button>
+          </div>
+        )}
+
+        {/* The List Loop */}
+        {filteredData.map((etf) => (
           <div key={etf.ticker} className="border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow bg-white">
             
             {/* CARD HEADER */}
