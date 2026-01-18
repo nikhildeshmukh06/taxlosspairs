@@ -27,9 +27,7 @@ export default function Home() {
       {/* --- HERO SECTION --- */}
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
-          <div className="mb-6 inline-flex items-center justify-center bg-blue-50 rounded-full px-4 py-1.5 border border-blue-100">
-             <span className="text-blue-700 text-xs font-bold tracking-wide uppercase">Open Source • Free • Private</span>
-          </div>
+          
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
             Tax Loss Harvesting <span className="text-blue-600">Partner Finder</span>
           </h1>
@@ -139,8 +137,40 @@ export default function Home() {
         )}
       </main>
 
+      {/* --- FAQ SECTION (RESTORED) --- */}
+      <section className="bg-white border-t border-slate-200 py-16">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">What is the "Wash Sale" rule?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                The IRS Wash Sale rule prevents you from claiming a loss on the sale of a security if you buy a 
+                "substantially identical" security within 30 days before or after the sale. This tool helps you find 
+                alternatives that are correlated but track different indices, which is a common strategy to avoid this rule.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">How are "Partners" selected?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                We analyze 10 years of historical price data to find ETFs with high correlation (typically &gt;0.98) 
+                and similar sector exposure. We prioritize funds that track <strong>different underlying indices</strong> 
+                (e.g., CRSP vs. Dow Jones) to minimize wash sale risk.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">Is this financial advice?</h3>
+              <p className="text-slate-600 leading-relaxed">
+                No. This tool is for informational purposes only. "Substantially identical" is not strictly defined 
+                by the IRS. You should always consult a qualified tax professional before making trading decisions.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* --- FOOTER --- */}
-      <footer className="bg-white border-t border-slate-200 mt-20 py-12">
+      <footer className="bg-slate-50 border-t border-slate-200 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-slate-400 text-sm mb-4">
             Built for the Bogleheads community. Open Source. No Ads.
