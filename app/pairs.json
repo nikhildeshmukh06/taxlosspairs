@@ -1,0 +1,662 @@
+[
+  {
+    "ticker": "SPY",
+    "name": "SPDR S&P 500 ETF",
+    "sector": "Large Blend",
+    "price": 692.24,
+    "partners": [
+      {
+        "ticker": "IVV",
+        "correlation": 0.9982,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SPLG",
+        "correlation": 0.9969,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9954,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IVV",
+    "name": "iShares Core S&P 500 ETF",
+    "sector": "Large Blend",
+    "price": 695.32,
+    "partners": [
+      {
+        "ticker": "SPLG",
+        "correlation": 0.9981,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9964,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SCHB",
+        "correlation": 0.9961,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VOO",
+    "name": "Vanguard S&P 500 ETF",
+    "sector": "Large Blend",
+    "price": 636.62,
+    "partners": [
+      {
+        "ticker": "IVV",
+        "correlation": 0.9995,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SPLG",
+        "correlation": 0.9982,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9966,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VTI",
+    "name": "Vanguard Total Stock Market Index Fund ETF Shares",
+    "sector": "Large Blend",
+    "price": 342.05,
+    "partners": [
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9988,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SCHB",
+        "correlation": 0.9981,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9962,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "QQQ",
+    "name": "Invesco QQQ Trust",
+    "sector": "Large Growth",
+    "price": 621.78,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9998,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9906,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9611,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VEA",
+    "name": "Vanguard FTSE Developed Markets Index Fund ETF Shares",
+    "sector": "Foreign Large Blend",
+    "price": 64.96,
+    "partners": []
+  },
+  {
+    "ticker": "VTV",
+    "name": "Vanguard Value Index Fund ETF Shares",
+    "sector": "Large Value",
+    "price": 198.41,
+    "partners": []
+  },
+  {
+    "ticker": "IEFA",
+    "name": "iShares Core MSCI EAFE ETF",
+    "sector": "Foreign Large Blend",
+    "price": 92.5,
+    "partners": []
+  },
+  {
+    "ticker": "BND",
+    "name": "Vanguard Total Bond Market Index Fund",
+    "sector": "Intermediate Core Bond",
+    "price": 74.32,
+    "partners": [
+      {
+        "ticker": "SCHR",
+        "correlation": 0.947,
+        "overlap_estimate": 61,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "AGG",
+    "name": "iShares Core U.S. Aggregate Bond ETF",
+    "sector": "Intermediate Core Bond",
+    "price": 100.22,
+    "partners": [
+      {
+        "ticker": "SCHR",
+        "correlation": 0.9449,
+        "overlap_estimate": 61,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VUG",
+    "name": "Vanguard Growth Index Fund ETF Shares",
+    "sector": "Large Growth",
+    "price": 485.59,
+    "partners": [
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9882,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9856,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9608,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VWO",
+    "name": "Vanguard Emerging Markets Stock Index Fund",
+    "sector": "Diversified Emerging Mkts",
+    "price": 56.34,
+    "partners": [
+      {
+        "ticker": "IEMG",
+        "correlation": 0.9869,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IEMG",
+    "name": "iShares Core MSCI Emerging Markets ETF",
+    "sector": "Diversified Emerging Mkts",
+    "price": 71.18,
+    "partners": [
+      {
+        "ticker": "VWO",
+        "correlation": 0.9869,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IJR",
+    "name": "iShares Core S&P Small-Cap ETF",
+    "sector": "Small Blend",
+    "price": 129.06,
+    "partners": []
+  },
+  {
+    "ticker": "IJH",
+    "name": "iShares Core S&P Mid-Cap ETF",
+    "sector": "Mid-Cap Blend",
+    "price": 70.24,
+    "partners": []
+  },
+  {
+    "ticker": "VIG",
+    "name": "Vanguard Dividend Appreciation Index Fund ETF Shares",
+    "sector": "Large Blend",
+    "price": 225.14,
+    "partners": [
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9219,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "SCHB",
+        "correlation": 0.9212,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9176,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VO",
+    "name": "Vanguard Mid-Cap Index Fund ETF Shares",
+    "sector": "Mid-Cap Blend",
+    "price": 301.27,
+    "partners": [
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9223,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "SCHB",
+        "correlation": 0.9213,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9015,
+        "overlap_estimate": 58,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VXUS",
+    "name": "Vanguard Total International Stock Index Fund ETF Shares",
+    "sector": "Foreign Large Blend",
+    "price": 78.6,
+    "partners": [
+      {
+        "ticker": "IEMG",
+        "correlation": 0.9066,
+        "overlap_estimate": 58,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IWM",
+    "name": "iShares Russell 2000 ETF",
+    "sector": "Small Blend",
+    "price": 265.51,
+    "partners": []
+  },
+  {
+    "ticker": "VGT",
+    "name": "Vanguard Information Technology Index Fund ETF Shares",
+    "sector": "Technology",
+    "price": 759.35,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9754,
+        "overlap_estimate": 63,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9725,
+        "overlap_estimate": 63,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9297,
+        "overlap_estimate": 60,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "XLK",
+    "name": "State Street Technology Select Sector SPDR ETF",
+    "sector": "Technology",
+    "price": 145.46,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9719,
+        "overlap_estimate": 63,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9625,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9231,
+        "overlap_estimate": 59,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "GLD",
+    "name": "SPDR Gold Shares",
+    "sector": "Commodities Focused",
+    "price": 423.33,
+    "partners": [
+      {
+        "ticker": "IAU",
+        "correlation": 0.9996,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VB",
+    "name": "Vanguard Small-Cap Index Fund ETF Shares",
+    "sector": "Small Blend",
+    "price": 275.78,
+    "partners": []
+  },
+  {
+    "ticker": "VCSH",
+    "name": "Vanguard Short-Term Corporate Bond Index Fund ETF Shares",
+    "sector": "Short-Term Bond",
+    "price": 79.8,
+    "partners": []
+  },
+  {
+    "ticker": "VCIT",
+    "name": "Vanguard Intermediate-Term Corporate Bond Index Fund ETF Shares",
+    "sector": "Corporate Bond",
+    "price": 83.97,
+    "partners": []
+  },
+  {
+    "ticker": "BSV",
+    "name": "Vanguard Short-Term Bond Index Fund ETF Shares",
+    "sector": "Short-Term Bond",
+    "price": 78.79,
+    "partners": [
+      {
+        "ticker": "SCHR",
+        "correlation": 0.9581,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "BNDX",
+    "name": "Vanguard Total International Bond Index Fund",
+    "sector": "Global Bond-USD Hedged",
+    "price": 48.59,
+    "partners": []
+  },
+  {
+    "ticker": "LQD",
+    "name": "iShares iBoxx $ Investment Grade Corporate Bond ETF",
+    "sector": "Corporate Bond",
+    "price": 110.89,
+    "partners": []
+  },
+  {
+    "ticker": "XLE",
+    "name": "State Street Energy Select Sector SPDR ETF",
+    "sector": "Equity Energy",
+    "price": 47.61,
+    "partners": []
+  },
+  {
+    "ticker": "XLF",
+    "name": "State Street Financial Select Sector SPDR ETF",
+    "sector": "Financial",
+    "price": 54.37,
+    "partners": []
+  },
+  {
+    "ticker": "XLV",
+    "name": "State Street Health Care Select Sector SPDR ETF",
+    "sector": "Health",
+    "price": 156.96,
+    "partners": []
+  },
+  {
+    "ticker": "XLY",
+    "name": "State Street Consumer Discretionary Select Sector SPDR ETF",
+    "sector": "Consumer Cyclical",
+    "price": 122.7,
+    "partners": []
+  },
+  {
+    "ticker": "XLP",
+    "name": "State Street Consumer Staples Select Sector SPDR ETF",
+    "sector": "Consumer Defensive",
+    "price": 82.37,
+    "partners": []
+  },
+  {
+    "ticker": "XLI",
+    "name": "State Street Industrial Select Sector SPDR ETF",
+    "sector": "Industrials",
+    "price": 165.78,
+    "partners": []
+  },
+  {
+    "ticker": "XLU",
+    "name": "State Street Utilities Select Sector SPDR ETF",
+    "sector": "Utilities",
+    "price": 43.61,
+    "partners": []
+  },
+  {
+    "ticker": "XLB",
+    "name": "State Street Materials Select Sector SPDR ETF",
+    "sector": "Natural Resources",
+    "price": 48.96,
+    "partners": []
+  },
+  {
+    "ticker": "XLRE",
+    "name": "State Street Real Estate Select Sector SPDR ETF",
+    "sector": "Real Estate",
+    "price": 41.7,
+    "partners": [
+      {
+        "ticker": "SCHH",
+        "correlation": 0.9893,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "SCHD",
+    "name": "Schwab U.S. Dividend Equity ETF",
+    "sector": "Large Value",
+    "price": 29.03,
+    "partners": []
+  },
+  {
+    "ticker": "SCHF",
+    "name": "Schwab International Equity ETF",
+    "sector": "Foreign Large Blend",
+    "price": 25.05,
+    "partners": []
+  },
+  {
+    "ticker": "SCHB",
+    "name": "Schwab U.S. Broad Market ETF",
+    "sector": "Large Blend",
+    "price": 26.75,
+    "partners": [
+      {
+        "ticker": "ITOT",
+        "correlation": 0.9987,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9961,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "SPLG",
+        "correlation": 0.9951,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      }
+    ]
+  },
+  {
+    "ticker": "VTEB",
+    "name": "Vanguard Tax-Exempt Bond Index Fund ETF Shares",
+    "sector": "Muni National Interm",
+    "price": 50.61,
+    "partners": []
+  },
+  {
+    "ticker": "GOVT",
+    "name": "iShares U.S. Treasury Bond ETF",
+    "sector": "Intermediate Government",
+    "price": 23.075,
+    "partners": []
+  },
+  {
+    "ticker": "SHV",
+    "name": "iShares 0\u20131 Year Treasury Bond ETF",
+    "sector": "Ultrashort Bond",
+    "price": 110.28,
+    "partners": []
+  },
+  {
+    "ticker": "MBB",
+    "name": "iShares MBS ETF",
+    "sector": "Government Mortgage-Backed Bond",
+    "price": 95.645,
+    "partners": [
+      {
+        "ticker": "SCHR",
+        "correlation": 0.9302,
+        "overlap_estimate": 60,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IGIB",
+    "name": "iShares 5-10 Year Investment Grade Corporate Bond ETF",
+    "sector": "Corporate Bond",
+    "price": 54.03,
+    "partners": []
+  },
+  {
+    "ticker": "SPSB",
+    "name": "State Street SPDR Portfolio Short Term Corporate Bond ETF",
+    "sector": "Short-Term Bond",
+    "price": 30.23,
+    "partners": []
+  },
+  {
+    "ticker": "BIL",
+    "name": "State Street SPDR Bloomberg 1-3 Month T-Bill ETF",
+    "sector": "Ultrashort Bond",
+    "price": 91.5,
+    "partners": []
+  },
+  {
+    "ticker": "SPYV",
+    "name": "State Street SPDR Portfolio S&P 500 Value ETF",
+    "sector": "Large Value",
+    "price": 58.32,
+    "partners": []
+  },
+  {
+    "ticker": "SPYG",
+    "name": "State Street SPDR Portfolio S&P 500 Growth ETF",
+    "sector": "Large Growth",
+    "price": 107.19,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9862,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9859,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9592,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  },
+  {
+    "ticker": "IVW",
+    "name": "iShares S&P 500 Growth ETF",
+    "sector": "Large Growth",
+    "price": 123.82,
+    "partners": [
+      {
+        "ticker": "QQQM",
+        "correlation": 0.9867,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "ONEQ",
+        "correlation": 0.9865,
+        "overlap_estimate": 64,
+        "verdict": "Excellent Match"
+      },
+      {
+        "ticker": "IVV",
+        "correlation": 0.9613,
+        "overlap_estimate": 62,
+        "verdict": "Good Match"
+      }
+    ]
+  }
+]
