@@ -1,3 +1,4 @@
+import Link from 'next/link';
 "use client";
 
 import React, { useState } from 'react';
@@ -62,11 +63,15 @@ export default function Home() {
           />
         </div>
         
-        {/* POPULAR SEARCHES (Point 8) */}
-        <div className="text-xs text-gray-400 mt-3">
-          Popular: <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VTI")}>VTI</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VOO")}>VOO</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("QQQ")}>QQQ</span>, <span className="cursor-pointer hover:text-blue-600" onClick={() => setSearchTerm("VXUS")}>VXUS</span>
-        </div>
-      </div>
+        {/* POPULAR SEARCHES (Updated for SEO) */}
+<div className="text-xs text-gray-400 mt-3 flex gap-2 items-center justify-center">
+  <span>Popular:</span>
+  <Link href="/pairs/VTI" className="hover:text-blue-600 underline decoration-dotted">VTI</Link>
+  <Link href="/pairs/VOO" className="hover:text-blue-600 underline decoration-dotted">VOO</Link>
+  <Link href="/pairs/QQQ" className="hover:text-blue-600 underline decoration-dotted">QQQ</Link>
+  <Link href="/pairs/VXUS" className="hover:text-blue-600 underline decoration-dotted">VXUS</Link>
+  <Link href="/pairs/SMH" className="hover:text-blue-600 underline decoration-dotted">SMH</Link>
+</div>
 
       {/* --- MAIN CONTENT --- */}
       <main className="max-w-4xl mx-auto px-4 py-12 space-y-8">
