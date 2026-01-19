@@ -3,16 +3,15 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
-import ReportIssueButton from '../../components/ReportIssueButton'; // <--- Import the new client component
 
-// 1. Tell Next.js exactly which pages to build
+// 1. Tell Next.js exactly which pages to build (Crucial for SEO)
 export async function generateStaticParams() {
   return pairsData.map((etf) => ({
     ticker: etf.ticker,
   }));
 }
 
-// 2. Optimized SEO Metadata (Server Side Only)
+// 2. Optimized SEO Metadata
 export async function generateMetadata({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -25,7 +24,7 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
   };
 }
 
-// 3. The Page Content
+// 3. The Page Content - 100% Server Component
 export default function TickerPage({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -197,8 +196,16 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
           
           <div className="mt-4 mb-4">
-             {/* THE FIX: Use our new Client Component here */}
-             <ReportIssueButton ticker={etf.ticker} />
+             {/* STANDARD TALLY TRIGGER - NO FANCY LOGIC */}
+             <button 
+               data-tally-open="68Kqjo" 
+               data-tally-layout="modal"
+               data-tally-emoji-text="👋"
+               data-tally-emoji-animation="wave"
+               className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
+             >
+               Report data issue for {etf.ticker}
+             </button>
           </div>
 
           <p className="mt-2 max-w-lg mx-auto leading-relaxed">
