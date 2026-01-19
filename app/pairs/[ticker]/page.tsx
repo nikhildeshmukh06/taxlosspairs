@@ -98,8 +98,8 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                         {(partner.correlation * 100).toFixed(1)}%
                       </div>
                       <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
-                        {isInverse ? 'Inverse Rel.' : 'Correlation'}
-                      </div>
+  {isInverse ? 'Inverse Correlation' : 'Correlation'}
+</div>
                     </div>
                   </div>
                   
