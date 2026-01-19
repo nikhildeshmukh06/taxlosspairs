@@ -24,20 +24,26 @@ export default function Home() {
         </p>
       </div>
 
-      {/* --- HERO SECTION (NEUTRALIZED) --- */}
+      {/* --- HERO SECTION --- */}
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
             ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
           </h1>
-          <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Explore quantitative data for ETF research. 
-            View 2-year correlation coefficients and sector overlap estimates used in tax loss harvesting strategies.
-          </p>
+          
+          {/* SEO INTRO TEXT */}
+          <div className="max-w-3xl mx-auto mb-10 text-slate-600 space-y-4 leading-relaxed text-lg">
+            <p>
+              Tax-loss harvesting involves selling securities at a loss to offset gains, but IRS wash-sale rules may restrict claiming those losses if a substantially identical security is repurchased within 30 days.
+            </p>
+            <p>
+              This tool presents structured ETF correlation and holdings overlap metrics to support individual research into potential alternatives.
+            </p>
+          </div>
 
           {/* SEARCH BAR */}
-          <div className="max-w-xl mx-auto relative group">
+          <div className="max-w-xl mx-auto relative group mb-6">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
             <input
               type="text"
@@ -49,7 +55,7 @@ export default function Home() {
           </div>
 
           {/* POPULAR SEARCHES */}
-          <div className="text-xs text-gray-400 mt-4 flex gap-3 items-center justify-center">
+          <div className="text-xs text-gray-400 flex gap-3 items-center justify-center">
             <span className="font-semibold uppercase tracking-wider text-gray-300">Popular:</span>
             <Link href="/pairs/VTI" className="hover:text-blue-600 hover:underline transition-colors">VTI</Link>
             <Link href="/pairs/VOO" className="hover:text-blue-600 hover:underline transition-colors">VOO</Link>
@@ -99,7 +105,7 @@ export default function Home() {
                         <div className="flex justify-between items-center mb-2">
                           <span className="font-bold text-slate-800 text-lg">{partner.ticker}</span>
                           
-                          {/* NEUTRAL BADGE - REPLACES "EXCELLENT MATCH" */}
+                          {/* NEUTRAL BADGE */}
                           <span className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-slate-200 text-slate-700">
                             CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}
                           </span>
@@ -135,7 +141,7 @@ export default function Home() {
         )}
       </main>
 
-      {/* --- FAQ SECTION (UPDATED) --- */}
+      {/* --- FAQ SECTION --- */}
       <section className="bg-white border-t border-slate-200 py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
@@ -173,7 +179,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-6 text-sm font-medium text-slate-500">
             <Link href="/" className="hover:text-blue-600">Home</Link>
-            <a href="https://github.com/nikhildeshmukh/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
+            <a href="https://github.com/deshmukhnikhil/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
             <span className="text-slate-300">|</span>
             <span>Data updated: Jan 2026</span>
           </div>
