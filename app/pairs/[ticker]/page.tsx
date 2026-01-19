@@ -1,220 +1,224 @@
-"use client";
-
-import React, { useState } from 'react';
+import React from 'react';
+import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import pairsData from './pairs.json';
+import pairsData from '../../pairs.json'; // <--- FIX: Goes up 2 levels to find the file
+import BackButton from '../../components/BackButton';
 
-export default function Home() {
-  const [searchTerm, setSearchTerm] = useState('');
+// 1. Tell Next.js exactly which pages to build
+export async function generateStaticParams() {
+  return pairsData.map((etf) => ({
+    ticker: etf.ticker,
+  }));
+}
 
-  // Filter logic
-  const filteredPairs = pairsData.filter((pair) =>
-    pair.ticker.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    pair.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    pair.sector.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+// 2. Optimized SEO Metadata
+export async function generateMetadata({ params }: { params: { ticker: string } }) {
+  const ticker = params.ticker.toUpperCase();
+  const etf = pairsData.find((p) => p.ticker === ticker);
+
+  if (!etf) return { title: 'ETF Not Found' };
+
+  return {
+    title: `${ticker} ETF Correlation & Holdings Overlap | TaxLossPairs`,
+    description: `Compare ${ticker} correlation and holdings overlap with similar ETFs for research into tax loss harvesting alternatives. Not tax or investment advice.`,
+  };
+}
+
+// 3. The Page Content
+export default function TickerPage({ params }: { params: { ticker: string } }) {
+  const ticker = params.ticker.toUpperCase();
+  const etf = pairsData.find((p) => p.ticker === ticker);
+
+  if (!etf) return notFound();
+
+  // CHECK: Is this a leveraged or inverse fund?
+  const isLeveraged = etf.sector.toLowerCase().includes('leveraged') || 
+                      etf.sector.toLowerCase().includes('inverse');
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* --- COMPLIANCE WARNING --- */}
-      <div className="bg-slate-100 border-b border-slate-200 p-3 text-center">
-        <p className="text-xs text-slate-600 font-medium">
-          ⚠️ Market Data Only. Not financial, tax, or investment advice. Past correlation does not guarantee future results.
-        </p>
-      </div>
-
-      {/* --- HERO SECTION --- */}
-      <header className="bg-white border-b border-slate-200">
-        <div className="max-w-4xl mx-auto px-6 py-16 text-center">
+      {/* NAV */}
+      <nav className="bg-white border-b border-gray-200 px-4 py-4">
+        <div className="max-w-4xl mx-auto flex items-center justify-between">
           
-          <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
-            ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
+          {/* SMART BACK BUTTON */}
+          <BackButton />
+          
+          <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
+        </div>
+      </nav>
+
+      <main className="max-w-3xl mx-auto px-4 py-12">
+        
+        {/* HEADER */}
+        <div className="mb-10 text-center">
+          <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold mb-4 tracking-wide border border-slate-200 uppercase">
+            Market Research Data
+          </span>
+          <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
+            {etf.ticker} Correlation & Overlap
           </h1>
           
-          <div className="max-w-3xl mx-auto mb-10 text-slate-600 space-y-4 leading-relaxed text-lg">
-            <p>
-              Tax-loss harvesting involves selling securities at a loss to offset gains, but IRS wash-sale rules may restrict claiming those losses if a substantially identical security is repurchased within 30 days.
-            </p>
-            <p>
-              This tool presents structured ETF correlation and holdings overlap metrics often reviewed when comparing economically similar ETFs for research purposes.
-            </p>
-          </div>
+          {/* SMART HERO TEXT */}
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            This page shows historical correlation and estimated holdings overlap between {etf.ticker} and other ETFs, 
+            {isLeveraged 
+              ? " metrics sometimes reviewed when researching market similarity and wash sale considerations." 
+              : " metrics commonly reviewed when researching wash sale considerations."}
+          </p>
+        </div>
 
-          {/* SEARCH BAR */}
-          <div className="max-w-xl mx-auto relative group mb-6">
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
-            <input
-              type="text"
-              placeholder="Search ticker (e.g. VTI, QQQ, SMH)..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="relative w-full p-4 pl-6 rounded-lg border border-slate-200 text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 placeholder-slate-400"
-            />
+        {/* MAIN DATA CARD */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+          <div className="p-6 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
+            <h2 className="text-xl font-bold text-gray-800 tracking-tight">Top Correlated ETFs</h2>
+            <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded border border-gray-200 font-medium lowercase">
+              {etf.sector}
+            </span>
           </div>
+          
+          <div className="divide-y divide-gray-100">
+            {etf.partners.map((partner) => {
+              // 1. Check for inverse relationship
+              const isInverse = partner.correlation < 0;
+              
+              // 2. Check if the partner actually has a page in our DB
+              const partnerPageExists = pairsData.some(p => p.ticker === partner.ticker);
+              
+              return (
+                <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="text-2xl font-bold text-gray-800 tracking-tighter">{partner.ticker}</div>
+                      
+                      {/* Correlation Badge */}
+                      <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
+                          {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
+                      </span>
+                    </div>
+                    <div className="text-right">
+                      <div className={`text-2xl font-mono font-bold ${isInverse ? 'text-red-600' : 'text-blue-600'}`}>
+                        {(partner.correlation * 100).toFixed(1)}%
+                      </div>
+                      <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
+                        {isInverse ? 'Inverse Correlation' : 'Correlation'}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 mb-4 font-medium">
+                    Estimated holding overlap: <span className="text-gray-900">{partner.overlap_estimate}%</span>
+                  </p>
 
-          {/* POPULAR SEARCHES */}
-          <div className="text-xs text-gray-400 flex gap-3 items-center justify-center">
-            <span className="font-semibold uppercase tracking-wider text-gray-300">Popular:</span>
-            <Link href="/pairs/VTI" className="hover:text-blue-600 hover:underline transition-colors">VTI</Link>
-            <Link href="/pairs/VOO" className="hover:text-blue-600 hover:underline transition-colors">VOO</Link>
-            <Link href="/pairs/QQQ" className="hover:text-blue-600 hover:underline transition-colors">QQQ</Link>
-            <Link href="/pairs/VXUS" className="hover:text-blue-600 hover:underline transition-colors">VXUS</Link>
-            <Link href="/pairs/SMH" className="hover:text-blue-600 hover:underline transition-colors">SMH</Link>
+                  <div className="flex gap-4 items-center">
+                    <a 
+                      href={`https://finance.yahoo.com/quote/${partner.ticker}`} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="text-xs font-semibold text-blue-600 hover:underline"
+                    >
+                      View external fund information ↗
+                    </a>
+
+                    {/* CONDITIONAL LINK LOGIC */}
+                    {partnerPageExists ? (
+                        <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
+                        View {partner.ticker} Metrics →
+                        </Link>
+                    ) : (
+                        <span className="text-xs font-medium text-gray-400 cursor-not-allowed select-none">
+                            {partner.ticker} Data Coming Soon
+                        </span>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          
+          {/* DISCLAIMER BLOCK */}
+          <div className="bg-slate-50 p-6 border-t border-gray-100 text-xs text-gray-500 space-y-3 leading-relaxed">
+            <p>
+              <strong>Note on Overlap:</strong> Estimates are based on the most recent publicly disclosed holdings and may differ from current portfolio composition.
+            </p>
+            
+            {/* CONDITIONAL LEVERAGED WARNING */}
+            {isLeveraged ? (
+              <div className="p-3 bg-yellow-50 border border-yellow-100 rounded text-yellow-800">
+                <strong>Leveraged/Inverse Note:</strong> Leveraged ETFs are designed to deliver multiples of daily returns and may experience significant performance divergence over longer periods. Overlap metrics may be less predictive due to derivative exposure.
+              </div>
+            ) : (
+              <p>
+                <strong>Benchmark Similarity:</strong> ETFs tracking similar broad-market or sector-specific benchmarks often exhibit extremely high correlation and overlap. Investors typically review additional factors such as index methodology, fund structure, and reconstitution rules when evaluating similarity.
+              </p>
+            )}
+
+            <p className="italic">
+              * Correlation calculated using 2-year daily price returns.
+            </p>
           </div>
         </div>
-      </header>
 
-      {/* --- RESULTS SECTION --- */}
-      <main className="max-w-4xl mx-auto px-6 py-12">
-        {filteredPairs.length === 0 ? (
-          <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
-             <p className="text-slate-400 text-lg">No ETF found matching "{searchTerm}"</p>
+        {/* DEFINITIONS BLOCK */}
+        <div className="grid md:grid-cols-2 gap-4 mb-12">
+            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 className="text-sm font-bold text-gray-900 mb-2">What is Correlation?</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                    Correlation measures how closely two assets move together historically. A value of 1.00 means they move perfectly in sync. This tool uses 2 years of daily price history.
+                </p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 className="text-sm font-bold text-gray-900 mb-2">What is Overlap?</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                   Overlap estimates the percentage of holdings that two ETFs share. High overlap may indicate similar economic exposure.
+                </p>
+            </div>
+        </div>
+
+        {/* RELATED RESEARCH */}
+        <div className="mb-12">
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Related ETF Correlation Research</h4>
+            <div className="flex flex-wrap gap-2">
+                {['VOO', 'IVV', 'SPY', 'QQQ', 'VTI'].filter(t => t !== ticker).map(t => (
+                    <Link key={t} href={`/pairs/${t}`} className="px-3 py-1 bg-white border border-gray-200 rounded text-xs text-blue-600 hover:border-blue-300 transition-colors font-medium">
+                        {t} Correlation & Overlap
+                    </Link>
+                ))}
+            </div>
+            <p className="mt-6 text-xs text-slate-400 italic">
+              Tip: Many investors review multiple correlation and overlap pairs before making research-based decisions.
+            </p>
+        </div>
+
+        {/* FOOTER */}
+        <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
+          <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
+          
+          <div className="mt-4 mb-4">
+             {/* TALLY TRIGGER SPECIFIC TO THIS TICKER */}
              <button 
-               onClick={() => setSearchTerm('')}
-               className="mt-4 text-blue-600 font-bold hover:underline"
+               data-tally-open="68Kqjo" 
+               data-tally-layout="modal"
+               data-tally-hidden-ticker={etf.ticker}
+               data-tally-emoji-text="👋"
+               data-tally-emoji-animation="wave"
+               className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
              >
-               Clear Search
+               Report data issue for {etf.ticker}
              </button>
           </div>
-        ) : (
-          <div className="grid gap-6">
-            {filteredPairs.map((etf) => (
-              <Link href={`/pairs/${etf.ticker}`} key={etf.ticker} className="block group">
-                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 hover:shadow-xl hover:border-blue-200 transition-all duration-200 cursor-pointer relative overflow-hidden">
-                  
-                  {/* Hover Accent */}
-                  <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
-                  <div className="flex justify-between items-start mb-6">
-                    <div>
-                      <h2 className="text-3xl font-extrabold text-slate-900 group-hover:text-blue-700 transition-colors">
-                        {etf.ticker}
-                      </h2>
-                      <p className="text-slate-500 font-medium text-sm mt-1">{etf.name}</p>
-                    </div>
-                    <span className="px-3 py-1 bg-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider rounded-full border border-slate-200">
-                      {etf.sector}
-                    </span>
-                  </div>
+          <p className="mt-2 max-w-lg mx-auto leading-relaxed">
+            Market data for informational purposes only. Not financial, tax, or legal advice. 
+            Correlation data through Jan 2026. Overlap based on most recent publicly available filings.
+          </p>
+           <p className="mt-4">
+            <Link href="/" className="text-blue-600 hover:underline">Back to Global Search</Link>
+          </p>
+        </div>
 
-                  <div className="grid md:grid-cols-3 gap-4">
-                    {etf.partners.map((partner) => (
-                      <div key={partner.ticker} className="bg-slate-50 rounded-lg p-4 border border-slate-100 group-hover:bg-blue-50/50 transition-colors">
-                        <div className="flex justify-between items-center mb-2">
-                          <span className="font-bold text-slate-800 text-lg">{partner.ticker}</span>
-                          
-                          {/* NEUTRAL BADGE */}
-                          <span className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-slate-200 text-slate-700">
-                            CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}
-                          </span>
-                        </div>
-                        <div className="flex items-end justify-between">
-                           <div>
-                             <div className="text-xs text-slate-400 font-medium uppercase">Correlation</div>
-                             <div className="text-sm font-mono font-bold text-slate-700">
-                               {(partner.correlation * 100).toFixed(1)}%
-                             </div>
-                           </div>
-                           <div className="text-right">
-                             <div className="text-xs text-slate-400 font-medium uppercase">Overlap</div>
-                             <div className="text-sm font-mono font-bold text-slate-700">
-                               ~{partner.overlap_estimate}%
-                             </div>
-                           </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                  
-                  <div className="mt-4 text-center">
-                    <span className="text-xs font-bold text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-widest">
-                      View Full Analysis →
-                    </span>
-                  </div>
-
-                </div>
-              </Link>
-            ))}
-          </div>
-        )}
       </main>
-
-      {/* --- METHODOLOGY STRIP --- */}
-      <div className="bg-slate-100 border-y border-slate-200 py-6">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-1">Data Methodology</p>
-          <p className="text-sm text-slate-700">
-            Correlation based on 2-year daily returns. Overlap estimates derived from latest publicly disclosed holdings.
-          </p>
-        </div>
-      </div>
-
-      {/* --- FAQ SECTION --- */}
-      <section className="bg-white py-16">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">What is "Overlap"?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Overlap reflects the percentage of shared securities based on the latest publicly reported holdings. 
-                Values are estimates and may lag actual current holdings.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">How is Correlation calculated?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                We utilize 2 years of historical daily price returns to calculate the correlation coefficient. 
-                A value of 1.00 indicates perfect positive correlation.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">Is this investment advice?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                No. This tool displays historical market data only. It does not provide tax, legal, or investment advice. 
-                You should consult a qualified professional before making trading decisions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* --- FOOTER --- */}
-      <footer className="bg-slate-50 border-t border-slate-200 py-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-slate-400 text-sm mb-4">
-            Built for the Bogleheads community. Open Source.
-          </p>
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
-            <Link href="/" className="hover:text-blue-600">Home</Link>
-            
-            <a 
-              href="https://github.com/deshmukhnikhil/taxlosspairs" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="hover:text-blue-600"
-            >
-              GitHub
-            </a>
-
-            {/* Tally Trigger Button */}
-            <button 
-              data-tally-open="68Kqjo" 
-              data-tally-layout="modal"
-              data-tally-emoji-text="👋"
-              data-tally-emoji-animation="wave"
-              className="hover:text-blue-600 bg-transparent border-none cursor-pointer p-0 font-medium text-slate-500"
-            >
-              Report an Issue
-            </button>
-
-            <span className="text-slate-300">|</span>
-            
-            <span>Data updated: Jan 2026</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
