@@ -1,15 +1,29 @@
-"use client"; // <--- Added this to allow useEffect
-
-import React, { useEffect } from 'react'; // <--- Import useEffect
+import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
+import ReportIssueButton from '../../components/ReportIssueButton'; // <--- Import the new client component
 
 // 1. Tell Next.js exactly which pages to build
-// Note: In strict "use client" mode with static export, we might need to separate this. 
-// However, for this specific fix, we are making the component client-side to handle the Tally refresh.
-// If your build fails on generateStaticParams, let me know, but this hybrid approach usually works in App Router.
+export async function generateStaticParams() {
+  return pairsData.map((etf) => ({
+    ticker: etf.ticker,
+  }));
+}
+
+// 2. Optimized SEO Metadata (Server Side Only)
+export async function generateMetadata({ params }: { params: { ticker: string } }) {
+  const ticker = params.ticker.toUpperCase();
+  const etf = pairsData.find((p) => p.ticker === ticker);
+
+  if (!etf) return { title: 'ETF Not Found' };
+
+  return {
+    title: `${ticker} ETF Correlation & Holdings Overlap | TaxLossPairs`,
+    description: `Compare ${ticker} correlation and holdings overlap with similar ETFs for research into tax loss harvesting alternatives. Not tax or investment advice.`,
+  };
+}
 
 // 3. The Page Content
 export default function TickerPage({ params }: { params: { ticker: string } }) {
@@ -21,15 +35,6 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
   // CHECK: Is this a leveraged or inverse fund?
   const isLeveraged = etf.sector.toLowerCase().includes('leveraged') || 
                       etf.sector.toLowerCase().includes('inverse');
-
-  // --- THE FIX: Force Tally to re-scan the page when we navigate ---
-  useEffect(() => {
-    // This tells Tally: "We just changed pages, please look for the new data attributes!"
-    const w = window as any;
-    if (w.Tally) {
-      w.Tally.loadEmbeds();
-    }
-  }, [ticker]); // Run every time the ticker changes
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
@@ -192,17 +197,8 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
           
           <div className="mt-4 mb-4">
-             {/* TALLY TRIGGER - ATTRIBUTE METHOD + USE-EFFECT REFRESH */}
-             <button 
-               data-tally-open="68Kqjo"           
-               data-tally-layout="modal"
-               data-tally-hidden-ticker={etf.ticker}
-               data-tally-emoji-text="👋"
-               data-tally-emoji-animation="wave"
-               className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
-             >
-               Report data issue for {etf.ticker}
-             </button>
+             {/* THE FIX: Use our new Client Component here */}
+             <ReportIssueButton ticker={etf.ticker} />
           </div>
 
           <p className="mt-2 max-w-lg mx-auto leading-relaxed">
