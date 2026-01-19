@@ -32,13 +32,13 @@ export default function Home() {
             ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
           </h1>
           
-          {/* SEO INTRO TEXT */}
+          {/* SEO INTRO TEXT + "WHY THIS MATTERS" */}
           <div className="max-w-3xl mx-auto mb-10 text-slate-600 space-y-4 leading-relaxed text-lg">
             <p>
               Tax-loss harvesting involves selling securities at a loss to offset gains, but IRS wash-sale rules may restrict claiming those losses if a substantially identical security is repurchased within 30 days.
             </p>
             <p>
-              This tool presents structured ETF correlation and holdings overlap metrics to support individual research into potential alternatives.
+              This tool presents structured ETF correlation and holdings overlap metrics often reviewed when comparing economically similar ETFs for research purposes.
             </p>
           </div>
 
@@ -141,8 +141,18 @@ export default function Home() {
         )}
       </main>
 
+      {/* --- METHODOLOGY STRIP (MUST-FIX) --- */}
+      <div className="bg-slate-100 border-y border-slate-200 py-6">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-1">Data Methodology</p>
+          <p className="text-sm text-slate-700">
+            Correlation based on 2-year daily returns. Overlap estimates derived from latest publicly disclosed holdings.
+          </p>
+        </div>
+      </div>
+
       {/* --- FAQ SECTION --- */}
-      <section className="bg-white border-t border-slate-200 py-16">
+      <section className="bg-white py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
           <div className="space-y-8">
