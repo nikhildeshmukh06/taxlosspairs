@@ -7,13 +7,16 @@ import DisclaimerModal from "./components/DisclaimerModal"; // <--- ADDED THIS I
 // Setup the Inter font (Standard, Safe)
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
-  description: 'Instantly find mathematically safe ETF partners for tax loss harvesting. Avoid wash sales with correlation and sector analysis.',
+export const metadata: Metadata = {
+  title: {
+    default: 'TaxLossPairs — ETF Correlation & Overlap for Tax Loss Harvesting',
+    template: '%s | TaxLossPairs',
+  },
+  description: 'Structured ETF correlation & holdings overlap metrics to support research into potential tax loss harvesting alternatives. Not financial advice.',
   icons: {
-    // PRESERVED: This is your bulletproof icon code
     icon: 'data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📉</text></svg>',
   },
+};
   openGraph: {
     title: 'TaxLossPairs | Free Tax Loss Harvesting Tool',
     description: 'Instantly find mathematically safe ETF partners for tax loss harvesting. Avoid wash sales with correlation and sector analysis.',
