@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import pairsData from './pairs.json';
+import pairsData from './pairs.json'; // <--- The correct import for Homepage
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
