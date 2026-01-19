@@ -176,7 +176,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-6 text-sm font-medium text-slate-500">
             <Link href="/" className="hover:text-blue-600">Home</Link>
-            <a href="https://github.com/nikhildeshmukh/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
+            <a href="https://github.com/nikhildeshmukh06/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
             <span className="text-slate-300">|</span>
             <span>Data updated: Jan 2026</span>
           </div>
