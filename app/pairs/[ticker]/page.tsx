@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import pairsData from '../../pairs.json'; // <--- FIX: Goes up 2 levels to find the file
+import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
 
 // 1. Tell Next.js exactly which pages to build
@@ -196,11 +196,10 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
           
           <div className="mt-4 mb-4">
-             {/* TALLY TRIGGER SPECIFIC TO THIS TICKER */}
+             {/* TALLY TRIGGER WITH FORCE-FED TICKER */}
              <button 
-               data-tally-open="68Kqjo" 
+               data-tally-open={`68Kqjo?ticker=${etf.ticker}`}
                data-tally-layout="modal"
-               data-tally-hidden-ticker={etf.ticker}
                data-tally-emoji-text="👋"
                data-tally-emoji-animation="wave"
                className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
