@@ -196,12 +196,23 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
           
           <div className="mt-4 mb-4">
-             {/* TALLY TRIGGER WITH FORCE-FED TICKER */}
+             {/* TALLY TRIGGER - JAVASCRIPT METHOD (Fixes Close Bug) */}
              <button 
-               data-tally-open={`68Kqjo?ticker=${etf.ticker}`}
-               data-tally-layout="modal"
-               data-tally-emoji-text="👋"
-               data-tally-emoji-animation="wave"
+               onClick={() => {
+                 // Check if Tally is loaded on the window object
+                 if (typeof window !== 'undefined' && (window as any).Tally) {
+                   (window as any).Tally.openPopup('68Kqjo', {
+                     layout: 'modal',
+                     emoji: {
+                       text: '👋',
+                       animation: 'wave'
+                     },
+                     hidden: {
+                       ticker: etf.ticker,
+                     }
+                   });
+                 }
+               }}
                className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
              >
                Report data issue for {etf.ticker}
