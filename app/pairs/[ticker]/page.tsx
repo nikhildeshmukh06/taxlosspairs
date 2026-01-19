@@ -94,7 +94,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                       
                       {/* Correlation Badge */}
                       <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
-                         {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
+                          {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
                       </span>
                     </div>
                     <div className="text-right">
@@ -194,6 +194,21 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
         {/* FOOTER */}
         <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
+          
+          <div className="mt-4 mb-4">
+             {/* TALLY TRIGGER SPECIFIC TO THIS TICKER */}
+             <button 
+               data-tally-open="68Kqjo" 
+               data-tally-layout="modal"
+               data-tally-hidden-ticker={etf.ticker}
+               data-tally-emoji-text="👋"
+               data-tally-emoji-animation="wave"
+               className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
+             >
+               Report data issue for {etf.ticker}
+             </button>
+          </div>
+
           <p className="mt-2 max-w-lg mx-auto leading-relaxed">
             Market data for informational purposes only. Not financial, tax, or legal advice. 
             Correlation data through Jan 2026. Overlap based on most recent publicly available filings.
