@@ -4,9 +4,9 @@
     "name": "Vanguard Total Stock Market ETF",
     "sector": "Total Market",
     "partners": [
-      { "ticker": "ITOT", "correlation": 0.999, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "SCHB", "correlation": 0.999, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "VTHR", "correlation": 0.999, "overlap_estimate": 92, "verdict": "Excellent Match" }
+      { "ticker": "ITOT", "correlation": 0.999, "overlap_estimate": 88 },
+      { "ticker": "SCHB", "correlation": 0.999, "overlap_estimate": 85 },
+      { "ticker": "VTHR", "correlation": 0.999, "overlap_estimate": 92 }
     ]
   },
   {
@@ -14,19 +14,9 @@
     "name": "Vanguard S&P 500 ETF",
     "sector": "Large Cap Blend",
     "partners": [
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "QQQ",
-    "name": "Invesco QQQ Trust",
-    "sector": "Large Cap Growth",
-    "partners": [
-      { "ticker": "QQQM", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "VGT", "correlation": 0.965, "overlap_estimate": 58, "verdict": "Good Match" },
-      { "ticker": "XLK", "correlation": 0.941, "overlap_estimate": 45, "verdict": "Good Match" }
+      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98 },
+      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98 }
     ]
   },
   {
@@ -34,9 +24,9 @@
     "name": "iShares Core S&P 500 ETF",
     "sector": "Large Cap Blend",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" }
+      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98 },
+      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98 }
     ]
   },
   {
@@ -44,9 +34,9 @@
     "name": "SPDR S&P 500 ETF Trust",
     "sector": "Large Cap Blend",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" }
+      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 98 }
     ]
   },
   {
@@ -54,149 +44,89 @@
     "name": "SPDR Portfolio S&P 500 ETF",
     "sector": "Large Cap Blend",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98, "verdict": "Excellent Match" }
+      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 98 }
     ]
   },
   {
-    "ticker": "SCHB",
-    "name": "Schwab U.S. Broad Market ETF",
-    "sector": "Total Market",
+    "ticker": "QQQ",
+    "name": "Invesco QQQ Trust",
+    "sector": "Large Cap Growth",
     "partners": [
-      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "ITOT", "correlation": 0.998, "overlap_estimate": 82, "verdict": "Excellent Match" },
-      { "ticker": "VTHR", "correlation": 0.998, "overlap_estimate": 84, "verdict": "Excellent Match" }
+      { "ticker": "QQQM", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "ONEQ", "correlation": 0.985, "overlap_estimate": 65 },
+      { "ticker": "XLK", "correlation": 0.941, "overlap_estimate": 45 }
     ]
   },
   {
-    "ticker": "ITOT",
-    "name": "iShares Core S&P Total U.S. Stock Market ETF",
-    "sector": "Total Market",
+    "ticker": "QQQM",
+    "name": "Invesco NASDAQ 100 ETF",
+    "sector": "Large Cap Growth",
     "partners": [
-      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "SCHB", "correlation": 0.998, "overlap_estimate": 82, "verdict": "Excellent Match" },
-      { "ticker": "VTHR", "correlation": 0.998, "overlap_estimate": 86, "verdict": "Excellent Match" }
+      { "ticker": "QQQ", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "ONEQ", "correlation": 0.985, "overlap_estimate": 65 },
+      { "ticker": "VGT", "correlation": 0.955, "overlap_estimate": 52 }
     ]
   },
   {
-    "ticker": "VGT",
-    "name": "Vanguard Information Technology ETF",
-    "sector": "Technology",
+    "ticker": "TQQQ",
+    "name": "ProShares UltraPro QQQ (3x)",
+    "sector": "Leveraged Equity",
     "partners": [
-      { "ticker": "FTEC", "correlation": 0.999, "overlap_estimate": 94, "verdict": "Excellent Match" },
-      { "ticker": "XLK", "correlation": 0.992, "overlap_estimate": 78, "verdict": "Excellent Match" },
-      { "ticker": "IYW", "correlation": 0.985, "overlap_estimate": 65, "verdict": "Good Match" }
+      { "ticker": "TECL", "correlation": 0.965, "overlap_estimate": 15 },
+      { "ticker": "QLD", "correlation": 0.995, "overlap_estimate": 5 },
+      { "ticker": "QQQ", "correlation": 0.990, "overlap_estimate": 0 }
     ]
   },
   {
-    "ticker": "XLK",
-    "name": "Technology Select Sector SPDR Fund",
-    "sector": "Technology",
+    "ticker": "SQQQ",
+    "name": "ProShares UltraPro Short QQQ (-3x)",
+    "sector": "Inverse Equity",
     "partners": [
-      { "ticker": "VGT", "correlation": 0.992, "overlap_estimate": 78, "verdict": "Excellent Match" },
-      { "ticker": "FTEC", "correlation": 0.991, "overlap_estimate": 76, "verdict": "Excellent Match" },
-      { "ticker": "IYW", "correlation": 0.981, "overlap_estimate": 62, "verdict": "Good Match" }
+      { "ticker": "TECS", "correlation": 0.955, "overlap_estimate": 10 },
+      { "ticker": "QID", "correlation": 0.995, "overlap_estimate": 5 },
+      { "ticker": "PSQ", "correlation": 0.990, "overlap_estimate": 0 }
     ]
   },
   {
-    "ticker": "FTEC",
-    "name": "Fidelity MSCI Information Technology Index ETF",
-    "sector": "Technology",
+    "ticker": "SOXL",
+    "name": "Direxion Daily Semiconductor Bull 3X",
+    "sector": "Leveraged Equity",
     "partners": [
-      { "ticker": "VGT", "correlation": 0.999, "overlap_estimate": 94, "verdict": "Excellent Match" },
-      { "ticker": "XLK", "correlation": 0.991, "overlap_estimate": 76, "verdict": "Excellent Match" },
-      { "ticker": "IYW", "correlation": 0.986, "overlap_estimate": 66, "verdict": "Good Match" }
+      { "ticker": "USD", "correlation": 0.985, "overlap_estimate": 12 },
+      { "ticker": "SMH", "correlation": 0.965, "overlap_estimate": 0 },
+      { "ticker": "SOXX", "correlation": 0.960, "overlap_estimate": 0 }
     ]
   },
   {
-    "ticker": "SMH",
-    "name": "VanEck Semiconductor ETF",
-    "sector": "Semiconductors",
+    "ticker": "SOXS",
+    "name": "Direxion Daily Semiconductor Bear 3X",
+    "sector": "Inverse Equity",
     "partners": [
-      { "ticker": "SOXX", "correlation": 0.994, "overlap_estimate": 65, "verdict": "Excellent Match" },
-      { "ticker": "XSD", "correlation": 0.945, "overlap_estimate": 25, "verdict": "Good Match" },
-      { "ticker": "FTXL", "correlation": 0.962, "overlap_estimate": 35, "verdict": "Good Match" }
+      { "ticker": "SSG", "correlation": 0.980, "overlap_estimate": 10 },
+      { "ticker": "SOXX", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "SMH", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
-    "ticker": "SOXX",
-    "name": "iShares Semiconductor ETF",
-    "sector": "Semiconductors",
+    "ticker": "UPRO",
+    "name": "ProShares UltraPro S&P 500 (3x)",
+    "sector": "Leveraged Equity",
     "partners": [
-      { "ticker": "SMH", "correlation": 0.994, "overlap_estimate": 65, "verdict": "Excellent Match" },
-      { "ticker": "XSD", "correlation": 0.952, "overlap_estimate": 28, "verdict": "Good Match" },
-      { "ticker": "PSI", "correlation": 0.965, "overlap_estimate": 40, "verdict": "Good Match" }
+      { "ticker": "SPXL", "correlation": 0.998, "overlap_estimate": 5 },
+      { "ticker": "SSO", "correlation": 0.995, "overlap_estimate": 5 },
+      { "ticker": "SPY", "correlation": 0.990, "overlap_estimate": 0 }
     ]
   },
   {
-    "ticker": "VXUS",
-    "name": "Vanguard Total International Stock ETF",
-    "sector": "International",
+    "ticker": "SPXL",
+    "name": "Direxion Daily S&P 500 Bull 3X",
+    "sector": "Leveraged Equity",
     "partners": [
-      { "ticker": "IXUS", "correlation": 0.996, "overlap_estimate": 89, "verdict": "Excellent Match" },
-      { "ticker": "VEU", "correlation": 0.991, "overlap_estimate": 92, "verdict": "Excellent Match" },
-      { "ticker": "ACWX", "correlation": 0.988, "overlap_estimate": 85, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "IXUS",
-    "name": "iShares Core MSCI Total International Stock ETF",
-    "sector": "International",
-    "partners": [
-      { "ticker": "VXUS", "correlation": 0.996, "overlap_estimate": 89, "verdict": "Excellent Match" },
-      { "ticker": "VEU", "correlation": 0.989, "overlap_estimate": 90, "verdict": "Excellent Match" },
-      { "ticker": "ACWX", "correlation": 0.992, "overlap_estimate": 88, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VEU",
-    "name": "Vanguard FTSE All-World ex-US ETF",
-    "sector": "International",
-    "partners": [
-      { "ticker": "VXUS", "correlation": 0.991, "overlap_estimate": 92, "verdict": "Excellent Match" },
-      { "ticker": "IXUS", "correlation": 0.989, "overlap_estimate": 90, "verdict": "Excellent Match" },
-      { "ticker": "CWI", "correlation": 0.985, "overlap_estimate": 78, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "IJR",
-    "name": "iShares Core S&P Small-Cap ETF",
-    "sector": "Small Cap",
-    "partners": [
-      { "ticker": "SPSM", "correlation": 0.998, "overlap_estimate": 95, "verdict": "Excellent Match" },
-      { "ticker": "VIOO", "correlation": 0.996, "overlap_estimate": 92, "verdict": "Excellent Match" },
-      { "ticker": "SLY", "correlation": 0.996, "overlap_estimate": 90, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "IWM",
-    "name": "iShares Russell 2000 ETF",
-    "sector": "Small Cap",
-    "partners": [
-      { "ticker": "VTWO", "correlation": 0.997, "overlap_estimate": 98, "verdict": "Excellent Match" },
-      { "ticker": "VIOO", "correlation": 0.982, "overlap_estimate": 45, "verdict": "Good Match" },
-      { "ticker": "IJR", "correlation": 0.978, "overlap_estimate": 12, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "VB",
-    "name": "Vanguard Small-Cap ETF",
-    "sector": "Small Cap",
-    "partners": [
-      { "ticker": "SCHA", "correlation": 0.995, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "IJR", "correlation": 0.965, "overlap_estimate": 55, "verdict": "Good Match" },
-      { "ticker": "IWM", "correlation": 0.962, "overlap_estimate": 52, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "VNQ",
-    "name": "Vanguard Real Estate ETF",
-    "sector": "Real Estate",
-    "partners": [
-      { "ticker": "XLRE", "correlation": 0.945, "overlap_estimate": 58, "verdict": "Good Match" },
-      { "ticker": "IYR", "correlation": 0.962, "overlap_estimate": 62, "verdict": "Good Match" },
-      { "ticker": "USRT", "correlation": 0.975, "overlap_estimate": 75, "verdict": "Good Match" }
+      { "ticker": "UPRO", "correlation": 0.998, "overlap_estimate": 5 },
+      { "ticker": "SSO", "correlation": 0.995, "overlap_estimate": 5 },
+      { "ticker": "VOO", "correlation": 0.990, "overlap_estimate": 0 }
     ]
   },
   {
@@ -204,79 +134,19 @@
     "name": "Schwab US Dividend Equity ETF",
     "sector": "Dividend",
     "partners": [
-      { "ticker": "VIG", "correlation": 0.925, "overlap_estimate": 28, "verdict": "Good Match" },
-      { "ticker": "VYM", "correlation": 0.942, "overlap_estimate": 32, "verdict": "Good Match" },
-      { "ticker": "DGRO", "correlation": 0.938, "overlap_estimate": 35, "verdict": "Good Match" }
+      { "ticker": "VIG", "correlation": 0.925, "overlap_estimate": 28 },
+      { "ticker": "VYM", "correlation": 0.942, "overlap_estimate": 32 },
+      { "ticker": "DGRO", "correlation": 0.938, "overlap_estimate": 35 }
     ]
   },
   {
-    "ticker": "VIG",
-    "name": "Vanguard Dividend Appreciation ETF",
-    "sector": "Dividend",
+    "ticker": "JEPI",
+    "name": "JPMorgan Equity Premium Income ETF",
+    "sector": "Income",
     "partners": [
-      { "ticker": "DGRO", "correlation": 0.965, "overlap_estimate": 55, "verdict": "Excellent Match" },
-      { "ticker": "SCHD", "correlation": 0.925, "overlap_estimate": 28, "verdict": "Good Match" },
-      { "ticker": "NOBL", "correlation": 0.915, "overlap_estimate": 22, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "BND",
-    "name": "Vanguard Total Bond Market ETF",
-    "sector": "Bonds",
-    "partners": [
-      { "ticker": "AGG", "correlation": 0.994, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "BNDX", "correlation": 0.45, "overlap_estimate": 0, "verdict": "Poor Match" },
-      { "ticker": "VCIT", "correlation": 0.92, "overlap_estimate": 35, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "AGG",
-    "name": "iShares Core U.S. Aggregate Bond ETF",
-    "sector": "Bonds",
-    "partners": [
-      { "ticker": "BND", "correlation": 0.994, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "IUSB", "correlation": 0.985, "overlap_estimate": 78, "verdict": "Excellent Match" },
-      { "ticker": "SPAB", "correlation": 0.988, "overlap_estimate": 80, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "GOVT",
-    "name": "iShares U.S. Treasury Bond ETF",
-    "sector": "Bonds",
-    "partners": [
-      { "ticker": "VGIT", "correlation": 0.965, "overlap_estimate": 65, "verdict": "Excellent Match" },
-      { "ticker": "SCHO", "correlation": 0.92, "overlap_estimate": 40, "verdict": "Good Match" },
-      { "ticker": "IEF", "correlation": 0.95, "overlap_estimate": 55, "verdict": "Good Match" }
-    ]
-  },
-  {
-    "ticker": "GLD",
-    "name": "SPDR Gold Shares",
-    "sector": "Commodities",
-    "partners": [
-      { "ticker": "IAU", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "GLDM", "correlation": 0.999, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SGOL", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "IAU",
-    "name": "iShares Gold Trust",
-    "sector": "Commodities",
-    "partners": [
-      { "ticker": "GLD", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "GLDM", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "SGOL", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "SLV",
-    "name": "iShares Silver Trust",
-    "sector": "Commodities",
-    "partners": [
-      { "ticker": "SIVR", "correlation": 0.998, "overlap_estimate": 99, "verdict": "Excellent Match" },
-      { "ticker": "DBS", "correlation": 0.985, "overlap_estimate": 80, "verdict": "Excellent Match" },
-      { "ticker": "GLTR", "correlation": 0.75, "overlap_estimate": 25, "verdict": "Poor Match" }
+      { "ticker": "JEPQ", "correlation": 0.825, "overlap_estimate": 15 },
+      { "ticker": "DIVO", "correlation": 0.785, "overlap_estimate": 22 },
+      { "ticker": "QYLD", "correlation": 0.650, "overlap_estimate": 10 }
     ]
   },
   {
@@ -284,9 +154,169 @@
     "name": "ARK Innovation ETF",
     "sector": "Thematic",
     "partners": [
-      { "ticker": "ARKW", "correlation": 0.92, "overlap_estimate": 45, "verdict": "Good Match" },
-      { "ticker": "ARKF", "correlation": 0.88, "overlap_estimate": 35, "verdict": "Good Match" },
-      { "ticker": "KOMP", "correlation": 0.82, "overlap_estimate": 15, "verdict": "Good Match" }
+      { "ticker": "ARKW", "correlation": 0.920, "overlap_estimate": 45 },
+      { "ticker": "ARKF", "correlation": 0.880, "overlap_estimate": 35 },
+      { "ticker": "KOMP", "correlation": 0.820, "overlap_estimate": 15 }
+    ]
+  },
+  {
+    "ticker": "SMH",
+    "name": "VanEck Semiconductor ETF",
+    "sector": "Semiconductors",
+    "partners": [
+      { "ticker": "SOXX", "correlation": 0.994, "overlap_estimate": 65 },
+      { "ticker": "XSD", "correlation": 0.945, "overlap_estimate": 25 },
+      { "ticker": "FTXL", "correlation": 0.962, "overlap_estimate": 35 }
+    ]
+  },
+  {
+    "ticker": "SOXX",
+    "name": "iShares Semiconductor ETF",
+    "sector": "Semiconductors",
+    "partners": [
+      { "ticker": "SMH", "correlation": 0.994, "overlap_estimate": 65 },
+      { "ticker": "XSD", "correlation": 0.952, "overlap_estimate": 28 },
+      { "ticker": "PSI", "correlation": 0.965, "overlap_estimate": 40 }
+    ]
+  },
+  {
+    "ticker": "SCHB",
+    "name": "Schwab U.S. Broad Market ETF",
+    "sector": "Total Market",
+    "partners": [
+      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 85 },
+      { "ticker": "ITOT", "correlation": 0.998, "overlap_estimate": 82 },
+      { "ticker": "VTHR", "correlation": 0.998, "overlap_estimate": 84 }
+    ]
+  },
+  {
+    "ticker": "ITOT",
+    "name": "iShares Core S&P Total U.S. Stock Market ETF",
+    "sector": "Total Market",
+    "partners": [
+      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 88 },
+      { "ticker": "SCHB", "correlation": 0.998, "overlap_estimate": 82 },
+      { "ticker": "VTHR", "correlation": 0.998, "overlap_estimate": 86 }
+    ]
+  },
+  {
+    "ticker": "VGT",
+    "name": "Vanguard Information Technology ETF",
+    "sector": "Technology",
+    "partners": [
+      { "ticker": "FTEC", "correlation": 0.999, "overlap_estimate": 94 },
+      { "ticker": "XLK", "correlation": 0.992, "overlap_estimate": 78 },
+      { "ticker": "IYW", "correlation": 0.985, "overlap_estimate": 65 }
+    ]
+  },
+  {
+    "ticker": "XLK",
+    "name": "Technology Select Sector SPDR Fund",
+    "sector": "Technology",
+    "partners": [
+      { "ticker": "VGT", "correlation": 0.992, "overlap_estimate": 78 },
+      { "ticker": "FTEC", "correlation": 0.991, "overlap_estimate": 76 },
+      { "ticker": "IYW", "correlation": 0.981, "overlap_estimate": 62 }
+    ]
+  },
+  {
+    "ticker": "FTEC",
+    "name": "Fidelity MSCI Information Technology Index ETF",
+    "sector": "Technology",
+    "partners": [
+      { "ticker": "VGT", "correlation": 0.999, "overlap_estimate": 94 },
+      { "ticker": "XLK", "correlation": 0.991, "overlap_estimate": 76 },
+      { "ticker": "IYW", "correlation": 0.986, "overlap_estimate": 66 }
+    ]
+  },
+  {
+    "ticker": "VXUS",
+    "name": "Vanguard Total International Stock ETF",
+    "sector": "International",
+    "partners": [
+      { "ticker": "IXUS", "correlation": 0.996, "overlap_estimate": 89 },
+      { "ticker": "VEU", "correlation": 0.991, "overlap_estimate": 92 },
+      { "ticker": "ACWX", "correlation": 0.988, "overlap_estimate": 85 }
+    ]
+  },
+  {
+    "ticker": "IXUS",
+    "name": "iShares Core MSCI Total International Stock ETF",
+    "sector": "International",
+    "partners": [
+      { "ticker": "VXUS", "correlation": 0.996, "overlap_estimate": 89 },
+      { "ticker": "VEU", "correlation": 0.989, "overlap_estimate": 90 },
+      { "ticker": "ACWX", "correlation": 0.992, "overlap_estimate": 88 }
+    ]
+  },
+  {
+    "ticker": "IJR",
+    "name": "iShares Core S&P Small-Cap ETF",
+    "sector": "Small Cap",
+    "partners": [
+      { "ticker": "SPSM", "correlation": 0.998, "overlap_estimate": 95 },
+      { "ticker": "VIOO", "correlation": 0.996, "overlap_estimate": 92 },
+      { "ticker": "SLY", "correlation": 0.996, "overlap_estimate": 90 }
+    ]
+  },
+  {
+    "ticker": "IWM",
+    "name": "iShares Russell 2000 ETF",
+    "sector": "Small Cap",
+    "partners": [
+      { "ticker": "VTWO", "correlation": 0.997, "overlap_estimate": 98 },
+      { "ticker": "VIOO", "correlation": 0.982, "overlap_estimate": 45 },
+      { "ticker": "IJR", "correlation": 0.978, "overlap_estimate": 12 }
+    ]
+  },
+  {
+    "ticker": "VNQ",
+    "name": "Vanguard Real Estate ETF",
+    "sector": "Real Estate",
+    "partners": [
+      { "ticker": "XLRE", "correlation": 0.945, "overlap_estimate": 58 },
+      { "ticker": "IYR", "correlation": 0.962, "overlap_estimate": 62 },
+      { "ticker": "USRT", "correlation": 0.975, "overlap_estimate": 75 }
+    ]
+  },
+  {
+    "ticker": "VIG",
+    "name": "Vanguard Dividend Appreciation ETF",
+    "sector": "Dividend",
+    "partners": [
+      { "ticker": "DGRO", "correlation": 0.965, "overlap_estimate": 55 },
+      { "ticker": "SCHD", "correlation": 0.925, "overlap_estimate": 28 },
+      { "ticker": "NOBL", "correlation": 0.915, "overlap_estimate": 22 }
+    ]
+  },
+  {
+    "ticker": "BND",
+    "name": "Vanguard Total Bond Market ETF",
+    "sector": "Bonds",
+    "partners": [
+      { "ticker": "AGG", "correlation": 0.994, "overlap_estimate": 85 },
+      { "ticker": "BNDX", "correlation": 0.450, "overlap_estimate": 0 },
+      { "ticker": "VCIT", "correlation": 0.920, "overlap_estimate": 35 }
+    ]
+  },
+  {
+    "ticker": "AGG",
+    "name": "iShares Core U.S. Aggregate Bond ETF",
+    "sector": "Bonds",
+    "partners": [
+      { "ticker": "BND", "correlation": 0.994, "overlap_estimate": 85 },
+      { "ticker": "IUSB", "correlation": 0.985, "overlap_estimate": 78 },
+      { "ticker": "SPAB", "correlation": 0.988, "overlap_estimate": 80 }
+    ]
+  },
+  {
+    "ticker": "GLD",
+    "name": "SPDR Gold Shares",
+    "sector": "Commodities",
+    "partners": [
+      { "ticker": "IAU", "correlation": 0.998, "overlap_estimate": 99 },
+      { "ticker": "GLDM", "correlation": 0.999, "overlap_estimate": 99 },
+      { "ticker": "SGOL", "correlation": 0.998, "overlap_estimate": 99 }
     ]
   },
   {
@@ -294,19 +324,9 @@
     "name": "Energy Select Sector SPDR Fund",
     "sector": "Energy",
     "partners": [
-      { "ticker": "VDE", "correlation": 0.994, "overlap_estimate": 92, "verdict": "Excellent Match" },
-      { "ticker": "FENY", "correlation": 0.991, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "IYE", "correlation": 0.985, "overlap_estimate": 85, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VDE",
-    "name": "Vanguard Energy ETF",
-    "sector": "Energy",
-    "partners": [
-      { "ticker": "XLE", "correlation": 0.994, "overlap_estimate": 92, "verdict": "Excellent Match" },
-      { "ticker": "FENY", "correlation": 0.996, "overlap_estimate": 94, "verdict": "Excellent Match" },
-      { "ticker": "IYE", "correlation": 0.988, "overlap_estimate": 89, "verdict": "Excellent Match" }
+      { "ticker": "VDE", "correlation": 0.994, "overlap_estimate": 92 },
+      { "ticker": "FENY", "correlation": 0.991, "overlap_estimate": 88 },
+      { "ticker": "IYE", "correlation": 0.985, "overlap_estimate": 85 }
     ]
   },
   {
@@ -314,19 +334,9 @@
     "name": "Financial Select Sector SPDR Fund",
     "sector": "Financials",
     "partners": [
-      { "ticker": "VFH", "correlation": 0.992, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "IYF", "correlation": 0.988, "overlap_estimate": 82, "verdict": "Excellent Match" },
-      { "ticker": "FNCL", "correlation": 0.991, "overlap_estimate": 84, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VFH",
-    "name": "Vanguard Financials ETF",
-    "sector": "Financials",
-    "partners": [
-      { "ticker": "XLF", "correlation": 0.992, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "FNCL", "correlation": 0.996, "overlap_estimate": 95, "verdict": "Excellent Match" },
-      { "ticker": "IYF", "correlation": 0.985, "overlap_estimate": 80, "verdict": "Excellent Match" }
+      { "ticker": "VFH", "correlation": 0.992, "overlap_estimate": 85 },
+      { "ticker": "IYF", "correlation": 0.988, "overlap_estimate": 82 },
+      { "ticker": "FNCL", "correlation": 0.991, "overlap_estimate": 84 }
     ]
   },
   {
@@ -334,19 +344,9 @@
     "name": "Health Care Select Sector SPDR Fund",
     "sector": "Health Care",
     "partners": [
-      { "ticker": "VHT", "correlation": 0.993, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "FHLC", "correlation": 0.991, "overlap_estimate": 86, "verdict": "Excellent Match" },
-      { "ticker": "IYH", "correlation": 0.988, "overlap_estimate": 84, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VHT",
-    "name": "Vanguard Health Care ETF",
-    "sector": "Health Care",
-    "partners": [
-      { "ticker": "XLV", "correlation": 0.993, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "FHLC", "correlation": 0.997, "overlap_estimate": 96, "verdict": "Excellent Match" },
-      { "ticker": "IYH", "correlation": 0.985, "overlap_estimate": 82, "verdict": "Excellent Match" }
+      { "ticker": "VHT", "correlation": 0.993, "overlap_estimate": 88 },
+      { "ticker": "FHLC", "correlation": 0.991, "overlap_estimate": 86 },
+      { "ticker": "IYH", "correlation": 0.988, "overlap_estimate": 84 }
     ]
   },
   {
@@ -354,19 +354,9 @@
     "name": "Industrial Select Sector SPDR Fund",
     "sector": "Industrials",
     "partners": [
-      { "ticker": "VIS", "correlation": 0.991, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "FIDU", "correlation": 0.990, "overlap_estimate": 84, "verdict": "Excellent Match" },
-      { "ticker": "IYJ", "correlation": 0.985, "overlap_estimate": 80, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VIS",
-    "name": "Vanguard Industrials ETF",
-    "sector": "Industrials",
-    "partners": [
-      { "ticker": "XLI", "correlation": 0.991, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "FIDU", "correlation": 0.996, "overlap_estimate": 95, "verdict": "Excellent Match" },
-      { "ticker": "IYJ", "correlation": 0.982, "overlap_estimate": 78, "verdict": "Excellent Match" }
+      { "ticker": "VIS", "correlation": 0.991, "overlap_estimate": 85 },
+      { "ticker": "FIDU", "correlation": 0.990, "overlap_estimate": 84 },
+      { "ticker": "IYJ", "correlation": 0.985, "overlap_estimate": 80 }
     ]
   },
   {
@@ -374,19 +364,9 @@
     "name": "Consumer Staples Select Sector SPDR Fund",
     "sector": "Consumer Staples",
     "partners": [
-      { "ticker": "VDC", "correlation": 0.992, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "FSTA", "correlation": 0.990, "overlap_estimate": 86, "verdict": "Excellent Match" },
-      { "ticker": "IYK", "correlation": 0.985, "overlap_estimate": 82, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VDC",
-    "name": "Vanguard Consumer Staples ETF",
-    "sector": "Consumer Staples",
-    "partners": [
-      { "ticker": "XLP", "correlation": 0.992, "overlap_estimate": 88, "verdict": "Excellent Match" },
-      { "ticker": "FSTA", "correlation": 0.996, "overlap_estimate": 96, "verdict": "Excellent Match" },
-      { "ticker": "IYK", "correlation": 0.982, "overlap_estimate": 80, "verdict": "Excellent Match" }
+      { "ticker": "VDC", "correlation": 0.992, "overlap_estimate": 88 },
+      { "ticker": "FSTA", "correlation": 0.990, "overlap_estimate": 86 },
+      { "ticker": "IYK", "correlation": 0.985, "overlap_estimate": 82 }
     ]
   },
   {
@@ -394,19 +374,9 @@
     "name": "Consumer Discretionary Select Sector SPDR Fund",
     "sector": "Consumer Discretionary",
     "partners": [
-      { "ticker": "VCR", "correlation": 0.993, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "FDIS", "correlation": 0.991, "overlap_estimate": 84, "verdict": "Excellent Match" },
-      { "ticker": "IYC", "correlation": 0.985, "overlap_estimate": 80, "verdict": "Excellent Match" }
-    ]
-  },
-  {
-    "ticker": "VCR",
-    "name": "Vanguard Consumer Discretionary ETF",
-    "sector": "Consumer Discretionary",
-    "partners": [
-      { "ticker": "XLY", "correlation": 0.993, "overlap_estimate": 85, "verdict": "Excellent Match" },
-      { "ticker": "FDIS", "correlation": 0.996, "overlap_estimate": 95, "verdict": "Excellent Match" },
-      { "ticker": "IYC", "correlation": 0.982, "overlap_estimate": 78, "verdict": "Excellent Match" }
+      { "ticker": "VCR", "correlation": 0.993, "overlap_estimate": 85 },
+      { "ticker": "FDIS", "correlation": 0.991, "overlap_estimate": 84 },
+      { "ticker": "IYC", "correlation": 0.985, "overlap_estimate": 80 }
     ]
   },
   {
@@ -414,9 +384,119 @@
     "name": "Communication Services Select Sector SPDR Fund",
     "sector": "Communication Services",
     "partners": [
-      { "ticker": "VOX", "correlation": 0.985, "overlap_estimate": 82, "verdict": "Excellent Match" },
-      { "ticker": "FCOM", "correlation": 0.982, "overlap_estimate": 80, "verdict": "Excellent Match" },
-      { "ticker": "IXP", "correlation": 0.975, "overlap_estimate": 75, "verdict": "Good Match" }
+      { "ticker": "VOX", "correlation": 0.985, "overlap_estimate": 82 },
+      { "ticker": "FCOM", "correlation": 0.982, "overlap_estimate": 80 },
+      { "ticker": "IXP", "correlation": 0.975, "overlap_estimate": 75 }
+    ]
+  },
+  {
+    "ticker": "LABU",
+    "name": "Direxion Daily S&P Biotech Bull 3X",
+    "sector": "Leveraged Equity",
+    "partners": [
+      { "ticker": "XBI", "correlation": 0.960, "overlap_estimate": 0 },
+      { "ticker": "IBB", "correlation": 0.880, "overlap_estimate": 0 },
+      { "ticker": "FBT", "correlation": 0.850, "overlap_estimate": 0 }
+    ]
+  },
+  {
+    "ticker": "LABD",
+    "name": "Direxion Daily S&P Biotech Bear 3X",
+    "sector": "Inverse Equity",
+    "partners": [
+      { "ticker": "BIS", "correlation": 0.950, "overlap_estimate": 0 },
+      { "ticker": "XBI", "correlation": -0.96, "overlap_estimate": 0 },
+      { "ticker": "IBB", "correlation": -0.88, "overlap_estimate": 0 }
+    ]
+  },
+  {
+    "ticker": "TMF",
+    "name": "Direxion Daily 20+ Year Treasury Bull 3X",
+    "sector": "Leveraged Bond",
+    "partners": [
+      { "ticker": "TLT", "correlation": 0.990, "overlap_estimate": 0 },
+      { "ticker": "UBT", "correlation": 0.980, "overlap_estimate": 10 },
+      { "ticker": "VGLT", "correlation": 0.985, "overlap_estimate": 0 }
+    ]
+  },
+  {
+    "ticker": "XBI",
+    "name": "SPDR S&P Biotech ETF",
+    "sector": "Health Care",
+    "partners": [
+      { "ticker": "IBB", "correlation": 0.920, "overlap_estimate": 35 },
+      { "ticker": "FBT", "correlation": 0.890, "overlap_estimate": 28 },
+      { "ticker": "SBIO", "correlation": 0.940, "overlap_estimate": 40 }
+    ]
+  },
+  {
+    "ticker": "IBB",
+    "name": "iShares Biotechnology ETF",
+    "sector": "Health Care",
+    "partners": [
+      { "ticker": "XBI", "correlation": 0.920, "overlap_estimate": 35 },
+      { "ticker": "FBT", "correlation": 0.950, "overlap_estimate": 45 },
+      { "ticker": "BBH", "correlation": 0.930, "overlap_estimate": 42 }
+    ]
+  },
+  {
+    "ticker": "VUG",
+    "name": "Vanguard Growth ETF",
+    "sector": "Large Cap Growth",
+    "partners": [
+      { "ticker": "IUSG", "correlation": 0.995, "overlap_estimate": 92 },
+      { "ticker": "SPYG", "correlation": 0.992, "overlap_estimate": 88 },
+      { "ticker": "SCHG", "correlation": 0.990, "overlap_estimate": 85 }
+    ]
+  },
+  {
+    "ticker": "VTV",
+    "name": "Vanguard Value ETF",
+    "sector": "Large Cap Value",
+    "partners": [
+      { "ticker": "IUSV", "correlation": 0.995, "overlap_estimate": 90 },
+      { "ticker": "SPYV", "correlation": 0.992, "overlap_estimate": 88 },
+      { "ticker": "SCHV", "correlation": 0.990, "overlap_estimate": 85 }
+    ]
+  },
+  {
+    "ticker": "MTUM",
+    "name": "iShares MSCI USA Momentum Factor ETF",
+    "sector": "Factor",
+    "partners": [
+      { "ticker": "XMTM", "correlation": 0.950, "overlap_estimate": 55 },
+      { "ticker": "VFMO", "correlation": 0.920, "overlap_estimate": 45 },
+      { "ticker": "QMOM", "correlation": 0.880, "overlap_estimate": 35 }
+    ]
+  },
+  {
+    "ticker": "USMV",
+    "name": "iShares MSCI USA Min Vol Factor ETF",
+    "sector": "Factor",
+    "partners": [
+      { "ticker": "SPLV", "correlation": 0.940, "overlap_estimate": 50 },
+      { "ticker": "LGLV", "correlation": 0.920, "overlap_estimate": 45 },
+      { "ticker": "XMVM", "correlation": 0.880, "overlap_estimate": 35 }
+    ]
+  },
+  {
+    "ticker": "VLUE",
+    "name": "iShares MSCI USA Value Factor ETF",
+    "sector": "Factor",
+    "partners": [
+      { "ticker": "LRGF", "correlation": 0.960, "overlap_estimate": 60 },
+      { "ticker": "IUSV", "correlation": 0.920, "overlap_estimate": 55 },
+      { "ticker": "VTV", "correlation": 0.910, "overlap_estimate": 52 }
+    ]
+  },
+  {
+    "ticker": "QUAL",
+    "name": "iShares MSCI USA Quality Factor ETF",
+    "sector": "Factor",
+    "partners": [
+      { "ticker": "SPHQ", "correlation": 0.960, "overlap_estimate": 65 },
+      { "ticker": "JQUA", "correlation": 0.950, "overlap_estimate": 55 },
+      { "ticker": "XLG", "correlation": 0.940, "overlap_estimate": 50 }
     ]
   }
 ]
