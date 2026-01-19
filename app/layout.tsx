@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
-import Script from 'next/script'; // <--- NEW IMPORT
+import Script from 'next/script';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -36,13 +36,10 @@ export default function RootLayout({
         {children}
         <Analytics />
         
-        {/* NEW: Tally Popup Widget Script */}
+        {/* Tally Popup Widget Script - onLoad removed to fix build error */}
         <Script
           id="tally-js"
           src="https://tally.so/widgets/embed.js"
-          onLoad={() => {
-            // Widget loaded
-          }}
         />
       </body>
     </html>
