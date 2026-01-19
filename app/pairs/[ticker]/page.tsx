@@ -57,8 +57,13 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
             {etf.ticker} Correlation & Overlap
           </h1>
+          
+          {/* SMART HERO TEXT (Fix #1) */}
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            This page shows historical correlation and estimated holdings overlap between {etf.ticker} and other ETFs, metrics commonly reviewed when researching wash sale considerations.
+            This page shows historical correlation and estimated holdings overlap between {etf.ticker} and other ETFs, 
+            {isLeveraged 
+              ? " metrics sometimes reviewed when researching market similarity and wash sale considerations." 
+              : " metrics commonly reviewed when researching wash sale considerations."}
           </p>
         </div>
 
@@ -72,44 +77,52 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           </div>
           
           <div className="divide-y divide-gray-100">
-            {etf.partners.map((partner) => (
-              <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
-                <div className="flex justify-between items-start mb-2">
-                  <div className="flex items-center gap-3">
-                    <div className="text-2xl font-bold text-gray-800 tracking-tighter">{partner.ticker}</div>
-                    
-                    {/* Correlation Clarifier Badge */}
-                    <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
-                      CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}*
-                    </span>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-2xl font-mono font-bold text-blue-600">
-                      {(partner.correlation * 100).toFixed(1)}%
+            {etf.partners.map((partner) => {
+              // Check for inverse relationship (Fix #2)
+              const isInverse = partner.correlation < 0;
+              
+              return (
+                <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
+                  <div className="flex justify-between items-start mb-2">
+                    <div className="flex items-center gap-3">
+                      <div className="text-2xl font-bold text-gray-800 tracking-tighter">{partner.ticker}</div>
+                      
+                      {/* Correlation Badge */}
+                      <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
+                         {/* Handle display for inverse correlations */}
+                         {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
+                      </span>
                     </div>
-                    <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Correlation</div>
+                    <div className="text-right">
+                      <div className={`text-2xl font-mono font-bold ${isInverse ? 'text-red-600' : 'text-blue-600'}`}>
+                        {(partner.correlation * 100).toFixed(1)}%
+                      </div>
+                      <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
+                        {isInverse ? 'Inverse Rel.' : 'Correlation'}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <p className="text-sm text-gray-600 mb-4 font-medium">
+                    Estimated holding overlap: <span className="text-gray-900">{partner.overlap_estimate}%</span>
+                  </p>
+
+                  <div className="flex gap-4">
+                    <a 
+                      href={`https://finance.yahoo.com/quote/${partner.ticker}`} 
+                      target="_blank" 
+                      rel="noreferrer"
+                      className="text-xs font-semibold text-blue-600 hover:underline"
+                    >
+                      View external fund information ↗
+                    </a>
+                    <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
+                      View {partner.ticker} Metrics →
+                    </Link>
                   </div>
                 </div>
-                
-                <p className="text-sm text-gray-600 mb-4 font-medium">
-                  Estimated holding overlap: <span className="text-gray-900">{partner.overlap_estimate}%</span>
-                </p>
-
-                <div className="flex gap-4">
-                  <a 
-                    href={`https://finance.yahoo.com/quote/${partner.ticker}`} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="text-xs font-semibold text-blue-600 hover:underline"
-                  >
-                    View external fund information ↗
-                  </a>
-                  <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
-                    View {partner.ticker} Metrics →
-                  </Link>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           {/* DISCLAIMER BLOCK */}
