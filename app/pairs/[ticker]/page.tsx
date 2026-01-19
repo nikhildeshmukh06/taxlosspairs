@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// 2. Optimized SEO Metadata (UPDATED WITH POLISH)
+// 2. Optimized SEO Metadata
 export async function generateMetadata({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -42,7 +42,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
       <nav className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           
-          {/* SMART BACK BUTTON (Restores scroll position) */}
+          {/* SMART BACK BUTTON */}
           <BackButton />
           
           <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
@@ -80,8 +80,11 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           
           <div className="divide-y divide-gray-100">
             {etf.partners.map((partner) => {
-              // Check for inverse relationship
+              // 1. Check for inverse relationship
               const isInverse = partner.correlation < 0;
+              
+              // 2. THE FIX: Check if the partner actually has a page in our DB
+              const partnerPageExists = pairsData.some(p => p.ticker === partner.ticker);
               
               return (
                 <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
@@ -91,7 +94,6 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                       
                       {/* Correlation Badge */}
                       <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
-                         {/* Handle display for inverse correlations */}
                          {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
                       </span>
                     </div>
@@ -109,7 +111,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                     Estimated holding overlap: <span className="text-gray-900">{partner.overlap_estimate}%</span>
                   </p>
 
-                  <div className="flex gap-4">
+                  <div className="flex gap-4 items-center">
                     <a 
                       href={`https://finance.yahoo.com/quote/${partner.ticker}`} 
                       target="_blank" 
@@ -118,9 +120,17 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                     >
                       View external fund information ↗
                     </a>
-                    <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
-                      View {partner.ticker} Metrics →
-                    </Link>
+
+                    {/* CONDITIONAL LINK LOGIC */}
+                    {partnerPageExists ? (
+                        <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
+                        View {partner.ticker} Metrics →
+                        </Link>
+                    ) : (
+                        <span className="text-xs font-medium text-gray-400 cursor-not-allowed select-none">
+                            {partner.ticker} Data Coming Soon
+                        </span>
+                    )}
                   </div>
                 </div>
               );
