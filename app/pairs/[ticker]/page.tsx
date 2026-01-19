@@ -3,14 +3,14 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
 
-// 1. Tell Next.js exactly which pages to build (SEO Magic)
+// 1. Tell Next.js exactly which pages to build
 export async function generateStaticParams() {
   return pairsData.map((etf) => ({
     ticker: etf.ticker,
   }));
 }
 
-// 2. Dynamic SEO Metadata for Google
+// 2. Dynamic SEO Metadata
 export async function generateMetadata({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -18,8 +18,8 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
   if (!etf) return { title: 'ETF Not Found' };
 
   return {
-    title: `${ticker} Tax Loss Harvesting Partners & Correlation Data`,
-    description: `Find the best tax loss harvesting alternatives for ${ticker}. Compare overlap, correlation, and sector data for ${etf.name}.`,
+    title: `${ticker} Correlation & Overlap Data`,
+    description: `Quantitative correlation and overlap metrics for ${ticker} and ${etf.name}. Historical market data for research.`,
   };
 }
 
@@ -47,21 +47,21 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
         
         {/* HEADER */}
         <div className="mb-10 text-center">
-          <span className="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-bold mb-4 tracking-wide">
-            ETF ANALYSIS
+          <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold mb-4 tracking-wide border border-slate-200">
+            MARKET DATA
           </span>
           <h1 className="text-4xl font-extrabold text-gray-900 mb-2">
-            {etf.ticker} Tax Loss Partners
+            {etf.ticker} Correlation Metrics
           </h1>
           <p className="text-lg text-gray-600">
-            Top correlations and alternatives for <span className="font-semibold">{etf.name}</span>
+            Historical correlation and overlap data for <span className="font-semibold">{etf.name}</span>
           </p>
         </div>
 
         {/* MAIN CARD */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
           <div className="p-6 bg-gray-50 border-b border-gray-100 flex justify-between items-center">
-            <h2 className="text-xl font-bold text-gray-800">Correlation Data</h2>
+            <h2 className="text-xl font-bold text-gray-800">Top Correlated ETFs</h2>
             <span className="text-sm text-gray-500 bg-white px-2 py-1 rounded border border-gray-200">
               {etf.sector}
             </span>
@@ -73,12 +73,10 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                 <div className="flex justify-between items-start mb-2">
                   <div className="flex items-center gap-3">
                     <div className="text-2xl font-bold text-gray-800">{partner.ticker}</div>
-                    <span className={`text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide ${
-                      partner.verdict === "Excellent Match" 
-                      ? "bg-green-100 text-green-800" 
-                      : "bg-yellow-100 text-yellow-800"
-                    }`}>
-                      {partner.verdict}
+                    
+                    {/* NEUTRAL BADGE */}
+                    <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono">
+                      CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}
                     </span>
                   </div>
                   <div className="text-right">
@@ -91,6 +89,9 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                 
                 <p className="text-sm text-gray-600 mb-4">
                   Estimated holding overlap: <strong className="text-gray-900">{partner.overlap_estimate}%</strong>
+                  <span className="block text-[10px] text-gray-400 mt-1">
+                    *Based on latest public holdings.
+                  </span>
                 </p>
 
                 <div className="flex gap-3">
@@ -100,10 +101,10 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                     rel="noreferrer"
                     className="text-xs font-semibold text-blue-600 hover:underline"
                   >
-                    View {partner.ticker} on Yahoo ↗
+                    Research {partner.ticker} on Yahoo ↗
                   </a>
                   <Link href={`/pairs/${partner.ticker}`} className="text-xs font-semibold text-gray-500 hover:text-gray-800">
-                    Analyze {partner.ticker} →
+                    View {partner.ticker} Data →
                   </Link>
                 </div>
               </div>
@@ -114,8 +115,9 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
         {/* DISCLAIMER / FOOTER */}
         <div className="border-t border-gray-200 mt-12 pt-8 text-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} TaxLossPairs.com. Open Source.</p>
-          <p className="mt-2">
-            Not financial advice. Correlation data is historical. Consult a tax professional regarding wash sale rules.
+          <p className="mt-2 max-w-lg mx-auto leading-relaxed">
+            Market data for informational purposes only. Not financial, tax, or legal advice. 
+            Correlation data is historical. Overlap is estimated based on public filings.
           </p>
         </div>
 
