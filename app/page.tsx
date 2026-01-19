@@ -201,7 +201,7 @@ export default function Home() {
 
             {/* Tally Trigger Button */}
             <button 
-              data-tally-open="YOUR_FORM_ID_HERE" 
+              data-tally-open=68Kqjo 
               data-tally-layout="modal"
               data-tally-emoji-text="👋"
               data-tally-emoji-animation="wave"
