@@ -2,6 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
+import BackButton from '../../components/BackButton'; // <--- NEW IMPORT
 
 // 1. Tell Next.js exactly which pages to build
 export async function generateStaticParams() {
@@ -40,9 +41,10 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
       {/* NAV */}
       <nav className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link href="/" className="font-bold text-blue-700 text-lg hover:underline">
-            ← Back to Search
-          </Link>
+          
+          {/* SMART BACK BUTTON (Restores scroll position) */}
+          <BackButton />
+          
           <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
         </div>
       </nav>
@@ -58,7 +60,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             {etf.ticker} Correlation & Overlap
           </h1>
           
-          {/* SMART HERO TEXT (Fix #1) */}
+          {/* SMART HERO TEXT */}
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
             This page shows historical correlation and estimated holdings overlap between {etf.ticker} and other ETFs, 
             {isLeveraged 
@@ -78,7 +80,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           
           <div className="divide-y divide-gray-100">
             {etf.partners.map((partner) => {
-              // Check for inverse relationship (Fix #2)
+              // Check for inverse relationship
               const isInverse = partner.correlation < 0;
               
               return (
@@ -98,8 +100,8 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                         {(partner.correlation * 100).toFixed(1)}%
                       </div>
                       <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
-  {isInverse ? 'Inverse Correlation' : 'Correlation'}
-</div>
+                        {isInverse ? 'Inverse Correlation' : 'Correlation'}
+                      </div>
                     </div>
                   </div>
                   
