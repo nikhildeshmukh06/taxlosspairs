@@ -187,10 +187,31 @@ export default function Home() {
           <p className="text-slate-400 text-sm mb-4">
             Built for the Bogleheads community. Open Source.
           </p>
-          <div className="flex justify-center gap-6 text-sm font-medium text-slate-500">
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
             <Link href="/" className="hover:text-blue-600">Home</Link>
-            <a href="https://github.com/deshmukhnikhil/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
+            
+            <a 
+              href="https://github.com/deshmukhnikhil/taxlosspairs" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hover:text-blue-600"
+            >
+              GitHub
+            </a>
+
+            {/* Tally Trigger Button */}
+            <button 
+              data-tally-open="YOUR_FORM_ID_HERE" 
+              data-tally-layout="modal"
+              data-tally-emoji-text="👋"
+              data-tally-emoji-animation="wave"
+              className="hover:text-blue-600 bg-transparent border-none cursor-pointer p-0 font-medium text-slate-500"
+            >
+              Report an Issue
+            </button>
+
             <span className="text-slate-300">|</span>
+            
             <span>Data updated: Jan 2026</span>
           </div>
         </div>
