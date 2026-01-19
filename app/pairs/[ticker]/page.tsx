@@ -2,7 +2,7 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
-import BackButton from '../../components/BackButton'; // <--- NEW IMPORT
+import BackButton from '../../components/BackButton';
 
 // 1. Tell Next.js exactly which pages to build
 export async function generateStaticParams() {
@@ -11,7 +11,7 @@ export async function generateStaticParams() {
   }));
 }
 
-// 2. Optimized SEO Metadata
+// 2. Optimized SEO Metadata (UPDATED WITH POLISH)
 export async function generateMetadata({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
 
   return {
     title: `${ticker} ETF Correlation & Holdings Overlap | TaxLossPairs`,
-    description: `View quantitative correlation and estimated holdings overlap metrics for ${ticker} (${etf.name}) to support wash sale research.`,
+    description: `Compare ${ticker} correlation and holdings overlap with similar ETFs for research into tax loss harvesting alternatives. Not tax or investment advice.`,
   };
 }
 
