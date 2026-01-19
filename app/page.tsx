@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import pairsData from './pairs.json'; // <--- The correct import for Homepage
+import pairsData from './pairs.json';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,22 +18,22 @@ export default function Home() {
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
       {/* --- COMPLIANCE WARNING --- */}
-      <div className="bg-amber-50 border-b border-amber-100 p-3 text-center">
-        <p className="text-xs text-amber-800 font-medium">
-          ⚠️ For informational purposes only. Not financial or tax advice. Past correlation does not guarantee future results.
+      <div className="bg-slate-100 border-b border-slate-200 p-3 text-center">
+        <p className="text-xs text-slate-600 font-medium">
+          ⚠️ Market Data Only. Not financial, tax, or investment advice. Past correlation does not guarantee future results.
         </p>
       </div>
 
-      {/* --- HERO SECTION --- */}
+      {/* --- HERO SECTION (NEUTRALIZED) --- */}
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           
           <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight">
-            ETF Correlation & <span className="text-blue-600">Overlap Data</span>
+            ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
           </h1>
           <p className="text-lg text-slate-500 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Use this tool to compare ETFs when researching potential alternatives during Tax Loss Harvesting. 
-            View 2-year correlation coefficients and sector overlap estimates.
+            Explore quantitative data for ETF research. 
+            View 2-year correlation coefficients and sector overlap estimates used in tax loss harvesting strategies.
           </p>
 
           {/* SEARCH BAR */}
@@ -48,7 +48,7 @@ export default function Home() {
             />
           </div>
 
-          {/* POPULAR SEARCHES (SEO Links) */}
+          {/* POPULAR SEARCHES */}
           <div className="text-xs text-gray-400 mt-4 flex gap-3 items-center justify-center">
             <span className="font-semibold uppercase tracking-wider text-gray-300">Popular:</span>
             <Link href="/pairs/VTI" className="hover:text-blue-600 hover:underline transition-colors">VTI</Link>
@@ -98,12 +98,10 @@ export default function Home() {
                       <div key={partner.ticker} className="bg-slate-50 rounded-lg p-4 border border-slate-100 group-hover:bg-blue-50/50 transition-colors">
                         <div className="flex justify-between items-center mb-2">
                           <span className="font-bold text-slate-800 text-lg">{partner.ticker}</span>
-                          <span className={`text-[10px] px-2 py-0.5 rounded font-bold uppercase ${
-                            partner.verdict === 'Excellent Match' ? 'bg-emerald-100 text-emerald-700' : 
-                            partner.verdict === 'Good Match' ? 'bg-blue-100 text-blue-700' : 
-                            'bg-amber-100 text-amber-700'
-                          }`}>
-                            {partner.verdict === 'Excellent Match' ? 'Excellent' : 'Good'}
+                          
+                          {/* NEUTRAL BADGE - REPLACES "EXCELLENT MATCH" */}
+                          <span className="text-[10px] px-2 py-0.5 rounded font-mono font-bold bg-slate-200 text-slate-700">
+                            CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}
                           </span>
                         </div>
                         <div className="flex items-end justify-between">
@@ -137,31 +135,30 @@ export default function Home() {
         )}
       </main>
 
-      {/* --- FAQ SECTION --- */}
+      {/* --- FAQ SECTION (UPDATED) --- */}
       <section className="bg-white border-t border-slate-200 py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
           <div className="space-y-8">
             <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">What is the "Wash Sale" rule?</h3>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">What is "Overlap"?</h3>
               <p className="text-slate-600 leading-relaxed">
-                The IRS Wash Sale rule prevents you from claiming a loss on the sale of a security if you buy a 
-                "substantially identical" security within 30 days before or after the sale. This tool helps you find 
-                alternatives that are correlated but track different indices, which is a common strategy to avoid this rule.
+                Overlap reflects the percentage of shared securities based on the latest publicly reported holdings. 
+                Values are estimates and may lag actual current holdings.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">How is this data calculated?</h3>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">How is Correlation calculated?</h3>
               <p className="text-slate-600 leading-relaxed">
-                We calculate correlation coefficients using 2 years of historical daily price returns. 
-                Overlap estimates are based on the weight of shared holdings between the two funds.
+                We utilize 2 years of historical daily price returns to calculate the correlation coefficient. 
+                A value of 1.00 indicates perfect positive correlation.
               </p>
             </div>
             <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">Is this financial advice?</h3>
+              <h3 className="text-lg font-bold text-slate-800 mb-2">Is this investment advice?</h3>
               <p className="text-slate-600 leading-relaxed">
-                No. This tool is for informational purposes only. "Substantially identical" is not strictly defined 
-                by the IRS. You should always consult a qualified tax professional before making trading decisions.
+                No. This tool displays historical market data only. It does not provide tax, legal, or investment advice. 
+                You should consult a qualified professional before making trading decisions.
               </p>
             </div>
           </div>
@@ -176,7 +173,7 @@ export default function Home() {
           </p>
           <div className="flex justify-center gap-6 text-sm font-medium text-slate-500">
             <Link href="/" className="hover:text-blue-600">Home</Link>
-            <a href="https://github.com/nikhildeshmukh06/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
+            <a href="https://github.com/nikhildeshmukh/taxlosspairs" target="_blank" rel="noreferrer" className="hover:text-blue-600">GitHub</a>
             <span className="text-slate-300">|</span>
             <span>Data updated: Jan 2026</span>
           </div>
