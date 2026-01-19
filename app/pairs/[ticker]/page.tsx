@@ -30,6 +30,10 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
 
   if (!etf) return notFound();
 
+  // CHECK: Is this a leveraged or inverse fund?
+  const isLeveraged = etf.sector.toLowerCase().includes('leveraged') || 
+                      etf.sector.toLowerCase().includes('inverse');
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
@@ -74,7 +78,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                   <div className="flex items-center gap-3">
                     <div className="text-2xl font-bold text-gray-800 tracking-tighter">{partner.ticker}</div>
                     
-                    {/* Fix #2: Correlation Clarifier Badge */}
+                    {/* Correlation Clarifier Badge */}
                     <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
                       CORR ≥ {partner.correlation >= 0.99 ? '0.99' : '0.95'}*
                     </span>
@@ -92,7 +96,6 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                 </p>
 
                 <div className="flex gap-4">
-                  {/* Fix #3: Standardized Link Text */}
                   <a 
                     href={`https://finance.yahoo.com/quote/${partner.ticker}`} 
                     target="_blank" 
@@ -109,14 +112,23 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             ))}
           </div>
           
-          {/* Fix #1: Factually Correct Benchmark Note */}
+          {/* DISCLAIMER BLOCK */}
           <div className="bg-slate-50 p-6 border-t border-gray-100 text-xs text-gray-500 space-y-3 leading-relaxed">
             <p>
               <strong>Note on Overlap:</strong> Estimates are based on the most recent publicly disclosed holdings and may differ from current portfolio composition.
             </p>
-            <p>
-              <strong>Benchmark Similarity:</strong> ETFs tracking similar broad-market or sector-specific benchmarks often exhibit extremely high correlation and overlap. Investors typically review additional factors such as index methodology, fund structure, and reconstitution rules when evaluating similarity.
-            </p>
+            
+            {/* CONDITIONAL LEVERAGED WARNING */}
+            {isLeveraged ? (
+              <div className="p-3 bg-yellow-50 border border-yellow-100 rounded text-yellow-800">
+                <strong>Leveraged/Inverse Note:</strong> Leveraged ETFs are designed to deliver multiples of daily returns and may experience significant performance divergence over longer periods. Overlap metrics may be less predictive due to derivative exposure.
+              </div>
+            ) : (
+              <p>
+                <strong>Benchmark Similarity:</strong> ETFs tracking similar broad-market or sector-specific benchmarks often exhibit extremely high correlation and overlap. Investors typically review additional factors such as index methodology, fund structure, and reconstitution rules when evaluating similarity.
+              </p>
+            )}
+
             <p className="italic">
               * Correlation calculated using 2-year daily price returns.
             </p>
@@ -139,7 +151,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             </div>
         </div>
 
-        {/* RELATED RESEARCH (Good-to-Have #2) */}
+        {/* RELATED RESEARCH */}
         <div className="mb-12">
             <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Related ETF Correlation Research</h4>
             <div className="flex flex-wrap gap-2">
@@ -149,7 +161,6 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                     </Link>
                 ))}
             </div>
-            {/* Soft CTA */}
             <p className="mt-6 text-xs text-slate-400 italic">
               Tip: Many investors review multiple correlation and overlap pairs before making research-based decisions.
             </p>
