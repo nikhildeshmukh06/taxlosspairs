@@ -25,15 +25,12 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
 }
 
 // --- HELPER: DETERMINISTIC VARIANT SELECTOR ---
-// Sums the ASCII codes of the ticker string to get a stable, non-random index.
 const getVariantIndex = (str: string, count: number) => {
   const sum = str.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   return sum % count;
 };
 
-// --- CONTENT TEMPLATES (UPDATED WITH FRIEND'S FEEDBACK) ---
-// Shifting language from "Action" to "Analysis" for higher compliance safety.
-
+// --- CONTENT TEMPLATES ---
 const INTRO_TEMPLATES = [
   (ticker: string, sector: string) => `Data regarding ${ticker} is frequently analyzed by investors planning tax loss harvesting strategies, specifically those seeking to maintain ${sector} exposure while navigating IRS wash sale regulations.`,
   (ticker: string, sector: string) => `For portfolios allocated to the ${sector} sector, ${ticker} is a primary vehicle. Market research often focuses on finding partner assets that preserve this specific market exposure without triggering wash sale rules.`,
@@ -42,10 +39,10 @@ const INTRO_TEMPLATES = [
 ];
 
 const PARTNER_TEMPLATES = [
-  (t1: string, t2: string, overlap: number) => `${t1} shows a high degree of historical similarity with ${t2}. With an estimated overlap of <strong>${overlap}%</strong>, this pair is often analyzed in discussions regarding "substantially identical" securities and potential wash sale risks.`,
-  (t1: string, t2: string, overlap: number) => `With approximately <strong>${overlap}%</strong> overlap in holdings, ${t1} and ${t2} exhibit highly synchronized price behavior driven by similar portfolio composition. This structural similarity is a key data point for tax-loss harvesting research.`,
-  (t1: string, t2: string, overlap: number) => `${t1} and ${t2} hold a substantial number of the same securities (~<strong>${overlap}%</strong> overlap), which helps explain their historically tight correlation. The key distinction for tax purposes often lies in their divergent index methodologies.`,
-  (t1: string, t2: string, overlap: number) => `A holdings overlap of roughly <strong>${overlap}%</strong> suggests that ${t1} and ${t2} maintain closely aligned market exposure through shared constituents. This metric is frequently used to assess the potential for maintaining economic position while realizing a tax loss.`
+  (t1: string, t2: string, overlap: number) => `${t1} shows a high degree of historical similarity with ${t2}. With an estimated overlap of <strong>${overlap < 10 ? '<10' : overlap}%</strong>, this pair is often analyzed in discussions regarding "substantially identical" securities.`,
+  (t1: string, t2: string, overlap: number) => `With approximately <strong>${overlap < 10 ? '<10' : overlap}%</strong> overlap in holdings, ${t1} and ${t2} exhibit highly synchronized price behavior. This structural similarity is a key data point for tax-loss harvesting research.`,
+  (t1: string, t2: string, overlap: number) => `${t1} and ${t2} share a specific relationship in their market behavior. The key distinction for tax purposes often lies in their divergent index methodologies despite high correlation.`,
+  (t1: string, t2: string, overlap: number) => `A holdings overlap of roughly <strong>${overlap < 10 ? '<10' : overlap}%</strong> suggests that ${t1} and ${t2} maintain aligned market exposure. This metric is frequently used to assess the potential for maintaining economic position while realizing a tax loss.`
 ];
 
 // 3. PAGE COMPONENT
@@ -115,20 +112,30 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
               const partnerVariant = getVariantIndex(ticker + partner.ticker, PARTNER_TEMPLATES.length);
               const PartnerText = PARTNER_TEMPLATES[partnerVariant];
 
+              // --- NEW "SOFT PRECISION" FORMATTING LOGIC ---
+              const correlationDisplay = partner.correlation >= 0.99 
+                ? '>0.99' 
+                : (partner.correlation * 100).toFixed(1) + '%';
+                
+              const overlapDisplay = partner.overlap_estimate < 10 
+                ? '< 10%' 
+                : `~${partner.overlap_estimate}%`;
+
               return (
                 <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
                   <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center gap-3">
                       <div className="text-2xl font-bold text-gray-800 tracking-tighter">{partner.ticker}</div>
                       
-                      {/* Correlation Badge */}
+                      {/* Banded Correlation Badge */}
                       <span className="text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wide bg-slate-200 text-slate-700 font-mono" title="Based on 2-year daily price returns">
-                          {isInverse ? 'INVERSE' : `CORR ≥ ${partner.correlation >= 0.99 ? '0.99' : '0.95'}*`}
+                          {isInverse ? 'INVERSE' : `CORR ${partner.correlation >= 0.99 ? '≥ 0.99' : '≥ 0.95'}*`}
                       </span>
                     </div>
                     <div className="text-right">
+                      {/* SOFT PRECISION DISPLAY */}
                       <div className={`text-2xl font-mono font-bold ${isInverse ? 'text-red-600' : 'text-blue-600'}`}>
-                        {(partner.correlation * 100).toFixed(1)}%
+                        {correlationDisplay}
                       </div>
                       <div className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">
                         {isInverse ? 'Inverse Correlation' : 'Correlation'}
@@ -137,10 +144,16 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                   </div>
                   
                   {/* DYNAMIC PARTNER TEXT */}
-                  <p 
-                    className="text-sm text-gray-600 mb-4 font-medium leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }}
-                  />
+                  <div className="text-sm text-gray-600 mb-4 font-medium leading-relaxed">
+                     <span dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }} />
+                     
+                     {/* EXPLICIT OVERLAP DATA POINT (NEW) */}
+                     <div className="mt-2 flex items-center gap-2">
+                        <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                          Overlap: {overlapDisplay}
+                        </span>
+                     </div>
+                  </div>
 
                   <div className="flex gap-4 items-center">
                     <a 
@@ -170,7 +183,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           {/* DISCLAIMER BLOCK */}
           <div className="bg-slate-50 p-6 border-t border-gray-100 text-xs text-gray-500 space-y-3 leading-relaxed">
             <p>
-              <strong>Note on Overlap:</strong> Estimates are based on the most recent publicly disclosed holdings and may differ from current portfolio composition.
+              <strong>Note on Overlap:</strong> Estimates are based on the most recent publicly disclosed holdings. Leveraged/Inverse products often use swaps resulting in low physical overlap despite high correlation.
             </p>
             
             {isLeveraged ? (
@@ -234,8 +247,9 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           </div>
 
           <p className="mt-2 max-w-lg mx-auto leading-relaxed italic">
-            Market data for informational purposes only. Not financial, tax, or legal advice. 
-            Correlation data through Jan 2026. Consult a tax professional regarding Section 1091.
+            DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
+            They are approximations, not guarantees. Leveraged products often use swaps/derivatives resulting in low physical overlap.
+            Not financial, tax, or legal advice.
           </p>
            <p className="mt-4">
             <Link href="/" className="text-blue-600 hover:underline">Back to Global Search</Link>
