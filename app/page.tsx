@@ -54,14 +54,14 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* --- COMPLIANCE WARNING (PRESERVED) --- */}
+      {/* --- COMPLIANCE WARNING --- */}
       <div className="bg-slate-100 border-b border-slate-200 p-3 text-center">
         <p className="text-xs text-slate-600 font-medium">
           ⚠️ Market Data Only. Not financial, tax, or investment advice. Past correlation does not guarantee future results.
         </p>
       </div>
 
-      {/* --- HERO SECTION (PRESERVED STYLE) --- */}
+      {/* --- HERO SECTION --- */}
       <header className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-16 text-center">
           
@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* --- RESULTS SECTION (CLUSTERS + SMART BADGES) --- */}
+      {/* --- RESULTS SECTION --- */}
       <main className="max-w-6xl mx-auto px-4 py-12">
         {!hasResults ? (
           <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
@@ -147,20 +147,25 @@ export default function Home() {
                               {etf.ticker}
                             </h3>
                             
-                            {/* SMART RISK BADGE WITH TOOLTIP */}
+                            {/* SMART "TACTICAL" BADGE WITH MOBILE TAP SUPPORT */}
                             {isLeveraged && (
-                              <div className="group/badge relative z-10 ml-auto" onClick={(e) => e.stopPropagation()}>
-                                <span className="cursor-help flex items-center gap-1 text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-100 uppercase hover:bg-red-100 transition-colors">
-                                  Risk
+                              <div 
+                                className="group/badge relative z-10 ml-auto outline-none" 
+                                role="button"
+                                tabIndex={0} // Makes it focusable on mobile tap
+                                onClick={(e) => e.preventDefault()} // Prevents navigation when clicking badge
+                              >
+                                <span className="cursor-help flex items-center gap-1 text-[9px] font-bold text-red-600 bg-white px-2 py-0.5 rounded border border-red-200 uppercase tracking-wide hover:bg-red-50 transition-colors">
+                                  Tactical
                                   {/* Tiny Info Icon */}
-                                  <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                  <svg className="w-3 h-3 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                   </svg>
                                 </span>
 
-                                {/* TOOLTIP (Visible on Hover) */}
-                                <div className="absolute bottom-full right-0 mb-2 w-48 p-2.5 bg-slate-800 text-white text-[10px] font-medium leading-relaxed rounded-md shadow-xl opacity-0 translate-y-2 group-hover/badge:opacity-100 group-hover/badge:translate-y-0 transition-all pointer-events-none">
-                                  <div className="mb-1 text-red-300 font-bold uppercase tracking-wider">Tactical Use Only</div>
+                                {/* TOOLTIP (Visible on Hover OR Focus/Tap) */}
+                                <div className="absolute bottom-full right-0 mb-2 w-48 p-2.5 bg-slate-800 text-white text-[10px] font-medium leading-relaxed rounded-md shadow-xl opacity-0 translate-y-2 group-hover/badge:opacity-100 group-hover/badge:translate-y-0 group-focus/badge:opacity-100 group-focus/badge:translate-y-0 transition-all pointer-events-none group-focus/badge:pointer-events-auto">
+                                  <div className="mb-1 text-red-300 font-bold uppercase tracking-wider">High Risk Structure</div>
                                   Leveraged ETFs reset daily and are not designed for long-term buy-and-hold strategies.
                                   {/* Arrow */}
                                   <div className="absolute top-full right-3 -mt-1 border-4 border-transparent border-t-slate-800"></div>
@@ -186,7 +191,7 @@ export default function Home() {
         )}
       </main>
 
-      {/* --- METHODOLOGY STRIP (PRESERVED) --- */}
+      {/* --- METHODOLOGY STRIP --- */}
       <div className="bg-slate-100 border-y border-slate-200 py-6">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-xs text-slate-500 font-medium uppercase tracking-wide mb-1">Data Methodology</p>
@@ -196,7 +201,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* --- FAQ SECTION (PRESERVED) --- */}
+      {/* --- FAQ SECTION --- */}
       <section className="bg-white py-16">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
@@ -226,7 +231,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER (PRESERVED) --- */}
+      {/* --- FOOTER --- */}
       <footer className="bg-slate-50 border-t border-slate-200 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-slate-400 text-sm mb-4">
