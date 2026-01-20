@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import BackButton from '../../components/BackButton';
+import BackButton from '../components/BackButton'; // <--- FIX: Only one "../" needed here
 
 export const metadata = {
   title: 'Legal & Privacy | TaxLossPairs',
