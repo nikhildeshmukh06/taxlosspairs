@@ -241,7 +241,7 @@ export default function Home() {
             <Link href="/" className="hover:text-blue-600">Home</Link>
             
             <a 
-              href="https://github.com/deshmukhnikhil/taxlosspairs" 
+              href="https://github.com/nikhildeshmukh06/taxlosspairs" 
               target="_blank" 
               rel="noreferrer" 
               className="hover:text-blue-600"
