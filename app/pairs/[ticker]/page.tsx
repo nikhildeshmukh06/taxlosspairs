@@ -4,7 +4,7 @@ import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
 
-// 1. Tell Next.js exactly which pages to build (Crucial for SEO)
+// 1. Tell Next.js exactly which pages to build
 export async function generateStaticParams() {
   return pairsData.map((etf) => ({
     ticker: etf.ticker,
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
   };
 }
 
-// 3. The Page Content - 100% Server Component
+// 3. The Page Content
 export default function TickerPage({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -195,8 +195,17 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
         <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Open Source</p>
           
-          <div className="mt-4 mb-4">
-             {/* STANDARD TALLY TRIGGER - NO FANCY LOGIC */}
+          <div className="mt-4 mb-4 flex flex-wrap justify-center items-center gap-x-4">
+             <Link href="/" className="hover:text-blue-600 hover:underline">
+               Home
+             </Link>
+
+             {/* Legal Link */}
+             <Link href="/legal" className="hover:text-blue-600 hover:underline">
+               Legal & Privacy
+             </Link>
+
+             {/* TALLY TRIGGER */}
              <button 
                data-tally-open="68Kqjo" 
                data-tally-layout="modal"
