@@ -98,7 +98,7 @@ export default function Home() {
         </div>
       </header>
 
-      {/* --- RESULTS SECTION (UPDATED TO CLUSTERS) --- */}
+      {/* --- RESULTS SECTION (CLUSTERS + SMART BADGES) --- */}
       <main className="max-w-6xl mx-auto px-4 py-12">
         {!hasResults ? (
           <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
@@ -138,7 +138,7 @@ export default function Home() {
                           href={`/pairs/${etf.ticker}`} 
                           key={etf.ticker} 
                           className={`
-                            group relative bg-white p-4 rounded-lg border shadow-sm hover:shadow-md transition-all
+                            group relative bg-white p-4 rounded-lg border shadow-sm hover:shadow-md hover:z-20 transition-all
                             ${isLeveraged ? 'border-red-100 hover:border-red-300' : 'border-slate-200 hover:border-blue-300'}
                           `}
                         >
@@ -146,12 +146,29 @@ export default function Home() {
                             <h3 className="font-extrabold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
                               {etf.ticker}
                             </h3>
+                            
+                            {/* SMART RISK BADGE WITH TOOLTIP */}
                             {isLeveraged && (
-                              <span className="text-[10px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded uppercase">
-                                Risk
-                              </span>
+                              <div className="group/badge relative z-10 ml-auto" onClick={(e) => e.stopPropagation()}>
+                                <span className="cursor-help flex items-center gap-1 text-[10px] font-bold text-red-700 bg-red-50 px-2 py-0.5 rounded border border-red-100 uppercase hover:bg-red-100 transition-colors">
+                                  Risk
+                                  {/* Tiny Info Icon */}
+                                  <svg className="w-3 h-3 opacity-50" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                  </svg>
+                                </span>
+
+                                {/* TOOLTIP (Visible on Hover) */}
+                                <div className="absolute bottom-full right-0 mb-2 w-48 p-2.5 bg-slate-800 text-white text-[10px] font-medium leading-relaxed rounded-md shadow-xl opacity-0 translate-y-2 group-hover/badge:opacity-100 group-hover/badge:translate-y-0 transition-all pointer-events-none">
+                                  <div className="mb-1 text-red-300 font-bold uppercase tracking-wider">Tactical Use Only</div>
+                                  Leveraged ETFs reset daily and are not designed for long-term buy-and-hold strategies.
+                                  {/* Arrow */}
+                                  <div className="absolute top-full right-3 -mt-1 border-4 border-transparent border-t-slate-800"></div>
+                                </div>
+                              </div>
                             )}
                           </div>
+
                           <div className="text-xs text-slate-500 truncate font-medium mb-3">
                             {etf.name}
                           </div>
