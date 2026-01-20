@@ -32,6 +32,7 @@ export default function Home() {
             ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
           </h1>
           
+          {/* SEO INTRO TEXT + "WHY THIS MATTERS" */}
           <div className="max-w-3xl mx-auto mb-10 text-slate-600 space-y-4 leading-relaxed text-lg">
             <p>
               Tax-loss harvesting involves selling securities at a loss to offset gains, but IRS wash-sale rules may restrict claiming those losses if a substantially identical security is repurchased within 30 days.
@@ -197,6 +198,11 @@ export default function Home() {
             >
               GitHub
             </a>
+
+            {/* Legal Link */}
+            <Link href="/legal" className="hover:text-blue-600 hover:underline">
+              Legal & Privacy
+            </Link>
 
             {/* Tally Trigger Button */}
             <button 
