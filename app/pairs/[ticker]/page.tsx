@@ -4,14 +4,14 @@ import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
 
-// 1. Tell Next.js exactly which pages to build
+// 1. GENERATE STATIC PARAMS
 export async function generateStaticParams() {
   return pairsData.map((etf) => ({
     ticker: etf.ticker,
   }));
 }
 
-// 2. Optimized SEO Metadata
+// 2. SEO METADATA
 export async function generateMetadata({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -24,7 +24,33 @@ export async function generateMetadata({ params }: { params: { ticker: string } 
   };
 }
 
-// 3. The Page Content
+// --- HELPER: DETERMINISTIC VARIANT SELECTOR ---
+// Sums the ASCII codes of the ticker string to get a stable, non-random index.
+// "VTI" (86+84+73=243) % 4 = Variant 3
+// "SCHB" (83+67+72+66=288) % 4 = Variant 0
+const getVariantIndex = (str: string, count: number) => {
+  const sum = str.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  return sum % count;
+};
+
+// --- CONTENT TEMPLATES ---
+// Designed to vary sentence structure to avoid "duplicate content" flags.
+
+const INTRO_TEMPLATES = [
+  (ticker: string, sector: string) => `Investors often research ${ticker} when planning tax loss harvesting strategies, seeking to maintain ${sector} exposure while navigating IRS wash sale regulations.`,
+  (ticker: string, sector: string) => `For portfolios allocated to the ${sector} sector, ${ticker} is a primary vehicle. When harvesting losses, the goal is often to find a partner asset that preserves this specific market exposure without triggering wash sale rules.`,
+  (ticker: string, sector: string) => `As a key ${sector} instrument, ${ticker} plays a central role in many portfolios. Tax-conscious investors frequently analyze its correlation with other funds to execute efficiency swaps that adhere to Section 1091.`,
+  (ticker: string, sector: string) => `${ticker} offers targeted access to the ${sector} market. To capture tax benefits without exiting this position entirely, investors look for "safe" pairs—funds with high correlation but distinct underlying indices.`
+];
+
+const PARTNER_TEMPLATES = [
+  (t1: string, t2: string, overlap: number) => `${t1} shows a high degree of historical similarity with ${t2}. With an estimated overlap of <strong>${overlap}%</strong>, investors frequently review this pair when looking for "substantially identical" alternatives that track slightly different underlying indices to mitigate wash sale risk.`,
+  (t1: string, t2: string, overlap: number) => `With approximately <strong>${overlap}%</strong> overlap in holdings, ${t1} and ${t2} exhibit highly synchronized price behavior driven by similar portfolio composition. This structural similarity makes them a common consideration for tax-loss harvesting strategies.`,
+  (t1: string, t2: string, overlap: number) => `${t1} and ${t2} hold a substantial number of the same securities (~<strong>${overlap}%</strong> overlap), which helps explain their historically tight correlation. The key distinction for tax purposes often lies in their divergent index methodologies.`,
+  (t1: string, t2: string, overlap: number) => `A holdings overlap of roughly <strong>${overlap}%</strong> suggests that ${t1} and ${t2} maintain closely aligned market exposure through shared constituents. This metric is often used to assess the potential for maintaining economic position while realizing a tax loss.`
+];
+
+// 3. PAGE COMPONENT
 export default function TickerPage({ params }: { params: { ticker: string } }) {
   const ticker = params.ticker.toUpperCase();
   const etf = pairsData.find((p) => p.ticker === ticker);
@@ -35,23 +61,24 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
   const isLeveraged = etf.sector.toLowerCase().includes('leveraged') || 
                       etf.sector.toLowerCase().includes('inverse');
 
+  // SELECT INTRO VARIANT
+  const introVariant = getVariantIndex(ticker, INTRO_TEMPLATES.length);
+  const IntroText = INTRO_TEMPLATES[introVariant];
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
       {/* NAV */}
       <nav className="bg-white border-b border-gray-200 px-4 py-4">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
-          
-          {/* SMART BACK BUTTON */}
           <BackButton />
-          
           <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
         </div>
       </nav>
 
       <main className="max-w-3xl mx-auto px-4 py-12">
         
-        {/* HEADER & DYNAMIC INTRODUCTION (Added for SEO Density) */}
+        {/* HEADER & DYNAMIC INTRODUCTION */}
         <div className="mb-10 text-center">
           <span className="inline-block px-3 py-1 bg-slate-100 text-slate-600 rounded-full text-xs font-bold mb-4 tracking-wide border border-slate-200 uppercase">
             Market Research Data
@@ -63,10 +90,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <div className="bg-white p-6 rounded-xl border border-gray-200 text-left shadow-sm mb-6">
             <h2 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2">Fund Strategy Analysis</h2>
             <p className="text-gray-700 leading-relaxed">
-              <strong>{etf.name} ({etf.ticker})</strong> is a key instrument in the {etf.sector} category. 
-              Investors often research {etf.ticker} when planning tax loss harvesting strategies, 
-              seeking to maintain market exposure while navigating IRS wash sale regulations. 
-              The metrics below analyze how closely this fund tracks potential replacement candidates.
+              <strong>{etf.name} ({etf.ticker})</strong> is a key instrument in the {etf.sector} category. {IntroText(etf.ticker, etf.sector)} The metrics below analyze how closely this fund tracks potential replacement candidates.
             </p>
           </div>
         </div>
@@ -85,6 +109,11 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
               const isInverse = partner.correlation < 0;
               const partnerPageExists = pairsData.some(p => p.ticker === partner.ticker);
               
+              // SELECT PARTNER VARIANT
+              // Use sum of both tickers to ensure unique pairing logic (VTI+ITOT != VTI+SCHB)
+              const partnerVariant = getVariantIndex(ticker + partner.ticker, PARTNER_TEMPLATES.length);
+              const PartnerText = PARTNER_TEMPLATES[partnerVariant];
+
               return (
                 <div key={partner.ticker} className="p-6 hover:bg-slate-50 transition-colors">
                   <div className="flex justify-between items-start mb-2">
@@ -106,12 +135,11 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                     </div>
                   </div>
                   
-                  <p className="text-sm text-gray-600 mb-4 font-medium leading-relaxed">
-                    Estimated holding overlap is <span className="text-gray-900">{partner.overlap_estimate}%</span>. 
-                    {partner.overlap_estimate > 80 
-                      ? ` ${partner.ticker} and ${etf.ticker} share a significant portion of their underlying portfolios, often resulting in synchronized price movements.` 
-                      : ` While highly correlated, the structural differences between these funds are often reviewed when considering wash sale safety.`}
-                  </p>
+                  {/* DYNAMIC PARTNER TEXT (Rendered HTML for bold tags) */}
+                  <p 
+                    className="text-sm text-gray-600 mb-4 font-medium leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }}
+                  />
 
                   <div className="flex gap-4 items-center">
                     <a 
@@ -160,7 +188,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           </div>
         </div>
 
-        {/* DEFINITIONS & SEO CONTENT BLOCK (Added for Authority) */}
+        {/* DEFINITIONS & SEO CONTENT BLOCK */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
             <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
                 <h3 className="text-sm font-bold text-gray-900 mb-2">What is Correlation?</h3>
