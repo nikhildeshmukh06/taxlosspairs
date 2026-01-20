@@ -5,10 +5,10 @@
     "sector": "Total Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "ITOT", "correlation": 0.999, "overlap_estimate": 88 },
-      { "ticker": "SCHB", "correlation": 0.999, "overlap_estimate": 85 },
-      { "ticker": "VTHR", "correlation": 0.999, "overlap_estimate": 92 },
-      { "ticker": "IWV", "correlation": 0.998, "overlap_estimate": 81 }
+      { "ticker": "ITOT", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "SCHB", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "VTHR", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "IWV", "correlation": 0.99, "overlap_estimate": 81 }
     ]
   },
   {
@@ -17,10 +17,10 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "VV", "correlation": 0.998, "overlap_estimate": 87 }
+      { "ticker": "IVV", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPY", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "VV", "correlation": 0.99, "overlap_estimate": 87 }
     ]
   },
   {
@@ -29,9 +29,9 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 99 }
+      { "ticker": "VOO", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPY", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.99, "overlap_estimate": 99 }
     ]
   },
   {
@@ -40,9 +40,9 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPLG", "correlation": 0.999, "overlap_estimate": 99 }
+      { "ticker": "VOO", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "IVV", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPLG", "correlation": 0.99, "overlap_estimate": 99 }
     ]
   },
   {
@@ -51,9 +51,9 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VOO", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "IVV", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "SPY", "correlation": 0.999, "overlap_estimate": 99 }
+      { "ticker": "VOO", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "IVV", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "SPY", "correlation": 0.99, "overlap_estimate": 99 }
     ]
   },
   {
@@ -62,9 +62,9 @@
     "sector": "Broad Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 85 },
-      { "ticker": "ITOT", "correlation": 0.999, "overlap_estimate": 84 },
-      { "ticker": "VTHR", "correlation": 0.998, "overlap_estimate": 82 }
+      { "ticker": "VTI", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "ITOT", "correlation": 0.99, "overlap_estimate": 84 },
+      { "ticker": "VTHR", "correlation": 0.99, "overlap_estimate": 82 }
     ]
   },
   {
@@ -73,9 +73,9 @@
     "sector": "Total Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 88 },
-      { "ticker": "SCHB", "correlation": 0.999, "overlap_estimate": 84 },
-      { "ticker": "VTHR", "correlation": 0.999, "overlap_estimate": 90 }
+      { "ticker": "VTI", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "SCHB", "correlation": 0.99, "overlap_estimate": 84 },
+      { "ticker": "VTHR", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -84,9 +84,9 @@
     "sector": "Total Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "IWV", "correlation": 0.999, "overlap_estimate": 98 },
-      { "ticker": "VTI", "correlation": 0.999, "overlap_estimate": 92 },
-      { "ticker": "ITOT", "correlation": 0.999, "overlap_estimate": 90 }
+      { "ticker": "IWV", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "VTI", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "ITOT", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -95,9 +95,9 @@
     "sector": "Total Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VTHR", "correlation": 0.999, "overlap_estimate": 98 },
-      { "ticker": "VTI", "correlation": 0.998, "overlap_estimate": 81 },
-      { "ticker": "ITOT", "correlation": 0.998, "overlap_estimate": 80 }
+      { "ticker": "VTHR", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "VTI", "correlation": 0.99, "overlap_estimate": 81 },
+      { "ticker": "ITOT", "correlation": 0.99, "overlap_estimate": 80 }
     ]
   },
   {
@@ -106,9 +106,9 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SCHX", "correlation": 0.999, "overlap_estimate": 91 },
-      { "ticker": "VOO", "correlation": 0.998, "overlap_estimate": 87 },
-      { "ticker": "SPY", "correlation": 0.998, "overlap_estimate": 87 }
+      { "ticker": "SCHX", "correlation": 0.99, "overlap_estimate": 91 },
+      { "ticker": "VOO", "correlation": 0.99, "overlap_estimate": 87 },
+      { "ticker": "SPY", "correlation": 0.99, "overlap_estimate": 87 }
     ]
   },
   {
@@ -117,9 +117,9 @@
     "sector": "Large Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VV", "correlation": 0.999, "overlap_estimate": 91 },
-      { "ticker": "VOO", "correlation": 0.998, "overlap_estimate": 86 },
-      { "ticker": "IVV", "correlation": 0.998, "overlap_estimate": 86 }
+      { "ticker": "VV", "correlation": 0.99, "overlap_estimate": 91 },
+      { "ticker": "VOO", "correlation": 0.99, "overlap_estimate": 86 },
+      { "ticker": "IVV", "correlation": 0.99, "overlap_estimate": 86 }
     ]
   },
   {
@@ -128,9 +128,9 @@
     "sector": "Total Market",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "QQQ", "correlation": 0.985, "overlap_estimate": 65 },
-      { "ticker": "VGT", "correlation": 0.970, "overlap_estimate": 45 },
-      { "ticker": "VTI", "correlation": 0.940, "overlap_estimate": 35 }
+      { "ticker": "QQQ", "correlation": 0.98, "overlap_estimate": 65 },
+      { "ticker": "VGT", "correlation": 0.97, "overlap_estimate": 45 },
+      { "ticker": "VTI", "correlation": 0.94, "overlap_estimate": 35 }
     ]
   },
   {
@@ -139,9 +139,9 @@
     "sector": "Small Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VTWO", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "VIOO", "correlation": 0.985, "overlap_estimate": 62 },
-      { "ticker": "IJR", "correlation": 0.980, "overlap_estimate": 45 }
+      { "ticker": "VTWO", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "VIOO", "correlation": 0.98, "overlap_estimate": 62 },
+      { "ticker": "IJR", "correlation": 0.98, "overlap_estimate": 45 }
     ]
   },
   {
@@ -150,9 +150,9 @@
     "sector": "Small Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SPSM", "correlation": 0.999, "overlap_estimate": 95 },
-      { "ticker": "SCHA", "correlation": 0.985, "overlap_estimate": 55 },
-      { "ticker": "VB", "correlation": 0.980, "overlap_estimate": 50 }
+      { "ticker": "SPSM", "correlation": 0.99, "overlap_estimate": 95 },
+      { "ticker": "SCHA", "correlation": 0.98, "overlap_estimate": 55 },
+      { "ticker": "VB", "correlation": 0.98, "overlap_estimate": 50 }
     ]
   },
   {
@@ -161,9 +161,9 @@
     "sector": "Small Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VB", "correlation": 0.995, "overlap_estimate": 85 },
-      { "ticker": "IJR", "correlation": 0.985, "overlap_estimate": 55 },
-      { "ticker": "VTWO", "correlation": 0.990, "overlap_estimate": 70 }
+      { "ticker": "VB", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IJR", "correlation": 0.98, "overlap_estimate": 55 },
+      { "ticker": "VTWO", "correlation": 0.99, "overlap_estimate": 70 }
     ]
   },
   {
@@ -172,9 +172,9 @@
     "sector": "Small Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SCHA", "correlation": 0.995, "overlap_estimate": 85 },
-      { "ticker": "IJR", "correlation": 0.980, "overlap_estimate": 50 },
-      { "ticker": "IWM", "correlation": 0.985, "overlap_estimate": 60 }
+      { "ticker": "SCHA", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IJR", "correlation": 0.98, "overlap_estimate": 50 },
+      { "ticker": "IWM", "correlation": 0.98, "overlap_estimate": 60 }
     ]
   },
   {
@@ -183,9 +183,9 @@
     "sector": "Small Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VBR", "correlation": 0.985, "overlap_estimate": 55 },
-      { "ticker": "SLYV", "correlation": 0.999, "overlap_estimate": 98 },
-      { "ticker": "IWN", "correlation": 0.970, "overlap_estimate": 45 }
+      { "ticker": "VBR", "correlation": 0.98, "overlap_estimate": 55 },
+      { "ticker": "SLYV", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "IWN", "correlation": 0.97, "overlap_estimate": 45 }
     ]
   },
   {
@@ -194,9 +194,9 @@
     "sector": "Mid Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SPMD", "correlation": 0.999, "overlap_estimate": 96 },
-      { "ticker": "VO", "correlation": 0.980, "overlap_estimate": 50 },
-      { "ticker": "SCHM", "correlation": 0.985, "overlap_estimate": 55 }
+      { "ticker": "SPMD", "correlation": 0.99, "overlap_estimate": 96 },
+      { "ticker": "VO", "correlation": 0.98, "overlap_estimate": 50 },
+      { "ticker": "SCHM", "correlation": 0.98, "overlap_estimate": 55 }
     ]
   },
   {
@@ -205,9 +205,9 @@
     "sector": "Mid Cap",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SCHM", "correlation": 0.995, "overlap_estimate": 88 },
-      { "ticker": "IJH", "correlation": 0.980, "overlap_estimate": 50 },
-      { "ticker": "MDY", "correlation": 0.975, "overlap_estimate": 45 }
+      { "ticker": "SCHM", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "IJH", "correlation": 0.98, "overlap_estimate": 50 },
+      { "ticker": "MDY", "correlation": 0.97, "overlap_estimate": 45 }
     ]
   },
   {
@@ -216,10 +216,10 @@
     "sector": "Technology",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "QQQM", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "ONEQ", "correlation": 0.985, "overlap_estimate": 65 },
-      { "ticker": "VGT", "correlation": 0.960, "overlap_estimate": 55 },
-      { "ticker": "XLK", "correlation": 0.950, "overlap_estimate": 48 }
+      { "ticker": "QQQM", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "ONEQ", "correlation": 0.98, "overlap_estimate": 65 },
+      { "ticker": "VGT", "correlation": 0.96, "overlap_estimate": 55 },
+      { "ticker": "XLK", "correlation": 0.95, "overlap_estimate": 48 }
     ]
   },
   {
@@ -228,9 +228,9 @@
     "sector": "Technology",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "QQQ", "correlation": 0.999, "overlap_estimate": 99 },
-      { "ticker": "ONEQ", "correlation": 0.985, "overlap_estimate": 65 },
-      { "ticker": "VGT", "correlation": 0.960, "overlap_estimate": 55 }
+      { "ticker": "QQQ", "correlation": 0.99, "overlap_estimate": 99 },
+      { "ticker": "ONEQ", "correlation": 0.98, "overlap_estimate": 65 },
+      { "ticker": "VGT", "correlation": 0.96, "overlap_estimate": 55 }
     ]
   },
   {
@@ -239,9 +239,9 @@
     "sector": "Technology",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "FTEC", "correlation": 0.999, "overlap_estimate": 98 },
-      { "ticker": "XLK", "correlation": 0.995, "overlap_estimate": 85 },
-      { "ticker": "IYW", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "FTEC", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "XLK", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYW", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -250,9 +250,9 @@
     "sector": "Technology",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "VGT", "correlation": 0.995, "overlap_estimate": 85 },
-      { "ticker": "FTEC", "correlation": 0.994, "overlap_estimate": 84 },
-      { "ticker": "IYW", "correlation": 0.980, "overlap_estimate": 78 }
+      { "ticker": "VGT", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "FTEC", "correlation": 0.99, "overlap_estimate": 84 },
+      { "ticker": "IYW", "correlation": 0.98, "overlap_estimate": 78 }
     ]
   },
   {
@@ -261,9 +261,9 @@
     "sector": "Technology",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "VGT", "correlation": 0.999, "overlap_estimate": 98 },
-      { "ticker": "XLK", "correlation": 0.994, "overlap_estimate": 84 },
-      { "ticker": "IYW", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VGT", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "XLK", "correlation": 0.99, "overlap_estimate": 84 },
+      { "ticker": "IYW", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -272,9 +272,9 @@
     "sector": "Semiconductors",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "SOXX", "correlation": 0.985, "overlap_estimate": 60 },
-      { "ticker": "FTXL", "correlation": 0.970, "overlap_estimate": 45 },
-      { "ticker": "XSD", "correlation": 0.940, "overlap_estimate": 30 }
+      { "ticker": "SOXX", "correlation": 0.98, "overlap_estimate": 60 },
+      { "ticker": "FTXL", "correlation": 0.97, "overlap_estimate": 45 },
+      { "ticker": "XSD", "correlation": 0.94, "overlap_estimate": 30 }
     ]
   },
   {
@@ -283,9 +283,9 @@
     "sector": "Semiconductors",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "SMH", "correlation": 0.985, "overlap_estimate": 60 },
-      { "ticker": "FTXL", "correlation": 0.975, "overlap_estimate": 50 },
-      { "ticker": "PSI", "correlation": 0.960, "overlap_estimate": 40 }
+      { "ticker": "SMH", "correlation": 0.98, "overlap_estimate": 60 },
+      { "ticker": "FTXL", "correlation": 0.97, "overlap_estimate": 50 },
+      { "ticker": "PSI", "correlation": 0.96, "overlap_estimate": 40 }
     ]
   },
   {
@@ -294,9 +294,9 @@
     "sector": "Innovation",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "ARKW", "correlation": 0.920, "overlap_estimate": 35 },
-      { "ticker": "MOON", "correlation": 0.850, "overlap_estimate": 15 },
-      { "ticker": "KOMP", "correlation": 0.800, "overlap_estimate": 10 }
+      { "ticker": "ARKW", "correlation": 0.92, "overlap_estimate": 35 },
+      { "ticker": "MOON", "correlation": 0.85, "overlap_estimate": 15 },
+      { "ticker": "KOMP", "correlation": 0.80, "overlap_estimate": 10 }
     ]
   },
   {
@@ -305,9 +305,9 @@
     "sector": "Growth",
     "category": "Technology & Growth",
     "partners": [
-      { "ticker": "SCHG", "correlation": 0.995, "overlap_estimate": 88 },
-      { "ticker": "IWF", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "SPYG", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "SCHG", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "IWF", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "SPYG", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   },
   {
@@ -316,9 +316,9 @@
     "sector": "Leveraged Tech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "TECL", "correlation": 0.960, "overlap_estimate": 40 },
-      { "ticker": "SQQQ", "correlation": -0.999, "overlap_estimate": 0 },
-      { "ticker": "PSQ", "correlation": -0.990, "overlap_estimate": 0 }
+      { "ticker": "TECL", "correlation": 0.96, "overlap_estimate": 1 },
+      { "ticker": "SQQQ", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "PSQ", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -327,9 +327,9 @@
     "sector": "Inverse Tech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "TECS", "correlation": 0.950, "overlap_estimate": 30 },
-      { "ticker": "TQQQ", "correlation": -0.999, "overlap_estimate": 0 },
-      { "ticker": "QLD", "correlation": -0.990, "overlap_estimate": 0 }
+      { "ticker": "TECS", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "TQQQ", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "QLD", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -338,9 +338,9 @@
     "sector": "Leveraged Tech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "TQQQ", "correlation": 0.960, "overlap_estimate": 40 },
-      { "ticker": "TECS", "correlation": -0.999, "overlap_estimate": 0 },
-      { "ticker": "SOXL", "correlation": 0.850, "overlap_estimate": 20 }
+      { "ticker": "TQQQ", "correlation": 0.96, "overlap_estimate": 1 },
+      { "ticker": "TECS", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "SOXL", "correlation": 0.85, "overlap_estimate": 1 }
     ]
   },
   {
@@ -349,8 +349,8 @@
     "sector": "Inverse Tech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SQQQ", "correlation": 0.950, "overlap_estimate": 30 },
-      { "ticker": "TECL", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SQQQ", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "TECL", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -359,9 +359,9 @@
     "sector": "Leveraged Semis",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "USD", "correlation": 0.950, "overlap_estimate": 35 },
-      { "ticker": "SOXS", "correlation": -0.999, "overlap_estimate": 0 },
-      { "ticker": "TECL", "correlation": 0.850, "overlap_estimate": 20 }
+      { "ticker": "USD", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "SOXS", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "TECL", "correlation": 0.85, "overlap_estimate": 1 }
     ]
   },
   {
@@ -370,8 +370,8 @@
     "sector": "Inverse Semis",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SSG", "correlation": 0.920, "overlap_estimate": 25 },
-      { "ticker": "SOXL", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SSG", "correlation": 0.92, "overlap_estimate": 1 },
+      { "ticker": "SOXL", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -380,9 +380,9 @@
     "sector": "Leveraged S&P 500",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SPXL", "correlation": 0.998, "overlap_estimate": 95 },
-      { "ticker": "SSO", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SPXU", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SPXL", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SSO", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SPXU", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -391,9 +391,9 @@
     "sector": "Leveraged S&P 500",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "UPRO", "correlation": 0.998, "overlap_estimate": 95 },
-      { "ticker": "SSO", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SPXS", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "UPRO", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SSO", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SPXS", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -402,9 +402,9 @@
     "sector": "Inverse S&P 500",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SPXS", "correlation": 0.998, "overlap_estimate": 95 },
-      { "ticker": "SDS", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "UPRO", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SPXS", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SDS", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "UPRO", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -413,9 +413,9 @@
     "sector": "Leveraged S&P 500",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "UPRO", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SPXL", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SDS", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "UPRO", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SPXL", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SDS", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -424,8 +424,8 @@
     "sector": "Inverse S&P 500",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SPXU", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SSO", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SPXU", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "SSO", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -434,9 +434,9 @@
     "sector": "Leveraged Small Cap",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "URTY", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "UWM", "correlation": 0.985, "overlap_estimate": 85 },
-      { "ticker": "TZA", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "URTY", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "UWM", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "TZA", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -445,8 +445,8 @@
     "sector": "Inverse Small Cap",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SRTY", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "TNA", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SRTY", "correlation": 0.99, "overlap_estimate": 1 },
+      { "ticker": "TNA", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -455,8 +455,8 @@
     "sector": "Leveraged Energy",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "DIG", "correlation": 0.985, "overlap_estimate": 85 },
-      { "ticker": "ERY", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "DIG", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "ERY", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -465,8 +465,8 @@
     "sector": "Inverse Energy",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "DUG", "correlation": 0.985, "overlap_estimate": 85 },
-      { "ticker": "ERX", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "DUG", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "ERX", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -475,8 +475,8 @@
     "sector": "Leveraged Financials",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "UYG", "correlation": 0.980, "overlap_estimate": 80 },
-      { "ticker": "FAZ", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "UYG", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "FAZ", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -485,8 +485,8 @@
     "sector": "Inverse Financials",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "SKF", "correlation": 0.980, "overlap_estimate": 80 },
-      { "ticker": "FAS", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "SKF", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "FAS", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -495,8 +495,8 @@
     "sector": "Leveraged Biotech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "XBI", "correlation": 0.950, "overlap_estimate": 100 },
-      { "ticker": "LABD", "correlation": -0.999, "overlap_estimate": 0 }
+      { "ticker": "XBI", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "LABD", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -505,8 +505,8 @@
     "sector": "Inverse Biotech",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "LABU", "correlation": -0.999, "overlap_estimate": 0 },
-      { "ticker": "BIS", "correlation": 0.940, "overlap_estimate": 85 }
+      { "ticker": "LABU", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "BIS", "correlation": 0.94, "overlap_estimate": 1 }
     ]
   },
   {
@@ -515,9 +515,9 @@
     "sector": "Volatility",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "VXX", "correlation": 0.980, "overlap_estimate": 90 },
-      { "ticker": "VIXY", "correlation": 0.980, "overlap_estimate": 90 },
-      { "ticker": "SVXY", "correlation": -0.950, "overlap_estimate": 0 }
+      { "ticker": "VXX", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "VIXY", "correlation": 0.98, "overlap_estimate": 1 },
+      { "ticker": "SVXY", "correlation": -0.95, "overlap_estimate": 0 }
     ]
   },
   {
@@ -526,8 +526,8 @@
     "sector": "Inverse Volatility",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "UVXY", "correlation": -0.950, "overlap_estimate": 0 },
-      { "ticker": "VXX", "correlation": -0.950, "overlap_estimate": 0 }
+      { "ticker": "UVXY", "correlation": -0.95, "overlap_estimate": 0 },
+      { "ticker": "VXX", "correlation": -0.95, "overlap_estimate": 0 }
     ]
   },
   {
@@ -536,9 +536,9 @@
     "sector": "Leveraged Bonds",
     "category": "Leveraged & Inverse",
     "partners": [
-      { "ticker": "TLT", "correlation": 0.950, "overlap_estimate": 100 },
-      { "ticker": "TMV", "correlation": -0.995, "overlap_estimate": 0 },
-      { "ticker": "TBT", "correlation": -0.990, "overlap_estimate": 0 }
+      { "ticker": "TLT", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "TMV", "correlation": -0.99, "overlap_estimate": 0 },
+      { "ticker": "TBT", "correlation": -0.99, "overlap_estimate": 0 }
     ]
   },
   {
@@ -547,10 +547,10 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "VYM", "correlation": 0.940, "overlap_estimate": 35 },
-      { "ticker": "DGRO", "correlation": 0.920, "overlap_estimate": 30 },
-      { "ticker": "HDV", "correlation": 0.890, "overlap_estimate": 25 },
-      { "ticker": "VIG", "correlation": 0.910, "overlap_estimate": 20 }
+      { "ticker": "VYM", "correlation": 0.94, "overlap_estimate": 35 },
+      { "ticker": "DGRO", "correlation": 0.92, "overlap_estimate": 30 },
+      { "ticker": "HDV", "correlation": 0.89, "overlap_estimate": 25 },
+      { "ticker": "VIG", "correlation": 0.91, "overlap_estimate": 20 }
     ]
   },
   {
@@ -559,9 +559,9 @@
     "sector": "Income",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "JEPQ", "correlation": 0.850, "overlap_estimate": 10 },
-      { "ticker": "DIVO", "correlation": 0.780, "overlap_estimate": 15 },
-      { "ticker": "SPYD", "correlation": 0.750, "overlap_estimate": 10 }
+      { "ticker": "JEPQ", "correlation": 0.85, "overlap_estimate": 10 },
+      { "ticker": "DIVO", "correlation": 0.78, "overlap_estimate": 15 },
+      { "ticker": "SPYD", "correlation": 0.75, "overlap_estimate": 10 }
     ]
   },
   {
@@ -570,9 +570,9 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "SCHD", "correlation": 0.940, "overlap_estimate": 35 },
-      { "ticker": "HDV", "correlation": 0.920, "overlap_estimate": 40 },
-      { "ticker": "SPYD", "correlation": 0.910, "overlap_estimate": 35 }
+      { "ticker": "SCHD", "correlation": 0.94, "overlap_estimate": 35 },
+      { "ticker": "HDV", "correlation": 0.92, "overlap_estimate": 40 },
+      { "ticker": "SPYD", "correlation": 0.91, "overlap_estimate": 35 }
     ]
   },
   {
@@ -581,9 +581,9 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "VIG", "correlation": 0.960, "overlap_estimate": 55 },
-      { "ticker": "SCHD", "correlation": 0.920, "overlap_estimate": 30 },
-      { "ticker": "RDVY", "correlation": 0.880, "overlap_estimate": 25 }
+      { "ticker": "VIG", "correlation": 0.96, "overlap_estimate": 55 },
+      { "ticker": "SCHD", "correlation": 0.92, "overlap_estimate": 30 },
+      { "ticker": "RDVY", "correlation": 0.88, "overlap_estimate": 25 }
     ]
   },
   {
@@ -592,9 +592,9 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "VYM", "correlation": 0.920, "overlap_estimate": 40 },
-      { "ticker": "SCHD", "correlation": 0.890, "overlap_estimate": 25 },
-      { "ticker": "SPYD", "correlation": 0.880, "overlap_estimate": 30 }
+      { "ticker": "VYM", "correlation": 0.92, "overlap_estimate": 40 },
+      { "ticker": "SCHD", "correlation": 0.89, "overlap_estimate": 25 },
+      { "ticker": "SPYD", "correlation": 0.88, "overlap_estimate": 30 }
     ]
   },
   {
@@ -603,9 +603,9 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "VYM", "correlation": 0.910, "overlap_estimate": 35 },
-      { "ticker": "HDV", "correlation": 0.880, "overlap_estimate": 30 },
-      { "ticker": "ALTY", "correlation": 0.750, "overlap_estimate": 10 }
+      { "ticker": "VYM", "correlation": 0.91, "overlap_estimate": 35 },
+      { "ticker": "HDV", "correlation": 0.88, "overlap_estimate": 30 },
+      { "ticker": "ALTY", "correlation": 0.75, "overlap_estimate": 10 }
     ]
   },
   {
@@ -614,9 +614,9 @@
     "sector": "Dividend Growth",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "DGRO", "correlation": 0.960, "overlap_estimate": 55 },
-      { "ticker": "SDY", "correlation": 0.920, "overlap_estimate": 35 },
-      { "ticker": "NOBL", "correlation": 0.910, "overlap_estimate": 30 }
+      { "ticker": "DGRO", "correlation": 0.96, "overlap_estimate": 55 },
+      { "ticker": "SDY", "correlation": 0.92, "overlap_estimate": 35 },
+      { "ticker": "NOBL", "correlation": 0.91, "overlap_estimate": 30 }
     ]
   },
   {
@@ -625,8 +625,8 @@
     "sector": "Income",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "JEPI", "correlation": 0.780, "overlap_estimate": 15 },
-      { "ticker": "IDVO", "correlation": 0.700, "overlap_estimate": 5 }
+      { "ticker": "JEPI", "correlation": 0.78, "overlap_estimate": 15 },
+      { "ticker": "IDVO", "correlation": 0.70, "overlap_estimate": 5 }
     ]
   },
   {
@@ -635,9 +635,9 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "NOBL", "correlation": 0.950, "overlap_estimate": 60 },
-      { "ticker": "VIG", "correlation": 0.920, "overlap_estimate": 35 },
-      { "ticker": "DVY", "correlation": 0.900, "overlap_estimate": 40 }
+      { "ticker": "NOBL", "correlation": 0.95, "overlap_estimate": 60 },
+      { "ticker": "VIG", "correlation": 0.92, "overlap_estimate": 35 },
+      { "ticker": "DVY", "correlation": 0.90, "overlap_estimate": 40 }
     ]
   },
   {
@@ -646,8 +646,8 @@
     "sector": "Dividend Equity",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "SDY", "correlation": 0.950, "overlap_estimate": 60 },
-      { "ticker": "VIG", "correlation": 0.910, "overlap_estimate": 30 }
+      { "ticker": "SDY", "correlation": 0.95, "overlap_estimate": 60 },
+      { "ticker": "VIG", "correlation": 0.91, "overlap_estimate": 30 }
     ]
   },
   {
@@ -656,8 +656,8 @@
     "sector": "Preferreds",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "PFF", "correlation": 0.990, "overlap_estimate": 80 },
-      { "ticker": "PGX", "correlation": 0.980, "overlap_estimate": 75 }
+      { "ticker": "PFF", "correlation": 0.99, "overlap_estimate": 80 },
+      { "ticker": "PGX", "correlation": 0.98, "overlap_estimate": 75 }
     ]
   },
   {
@@ -666,8 +666,8 @@
     "sector": "Inflation-Protected",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "TIP", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "VTIP", "correlation": 0.940, "overlap_estimate": 60 }
+      { "ticker": "TIP", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "VTIP", "correlation": 0.94, "overlap_estimate": 60 }
     ]
   },
   {
@@ -676,8 +676,8 @@
     "sector": "Inflation-Protected",
     "category": "Dividends & Income",
     "partners": [
-      { "ticker": "SCHP", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "VTIP", "correlation": 0.940, "overlap_estimate": 60 }
+      { "ticker": "SCHP", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "VTIP", "correlation": 0.94, "overlap_estimate": 60 }
     ]
   },
   {
@@ -686,9 +686,9 @@
     "sector": "Energy",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VDE", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "IYE", "correlation": 0.990, "overlap_estimate": 88 },
-      { "ticker": "FENY", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "VDE", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "IYE", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "FENY", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   },
   {
@@ -697,9 +697,9 @@
     "sector": "Energy",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLE", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "IYE", "correlation": 0.990, "overlap_estimate": 88 },
-      { "ticker": "FENY", "correlation": 0.995, "overlap_estimate": 90 }
+      { "ticker": "XLE", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "IYE", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "FENY", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -708,8 +708,8 @@
     "sector": "Energy",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLE", "correlation": 0.990, "overlap_estimate": 88 },
-      { "ticker": "VDE", "correlation": 0.990, "overlap_estimate": 88 }
+      { "ticker": "XLE", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "VDE", "correlation": 0.99, "overlap_estimate": 88 }
     ]
   },
   {
@@ -718,8 +718,8 @@
     "sector": "Financials",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VFH", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYF", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VFH", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYF", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -728,8 +728,8 @@
     "sector": "Financials",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLF", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "VFH", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "XLF", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "VFH", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   },
   {
@@ -738,8 +738,8 @@
     "sector": "Healthcare",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VHT", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "IYH", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "VHT", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "IYH", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   },
   {
@@ -748,8 +748,8 @@
     "sector": "Healthcare",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLV", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "VHT", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "XLV", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "VHT", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   },
   {
@@ -758,8 +758,8 @@
     "sector": "Industrials",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VIS", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYJ", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VIS", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYJ", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -768,8 +768,8 @@
     "sector": "Staples",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VDC", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYK", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VDC", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYK", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -778,8 +778,8 @@
     "sector": "Staples",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLP", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "VDC", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "XLP", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "VDC", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -788,8 +788,8 @@
     "sector": "Discretionary",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VCR", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYC", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VCR", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYC", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -798,8 +798,8 @@
     "sector": "Discretionary",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLY", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "VCR", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "XLY", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "VCR", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -808,8 +808,8 @@
     "sector": "Telecom",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VOX", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYZ", "correlation": 0.950, "overlap_estimate": 70 }
+      { "ticker": "VOX", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYZ", "correlation": 0.95, "overlap_estimate": 70 }
     ]
   },
   {
@@ -818,8 +818,8 @@
     "sector": "Telecom",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLC", "correlation": 0.950, "overlap_estimate": 70 },
-      { "ticker": "VOX", "correlation": 0.950, "overlap_estimate": 70 }
+      { "ticker": "XLC", "correlation": 0.95, "overlap_estimate": 70 },
+      { "ticker": "VOX", "correlation": 0.95, "overlap_estimate": 70 }
     ]
   },
   {
@@ -828,9 +828,9 @@
     "sector": "Real Estate",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLRE", "correlation": 0.990, "overlap_estimate": 75 },
-      { "ticker": "IYR", "correlation": 0.985, "overlap_estimate": 70 },
-      { "ticker": "SCHH", "correlation": 0.980, "overlap_estimate": 65 }
+      { "ticker": "XLRE", "correlation": 0.99, "overlap_estimate": 75 },
+      { "ticker": "IYR", "correlation": 0.98, "overlap_estimate": 70 },
+      { "ticker": "SCHH", "correlation": 0.98, "overlap_estimate": 65 }
     ]
   },
   {
@@ -839,8 +839,8 @@
     "sector": "Materials",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "VAW", "correlation": 0.990, "overlap_estimate": 85 },
-      { "ticker": "IYM", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VAW", "correlation": 0.99, "overlap_estimate": 85 },
+      { "ticker": "IYM", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -849,8 +849,8 @@
     "sector": "Materials",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XLB", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "VAW", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "XLB", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "VAW", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -859,9 +859,9 @@
     "sector": "Biotech",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "IBB", "correlation": 0.880, "overlap_estimate": 30 },
-      { "ticker": "LABU", "correlation": 0.950, "overlap_estimate": 100 },
-      { "ticker": "FBT", "correlation": 0.910, "overlap_estimate": 40 }
+      { "ticker": "IBB", "correlation": 0.88, "overlap_estimate": 30 },
+      { "ticker": "LABU", "correlation": 0.95, "overlap_estimate": 1 },
+      { "ticker": "FBT", "correlation": 0.91, "overlap_estimate": 40 }
     ]
   },
   {
@@ -870,8 +870,8 @@
     "sector": "Biotech",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "XBI", "correlation": 0.880, "overlap_estimate": 30 },
-      { "ticker": "FBT", "correlation": 0.920, "overlap_estimate": 45 }
+      { "ticker": "XBI", "correlation": 0.88, "overlap_estimate": 30 },
+      { "ticker": "FBT", "correlation": 0.92, "overlap_estimate": 45 }
     ]
   },
   {
@@ -880,9 +880,9 @@
     "sector": "Commodities",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "IAU", "correlation": 0.999, "overlap_estimate": 100 },
-      { "ticker": "GLDM", "correlation": 0.999, "overlap_estimate": 100 },
-      { "ticker": "SGOL", "correlation": 0.999, "overlap_estimate": 100 }
+      { "ticker": "IAU", "correlation": 0.99, "overlap_estimate": 100 },
+      { "ticker": "GLDM", "correlation": 0.99, "overlap_estimate": 100 },
+      { "ticker": "SGOL", "correlation": 0.99, "overlap_estimate": 100 }
     ]
   },
   {
@@ -891,9 +891,9 @@
     "sector": "Commodities",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "RING", "correlation": 0.970, "overlap_estimate": 60 },
-      { "ticker": "GDXJ", "correlation": 0.880, "overlap_estimate": 35 },
-      { "ticker": "GOAU", "correlation": 0.950, "overlap_estimate": 50 }
+      { "ticker": "RING", "correlation": 0.97, "overlap_estimate": 60 },
+      { "ticker": "GDXJ", "correlation": 0.88, "overlap_estimate": 35 },
+      { "ticker": "GOAU", "correlation": 0.95, "overlap_estimate": 50 }
     ]
   },
   {
@@ -902,8 +902,19 @@
     "sector": "Commodities",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "GDX", "correlation": 0.880, "overlap_estimate": 35 },
-      { "ticker": "SILJ", "correlation": 0.750, "overlap_estimate": 20 }
+      { "ticker": "GDX", "correlation": 0.88, "overlap_estimate": 35 },
+      { "ticker": "SILJ", "correlation": 0.75, "overlap_estimate": 20 }
+    ]
+  },
+  {
+    "ticker": "SLYV",
+    "name": "SPDR S&P 600 Small Cap Value ETF",
+    "sector": "Small Cap Value",
+    "category": "Core US ETFs",
+    "partners": [
+      { "ticker": "IJS", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "VBR", "correlation": 0.98, "overlap_estimate": 55 },
+      { "ticker": "VIOV", "correlation": 0.99, "overlap_estimate": 99 }
     ]
   },
   {
@@ -912,8 +923,8 @@
     "sector": "Commodities",
     "category": "Sector & Commodities",
     "partners": [
-      { "ticker": "SIVR", "correlation": 0.999, "overlap_estimate": 100 },
-      { "ticker": "SIL", "correlation": 0.700, "overlap_estimate": 10 }
+      { "ticker": "SIVR", "correlation": 0.99, "overlap_estimate": 100 },
+      { "ticker": "SIL", "correlation": 0.70, "overlap_estimate": 10 }
     ]
   },
   {
@@ -922,9 +933,9 @@
     "sector": "International",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "IXUS", "correlation": 0.998, "overlap_estimate": 95 },
-      { "ticker": "VEU", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "VEA", "correlation": 0.940, "overlap_estimate": 70 }
+      { "ticker": "IXUS", "correlation": 0.99, "overlap_estimate": 95 },
+      { "ticker": "VEU", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "VEA", "correlation": 0.94, "overlap_estimate": 70 }
     ]
   },
   {
@@ -933,8 +944,8 @@
     "sector": "International",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "VXUS", "correlation": 0.998, "overlap_estimate": 95 },
-      { "ticker": "ACWX", "correlation": 0.995, "overlap_estimate": 90 }
+      { "ticker": "VXUS", "correlation": 0.99, "overlap_estimate": 95 },
+      { "ticker": "ACWX", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -943,9 +954,9 @@
     "sector": "Developed Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "IEFA", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "SPDW", "correlation": 0.990, "overlap_estimate": 88 },
-      { "ticker": "EFA", "correlation": 0.990, "overlap_estimate": 88 }
+      { "ticker": "IEFA", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "SPDW", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "EFA", "correlation": 0.99, "overlap_estimate": 88 }
     ]
   },
   {
@@ -954,9 +965,9 @@
     "sector": "Developed Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "VEA", "correlation": 0.995, "overlap_estimate": 92 },
-      { "ticker": "EFA", "correlation": 0.998, "overlap_estimate": 98 },
-      { "ticker": "SPDW", "correlation": 0.990, "overlap_estimate": 88 }
+      { "ticker": "VEA", "correlation": 0.99, "overlap_estimate": 92 },
+      { "ticker": "EFA", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "SPDW", "correlation": 0.99, "overlap_estimate": 88 }
     ]
   },
   {
@@ -965,8 +976,8 @@
     "sector": "Developed Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "VEA", "correlation": 0.990, "overlap_estimate": 88 },
-      { "ticker": "IEFA", "correlation": 0.990, "overlap_estimate": 88 }
+      { "ticker": "VEA", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "IEFA", "correlation": 0.99, "overlap_estimate": 88 }
     ]
   },
   {
@@ -975,9 +986,9 @@
     "sector": "Emerging Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "IEMG", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "EEM", "correlation": 0.980, "overlap_estimate": 75 },
-      { "ticker": "SCHE", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "IEMG", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "EEM", "correlation": 0.98, "overlap_estimate": 75 },
+      { "ticker": "SCHE", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -986,9 +997,9 @@
     "sector": "Emerging Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "VWO", "correlation": 0.985, "overlap_estimate": 80 },
-      { "ticker": "EEM", "correlation": 0.998, "overlap_estimate": 98 },
-      { "ticker": "SPEM", "correlation": 0.990, "overlap_estimate": 90 }
+      { "ticker": "VWO", "correlation": 0.98, "overlap_estimate": 80 },
+      { "ticker": "EEM", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "SPEM", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -997,8 +1008,8 @@
     "sector": "Emerging Markets",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "IEMG", "correlation": 0.998, "overlap_estimate": 98 },
-      { "ticker": "VWO", "correlation": 0.980, "overlap_estimate": 75 }
+      { "ticker": "IEMG", "correlation": 0.99, "overlap_estimate": 98 },
+      { "ticker": "VWO", "correlation": 0.98, "overlap_estimate": 75 }
     ]
   },
   {
@@ -1007,8 +1018,8 @@
     "sector": "Japan",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "BBJP", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "FLJP", "correlation": 0.985, "overlap_estimate": 85 }
+      { "ticker": "BBJP", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "FLJP", "correlation": 0.98, "overlap_estimate": 85 }
     ]
   },
   {
@@ -1017,8 +1028,8 @@
     "sector": "United Kingdom",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "FLGB", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "FKU", "correlation": 0.980, "overlap_estimate": 85 }
+      { "ticker": "FLGB", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "FKU", "correlation": 0.98, "overlap_estimate": 85 }
     ]
   },
   {
@@ -1027,8 +1038,8 @@
     "sector": "Germany",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "FLGR", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "FGM", "correlation": 0.980, "overlap_estimate": 85 }
+      { "ticker": "FLGR", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "FGM", "correlation": 0.98, "overlap_estimate": 85 }
     ]
   },
   {
@@ -1037,8 +1048,8 @@
     "sector": "China",
     "category": "International ETFs",
     "partners": [
-      { "ticker": "MCHI", "correlation": 0.920, "overlap_estimate": 40 },
-      { "ticker": "GXC", "correlation": 0.910, "overlap_estimate": 35 }
+      { "ticker": "MCHI", "correlation": 0.92, "overlap_estimate": 40 },
+      { "ticker": "GXC", "correlation": 0.91, "overlap_estimate": 35 }
     ]
   },
   {
@@ -1047,9 +1058,9 @@
     "sector": "Total Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "AGG", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "BIV", "correlation": 0.950, "overlap_estimate": 60 },
-      { "ticker": "BLV", "correlation": 0.900, "overlap_estimate": 40 }
+      { "ticker": "AGG", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "BIV", "correlation": 0.95, "overlap_estimate": 60 },
+      { "ticker": "BLV", "correlation": 0.90, "overlap_estimate": 40 }
     ]
   },
   {
@@ -1058,8 +1069,8 @@
     "sector": "Total Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "BND", "correlation": 0.995, "overlap_estimate": 90 },
-      { "ticker": "BIV", "correlation": 0.950, "overlap_estimate": 60 }
+      { "ticker": "BND", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "BIV", "correlation": 0.95, "overlap_estimate": 60 }
     ]
   },
   {
@@ -1068,9 +1079,9 @@
     "sector": "Long Term Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "SPTL", "correlation": 0.995, "overlap_estimate": 95 },
-      { "ticker": "VGLT", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "TMF", "correlation": 0.950, "overlap_estimate": 100 }
+      { "ticker": "SPTL", "correlation": 0.99, "overlap_estimate": 95 },
+      { "ticker": "VGLT", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "TMF", "correlation": 0.95, "overlap_estimate": 1 }
     ]
   },
   {
@@ -1079,8 +1090,8 @@
     "sector": "Medium Term Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "VGIT", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SCHR", "correlation": 0.990, "overlap_estimate": 90 }
+      { "ticker": "VGIT", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "SCHR", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -1089,8 +1100,8 @@
     "sector": "Short Term Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "VGSH", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SCHO", "correlation": 0.990, "overlap_estimate": 90 }
+      { "ticker": "VGSH", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "SCHO", "correlation": 0.99, "overlap_estimate": 90 }
     ]
   },
   {
@@ -1099,8 +1110,8 @@
     "sector": "Medium Term Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "IEF", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "SCHR", "correlation": 0.995, "overlap_estimate": 95 }
+      { "ticker": "IEF", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "SCHR", "correlation": 0.99, "overlap_estimate": 95 }
     ]
   },
   {
@@ -1109,8 +1120,8 @@
     "sector": "Medium Term Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "VCIT", "correlation": 0.980, "overlap_estimate": 70 },
-      { "ticker": "BND", "correlation": 0.950, "overlap_estimate": 60 }
+      { "ticker": "VCIT", "correlation": 0.98, "overlap_estimate": 70 },
+      { "ticker": "BND", "correlation": 0.95, "overlap_estimate": 60 }
     ]
   },
   {
@@ -1119,8 +1130,8 @@
     "sector": "Corporate Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "BIV", "correlation": 0.980, "overlap_estimate": 70 },
-      { "ticker": "USIG", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "BIV", "correlation": 0.98, "overlap_estimate": 70 },
+      { "ticker": "USIG", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -1129,8 +1140,8 @@
     "sector": "High Yield Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "JNK", "correlation": 0.990, "overlap_estimate": 90 },
-      { "ticker": "USHY", "correlation": 0.985, "overlap_estimate": 85 }
+      { "ticker": "JNK", "correlation": 0.99, "overlap_estimate": 90 },
+      { "ticker": "USHY", "correlation": 0.98, "overlap_estimate": 85 }
     ]
   },
   {
@@ -1139,8 +1150,8 @@
     "sector": "Corporate Bond",
     "category": "Bonds & Rates",
     "partners": [
-      { "ticker": "VCLT", "correlation": 0.980, "overlap_estimate": 75 },
-      { "ticker": "IGLB", "correlation": 0.985, "overlap_estimate": 80 }
+      { "ticker": "VCLT", "correlation": 0.98, "overlap_estimate": 75 },
+      { "ticker": "IGLB", "correlation": 0.98, "overlap_estimate": 80 }
     ]
   },
   {
@@ -1149,8 +1160,8 @@
     "sector": "Factor",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VFMO", "correlation": 0.950, "overlap_estimate": 40 },
-      { "ticker": "SPMO", "correlation": 0.960, "overlap_estimate": 45 }
+      { "ticker": "VFMO", "correlation": 0.95, "overlap_estimate": 40 },
+      { "ticker": "SPMO", "correlation": 0.96, "overlap_estimate": 45 }
     ]
   },
   {
@@ -1159,8 +1170,8 @@
     "sector": "Factor",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SPLV", "correlation": 0.960, "overlap_estimate": 50 },
-      { "ticker": "XMVM", "correlation": 0.920, "overlap_estimate": 35 }
+      { "ticker": "SPLV", "correlation": 0.96, "overlap_estimate": 50 },
+      { "ticker": "XMVM", "correlation": 0.92, "overlap_estimate": 35 }
     ]
   },
   {
@@ -1169,8 +1180,8 @@
     "sector": "Factor",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "VTV", "correlation": 0.950, "overlap_estimate": 60 },
-      { "ticker": "IUSV", "correlation": 0.940, "overlap_estimate": 55 }
+      { "ticker": "VTV", "correlation": 0.95, "overlap_estimate": 60 },
+      { "ticker": "IUSV", "correlation": 0.94, "overlap_estimate": 55 }
     ]
   },
   {
@@ -1179,8 +1190,8 @@
     "sector": "Factor",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SPHQ", "correlation": 0.960, "overlap_estimate": 50 },
-      { "ticker": "JQUA", "correlation": 0.950, "overlap_estimate": 45 }
+      { "ticker": "SPHQ", "correlation": 0.96, "overlap_estimate": 50 },
+      { "ticker": "JQUA", "correlation": 0.95, "overlap_estimate": 45 }
     ]
   },
   {
@@ -1189,8 +1200,8 @@
     "sector": "Value",
     "category": "Core US ETFs",
     "partners": [
-      { "ticker": "SCHV", "correlation": 0.995, "overlap_estimate": 88 },
-      { "ticker": "IUSV", "correlation": 0.990, "overlap_estimate": 85 }
+      { "ticker": "SCHV", "correlation": 0.99, "overlap_estimate": 88 },
+      { "ticker": "IUSV", "correlation": 0.99, "overlap_estimate": 85 }
     ]
   }
 ]
