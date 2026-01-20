@@ -152,22 +152,20 @@ export default function Home() {
                               <div 
                                 className="group/badge relative z-10 ml-auto outline-none" 
                                 role="button"
-                                tabIndex={0} // Makes it focusable on mobile tap
-                                onClick={(e) => e.preventDefault()} // Prevents navigation when clicking badge
+                                tabIndex={0} 
+                                onClick={(e) => e.preventDefault()}
                               >
                                 <span className="cursor-help flex items-center gap-1 text-[9px] font-bold text-red-600 bg-white px-2 py-0.5 rounded border border-red-200 uppercase tracking-wide hover:bg-red-50 transition-colors">
                                   Tactical
-                                  {/* Tiny Info Icon */}
                                   <svg className="w-3 h-3 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                   </svg>
                                 </span>
 
-                                {/* TOOLTIP (Visible on Hover OR Focus/Tap) */}
+                                {/* TOOLTIP */}
                                 <div className="absolute bottom-full right-0 mb-2 w-48 p-2.5 bg-slate-800 text-white text-[10px] font-medium leading-relaxed rounded-md shadow-xl opacity-0 translate-y-2 group-hover/badge:opacity-100 group-hover/badge:translate-y-0 group-focus/badge:opacity-100 group-focus/badge:translate-y-0 transition-all pointer-events-none group-focus/badge:pointer-events-auto">
                                   <div className="mb-1 text-red-300 font-bold uppercase tracking-wider">High Risk Structure</div>
                                   Leveraged ETFs reset daily and are not designed for long-term buy-and-hold strategies.
-                                  {/* Arrow */}
                                   <div className="absolute top-full right-3 -mt-1 border-4 border-transparent border-t-slate-800"></div>
                                 </div>
                               </div>
@@ -231,12 +229,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER --- */}
+      {/* --- FOOTER (UPDATED DISCLAIMER) --- */}
       <footer className="bg-slate-50 border-t border-slate-200 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-slate-400 text-sm mb-4">
             Built for the Bogleheads community. Open Source.
           </p>
+          
+          {/* NEW GLOBAL DISCLAIMER */}
+          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
+            DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
+            They are approximations, not guarantees, and may change over time. Leveraged products often use swaps/derivatives 
+            resulting in low physical overlap despite high correlation. Past performance does not guarantee future results.
+          </p>
+
           <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
             <Link href="/" className="hover:text-blue-600">Home</Link>
             
@@ -249,12 +255,10 @@ export default function Home() {
               GitHub
             </a>
 
-            {/* Legal Link */}
             <Link href="/legal" className="hover:text-blue-600 hover:underline">
               Legal & Privacy
             </Link>
 
-            {/* Tally Trigger Button */}
             <button 
               data-tally-open="68Kqjo" 
               data-tally-layout="modal"
