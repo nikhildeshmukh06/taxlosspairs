@@ -2,159 +2,310 @@
 
 import { useState, useMemo } from 'react';
 
-const FED_BRACKETS = [
-  { label: '37% (Income > $609k)', value: 0.37 },
-  { label: '35% (Income > $243k)', value: 0.35 },
-  { label: '32% (Income > $191k)', value: 0.32 },
-  { label: '24% (Income > $100k)', value: 0.24 },
-  { label: '22% (Income > $47k)', value: 0.22 },
-];
+// --- TYPE DEFINITIONS ---
+type TaxBracket = { limit: number; rate: number };
+type TaxSchedule = { SINGLE: TaxBracket[]; MARRIED: TaxBracket[] };
 
-const STATE_TAXES = [
-  { label: 'No State Tax', value: 0 },
-  { label: 'California (13.3%)', value: 0.133 },
-  { label: 'New York City (3.8% + 10.9%)', value: 0.147 }, // NYC + NY State top
-  { label: 'New York State (10.9%)', value: 0.109 },
-  { label: 'New Jersey (10.75%)', value: 0.1075 },
-  { label: 'Massachusetts (5% + 4%)', value: 0.09 }, // 4% surtax over $1m
-  { label: 'Connecticut (6.99%)', value: 0.0699 },
-  { label: 'Other (5.0%)', value: 0.05 },
+// --- FEDERAL DATA (2025 Projected) ---
+const FED_BRACKETS: TaxSchedule = {
+  SINGLE: [
+    { limit: 609350, rate: 0.37 },
+    { limit: 243725, rate: 0.35 },
+    { limit: 191950, rate: 0.32 },
+    { limit: 100525, rate: 0.24 },
+    { limit: 47150, rate: 0.22 },
+    { limit: 11600, rate: 0.12 },
+    { limit: 0, rate: 0.10 },
+  ],
+  MARRIED: [
+    { limit: 731200, rate: 0.37 },
+    { limit: 487450, rate: 0.35 },
+    { limit: 383900, rate: 0.32 },
+    { limit: 201050, rate: 0.24 },
+    { limit: 94300, rate: 0.22 },
+    { limit: 23200, rate: 0.12 },
+    { limit: 0, rate: 0.10 },
+  ]
+};
+
+// --- STATE DATA (2025 Marginal Rates) ---
+const flat = (rate: number): TaxSchedule => ({
+  SINGLE: [{ limit: 0, rate }],
+  MARRIED: [{ limit: 0, rate }]
+});
+const zero = flat(0);
+
+const STATE_DATA: Record<string, TaxSchedule> = {
+  'AK': zero, 'FL': zero, 'NV': zero, 'NH': zero, 'SD': zero, 
+  'TN': zero, 'TX': zero, 'WA': zero, 'WY': zero,
+
+  'AZ': flat(0.025), 'CO': flat(0.044), 'IL': flat(0.0495), 
+  'IN': flat(0.0305), 'KY': flat(0.04), 'MI': flat(0.0425),
+  'MS': flat(0.047), 'NC': flat(0.045), 'PA': flat(0.0307), 
+  'UT': flat(0.0465), 'AL': flat(0.05), 'AR': flat(0.044), 
+  'DE': flat(0.066), 'GA': flat(0.0549), 'ID': flat(0.058), 
+  'IA': flat(0.057), 'KS': flat(0.057), 'LA': flat(0.0425),
+  'ME': flat(0.0715), 'MD': flat(0.0575), 'MO': flat(0.048), 
+  'MT': flat(0.059), 'NE': flat(0.0584), 'NM': flat(0.059), 
+  'ND': flat(0.025), 'OH': flat(0.035), 'OK': flat(0.0475), 
+  'RI': flat(0.0599), 'SC': flat(0.064), 'VT': flat(0.0875),
+  'VA': flat(0.0575), 'WV': flat(0.065), 'WI': flat(0.0765),
+
+  // Progressive States
+  'CA': {
+    SINGLE: [
+      { limit: 1000000, rate: 0.144 }, { limit: 677275, rate: 0.123 },
+      { limit: 406364, rate: 0.113 }, { limit: 338639, rate: 0.103 },
+      { limit: 68350, rate: 0.093 }, { limit: 54081, rate: 0.08 },
+      { limit: 37788, rate: 0.06 }, { limit: 23934, rate: 0.04 },
+      { limit: 10412, rate: 0.02 }, { limit: 0, rate: 0.01 }
+    ],
+    MARRIED: [
+      { limit: 1354550, rate: 0.133 }, { limit: 812728, rate: 0.113 }, 
+      { limit: 677278, rate: 0.103 }, { limit: 136700, rate: 0.093 }, 
+      { limit: 108162, rate: 0.08 }, { limit: 75576, rate: 0.06 }, 
+      { limit: 47868, rate: 0.04 }, { limit: 20824, rate: 0.02 }, 
+      { limit: 0, rate: 0.01 }
+    ]
+  },
+  'NY': {
+    SINGLE: [
+      { limit: 25000000, rate: 0.109 }, { limit: 5000000, rate: 0.103 },
+      { limit: 1077550, rate: 0.0965 }, { limit: 215400, rate: 0.0685 },
+      { limit: 80650, rate: 0.0633 }, { limit: 13900, rate: 0.0585 },
+      { limit: 8500, rate: 0.0525 }, { limit: 0, rate: 0.04 }
+    ],
+    MARRIED: [
+      { limit: 25000000, rate: 0.109 }, { limit: 5000000, rate: 0.103 },
+      { limit: 2155350, rate: 0.0965 }, { limit: 323200, rate: 0.0685 },
+      { limit: 161550, rate: 0.0633 }, { limit: 27900, rate: 0.0585 },
+      { limit: 17150, rate: 0.0525 }, { limit: 0, rate: 0.04 }
+    ]
+  },
+  'NJ': {
+    SINGLE: [
+      { limit: 1000000, rate: 0.1075 }, { limit: 500000, rate: 0.0897 },
+      { limit: 75000, rate: 0.0637 }, { limit: 40000, rate: 0.05525 },
+      { limit: 0, rate: 0.014 }
+    ],
+    MARRIED: [
+      { limit: 1000000, rate: 0.1075 }, { limit: 500000, rate: 0.0897 },
+      { limit: 150000, rate: 0.0637 }, { limit: 80000, rate: 0.05525 },
+      { limit: 0, rate: 0.014 }
+    ]
+  },
+  'MA': {
+    SINGLE: [{ limit: 1000000, rate: 0.09 }, { limit: 0, rate: 0.05 }],
+    MARRIED: [{ limit: 1000000, rate: 0.09 }, { limit: 0, rate: 0.05 }]
+  },
+  'CT': {
+    SINGLE: [
+      { limit: 500000, rate: 0.0699 }, { limit: 200000, rate: 0.069 },
+      { limit: 100000, rate: 0.06 }, { limit: 50000, rate: 0.055 },
+      { limit: 10000, rate: 0.05 }, { limit: 0, rate: 0.03 }
+    ],
+    MARRIED: [
+      { limit: 1000000, rate: 0.0699 }, { limit: 400000, rate: 0.069 },
+      { limit: 200000, rate: 0.06 }, { limit: 100000, rate: 0.055 },
+      { limit: 20000, rate: 0.05 }, { limit: 0, rate: 0.03 }
+    ]
+  },
+  'HI': {
+    SINGLE: [{ limit: 200000, rate: 0.11 }, { limit: 150000, rate: 0.10 }, { limit: 0, rate: 0.08 }],
+    MARRIED: [{ limit: 400000, rate: 0.11 }, { limit: 300000, rate: 0.10 }, { limit: 0, rate: 0.08 }]
+  },
+  'OR': {
+    SINGLE: [{ limit: 125000, rate: 0.099 }, { limit: 10200, rate: 0.0875 }, { limit: 0, rate: 0.0475 }],
+    MARRIED: [{ limit: 250000, rate: 0.099 }, { limit: 20400, rate: 0.0875 }, { limit: 0, rate: 0.0475 }]
+  },
+  'MN': {
+    SINGLE: [{ limit: 197870, rate: 0.0985 }, { limit: 103300, rate: 0.0785 }, { limit: 30070, rate: 0.068 }, { limit: 0, rate: 0.0535 }],
+    MARRIED: [{ limit: 316260, rate: 0.0985 }, { limit: 184040, rate: 0.0785 }, { limit: 43950, rate: 0.068 }, { limit: 0, rate: 0.0535 }]
+  },
+  'DC': {
+    SINGLE: [{ limit: 1000000, rate: 0.1075 }, { limit: 500000, rate: 0.0925 }, { limit: 250000, rate: 0.085 }, { limit: 0, rate: 0.06 }],
+    MARRIED: [{ limit: 1000000, rate: 0.1075 }, { limit: 500000, rate: 0.0925 }, { limit: 250000, rate: 0.085 }, { limit: 0, rate: 0.06 }]
+  },
+};
+
+const STATE_NAMES = [
+  { code: 'AL', name: 'Alabama' }, { code: 'AK', name: 'Alaska' }, { code: 'AZ', name: 'Arizona' },
+  { code: 'AR', name: 'Arkansas' }, { code: 'CA', name: 'California' }, { code: 'CO', name: 'Colorado' },
+  { code: 'CT', name: 'Connecticut' }, { code: 'DE', name: 'Delaware' }, { code: 'DC', name: 'District of Columbia' },
+  { code: 'FL', name: 'Florida' }, { code: 'GA', name: 'Georgia' }, { code: 'HI', name: 'Hawaii' },
+  { code: 'ID', name: 'Idaho' }, { code: 'IL', name: 'Illinois' }, { code: 'IN', name: 'Indiana' },
+  { code: 'IA', name: 'Iowa' }, { code: 'KS', name: 'Kansas' }, { code: 'KY', name: 'Kentucky' },
+  { code: 'LA', name: 'Louisiana' }, { code: 'ME', name: 'Maine' }, { code: 'MD', name: 'Maryland' },
+  { code: 'MA', name: 'Massachusetts' }, { code: 'MI', name: 'Michigan' }, { code: 'MN', name: 'Minnesota' },
+  { code: 'MS', name: 'Mississippi' }, { code: 'MO', name: 'Missouri' }, { code: 'MT', name: 'Montana' },
+  { code: 'NE', name: 'Nebraska' }, { code: 'NV', name: 'Nevada' }, { code: 'NH', name: 'New Hampshire' },
+  { code: 'NJ', name: 'New Jersey' }, { code: 'NM', name: 'New Mexico' }, { code: 'NY', name: 'New York' },
+  { code: 'NC', name: 'North Carolina' }, { code: 'ND', name: 'North Dakota' }, { code: 'OH', name: 'Ohio' },
+  { code: 'OK', name: 'Oklahoma' }, { code: 'OR', name: 'Oregon' }, { code: 'PA', name: 'Pennsylvania' },
+  { code: 'RI', name: 'Rhode Island' }, { code: 'SC', name: 'South Carolina' }, { code: 'SD', name: 'South Dakota' },
+  { code: 'TN', name: 'Tennessee' }, { code: 'TX', name: 'Texas' }, { code: 'UT', name: 'Utah' },
+  { code: 'VT', name: 'Vermont' }, { code: 'VA', name: 'Virginia' }, { code: 'WA', name: 'Washington' },
+  { code: 'WV', name: 'West Virginia' }, { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' }
 ];
 
 export default function TEYCalculator() {
   const [muniYield, setMuniYield] = useState<string>('3.50');
-  const [fedRate, setFedRate] = useState<number>(0.37);
-  const [stateRate, setStateRate] = useState<number>(0.133);
-  const [niit, setNiit] = useState<boolean>(true); // Net Investment Income Tax
+  const [income, setIncome] = useState<string>('150000');
+  const [status, setStatus] = useState<'SINGLE' | 'MARRIED'>('SINGLE');
+  const [stateCode, setStateCode] = useState<string>('CA');
 
-  const results = useMemo(() => {
+  const calculation = useMemo(() => {
     const yieldNum = parseFloat(muniYield) || 0;
-    const niitRate = niit ? 0.038 : 0;
-    const totalTaxRate = fedRate + stateRate + niitRate;
     
-    // Tax Equivalent Yield Formula: Yield / (1 - TaxRate)
-    const tey = yieldNum / (1 - totalTaxRate);
-    
+    // SAFE PARSING: Remove '$' and ',' then parse
+    const cleanIncome = income.toString().replace(/[$,]/g, '');
+    const incomeNum = parseFloat(cleanIncome) || 0;
+
+    // 1. Get Federal Marginal Rate
+    const fBrackets = FED_BRACKETS[status];
+    // Find first bracket where income > limit, or fallback to lowest
+    const fedBracket = fBrackets.find(b => incomeNum > b.limit) || fBrackets[fBrackets.length - 1];
+    const fedRate = fedBracket.rate;
+
+    // 2. Get NIIT (3.8% Surtax)
+    const niitThreshold = status === 'SINGLE' ? 200000 : 250000;
+    const niitRate = incomeNum > niitThreshold ? 0.038 : 0;
+
+    // 3. Get State Marginal Rate (Safely)
+    let stateRate = 0;
+    const schedule = STATE_DATA[stateCode];
+    if (schedule) {
+      const sBrackets = schedule[status];
+      const stateBracket = sBrackets.find(b => incomeNum > b.limit) || sBrackets[sBrackets.length - 1];
+      stateRate = stateBracket.rate;
+    }
+
+    // 4. Calculate TEY
+    const totalTaxRate = fedRate + niitRate + stateRate;
+    // Prevent divide by zero if tax rate is somehow >= 100% (impossible, but safe)
+    const safeTaxRate = Math.min(totalTaxRate, 0.99); 
+    const tey = yieldNum / (1 - safeTaxRate);
+
     return {
       tey: tey.toFixed(2),
-      taxableDiff: (tey - yieldNum).toFixed(2),
-      effectiveTax: (totalTaxRate * 100).toFixed(1)
+      fedRate: (fedRate * 100).toFixed(2), // Consistent 2 decimals
+      niitApplies: niitRate > 0,
+      stateRate: (stateRate * 100).toFixed(2),
+      totalTax: (totalTaxRate * 100).toFixed(2)
     };
-  }, [muniYield, fedRate, stateRate, niit]);
+  }, [muniYield, income, status, stateCode]);
 
   return (
     <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-      {/* Header Section */}
       <div className="bg-slate-50 p-6 border-b border-slate-100">
         <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
           🏛️ Tax-Equivalent Yield Calculator
         </h2>
         <p className="text-sm text-slate-500 mt-1">
-          Calculate the true value of tax-free municipal bonds for your tax bracket.
+          Precisely calculates your marginal tax impact based on 2025 brackets.
         </p>
       </div>
 
       <div className="p-6 grid gap-8 md:grid-cols-2">
-        {/* INPUTS COLUMN */}
-        <div className="space-y-6">
-          
-          {/* Input: Muni Yield */}
+        {/* INPUTS */}
+        <div className="space-y-5">
+          {/* Muni Yield */}
           <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              Muni Bond Yield (%)
-            </label>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Muni Bond Yield (%)</label>
+            <input
+              type="number"
+              value={muniYield}
+              onChange={(e) => setMuniYield(e.target.value)}
+              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg"
+              step="0.01"
+            />
+          </div>
+
+          {/* Annual Income */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Annual Taxable Income ($)</label>
+            <input
+              type="text" // Changed to TEXT to allow commas
+              value={income}
+              onChange={(e) => setIncome(e.target.value)}
+              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg"
+              placeholder="e.g. 250,000"
+            />
+          </div>
+
+          {/* Filing Status */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">Filing Status</label>
+            <div className="grid grid-cols-2 gap-2">
+              <button
+                onClick={() => setStatus('SINGLE')}
+                className={`p-2 rounded-lg text-sm font-medium transition-colors ${status === 'SINGLE' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              >
+                Single
+              </button>
+              <button
+                onClick={() => setStatus('MARRIED')}
+                className={`p-2 rounded-lg text-sm font-medium transition-colors ${status === 'MARRIED' ? 'bg-blue-600 text-white shadow-md' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+              >
+                Married
+              </button>
+            </div>
+          </div>
+
+          {/* State Selector */}
+          <div>
+            <label className="block text-sm font-semibold text-slate-700 mb-2">State Residency</label>
             <div className="relative">
-              <input
-                type="number"
-                value={muniYield}
-                onChange={(e) => setMuniYield(e.target.value)}
-                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 font-mono text-lg"
-                step="0.01"
-              />
-            </div>
-          </div>
-
-          {/* Input: Federal Bracket */}
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              Federal Tax Bracket
-            </label>
-            <select
-              value={fedRate}
-              onChange={(e) => setFedRate(parseFloat(e.target.value))}
-              className="w-full p-3 border border-slate-300 rounded-lg bg-white"
-            >
-              {FED_BRACKETS.map((b) => (
-                <option key={b.value} value={b.value}>{b.label}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Input: State Bracket */}
-          <div>
-            <label className="block text-sm font-semibold text-slate-700 mb-2">
-              State Residency
-            </label>
-            <select
-              value={stateRate}
-              onChange={(e) => setStateRate(parseFloat(e.target.value))}
-              className="w-full p-3 border border-slate-300 rounded-lg bg-white"
-            >
-              {STATE_TAXES.map((s) => (
-                <option key={s.value} value={s.value}>{s.label}</option>
-              ))}
-            </select>
-          </div>
-
-          {/* Input: NIIT Toggle */}
-          <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-100">
-            <div>
-              <span className="block text-sm font-semibold text-blue-900">NIIT Surtax (+3.8%)</span>
-              <span className="text-xs text-blue-700">Income &gt;$200k/$250k</span>
-            </div>
-            <label className="relative inline-flex items-center cursor-pointer">
-              <input 
-                type="checkbox" 
-                checked={niit}
-                onChange={(e) => setNiit(e.target.checked)}
-                className="sr-only peer" 
-              />
-              <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
-            </label>
-          </div>
-
-        </div>
-
-        {/* RESULTS COLUMN */}
-        <div className="flex flex-col justify-center">
-          
-          <div className="bg-slate-900 text-white rounded-xl p-6 shadow-xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 p-4 opacity-10">
-              <span className="text-6xl font-bold">%</span>
-            </div>
-            
-            <p className="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">
-              Tax-Equivalent Yield
-            </p>
-            <div className="text-5xl font-bold text-green-400 mb-2">
-              {results.tey}%
-            </div>
-            <p className="text-slate-300 text-sm">
-              To match your <span className="text-white font-bold">{muniYield}%</span> tax-free bond, a taxable investment (like a CD or Corporate Bond) must pay <span className="text-green-300 font-bold">{results.tey}%</span>.
-            </p>
-
-            <div className="mt-6 pt-6 border-t border-slate-700">
-              <div className="flex justify-between items-center text-sm">
-                <span className="text-slate-400">Your Effective Tax Rate:</span>
-                <span className="font-mono font-bold">{results.effectiveTax}%</span>
+              <select
+                value={stateCode}
+                onChange={(e) => setStateCode(e.target.value)}
+                className="w-full p-3 border border-slate-300 rounded-lg bg-white appearance-none"
+              >
+                {STATE_NAMES.map((s) => (
+                  <option key={s.code} value={s.code}>{s.name}</option>
+                ))}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
           </div>
+        </div>
 
-          <div className="mt-4 p-4 bg-yellow-50 border border-yellow-100 rounded-lg text-sm text-yellow-800">
-            <strong>Strategy Tip:</strong> High-yield savings accounts typically pay ~4.0% fully taxable. For your bracket, this Muni bond is far superior.
+        {/* RESULTS */}
+        <div className="flex flex-col justify-center">
+          <div className="bg-slate-900 text-white rounded-xl p-6 shadow-xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 p-4 opacity-10"><span className="text-6xl font-bold">%</span></div>
+            <p className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">Tax-Equivalent Yield</p>
+            <div className="text-5xl font-bold text-green-400 mb-3">{calculation.tey}%</div>
+            
+            <div className="mt-6 pt-6 border-t border-slate-700 space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-slate-400">Fed Marginal Rate</span>
+                <span className="font-mono">{calculation.fedRate}%</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-400">NIIT Surtax</span>
+                <span className={`font-mono ${calculation.niitApplies ? 'text-yellow-400' : 'text-slate-600'}`}>
+                  {calculation.niitApplies ? '3.80%' : '0.00%'}
+                </span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-slate-400">State Marginal Rate</span>
+                <span className="font-mono text-green-300">{calculation.stateRate}%</span>
+              </div>
+              <div className="flex justify-between pt-2 border-t border-slate-800 text-white font-bold">
+                <span>Total Tax on Next $1</span>
+                <span className="font-mono">{calculation.totalTax}%</span>
+              </div>
+            </div>
           </div>
-
+          
+          <div className="mt-4 text-center">
+             <p className="text-xs text-slate-400">
+               *Calculated using <strong>marginal tax rates</strong>. This reflects the tax you would pay on the specific dollars earned from this bond, not your total effective tax rate.
+             </p>
+          </div>
         </div>
       </div>
     </div>
