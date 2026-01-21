@@ -6,6 +6,7 @@ import TEYCalculator from '../components/TEYCalculator';
 export const metadata: Metadata = {
   title: 'Tax Equivalent Yield Calculator | TaxLossPairs',
   description: 'Calculate the taxable equivalent yield for municipal bonds based on your federal and state tax brackets (CA, NY, NJ, MA).',
+  keywords: 'tax equivalent yield, muni bond calculator, NIIT tax, California tax free bonds, tax loss harvesting',
 };
 
 export default function TEYPage() {
@@ -40,10 +41,11 @@ export default function TEYPage() {
         {/* The Calculator Component */}
         <TEYCalculator />
 
-        {/* The Content Block (Fixed Styling) */}
-        <div className="mt-16 max-w-2xl mx-auto">
+        {/* Content & SEO Block */}
+        <div className="mt-16 max-w-3xl mx-auto space-y-16">
           
-          <div className="mb-10">
+          {/* Strategy Section */}
+          <div>
             <h3 className="text-2xl font-bold text-slate-900 mb-4">
               Why This Calculation Matters
             </h3>
@@ -53,11 +55,43 @@ export default function TEYPage() {
               because you keep <strong>100% of the muni yield</strong>, but only a fraction of the taxable yield.
             </p>
           </div>
+
+          {/* FAQ Section (SEO Gold Mine) */}
+          <div className="border-t border-slate-200 pt-10">
+            <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
+            
+            <div className="space-y-8">
+              <div>
+                <h4 className="font-bold text-lg text-slate-800 mb-2">What is the NIIT Surtax?</h4>
+                <p className="text-slate-600 leading-relaxed">
+                  The <strong>Net Investment Income Tax (NIIT)</strong> is an extra 3.8% tax applied to investment income 
+                  (like interest, dividends, and capital gains) for high earners. It kicks in if your modified adjusted gross income 
+                  is above <strong>$200,000 (Single)</strong> or <strong>$250,000 (Married)</strong>. Our calculator automatically detects if you owe this.
+                </p>
+              </div>
+
+              <div>
+                <h4 className="font-bold text-lg text-slate-800 mb-2">Why isn't my "Effective Tax Rate" used?</h4>
+                <p className="text-slate-600 leading-relaxed">
+                  When investing new money, the IRS taxes those specific dollars at your <strong>marginal rate</strong> (your highest bracket), 
+                  not your average rate. Using your effective rate would dangerously underestimate your tax bill and make taxable bonds look better than they actually are.
+                </p>
+              </div>
+              
+              <div>
+                <h4 className="font-bold text-lg text-slate-800 mb-2">Which states benefit most from Muni Bonds?</h4>
+                <p className="text-slate-600 leading-relaxed">
+                  Investors in high-tax states like <strong>California (14.4%), New York (10.9%), New Jersey (10.75%), and Hawaii (11%)</strong> 
+                  see the massive benefits from state-specific municipal bonds ("Double Tax-Free"), as they avoid both Federal and State taxes.
+                </p>
+              </div>
+            </div>
+          </div>
           
           {/* The Blue "Cross-Sell" Box */}
           <div className="bg-white p-8 rounded-2xl border border-blue-100 shadow-sm">
             <div className="flex items-start gap-4">
-              <div className="p-3 bg-blue-100 rounded-lg text-blue-600">
+              <div className="p-3 bg-blue-100 rounded-lg text-blue-600 shrink-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </div>
               <div>
