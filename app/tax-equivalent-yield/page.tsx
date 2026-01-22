@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import TEYCalculator from '../components/TEYCalculator';
 import { STATE_CONTENT } from '../data/state-content';
-import DisclaimerModal from '../components/DisclaimerModal';
+import Footer from '../components/Footer'; // <--- NEW SHARED FOOTER
 
 export const metadata: Metadata = {
   title: 'Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
@@ -15,7 +15,7 @@ export default function TEYHubPage() {
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
       
-      {/* 1. UNIVERSAL NAV BAR */}
+      {/* NAV BAR */}
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -60,7 +60,6 @@ export default function TEYHubPage() {
             <h2 className="text-2xl font-bold text-slate-900">State-Specific Calculators</h2>
             <p className="text-slate-600 mt-2">Get precise tax rates and analysis for your state.</p>
           </div>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {Object.values(STATE_CONTENT).map((state) => (
               <Link 
@@ -140,25 +139,8 @@ export default function TEYHubPage() {
         </div>
       </div>
 
-      {/* FOOTER SECTION */}
-      <footer className="bg-white border-t border-slate-200 mt-auto">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-             <div>
-               <Link href="/" className="text-lg font-black text-slate-900">TaxLossPairs</Link>
-               <p className="text-sm text-slate-500 mt-2">Smart tools for tax-sensitive investors.</p>
-             </div>
-             <div className="flex gap-6 md:justify-end text-sm text-slate-600">
-               <Link href="/" className="hover:text-blue-600">Home</Link>
-               <Link href="/tax-equivalent-yield" className="hover:text-blue-600">TEY Calculator</Link>
-             </div>
-          </div>
-          <div className="border-t border-slate-100 pt-8 text-center">
-            <DisclaimerModal />
-            <p className="text-xs text-slate-400 mt-4">&copy; {new Date().getFullYear()} TaxLossPairs. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* REUSABLE FOOTER */}
+      <Footer />
     </main>
   );
 }
