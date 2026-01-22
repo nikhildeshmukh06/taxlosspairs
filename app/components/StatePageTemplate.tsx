@@ -5,8 +5,7 @@ import Link from 'next/link';
 import { StateContent } from '../data/state-content';
 import TEYCalculator from './TEYCalculator';
 import BackButton from './BackButton';
-import ReportIssueButton from './ReportIssueButton';
-import DisclaimerModal from './DisclaimerModal';
+import Footer from './Footer'; // <--- NEW SHARED FOOTER
 
 interface Props {
   content: StateContent;
@@ -32,18 +31,14 @@ export function StatePageTemplate({ content, stateCode }: Props) {
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
       
-      {/* 1. UNIVERSAL NAV BAR */}
+      {/* NAV BAR */}
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
-            {/* HOME LINK (RESTORED) */}
             <Link href="/" className="text-lg font-black text-slate-900 tracking-tight hover:text-blue-600 transition-colors">
               TaxLossPairs
             </Link>
-            
             <div className="h-6 w-px bg-slate-200 hidden md:block" />
-            
-            {/* BREADCRUMB NAV */}
             <div className="flex items-center gap-3 text-sm">
               <Link href="/tax-equivalent-yield" className="font-semibold text-slate-500 hover:text-slate-900 transition-colors">
                 TEY Calculator
@@ -54,7 +49,6 @@ export function StatePageTemplate({ content, stateCode }: Props) {
               </span>
             </div>
           </div>
-          
           <div className="hidden md:block text-xs font-mono text-slate-400">
             2026 Tax Outlook
           </div>
@@ -79,7 +73,7 @@ export function StatePageTemplate({ content, stateCode }: Props) {
           <TEYCalculator defaultState={calcCode} />
         </div>
 
-        {/* CONTENT BLOCKS */}
+        {/* CONTENT */}
         <div className="max-w-3xl mx-auto px-6 pb-24 space-y-20">
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
@@ -102,7 +96,6 @@ export function StatePageTemplate({ content, stateCode }: Props) {
                 <p className="text-lg text-slate-300 mb-8 leading-relaxed" 
                    dangerouslySetInnerHTML={{ __html: content.example.description }} 
                 />
-                
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                   <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
                     <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Annual Income</div>
@@ -117,12 +110,9 @@ export function StatePageTemplate({ content, stateCode }: Props) {
                     <div className="text-xl font-mono font-bold text-white">{content.example.taxableYield}</div>
                   </div>
                 </div>
-
                 <div className="bg-blue-600/20 border border-blue-500/30 p-4 rounded-lg flex gap-4 items-start">
                   <div className="text-2xl">💡</div>
-                  <p className="text-sm text-blue-100 leading-relaxed italic">
-                    "{content.example.takeaway}"
-                  </p>
+                  <p className="text-sm text-blue-100 leading-relaxed italic">"{content.example.takeaway}"</p>
                 </div>
               </div>
               <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-10 -mr-32 -mt-32"></div>
@@ -140,32 +130,11 @@ export function StatePageTemplate({ content, stateCode }: Props) {
               ))}
             </div>
           </section>
-          
-          <div className="flex justify-center pt-8">
-            <ReportIssueButton />
-          </div>
         </div>
       </div>
 
-      {/* FOOTER SECTION */}
-      <footer className="bg-white border-t border-slate-200 mt-auto">
-        <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="grid md:grid-cols-2 gap-8 items-center mb-8">
-             <div>
-               <Link href="/" className="text-lg font-black text-slate-900">TaxLossPairs</Link>
-               <p className="text-sm text-slate-500 mt-2">Smart tools for tax-sensitive investors.</p>
-             </div>
-             <div className="flex gap-6 md:justify-end text-sm text-slate-600">
-               <Link href="/" className="hover:text-blue-600">Home</Link>
-               <Link href="/tax-equivalent-yield" className="hover:text-blue-600">TEY Calculator</Link>
-             </div>
-          </div>
-          <div className="border-t border-slate-100 pt-8 text-center">
-            <DisclaimerModal />
-            <p className="text-xs text-slate-400 mt-4">&copy; {new Date().getFullYear()} TaxLossPairs. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
+      {/* REUSABLE FOOTER */}
+      <Footer />
     </main>
   );
 }
