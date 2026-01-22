@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function TEYPage() {
   return (
-    <main className="min-h-screen bg-slate-50 flex flex-col">
+    <main className="min-h-screen bg-slate-50 flex flex-col font-sans">
       
       {/* Navigation Bar */}
       <nav className="bg-white border-b border-slate-200">
@@ -38,7 +38,7 @@ export default function TEYPage() {
           </p>
         </div>
 
-        {/* The Calculator Component */}
+        {/* The Calculator Component (Generic Mode) */}
         <TEYCalculator />
 
         {/* SEO CONTENT BLOCK */}
@@ -55,6 +55,7 @@ export default function TEYPage() {
               This helps validate why tax-free yields are so powerful in these specific regions.
             </p>
             
+            {/* HERO CARDS (The Big 3) */}
             <div className="grid gap-4 md:grid-cols-3">
               
               {/* California Card */}
@@ -130,7 +131,7 @@ export default function TEYPage() {
               </Link>
             </div>
 
-            {/* --- NEW: SECONDARY STATE LINK CLUSTER --- */}
+            {/* --- LINK CLUSTER (Secondary States) --- */}
             <div className="mt-8 text-center bg-white/50 p-4 rounded-lg border border-slate-100">
               <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">
                 Also available for these high-tax states
@@ -183,10 +184,10 @@ export default function TEYPage() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-2">
-                  Already Maximized Your Yields?
+                  Optimized Your Bond Yield? Now Optimize Your Capital Gains.
                 </h4>
                 <p className="text-slate-600 mb-6">
-                  Optimizing bond yield is just one lever. Step two is <strong>Harvesting Losses</strong> in your stock portfolio to offset capital gains.
+                  Avoiding tax on interest is step one. Step two is using <strong>Tax-Loss Harvesting</strong> to offset your stock market gains.
                 </p>
                 <Link 
                   href="/"
@@ -202,14 +203,13 @@ export default function TEYPage() {
 
       </div>
 
-      {/* --- PRO FOOTER (Identical to Homepage but with TEY-specific disclaimer) --- */}
+      {/* --- FOOTER (Matches StatePageTemplate) --- */}
       <footer className="bg-slate-50 border-t border-slate-200 py-12">
         <div className="max-w-4xl mx-auto px-6 text-center">
           <p className="text-slate-400 text-sm mb-4">
             Built for the Bogleheads community. Open Source.
           </p>
           
-          {/* TEY-SPECIFIC DISCLAIMER */}
           <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
             DISCLAIMER: Tax-equivalent yield calculations are estimates based on 2026 marginal tax brackets and public bond data. 
             They do not constitute financial or tax advice. Actual tax liability depends on your specific situation. 
