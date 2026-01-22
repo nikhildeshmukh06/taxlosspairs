@@ -26,11 +26,9 @@ const TAX_BRACKETS_2026 = {
 
 const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
-// --- 2. STATE DATA (All 50 States + DC + NYC) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
-  // SEO Priority & High Tax States
   'CA': { name: 'California', topRate: 13.3 },
-  'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 }, // 10.9% State + ~3.87% City
+  'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 },
   'NY': { name: 'New York (State)', topRate: 10.9 },
   'NJ': { name: 'New Jersey', topRate: 10.75 },
   'DC': { name: 'Washington, DC', topRate: 10.75 },
@@ -40,8 +38,6 @@ const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'MA': { name: 'Massachusetts', topRate: 9.0 },
   'VT': { name: 'Vermont', topRate: 8.75 },
   'CT': { name: 'Connecticut', topRate: 6.99 },
-  
-  // Zero Tax States
   'AK': { name: 'Alaska', topRate: 0 },
   'FL': { name: 'Florida', topRate: 0 },
   'NV': { name: 'Nevada', topRate: 0 },
@@ -51,8 +47,6 @@ const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'TX': { name: 'Texas', topRate: 0 },
   'WA': { name: 'Washington', topRate: 0 },
   'WY': { name: 'Wyoming', topRate: 0 },
-
-  // Remaining States
   'AL': { name: 'Alabama', topRate: 5.0 },
   'AZ': { name: 'Arizona', topRate: 2.5 },
   'AR': { name: 'Arkansas', topRate: 3.9 },
@@ -94,7 +88,10 @@ interface Props {
 export default function TEYCalculator({ defaultState = 'CA' }: Props) {
   const [selectedState, setSelectedState] = useState(defaultState);
   const [muniYield, setMuniYield] = useState('3.50');
-  const [incomeStr, setIncomeStr] = useState('1000000');
+  
+  // POLISH 1: Handle Income as formatted string
+  const [incomeStr, setIncomeStr] = useState('1,000,000');
+  
   const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('single');
   const [customStateRate, setCustomStateRate] = useState<string>('');
 
@@ -102,8 +99,18 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
     if (defaultState) setSelectedState(defaultState);
   }, [defaultState]);
 
+  // Helper: Format number with commas
+  const formatWithCommas = (val: string) => {
+    const num = val.replace(/,/g, '');
+    if (isNaN(Number(num))) return val;
+    return Number(num).toLocaleString('en-US');
+  };
+
+  // Helper: Strip commas for math
+  const getRawIncome = () => parseFloat(incomeStr.replace(/,/g, '')) || 0;
+
   // --- LOGIC ENGINE ---
-  const income = parseFloat(incomeStr) || 0;
+  const income = getRawIncome();
 
   const getFedRate = () => {
     const brackets = TAX_BRACKETS_2026[filingStatus];
@@ -166,11 +173,11 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             <div className="relative">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
               <input
-                type="number"
+                type="text"
                 value={incomeStr}
-                onChange={(e) => setIncomeStr(e.target.value)}
+                onChange={(e) => setIncomeStr(formatWithCommas(e.target.value))}
                 className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 pl-7 pr-4 text-lg text-slate-900 font-semibold"
-                placeholder="e.g. 250000"
+                placeholder="e.g. 250,000"
               />
             </div>
           </div>
@@ -204,8 +211,9 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
                className="block w-full rounded-md border-slate-300 bg-slate-50 py-2 px-3 text-sm text-slate-900 focus:bg-white transition-colors"
                step="0.01"
              />
+             {/* POLISH 2: Restore Helper Text */}
              <p className="text-[10px] text-slate-400 mt-1">
-               Defaults to top marginal bracket. {selectedState === 'NYC' && "Includes NYC 3.87% local tax."}
+               Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.87% local tax."}
              </p>
           </div>
 
@@ -249,8 +257,9 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               <span className="font-mono text-blue-400 font-bold">{(activeStateRate * 100).toFixed(2)}%</span>
             </div>
 
+            {/* POLISH 3: Rename "Combined Drag" to "Total Marginal Tax" */}
             <div className="flex justify-between items-center pt-4 border-t border-slate-800 font-black text-xl">
-              <span className="text-slate-200 uppercase text-xs tracking-wider">Combined Drag</span>
+              <span className="text-slate-200 uppercase text-xs tracking-wider">Total Marginal Tax</span>
               <span className="text-red-400 font-mono">{(totalTaxRate * 100).toFixed(2)}%</span>
             </div>
           </div>
@@ -261,7 +270,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
              </p>
           </div>
 
-          {/* Background Decorative Blob */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
         </div>
       </div>
