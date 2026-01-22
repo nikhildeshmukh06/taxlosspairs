@@ -26,7 +26,6 @@ const TAX_BRACKETS_2026 = {
 
 const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
-// --- 2. STATE DATA (All 50 States + DC + NYC) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'CA': { name: 'California', topRate: 13.3 },
   'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 },
@@ -98,7 +97,6 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
     if (defaultState) setSelectedState(defaultState);
   }, [defaultState]);
 
-  // Helper: Format with commas
   const formatWithCommas = (val: string) => {
     const num = val.replace(/,/g, '');
     if (isNaN(Number(num))) return val;
@@ -133,22 +131,25 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
   const muniVal = parseFloat(muniYield) || 0;
   const tey = totalTaxRate < 1 ? muniVal / (1 - totalTaxRate) : 0;
 
+  // Visual Helper: Shared Input Styles
+  const inputBaseClasses = "block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 text-lg text-slate-900 font-bold placeholder-slate-400";
+
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto">
+    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto font-sans">
       <div className="md:flex">
         
-        {/* LEFT: INPUTS */}
-        <div className="p-6 md:p-8 md:w-1/2 space-y-5 border-r border-slate-100">
+        {/* LEFT: INPUTS (NOW UNIFIED) */}
+        <div className="p-6 md:p-8 md:w-1/2 space-y-6 border-r border-slate-100 bg-white">
           
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">State / Locality</label>
+              <label className="block text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">State / Locality</label>
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
                 disabled={isLocked}
-                className={`block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                  isLocked ? 'bg-slate-100 cursor-not-allowed opacity-75' : 'bg-white'
+                className={`block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 font-bold shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  isLocked ? 'bg-slate-50 cursor-not-allowed' : 'bg-white'
                 }`}
               >
                 {Object.entries(STATE_DATA).map(([code, data]) => (
@@ -156,17 +157,17 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                 ))}
               </select>
               {isLocked && (
-                <p className="text-[9px] text-blue-600 font-bold mt-1 uppercase tracking-tighter">
+                <p className="text-[10px] text-blue-600 font-black mt-2 uppercase tracking-tighter">
                   Locked to {STATE_DATA[selectedState]?.name}
                 </p>
               )}
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Status</label>
+              <label className="block text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">Filing Status</label>
               <select
                 value={filingStatus}
                 onChange={(e) => setFilingStatus(e.target.value as 'single' | 'married')}
-                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 font-bold bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="single">Single</option>
                 <option value="married">Married (Joint)</option>
@@ -175,56 +176,56 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Taxable Income (After Deductions)</label>
+            <label className="block text-sm font-black text-slate-900 mb-2">Taxable Income (After Deductions)</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-900 font-bold">$</span>
               <input
                 type="text"
                 value={incomeStr}
                 onChange={(e) => setIncomeStr(formatWithCommas(e.target.value))}
-                className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 pl-7 pr-4 text-lg text-slate-900 font-semibold"
+                className={`${inputBaseClasses} pl-8 pr-4`}
                 placeholder="e.g. 250,000"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Muni Bond Yield (%)</label>
+            <label className="block text-sm font-black text-slate-900 mb-2">Muni Bond Yield (%)</label>
             <div className="relative">
               <input
                 type="number"
                 value={muniYield}
                 onChange={(e) => setMuniYield(e.target.value)}
-                className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg text-slate-900 font-semibold"
+                className={`${inputBaseClasses} px-4`}
                 placeholder="3.50"
                 step="0.01"
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">%</span>
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-900 font-bold">%</span>
             </div>
           </div>
 
           <div className="pt-2">
-             <label className="flex justify-between text-xs font-bold text-slate-500 uppercase mb-1">
+             <label className="flex justify-between text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">
                <span>Marginal State Tax Rate (%)</span>
-               <span className="text-blue-600 cursor-pointer font-normal normal-case hover:underline" onClick={() => setCustomStateRate(defaultStateRate.toString())}>
-                 Reset to Top ({defaultStateRate}%)
+               <span className="text-blue-600 cursor-pointer font-bold normal-case hover:underline" onClick={() => setCustomStateRate(defaultStateRate.toString())}>
+                 Reset ({defaultStateRate}%)
                </span>
              </label>
              <input
                type="number"
                value={customStateRate !== '' ? customStateRate : defaultStateRate}
                onChange={(e) => setCustomStateRate(e.target.value)}
-               className="block w-full rounded-md border-slate-300 bg-slate-50 py-2 px-3 text-sm text-slate-900 focus:bg-white transition-colors"
+               className="block w-full rounded-md border-slate-300 bg-slate-50 py-3 px-4 text-lg text-slate-900 font-bold focus:bg-white transition-colors focus:ring-2 focus:ring-blue-500 focus:outline-none"
                step="0.01"
              />
-             <p className="text-[10px] text-slate-400 mt-1">
+             <p className="text-[10px] text-slate-500 font-medium mt-2 leading-relaxed">
                Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.876% local tax."}
              </p>
           </div>
 
         </div>
 
-        {/* RIGHT: RESULTS */}
+        {/* RIGHT: RESULTS (PREVIOUSLY CORRECT) */}
         <div className="bg-slate-900 md:w-1/2 p-6 md:p-8 text-white flex flex-col justify-center relative overflow-hidden">
           
           <div className="text-center mb-8 relative z-10">
