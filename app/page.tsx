@@ -3,6 +3,7 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import pairsData from './pairs.json';
+import Footer from './components/Footer'; // <--- Import the new Footer
 
 // Define the order for the "Bloomberg Terminal" clusters
 const CATEGORY_ORDER = [
@@ -39,7 +40,6 @@ export default function Home() {
 
     // Sort items into groups
     filteredTickers.forEach((etf) => {
-      // Fallback for any old data without a category
       const cat = etf.category || 'Other'; 
       if (!groups[cat]) groups[cat] = [];
       groups[cat].push(etf);
@@ -48,11 +48,10 @@ export default function Home() {
     return groups;
   }, [filteredTickers]);
 
-  // Check if we have any results at all
   const hasResults = Object.values(groupedTickers).some(group => group.length > 0);
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
       
       {/* --- COMPLIANCE WARNING --- */}
       <div className="bg-slate-100 border-b border-slate-200 p-3 text-center">
@@ -69,7 +68,6 @@ export default function Home() {
             ETF Correlation & <span className="text-blue-600">Overlap Metrics</span>
           </h1>
           
-          {/* SEO INTRO TEXT */}
           <div className="max-w-3xl mx-auto mb-10 text-slate-600 space-y-4 leading-relaxed text-lg">
             <p>
               Tax-loss harvesting involves selling securities at a loss to offset gains, but IRS wash-sale rules may restrict claiming those losses if a substantially identical security is repurchased within 30 days.
@@ -79,7 +77,7 @@ export default function Home() {
             </p>
           </div>
 
-          {/* SEARCH BAR WITH GLOW EFFECT */}
+          {/* SEARCH BAR */}
           <div className="max-w-xl mx-auto relative group mb-6">
             <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-200"></div>
             <input
@@ -89,7 +87,6 @@ export default function Home() {
               onChange={(e) => setSearchTerm(e.target.value)}
               className="relative w-full p-4 pl-6 rounded-lg border border-slate-200 text-lg shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-slate-900 placeholder-slate-400"
             />
-            {/* Search Icon visual cue */}
             <div className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
                 🔍
             </div>
@@ -99,9 +96,8 @@ export default function Home() {
       </header>
 
       {/* --- RESULTS SECTION --- */}
-      <main className="max-w-6xl mx-auto px-4 py-12">
+      <main className="max-w-6xl mx-auto px-4 py-12 flex-grow">
         
-        {/* --- EXISTING ETF GRID --- */}
         {!hasResults ? (
           <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
              <p className="text-slate-400 text-lg">No ETF found matching "{searchTerm}"</p>
@@ -149,7 +145,7 @@ export default function Home() {
                               {etf.ticker}
                             </h3>
                             
-                            {/* SMART "TACTICAL" BADGE WITH MOBILE TAP SUPPORT */}
+                            {/* TACTICAL BADGE */}
                             {isLeveraged && (
                               <div 
                                 className="group/badge relative z-10 ml-auto outline-none" 
@@ -163,8 +159,6 @@ export default function Home() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                   </svg>
                                 </span>
-
-                                {/* TOOLTIP */}
                                 <div className="absolute bottom-full right-0 mb-2 w-48 p-2.5 bg-slate-800 text-white text-[10px] font-medium leading-relaxed rounded-md shadow-xl opacity-0 translate-y-2 group-hover/badge:opacity-100 group-hover/badge:translate-y-0 group-focus/badge:opacity-100 group-focus/badge:translate-y-0 transition-all pointer-events-none group-focus/badge:pointer-events-auto">
                                   <div className="mb-1 text-red-300 font-bold uppercase tracking-wider">High Risk Structure</div>
                                   Leveraged ETFs reset daily and are not designed for long-term buy-and-hold strategies.
@@ -190,7 +184,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* --- MOVED: RELATED TAX TOOLS (Now at the bottom) --- */}
+        {/* --- RELATED TAX TOOLS --- */}
         <section className="mt-20 pt-10 border-t border-slate-200">
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xl font-bold text-slate-800 uppercase tracking-wide">
@@ -199,7 +193,6 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* TEY Calculator Card */}
             <Link 
               href="/tax-equivalent-yield" 
               className="group block p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all relative overflow-hidden"
@@ -267,52 +260,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* --- FOOTER (UPDATED DISCLAIMER) --- */}
-      <footer className="bg-slate-50 border-t border-slate-200 py-12">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <p className="text-slate-400 text-sm mb-4">
-            Built for the Bogleheads community. Open Source.
-          </p>
-          
-          {/* NEW GLOBAL DISCLAIMER */}
-          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
-            DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
-            They are approximations, not guarantees, and may change over time. Leveraged products often use swaps/derivatives 
-            resulting in low physical overlap despite high correlation. Past performance does not guarantee future results.
-          </p>
-
-          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
-            <Link href="/" className="hover:text-blue-600">Home</Link>
-            
-            <a 
-              href="https://github.com/nikhildeshmukh06/taxlosspairs" 
-              target="_blank" 
-              rel="noreferrer" 
-              className="hover:text-blue-600"
-            >
-              GitHub
-            </a>
-
-            <Link href="/legal" className="hover:text-blue-600 hover:underline">
-              Legal & Privacy
-            </Link>
-
-            <button 
-              data-tally-open="68Kqjo" 
-              data-tally-layout="modal"
-              data-tally-emoji-text="👋"
-              data-tally-emoji-animation="wave"
-              className="hover:text-blue-600 bg-transparent border-none cursor-pointer p-0 font-medium text-slate-500"
-            >
-              Report an Issue
-            </button>
-
-            <span className="text-slate-300">|</span>
-            
-            <span>Data updated: Jan 2026</span>
-          </div>
-        </div>
-      </footer>
+      {/* --- REUSABLE FOOTER COMPONENT --- */}
+      <Footer />
     </div>
   );
 }
