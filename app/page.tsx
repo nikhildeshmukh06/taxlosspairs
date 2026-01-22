@@ -100,6 +100,8 @@ export default function Home() {
 
       {/* --- RESULTS SECTION --- */}
       <main className="max-w-6xl mx-auto px-4 py-12">
+        
+        {/* --- EXISTING ETF GRID --- */}
         {!hasResults ? (
           <div className="text-center py-20 bg-white rounded-xl border border-dashed border-slate-300">
              <p className="text-slate-400 text-lg">No ETF found matching "{searchTerm}"</p>
@@ -187,6 +189,42 @@ export default function Home() {
             })}
           </div>
         )}
+
+        {/* --- MOVED: RELATED TAX TOOLS (Now at the bottom) --- */}
+        <section className="mt-20 pt-10 border-t border-slate-200">
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-xl font-bold text-slate-800 uppercase tracking-wide">
+              Related Tax-Smart Tools
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* TEY Calculator Card */}
+            <Link 
+              href="/tax-equivalent-yield" 
+              className="group block p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <span className="text-6xl">🏛️</span>
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
+                  %
+                </div>
+                <h3 className="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
+                  TEY Calculator
+                </h3>
+              </div>
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                Compare tax-free municipal bonds to taxable CDs and corporate bonds using your marginal federal and state tax rates.
+              </p>
+              <span className="text-blue-600 text-sm font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Calculate Yield &rarr;
+              </span>
+            </Link>
+          </div>
+        </section>
+
       </main>
 
       {/* --- METHODOLOGY STRIP --- */}
