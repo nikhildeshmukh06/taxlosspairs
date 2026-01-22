@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import BackButton from '../components/BackButton'; // <--- FIX: Only one "../" needed here
+import BackButton from '../components/BackButton';
 
 export const metadata = {
   title: 'Legal & Privacy | TaxLossPairs',
@@ -23,28 +23,40 @@ export default function LegalPage() {
 
         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-8 text-slate-700 leading-relaxed">
           
-          {/* SECTION 1: NO ADVICE */}
+          {/* SECTION 1: NO ADVICE (Updated for TEY) */}
           <section>
-            <h2 className="text-xl font-bold text-slate-900 mb-3">1. No Investment Advice</h2>
+            <h2 className="text-xl font-bold text-slate-900 mb-3">1. No Investment or Tax Advice</h2>
             <p>
               The content provided on <strong>TaxLossPairs.com</strong> is for informational and research purposes only. 
               It does <strong>not</strong> constitute financial, investment, tax, or legal advice.
             </p>
             <p className="mt-2">
-              We are not financial advisors. Market data, correlation metrics, and overlap estimates are based on historical data 
-              and public filings, which may be inaccurate or outdated. You should consult a qualified professional (CPA, CFP, or attorney) 
-              before making any investment decisions, especially regarding tax-loss harvesting and wash-sale rules.
+              We are not financial advisors or tax professionals. The tools on this site—including ETF correlation metrics and 
+              Tax-Equivalent Yield (TEY) calculators—are based on historical data, public filings, and estimated projections. 
+              You should consult a qualified professional (CPA, CFP, or attorney) before making any investment decisions, 
+              especially regarding tax-loss harvesting, municipal bond selection, or tax planning.
             </p>
           </section>
 
-          {/* SECTION 2: DATA ACCURACY */}
+          {/* SECTION 2: DATA ACCURACY (Updated for Tax Rates) */}
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">2. No Warranty of Accuracy</h2>
             <p>
               All data is provided "as is" without warranty of any kind. We make no representations regarding the accuracy, 
-              completeness, or timeliness of the information. Correlation and overlap data are algorithmically generated 
-              and may contain errors.
+              completeness, or timeliness of the information.
             </p>
+            <ul className="list-disc pl-5 mt-2 space-y-1">
+              <li>
+                <strong>ETF Data:</strong> Correlation and overlap estimates are algorithmically generated and may contain errors.
+              </li>
+              <li>
+                <strong>Tax Data:</strong> Federal and state tax brackets used in the TEY Calculator are <strong>estimates</strong> based on 
+                inflation projections or current statutes. Actual tax rates for future tax years (e.g., 2026) may differ due to legislative changes.
+              </li>
+              <li>
+                <strong>Bond Rules:</strong> State-specific tax rules (e.g., AMT liability, reciprocity) are complex and subject to change.
+              </li>
+            </ul>
           </section>
 
           {/* SECTION 3: PRIVACY */}
@@ -60,7 +72,7 @@ export default function LegalPage() {
             </ul>
           </section>
 
-          {/* SECTION 4: AFFILIATE DISCLOSURE (Future Proofing) */}
+          {/* SECTION 4: EXTERNAL LINKS */}
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">4. External Links</h2>
             <p>
