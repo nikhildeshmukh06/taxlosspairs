@@ -10,6 +10,7 @@ import DisclaimerModal from './DisclaimerModal';
 
 interface Props {
   content: StateContent;
+  stateCode?: string; // <--- ADDED THIS BACK (Fixes the build error)
 }
 
 // Map the "Slug" (URL) to the "ID" (Calculator Code)
@@ -26,10 +27,11 @@ const SLUG_TO_CODE: Record<string, string> = {
   'dc': 'DC'
 };
 
-// FIX: Removed 'default'. Now it matches what your pages expect.
-export function StatePageTemplate({ content }: Props) {
-  // Determine the correct calculator code (Default to CA if missing)
-  const calcCode = SLUG_TO_CODE[content.slug] || 'CA';
+export default function StatePageTemplate({ content, stateCode }: Props) {
+  // Logic: Use the passed "stateCode" (from your existing pages)
+  // OR look it up by slug (backup)
+  // OR default to 'CA'
+  const calcCode = stateCode || SLUG_TO_CODE[content.slug] || 'CA';
 
   return (
     <main className="min-h-screen bg-slate-50">
@@ -109,43 +111,3 @@ export function StatePageTemplate({ content }: Props) {
                 <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
                   <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Taxable Equiv.</div>
                   <div className="text-xl font-mono font-bold text-white">{content.example.taxableYield}</div>
-                </div>
-              </div>
-
-              <div className="bg-blue-600/20 border border-blue-500/30 p-4 rounded-lg flex gap-4 items-start">
-                <div className="text-2xl">💡</div>
-                <p className="text-sm text-blue-100 leading-relaxed italic">
-                  "{content.example.takeaway}"
-                </p>
-              </div>
-            </div>
-            {/* Background Pattern */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-10 -mr-32 -mt-32"></div>
-          </div>
-        </section>
-
-        {/* FAQs */}
-        <section>
-          <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
-          <div className="space-y-4">
-            {content.faqs.map((faq, i) => (
-              <div key={i} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
-                <h3 className="font-bold text-slate-900 mb-2 text-lg">{faq.q}</h3>
-                <p className="text-slate-600 leading-relaxed">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-        
-        <div className="flex justify-center pt-8">
-          <ReportIssueButton />
-        </div>
-
-      </div>
-
-      <div className="text-center py-8">
-        <DisclaimerModal />
-      </div>
-    </main>
-  );
-}
