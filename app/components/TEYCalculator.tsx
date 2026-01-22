@@ -7,23 +7,24 @@ type TaxBracket = { limit: number; rate: number };
 type TaxSchedule = { SINGLE: TaxBracket[]; MARRIED: TaxBracket[] };
 
 // --- FEDERAL DATA (2026 Estimated based on Inflation Adjs) ---
+// Source: Tax Foundation / IRS Rev. Proc. projections for 2026
 const FED_BRACKETS: TaxSchedule = {
   SINGLE: [
-    { limit: 609350, rate: 0.37 },
-    { limit: 243725, rate: 0.35 },
-    { limit: 191950, rate: 0.32 },
-    { limit: 100525, rate: 0.24 },
-    { limit: 47150, rate: 0.22 },
-    { limit: 11600, rate: 0.12 },
+    { limit: 640600, rate: 0.37 },
+    { limit: 256225, rate: 0.35 },
+    { limit: 201775, rate: 0.32 },
+    { limit: 105700, rate: 0.24 },
+    { limit: 50400, rate: 0.22 },
+    { limit: 12400, rate: 0.12 },
     { limit: 0, rate: 0.10 },
   ],
   MARRIED: [
-    { limit: 731200, rate: 0.37 },
-    { limit: 487450, rate: 0.35 },
-    { limit: 383900, rate: 0.32 },
-    { limit: 201050, rate: 0.24 },
-    { limit: 94300, rate: 0.22 },
-    { limit: 23200, rate: 0.12 },
+    { limit: 768700, rate: 0.37 },
+    { limit: 512450, rate: 0.35 },
+    { limit: 403550, rate: 0.32 },
+    { limit: 211400, rate: 0.24 },
+    { limit: 100800, rate: 0.22 },
+    { limit: 24800, rate: 0.12 },
     { limit: 0, rate: 0.10 },
   ]
 };
@@ -39,6 +40,7 @@ const STATE_DATA: Record<string, TaxSchedule> = {
   'AK': zero, 'FL': zero, 'NV': zero, 'NH': zero, 'SD': zero, 
   'TN': zero, 'TX': zero, 'WA': zero, 'WY': zero,
 
+  // Flat & Simple States
   'AZ': flat(0.025), 'CO': flat(0.044), 'IL': flat(0.0495), 
   'IN': flat(0.0305), 'KY': flat(0.04), 'MI': flat(0.0425),
   'MS': flat(0.047), 'NC': flat(0.045), 'PA': flat(0.0307), 
@@ -52,17 +54,17 @@ const STATE_DATA: Record<string, TaxSchedule> = {
   'VA': flat(0.0575), 'WV': flat(0.065), 'WI': flat(0.0765),
 
   // Progressive States
-  // NOTE: CA Top Rate includes 1% Mental Health Surtax on income > $1M
   'CA': {
     SINGLE: [
-      { limit: 1000000, rate: 0.144 }, { limit: 677275, rate: 0.123 },
+      { limit: 1000000, rate: 0.144 }, // 13.3% + 1.1% SDI/MHSA proxy
+      { limit: 677275, rate: 0.123 },
       { limit: 406364, rate: 0.113 }, { limit: 338639, rate: 0.103 },
       { limit: 68350, rate: 0.093 }, { limit: 54081, rate: 0.08 },
       { limit: 37788, rate: 0.06 }, { limit: 23934, rate: 0.04 },
       { limit: 10412, rate: 0.02 }, { limit: 0, rate: 0.01 }
     ],
     MARRIED: [
-      { limit: 1000000, rate: 0.144 }, // Surtax hits Married at $1M too
+      { limit: 1000000, rate: 0.144 }, // FIXED: Surtax hits Married at $1M too
       { limit: 812728, rate: 0.113 }, 
       { limit: 677278, rate: 0.103 }, { limit: 136700, rate: 0.093 }, 
       { limit: 108162, rate: 0.08 }, { limit: 75576, rate: 0.06 }, 
@@ -161,7 +163,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
     const cleanIncome = income.toString().replace(/[$,]/g, '');
     const incomeNum = parseFloat(cleanIncome) || 0;
 
-    // 1. Get Federal Marginal Rate (Defensive Sort)
+    // 1. Get Federal Marginal Rate (Defensive Sort: High to Low)
     const fBrackets = [...FED_BRACKETS[status]].sort((a,b) => b.limit - a.limit);
     const fedBracket = fBrackets.find(b => incomeNum > b.limit) || fBrackets[fBrackets.length - 1];
     const fedRate = fedBracket.rate;
@@ -170,7 +172,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
     const niitThreshold = status === 'SINGLE' ? 200000 : 250000;
     const niitRate = incomeNum > niitThreshold ? 0.038 : 0;
 
-    // 3. Get State Marginal Rate (Defensive Sort)
+    // 3. Get State Marginal Rate (Defensive Sort: High to Low)
     let stateRate = 0;
     const schedule = STATE_DATA[stateCode];
     if (schedule) {
@@ -306,7 +308,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
           {/* DISCLOSURES / NOTES */}
           <div className="mt-4 text-[10px] text-slate-400 space-y-1 text-center">
              <p>*Calculated using 2026 estimated marginal tax brackets. State tax rates are estimates.</p>
-             <p>Assumes state taxes are not federally deductible due to the SALT cap.</p>
+             <p>Assumes in-state municipal bond (exempt from Federal & State tax). Assumes state taxes are not federally deductible (SALT cap).</p>
              {stateCode === 'NY' && (
                 <p>Includes NY State tax only. Does not include NYC or Yonkers local taxes.</p>
              )}
