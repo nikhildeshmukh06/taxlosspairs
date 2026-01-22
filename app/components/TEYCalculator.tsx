@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 // --- CONFIGURATION ---
 // 2026 Estimated Tax Brackets & Rates
@@ -10,12 +10,11 @@ const NIIT_RATE = 0.038;       // 3.8% Net Investment Income Tax
 interface StateTaxConfig {
   name: string;
   rate: number; // Top Marginal Rate
-  notes?: string;
 }
 
 const STATE_DATA: Record<string, StateTaxConfig> = {
-  'CA': { name: 'California', rate: 0.133 }, // UPDATED: 13.3% (12.3% + 1% Mental Health)
-  'NY': { name: 'New York', rate: 0.109 },   // 10.9% State Only
+  'CA': { name: 'California', rate: 0.133 }, // 13.3% Corrected Rate
+  'NY': { name: 'New York', rate: 0.109 },
   'NJ': { name: 'New Jersey', rate: 0.1075 },
   'MA': { name: 'Massachusetts', rate: 0.09 },
   'OR': { name: 'Oregon', rate: 0.099 },
@@ -31,10 +30,9 @@ interface Props {
 }
 
 export default function TEYCalculator({ defaultState = 'CA' }: Props) {
-  // State
   const [selectedState, setSelectedState] = useState(defaultState);
   const [muniYield, setMuniYield] = useState('3.50');
-  const [income, setIncome] = useState('1000000'); // Default high income
+  const [income, setIncome] = useState('1000000');
   const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('single');
 
   // Derived Values
@@ -45,11 +43,10 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
   const niitVal = NIIT_RATE;
   const stateRate = stateConfig.rate;
   
-  // Total Tax Burden (Fed + NIIT + State)
-  // Note: SALT deduction is capped/negligible for high earners, so we add full state rate.
+  // Total Tax Burden
   const totalTaxRate = fedRate + niitVal + stateRate;
   
-  // TEY Formula: MuniYield / (1 - TotalTaxRate)
+  // TEY Formula
   const muniVal = parseFloat(muniYield) || 0;
   const tey = muniVal / (1 - totalTaxRate);
 
@@ -65,11 +62,12 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               Muni Bond Yield (%)
             </label>
             <div className="relative">
+              {/* Added text-slate-900 to ensure black text */}
               <input
                 type="number"
                 value={muniYield}
                 onChange={(e) => setMuniYield(e.target.value)}
-                className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg"
+                className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg text-slate-900 bg-white"
                 placeholder="3.50"
                 step="0.01"
               />
@@ -80,11 +78,12 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             <label className="block text-sm font-bold text-slate-700 mb-2">
               Annual Taxable Income ($)
             </label>
+            {/* Added text-slate-900 to ensure black text */}
             <input
               type="number"
               value={income}
               onChange={(e) => setIncome(e.target.value)}
-              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg"
+              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg text-slate-900 bg-white"
               placeholder="1000000"
             />
           </div>
@@ -121,10 +120,11 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             <label className="block text-sm font-bold text-slate-700 mb-2">
               State Residency
             </label>
+            {/* Added text-slate-900 to ensure black text */}
             <select
               value={selectedState}
               onChange={(e) => setSelectedState(e.target.value)}
-              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4"
+              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-slate-900 bg-white"
             >
               {Object.entries(STATE_DATA).map(([code, data]) => (
                 <option key={code} value={code}>
@@ -146,6 +146,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             <h3 className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
               Tax-Equivalent Yield
             </h3>
+            {/* Ensure text color is explicit */}
             <div className="text-6xl font-black text-green-400 tracking-tight">
               {tey.toFixed(2)}%
             </div>
@@ -157,7 +158,8 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
           <div className="space-y-3 text-sm border-t border-slate-800 pt-6">
             <div className="flex justify-between">
               <span className="text-slate-400">Fed Marginal Rate</span>
-              <span className="font-mono">{(fedRate * 100).toFixed(2)}%</span>
+              {/* Added text-white explicitly */}
+              <span className="font-mono text-white">{(fedRate * 100).toFixed(2)}%</span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-400">NIIT Surtax</span>
@@ -167,7 +169,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               <span className="text-slate-400">State Marginal Rate</span>
               <span className="font-mono text-green-400">{(stateRate * 100).toFixed(2)}%</span>
             </div>
-            <div className="flex justify-between pt-3 border-t border-slate-800 font-bold text-lg">
+            <div className="flex justify-between pt-3 border-t border-slate-800 font-bold text-lg text-white">
               <span>Total Tax on Next $1</span>
               <span>{(totalTaxRate * 100).toFixed(2)}%</span>
             </div>
