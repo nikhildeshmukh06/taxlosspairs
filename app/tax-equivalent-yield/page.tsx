@@ -50,18 +50,27 @@ export default function TEYPage() {
               2026 Yield Guide: High-Tax States
             </h3>
             
-            {/* THE NEW CLARIFYING SENTENCE */}
+            {/* The Clarifying Sentence */}
             <p className="text-slate-700 mb-8 max-w-2xl">
               Not sure if your result makes sense? Here is how a <strong>3.50% Muni Bond</strong> compares for high earners in the highest-tax states. 
               This helps validate why tax-free yields are so powerful in these specific regions.
             </p>
             
             <div className="grid gap-4 md:grid-cols-3">
-              {/* California Card */}
-              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+              
+              {/* California Card -> LINKED TO /california */}
+              <Link 
+                href="/tax-equivalent-yield/california"
+                className="group block bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all relative overflow-hidden"
+              >
+                 {/* Subtle "Click Me" Background Hint */}
+                 <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                 </div>
+
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🐻</span>
-                  <h4 className="font-bold text-slate-900">California</h4>
+                  <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">California</h4>
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-slate-600">
@@ -73,10 +82,10 @@ export default function TEYPage() {
                     <span className="text-xl font-bold text-green-600">7.81%</span>
                   </div>
                 </div>
-              </div>
+              </Link>
 
-              {/* New York City Card */}
-              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+              {/* New York City Card (Static) */}
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm opacity-90">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🍎</span>
                   <h4 className="font-bold text-slate-900">New York City</h4>
@@ -93,8 +102,8 @@ export default function TEYPage() {
                 </div>
               </div>
 
-              {/* New Jersey Card */}
-              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+              {/* New Jersey Card (Static) */}
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm opacity-90">
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🛣️</span>
                   <h4 className="font-bold text-slate-900">New Jersey</h4>
