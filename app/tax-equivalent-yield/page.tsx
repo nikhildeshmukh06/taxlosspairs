@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 import TEYCalculator from '../components/TEYCalculator';
 
 export const metadata: Metadata = {
-  title: 'Tax Equivalent Yield Calculator | TaxLossPairs',
-  description: 'Calculate the taxable equivalent yield for municipal bonds based on your federal and state tax brackets (CA, NY, NJ, MA).',
-  keywords: 'tax equivalent yield, muni bond calculator, NIIT tax, California tax free bonds, tax loss harvesting',
+  title: 'Tax Equivalent Yield Calculator (2025) | California, NY, NJ',
+  description: 'Calculate the true tax-equivalent yield for municipal bonds in high-tax states like California, New York, and New Jersey. Includes 2025 marginal brackets and NIIT.',
+  keywords: 'California muni bond calculator, New York tax equivalent yield, NJ municipal bonds, NIIT tax calculator, tax free yield 2025',
 };
 
 export default function TEYPage() {
@@ -33,30 +33,85 @@ export default function TEYPage() {
             Is a Tax-Free Bond Better?
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            High earners often lose 40-50% of their investment income to taxes. 
+            High earners in states like <strong>California</strong> and <strong>New York</strong> often lose 50%+ of their income to taxes. 
             Use this calculator to see if a Municipal Bond beats a standard CD or Corporate Bond.
           </p>
         </div>
 
         {/* The Calculator Component */}
+        {/* We let it default to CA, or we could force it to any default. */}
         <TEYCalculator />
 
-        {/* Content & SEO Block */}
+        {/* SEO CONTENT BLOCK */}
         <div className="mt-16 max-w-3xl mx-auto space-y-16">
           
-          {/* Strategy Section */}
+          {/* State Comparison Table */}
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">
-              Why This Calculation Matters
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">
+              2025 Yield Guide: High-Tax States
             </h3>
-            <p className="text-slate-700 leading-relaxed text-lg">
-              Municipal bonds ("munis") are generally free from federal income tax and, in many cases, state and local taxes. 
-              Comparing them directly to taxable investments (like Corporate Bonds, CDs, or High-Yield Savings) is misleading 
-              because you keep <strong>100% of the muni yield</strong>, but only a fraction of the taxable yield.
+            <p className="text-slate-700 mb-6">
+              For a high earner (37% Federal + 3.8% NIIT), here is how a <strong>3.50% Muni Bond</strong> compares to taxable equivalents in top states:
             </p>
+            
+            <div className="grid gap-4 md:grid-cols-3">
+              {/* California Card */}
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🐻</span>
+                  <h4 className="font-bold text-slate-900">California</h4>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-slate-600">
+                    <span>Top Tax Rate</span>
+                    <span className="font-mono font-bold text-red-500">14.4%</span>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
+                    <span className="font-semibold text-slate-900">Taxable Equiv.</span>
+                    <span className="text-xl font-bold text-green-600">7.81%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* New York City Card */}
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🍎</span>
+                  <h4 className="font-bold text-slate-900">New York City</h4>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-slate-600">
+                    <span>Top Tax Rate</span>
+                    <span className="font-mono font-bold text-red-500">14.7%</span>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
+                    <span className="font-semibold text-slate-900">Taxable Equiv.</span>
+                    <span className="text-xl font-bold text-green-600">7.86%</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* New Jersey Card */}
+              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 transition-colors">
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-2xl">🛣️</span>
+                  <h4 className="font-bold text-slate-900">New Jersey</h4>
+                </div>
+                <div className="space-y-2 text-sm">
+                  <div className="flex justify-between text-slate-600">
+                    <span>Top Tax Rate</span>
+                    <span className="font-mono font-bold text-red-500">10.75%</span>
+                  </div>
+                  <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
+                    <span className="font-semibold text-slate-900">Taxable Equiv.</span>
+                    <span className="text-xl font-bold text-green-600">7.21%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* FAQ Section (SEO Gold Mine) */}
+          {/* FAQ Section */}
           <div className="border-t border-slate-200 pt-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
             
@@ -65,30 +120,29 @@ export default function TEYPage() {
                 <h4 className="font-bold text-lg text-slate-800 mb-2">What is the NIIT Surtax?</h4>
                 <p className="text-slate-600 leading-relaxed">
                   The <strong>Net Investment Income Tax (NIIT)</strong> is an extra 3.8% tax applied to investment income 
-                  (like interest, dividends, and capital gains) for high earners. It kicks in if your modified adjusted gross income 
-                  is above <strong>$200,000 (Single)</strong> or <strong>$250,000 (Married)</strong>. Our calculator automatically detects if you owe this.
+                  for high earners (AGI over $200k/$250k). Our calculator automatically adds this surtax to give you the real cost of taxable bonds.
                 </p>
               </div>
 
               <div>
                 <h4 className="font-bold text-lg text-slate-800 mb-2">Why isn't my "Effective Tax Rate" used?</h4>
                 <p className="text-slate-600 leading-relaxed">
-                  When investing new money, the IRS taxes those specific dollars at your <strong>marginal rate</strong> (your highest bracket), 
-                  not your average rate. Using your effective rate would dangerously underestimate your tax bill and make taxable bonds look better than they actually are.
+                  Investment decisions happen at the <strong>margin</strong>. The IRS taxes your <em>next</em> dollar of interest at your highest bracket, 
+                  not your average rate. Using your effective rate would underestimate your tax burden and lead to poor investment choices.
                 </p>
               </div>
               
               <div>
-                <h4 className="font-bold text-lg text-slate-800 mb-2">Which states benefit most from Muni Bonds?</h4>
+                <h4 className="font-bold text-lg text-slate-800 mb-2">Do I pay state tax on out-of-state Munis?</h4>
                 <p className="text-slate-600 leading-relaxed">
-                  Investors in high-tax states like <strong>California (14.4%), New York (10.9%), New Jersey (10.75%), and Hawaii (11%)</strong> 
-                  see the massive benefits from state-specific municipal bonds ("Double Tax-Free"), as they avoid both Federal and State taxes.
+                  Generally, yes. If you live in California and buy a New York bond, California will tax that income. 
+                  To be 100% tax-free, you typically need to buy bonds issued by your home state (e.g., "California Double Tax-Free" funds).
                 </p>
               </div>
             </div>
           </div>
           
-          {/* The Blue "Cross-Sell" Box */}
+          {/* Cross-Sell Box */}
           <div className="bg-white p-8 rounded-2xl border border-blue-100 shadow-sm">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-100 rounded-lg text-blue-600 shrink-0">
@@ -99,7 +153,7 @@ export default function TEYPage() {
                   Already Maximized Your Yields?
                 </h4>
                 <p className="text-slate-600 mb-6">
-                  Optimizing your bond yield is step one. Step two is <strong>Harvesting Losses</strong> in your stock portfolio to offset your other capital gains.
+                  Optimizing bond yield is just one lever. Step two is <strong>Harvesting Losses</strong> in your stock portfolio to offset capital gains.
                 </p>
                 <Link 
                   href="/"
