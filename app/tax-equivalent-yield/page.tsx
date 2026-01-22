@@ -139,8 +139,8 @@ export default function TEYHubPage() {
         </div>
       </div>
 
-      {/* REUSABLE FOOTER */}
-      <Footer />
+      {/* REUSABLE FOOTER (With Tax Disclaimer) */}
+      <Footer variant="tey" />
     </main>
   );
 }
