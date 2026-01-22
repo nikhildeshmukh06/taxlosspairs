@@ -15,11 +15,11 @@ export interface StateContent {
   };
   example: {
     title: string;
-    description: string; // e.g., "A resident earning $X..."
-    income: string;      // "$650,000"
-    muniYield: string;   // "4.50%"
-    taxableYield: string;// "8.67%"
-    takeaway: string;    // The blue box text
+    description: string;
+    income: string;
+    muniYield: string;
+    taxableYield: string;
+    takeaway: string;
   };
   faqs: {
     q: string;
@@ -29,39 +29,43 @@ export interface StateContent {
 
 export const STATE_CONTENT: Record<string, StateContent> = {
   // --- CALIFORNIA ---
+  // RATE: 13.3% (12.3% Top Bracket + 1% Mental Health Surtax)
+  // MATH: 4.50 / (1 - (0.37 + 0.038 + 0.133)) = 4.50 / 0.459 = 9.8039%
   'CA': {
     slug: 'california',
     name: 'California',
     metadata: {
       title: 'California Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
-      description: 'Calculate the true tax-equivalent yield for California municipal bonds using 2026 marginal tax brackets (14.4%) and NIIT.',
+      description: 'Calculate the true tax-equivalent yield for California municipal bonds using 2026 marginal tax brackets (13.3%) and NIIT.',
       keywords: 'California tax equivalent yield calculator, CA muni bond calculator, California marginal tax rate 2026, double tax free bonds CA',
     },
     hero: {
       title: 'California Tax-Equivalent Yield Calculator (2026)',
-      description: 'This calculator shows the taxable yield required to match a <strong>California in-state municipal bond</strong>, which is exempt from both Federal and California income tax, based on your 2026 marginal tax bracket.',
+      description: 'This calculator shows the taxable yield required to match a <strong>California in-state municipal bond</strong>, exempt from Federal, NIIT, and California income tax, based on your 2026 marginal tax bracket.',
     },
     whySection: {
       title: 'Why Tax-Equivalent Yield Matters More in California',
-      p1: 'California’s top marginal income tax rate is <strong>14.4%</strong> (including the Mental Health Services Surtax). Since state taxes are generally not deductible at the federal level due to the SALT cap, this hit is purely additive.',
-      p2: 'When state and federal taxes stack, small differences in yield compound dramatically. A California resident in the top bracket loses over <strong>50%</strong> of every additional dollar of taxable interest.',
+      p1: 'California’s top marginal income tax rate on investment income is <strong>13.3%</strong> (including the 1% Mental Health Services Surtax). Since state taxes are generally not deductible at the federal level due to the SALT cap, this hit is purely additive.',
+      p2: 'When state (13.3%), federal (37%), and NIIT (3.8%) taxes stack, a California resident in the top bracket loses over <strong>54%</strong> of every additional dollar of taxable interest.',
     },
     example: {
       title: 'Example: California High Earner',
-      description: 'Using the calculator above, a married California resident earning <strong>$650,000</strong> and considering a <strong>4.50% California municipal bond</strong> would need a taxable yield of approximately <strong>8.67%</strong> to break even.',
+      description: 'Using the calculator above, a married California resident earning <strong>$650,000</strong> and considering a <strong>4.50% California municipal bond</strong> would need a taxable yield of approximately <strong>9.80%</strong> to break even.',
       income: '$650,000',
       muniYield: '4.50%',
-      taxableYield: '8.67%',
-      takeaway: 'Reality Check: Very few investment-grade corporate bonds offer an 8.67% yield. This highlights why high-net-worth Californians heavily favor munis.',
+      taxableYield: '9.80%',
+      takeaway: 'Reality Check: Very few investment-grade corporate bonds offer a 9.80% yield. This highlights why high-net-worth Californians heavily favor munis.',
     },
     faqs: [
       { q: 'Do I pay CA tax on out-of-state bonds?', a: 'Yes. California generally taxes interest from municipal bonds issued by other states. To be fully tax-free, you typically need to buy bonds issued by California agencies.' },
-      { q: 'Does the 1% Mental Health Services Tax apply?', a: 'Yes. For taxable incomes over $1 million, California adds a 1% surtax. Our calculator automatically includes this 14.4% top bracket when your income exceeds the threshold.' },
+      { q: 'Does the 1% Mental Health Services Tax apply?', a: 'Yes. For taxable incomes over $1 million, California adds a 1% surtax. Our calculator automatically includes this 13.3% top bracket when your income exceeds the threshold.' },
       { q: 'Why isn\'t my "Effective Tax Rate" used?', a: 'Investment decisions happen at the margin. The IRS taxes your next dollar of interest at your highest bracket, not your average rate. Using effective rate underestimates your tax burden.' }
     ]
   },
 
   // --- NEW YORK ---
+  // RATE: 10.9% (State Top Bracket)
+  // MATH: 4.25 / (1 - (0.37 + 0.038 + 0.109)) = 4.25 / 0.483 = 8.799%
   'NY': {
     slug: 'new-york',
     name: 'New York',
@@ -81,11 +85,11 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: New York High Earner',
-      description: 'Using the calculator above, a married New York State resident earning <strong>$800,000</strong> and considering a <strong>4.25% NY municipal bond</strong> would need a taxable yield of approximately <strong>7.99%</strong> to break even.',
+      description: 'Using the calculator above, a married New York State resident earning <strong>$800,000</strong> and considering a <strong>4.25% NY municipal bond</strong> would need a taxable yield of approximately <strong>8.80%</strong> to break even.',
       income: '$800,000',
       muniYield: '4.25%',
-      taxableYield: '7.99%',
-      takeaway: 'Finding a safe corporate bond yielding nearly 8% is difficult in today\'s market, highlighting why NY munis are a staple for high-net-worth portfolios.',
+      taxableYield: '8.80%',
+      takeaway: 'Finding a safe corporate bond yielding nearly 9% is difficult in today\'s market, highlighting why NY munis are a staple for high-net-worth portfolios.',
     },
     faqs: [
       { q: 'Are NY munis triple tax-free?', a: 'Often, yes. If you live in NYC and buy "Triple Tax-Free" bonds (exempt from Federal, NY State, and NYC local taxes), your savings are maximized.' },
@@ -94,6 +98,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- NEW JERSEY ---
+  // RATE: 10.75% (Income > $1M)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.1075)) = 4.00 / 0.4845 = 8.2559%
   'NJ': {
     slug: 'new-jersey',
     name: 'New Jersey',
@@ -113,10 +119,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: New Jersey High Earner',
-      description: 'Using the calculator above, a New Jersey resident earning <strong>$1,200,000</strong> and considering a <strong>4.00% NJ municipal bond</strong> would need a taxable yield of approximately <strong>7.76%</strong> to break even.',
+      description: 'Using the calculator above, a New Jersey resident earning <strong>$1,200,000</strong> and considering a <strong>4.00% NJ municipal bond</strong> would need a taxable yield of approximately <strong>8.26%</strong> to break even.',
       income: '$1.2M',
       muniYield: '4.00%',
-      taxableYield: '7.76%',
+      taxableYield: '8.26%',
       takeaway: 'This effectively supercharges the yield of conservative fixed-income investments without requiring you to move down the credit spectrum.',
     },
     faqs: [
@@ -126,6 +132,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- MASSACHUSETTS ---
+  // RATE: 9.0% (5% Flat + 4% Surtax)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.09)) = 4.00 / 0.502 = 7.968%
   'MA': {
     slug: 'massachusetts',
     name: 'Massachusetts',
@@ -145,10 +153,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Boston High Earner',
-      description: 'A Massachusetts resident earning <strong>$1.5 million</strong> facing the 9% top rate and considering a <strong>4.00% MA municipal bond</strong> would need a taxable yield of approximately <strong>7.52%</strong> to break even.',
+      description: 'A Massachusetts resident earning <strong>$1.5 million</strong> facing the 9% top rate and considering a <strong>4.00% MA municipal bond</strong> would need a taxable yield of approximately <strong>7.97%</strong> to break even.',
       income: '$1.5M',
       muniYield: '4.00%',
-      taxableYield: '7.52%',
+      taxableYield: '7.97%',
       takeaway: 'This "Millionaire\'s Tax" has fundamentally changed the bond math in the Bay State.',
     },
     faqs: [
@@ -158,6 +166,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- OREGON ---
+  // RATE: 9.9% (Starts at $125k Single / $250k Joint)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.099)) = 4.00 / 0.493 = 8.113%
   'OR': {
     slug: 'oregon',
     name: 'Oregon',
@@ -177,10 +187,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Portland Professional',
-      description: 'A single Oregon resident earning <strong>$150,000</strong> falls into the 9.9% bracket. A <strong>4.00% Oregon muni bond</strong> is equivalent to a taxable bond yielding <strong>7.16%</strong>.',
-      income: '$150k',
+      description: 'A single Oregon resident earning <strong>$260,000</strong> falls into the 9.9% bracket. A <strong>4.00% Oregon muni bond</strong> is equivalent to a taxable bond yielding <strong>8.11%</strong>.',
+      income: '$260k',
       muniYield: '4.00%',
-      taxableYield: '7.16%',
+      taxableYield: '8.11%',
       takeaway: 'In most other states, you\'d need to earn $500k+ to see this kind of tax benefit. In Oregon, it starts much earlier.',
     },
     faqs: [
@@ -189,6 +199,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- MINNESOTA ---
+  // RATE: 9.85% (Fourth Tier)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0985)) = 4.00 / 0.4935 = 8.105%
   'MN': {
     slug: 'minnesota',
     name: 'Minnesota',
@@ -208,10 +220,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Minneapolis High Earner',
-      description: 'A married Minnesota resident earning <strong>$400,000</strong> and considering a <strong>4.00% MN municipal bond</strong> would need a taxable yield of approximately <strong>7.16%</strong> to break even.',
+      description: 'A married Minnesota resident earning <strong>$400,000</strong> and considering a <strong>4.00% MN municipal bond</strong> would need a taxable yield of approximately <strong>8.11%</strong> to break even.',
       income: '$400k',
       muniYield: '4.00%',
-      taxableYield: '7.16%',
+      taxableYield: '8.11%',
       takeaway: 'Without tax-free income, you are effectively donating 10% of your yield to the state of Minnesota.',
     },
     faqs: [
@@ -220,6 +232,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- HAWAII ---
+  // RATE: 11.0% (Highest outside CA/NYC)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.11)) = 4.00 / 0.482 = 8.298%
   'HI': {
     slug: 'hawaii',
     name: 'Hawaii',
@@ -239,11 +253,11 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Honolulu High Earner',
-      description: 'A Hawaii resident earning <strong>$450,000</strong> facing the 11% top rate and considering a <strong>4.00% HI municipal bond</strong> would need a taxable yield of approximately <strong>7.25%</strong> to break even.',
+      description: 'A Hawaii resident earning <strong>$450,000</strong> facing the 11% top rate and considering a <strong>4.00% HI municipal bond</strong> would need a taxable yield of approximately <strong>8.30%</strong> to break even.',
       income: '$450k',
       muniYield: '4.00%',
-      taxableYield: '7.25%',
-      takeaway: 'Finding a 7.25% yield in the corporate bond market usually requires taking on significant credit risk. Hawaii munis offer this yield with high-grade safety.',
+      taxableYield: '8.30%',
+      takeaway: 'Finding an 8.30% yield in the corporate bond market usually requires taking on significant credit risk. Hawaii munis offer this yield with high-grade safety.',
     },
     faqs: [
       { q: 'Do I pay HI tax on out-of-state bonds?', a: 'Yes. Hawaii taxes interest from municipal bonds issued by other states.' }
@@ -251,6 +265,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- VERMONT ---
+  // RATE: 8.75%
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0875)) = 4.00 / 0.5045 = 7.928%
   'VT': {
     slug: 'vermont',
     name: 'Vermont',
@@ -270,10 +286,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Burlington High Earner',
-      description: 'A Vermont resident earning <strong>$350,000</strong> and considering a <strong>4.00% VT municipal bond</strong> would need a taxable yield of approximately <strong>7.08%</strong> to break even.',
+      description: 'A Vermont resident earning <strong>$350,000</strong> and considering a <strong>4.00% VT municipal bond</strong> would need a taxable yield of approximately <strong>7.93%</strong> to break even.',
       income: '$350k',
       muniYield: '4.00%',
-      taxableYield: '7.08%',
+      taxableYield: '7.93%',
       takeaway: 'In high-tax states like Vermont, "yield" is not what you earn—it\'s what you keep.',
     },
     faqs: [
@@ -282,6 +298,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- CONNECTICUT ---
+  // RATE: 6.99% (Benefit Recapture)
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0699)) = 4.00 / 0.5221 = 7.661%
   'CT': {
     slug: 'connecticut',
     name: 'Connecticut',
@@ -301,10 +319,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: Greenwich High Earner',
-      description: 'A Connecticut resident earning <strong>$750,000</strong> and considering a <strong>4.00% CT municipal bond</strong> would need a taxable yield of approximately <strong>6.95%</strong> to break even.',
+      description: 'A Connecticut resident earning <strong>$750,000</strong> and considering a <strong>4.00% CT municipal bond</strong> would need a taxable yield of approximately <strong>7.66%</strong> to break even.',
       income: '$750k',
       muniYield: '4.00%',
-      taxableYield: '6.95%',
+      taxableYield: '7.66%',
       takeaway: 'With the SALT cap limiting deductions, avoiding this ~7% state drag is the only risk-free way to boost yield.',
     },
     faqs: [
@@ -312,7 +330,9 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     ]
   },
 
- // --- DC (UPDATED) ---
+  // --- WASHINGTON, DC ---
+  // RATE: 10.75%
+  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.1075)) = 4.00 / 0.4845 = 8.2559%
   'DC': {
     slug: 'dc',
     name: 'Washington, DC',
@@ -332,14 +352,14 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     example: {
       title: 'Example: DC Resident',
-      description: 'A Washington, DC resident earning <strong>$600,000</strong> facing the 10.75% top rate and considering a <strong>4.00% DC municipal bond</strong> would need a taxable yield of approximately <strong>7.21%</strong> to break even.',
+      description: 'A Washington, DC resident earning <strong>$600,000</strong> facing the 10.75% top rate and considering a <strong>4.00% DC municipal bond</strong> would need a taxable yield of approximately <strong>8.26%</strong> to break even.',
       income: '$600k',
       muniYield: '4.00%',
-      taxableYield: '7.21%',
+      taxableYield: '8.26%',
       takeaway: 'Buying a Virginia bond instead would likely trigger a surprise tax bill. Sticking to DC paper is now essential for tax efficiency.',
     },
     faqs: [
        { q: 'Can I still buy MD or VA bonds tax-free?', a: 'No. Unless they are specific bonds issued by certain regional authorities (like WMATA), bonds from Maryland or Virginia are now generally taxable for DC residents.' }
     ]
-  } // <--- NO SEMICOLON HERE
-}; // <--- End of STATE_CONTENT object
+  }
+};
