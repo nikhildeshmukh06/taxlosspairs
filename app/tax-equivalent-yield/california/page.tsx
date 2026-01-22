@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import TEYCalculator from '../../components/TEYCalculator'; // Note the double ../
+import TEYCalculator from '../../components/TEYCalculator'; 
 
 export const metadata: Metadata = {
   title: 'California Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
@@ -34,8 +34,8 @@ export default function CaliforniaTEYPage() {
             California Tax-Equivalent Yield Calculator (2026)
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            California has the highest state income tax in the country. 
-            This calculator shows the taxable yield required to match a <strong>California "Double Tax-Free" Municipal Bond</strong>, based on your specific 2026 tax bracket.
+            This calculator shows the taxable yield required to match a <strong>California in-state municipal bond</strong>, 
+            which is exempt from both Federal and California income tax, based on your 2026 marginal tax bracket.
           </p>
         </div>
 
@@ -52,7 +52,7 @@ export default function CaliforniaTEYPage() {
               California’s top marginal income tax rate is <strong>14.4%</strong> (including the Mental Health Services Surtax). Since state taxes are generally not deductible at the federal level due to the SALT cap, this hit is purely additive.
             </p>
             <p className="text-slate-700 leading-relaxed">
-              That means a California resident in the top bracket loses over <strong>50%</strong> of every additional dollar of taxable interest. 
+              When state and federal taxes stack, small differences in yield compound dramatically. A California resident in the top bracket loses over <strong>50%</strong> of every additional dollar of taxable interest. 
               For high earners, in-state municipal bonds are often the only way to preserve yield without taking on equity risk.
             </p>
           </div>
@@ -62,7 +62,7 @@ export default function CaliforniaTEYPage() {
             <h3 className="text-2xl font-bold text-slate-900 mb-6">Example: California High Earner</h3>
             <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
               <p className="text-slate-700 mb-4">
-                A married California resident earning <strong>$650,000</strong> and considering a <strong>4.50% California municipal bond</strong> would need a taxable yield of approximately <strong>8.67%</strong> to break even.
+                Using the calculator above, a married California resident earning <strong>$650,000</strong> and considering a <strong>4.50% California municipal bond</strong> would need a taxable yield of approximately <strong>8.67%</strong> to break even.
               </p>
               <div className="bg-blue-50 p-4 rounded-lg text-blue-900 text-sm font-medium border border-blue-100">
                 <strong>Reality Check:</strong> Very few investment-grade corporate bonds offer an 8.67% yield. This highlights why high-net-worth Californians heavily favor munis.
@@ -88,6 +88,13 @@ export default function CaliforniaTEYPage() {
                   Our calculator automatically includes this 14.4% top bracket when your income exceeds the threshold.
                 </p>
               </div>
+              <div>
+                <h4 className="font-bold text-lg text-slate-800 mb-1">Why isn't my "Effective Tax Rate" used?</h4>
+                <p className="text-slate-600">
+                  Investment decisions happen at the <strong>margin</strong>. The IRS taxes your <em>next</em> dollar of interest at your highest bracket, not your average rate. 
+                  Using your effective rate would underestimate your tax burden and lead to poor investment choices.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -99,7 +106,7 @@ export default function CaliforniaTEYPage() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-2">
-                  Optimized Your Yield? Now Optimize Your Gains.
+                  Optimized Your Bond Yield? Now Optimize Your Capital Gains.
                 </h4>
                 <p className="text-slate-600 mb-6">
                   Avoiding tax on interest is step one. Step two is using <strong>Tax-Loss Harvesting</strong> to offset your stock market gains.
