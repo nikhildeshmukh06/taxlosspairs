@@ -1,8 +1,9 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
-import { STATE_CONTENT } from '../../../data/state-content'; // Adjust path if needed
-import { StatePageTemplate } from '../../../components/StatePageTemplate'; // Adjust path if needed
+// FIX: Changed from ../../../ to ../../
+import { STATE_CONTENT } from '../../data/state-content'; 
+import { StatePageTemplate } from '../../components/StatePageTemplate'; 
 
 // Helper to find state data by URL slug (e.g. 'california' -> CA Data)
 function getStateContent(slug: string) {
@@ -10,8 +11,6 @@ function getStateContent(slug: string) {
 }
 
 // 1. GENERATE STATIC PARAMS (The "Pre-Build" Instruction)
-// This tells Next.js to statically generate these pages at build time.
-// It effectively recreates your 10 manual folders automatically.
 export async function generateStaticParams() {
   return Object.values(STATE_CONTENT).map((state) => ({
     state: state.slug,
@@ -19,7 +18,6 @@ export async function generateStaticParams() {
 }
 
 // 2. DYNAMIC METADATA (The SEO Fix)
-// This automatically creates unique titles and descriptions for Google.
 export async function generateMetadata({ params }: { params: { state: string } }): Promise<Metadata> {
   const content = getStateContent(params.state);
 
