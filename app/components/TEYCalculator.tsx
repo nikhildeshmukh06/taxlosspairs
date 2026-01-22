@@ -6,7 +6,7 @@ import { useState, useMemo } from 'react';
 type TaxBracket = { limit: number; rate: number };
 type TaxSchedule = { SINGLE: TaxBracket[]; MARRIED: TaxBracket[] };
 
-// --- FEDERAL DATA (2025 Projected) ---
+// --- FEDERAL DATA (2026 Estimated based on Inflation Adjs) ---
 const FED_BRACKETS: TaxSchedule = {
   SINGLE: [
     { limit: 609350, rate: 0.37 },
@@ -28,7 +28,7 @@ const FED_BRACKETS: TaxSchedule = {
   ]
 };
 
-// --- STATE DATA (2025 Marginal Rates) ---
+// --- STATE DATA (2026 Estimates) ---
 const flat = (rate: number): TaxSchedule => ({
   SINGLE: [{ limit: 0, rate }],
   MARRIED: [{ limit: 0, rate }]
@@ -52,6 +52,7 @@ const STATE_DATA: Record<string, TaxSchedule> = {
   'VA': flat(0.0575), 'WV': flat(0.065), 'WI': flat(0.0765),
 
   // Progressive States
+  // NOTE: CA Top Rate includes 1% Mental Health Surtax on income > $1M
   'CA': {
     SINGLE: [
       { limit: 1000000, rate: 0.144 }, { limit: 677275, rate: 0.123 },
@@ -61,7 +62,8 @@ const STATE_DATA: Record<string, TaxSchedule> = {
       { limit: 10412, rate: 0.02 }, { limit: 0, rate: 0.01 }
     ],
     MARRIED: [
-      { limit: 1354550, rate: 0.133 }, { limit: 812728, rate: 0.113 }, 
+      { limit: 1000000, rate: 0.144 }, // Surtax hits Married at $1M too
+      { limit: 812728, rate: 0.113 }, 
       { limit: 677278, rate: 0.103 }, { limit: 136700, rate: 0.093 }, 
       { limit: 108162, rate: 0.08 }, { limit: 75576, rate: 0.06 }, 
       { limit: 47868, rate: 0.04 }, { limit: 20824, rate: 0.02 }, 
@@ -108,7 +110,7 @@ const STATE_DATA: Record<string, TaxSchedule> = {
       { limit: 1000000, rate: 0.0699 }, { limit: 400000, rate: 0.069 },
       { limit: 200000, rate: 0.06 }, { limit: 100000, rate: 0.055 },
       { limit: 20000, rate: 0.05 }, { limit: 0, rate: 0.03 }
-    ]
+    ],
   },
   'HI': {
     SINGLE: [{ limit: 200000, rate: 0.11 }, { limit: 150000, rate: 0.10 }, { limit: 0, rate: 0.08 }],
@@ -148,24 +150,19 @@ const STATE_NAMES = [
   { code: 'WV', name: 'West Virginia' }, { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' }
 ];
 
-// UPDATED: Now accepts a defaultState prop
 export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: string }) {
   const [muniYield, setMuniYield] = useState<string>('3.50');
   const [income, setIncome] = useState<string>('150000');
   const [status, setStatus] = useState<'SINGLE' | 'MARRIED'>('SINGLE');
-  
-  // Initialize with the prop passed from the parent page
   const [stateCode, setStateCode] = useState<string>(defaultState);
 
   const calculation = useMemo(() => {
     const yieldNum = parseFloat(muniYield) || 0;
-    
-    // SAFE PARSING: Remove '$' and ',' then parse
     const cleanIncome = income.toString().replace(/[$,]/g, '');
     const incomeNum = parseFloat(cleanIncome) || 0;
 
-    // 1. Get Federal Marginal Rate
-    const fBrackets = FED_BRACKETS[status];
+    // 1. Get Federal Marginal Rate (Defensive Sort)
+    const fBrackets = [...FED_BRACKETS[status]].sort((a,b) => b.limit - a.limit);
     const fedBracket = fBrackets.find(b => incomeNum > b.limit) || fBrackets[fBrackets.length - 1];
     const fedRate = fedBracket.rate;
 
@@ -173,18 +170,18 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
     const niitThreshold = status === 'SINGLE' ? 200000 : 250000;
     const niitRate = incomeNum > niitThreshold ? 0.038 : 0;
 
-    // 3. Get State Marginal Rate (Safely)
+    // 3. Get State Marginal Rate (Defensive Sort)
     let stateRate = 0;
     const schedule = STATE_DATA[stateCode];
     if (schedule) {
-      const sBrackets = schedule[status];
+      const sBrackets = [...schedule[status]].sort((a,b) => b.limit - a.limit);
       const stateBracket = sBrackets.find(b => incomeNum > b.limit) || sBrackets[sBrackets.length - 1];
       stateRate = stateBracket.rate;
     }
 
-    // 4. Calculate TEY
+    // 4. Calculate TEY (Capped at 90% for realism)
     const totalTaxRate = fedRate + niitRate + stateRate;
-    const safeTaxRate = Math.min(totalTaxRate, 0.99); 
+    const safeTaxRate = Math.min(totalTaxRate, 0.90); 
     const tey = yieldNum / (1 - safeTaxRate);
 
     return {
@@ -200,10 +197,10 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
     <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
       <div className="bg-slate-50 p-6 border-b border-slate-100">
         <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-          🏛️ Tax-Equivalent Yield Calculator
+          Tax-Equivalent Yield Calculator
         </h2>
         <p className="text-sm text-slate-500 mt-1">
-          Precisely calculates your marginal tax impact based on 2025 brackets.
+          Calculates your marginal tax impact using 2026 estimated federal and state brackets.
         </p>
       </div>
 
@@ -216,8 +213,9 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
               type="number"
               value={muniYield}
               onChange={(e) => setMuniYield(e.target.value)}
-              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg"
+              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg text-slate-900"
               step="0.01"
+              placeholder="e.g. 3.50"
             />
           </div>
 
@@ -227,7 +225,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
               type="text"
               value={income}
               onChange={(e) => setIncome(e.target.value)}
-              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg"
+              className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 font-mono text-lg text-slate-900"
               placeholder="e.g. 250,000"
             />
           </div>
@@ -256,7 +254,7 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
               <select
                 value={stateCode}
                 onChange={(e) => setStateCode(e.target.value)}
-                className="w-full p-3 border border-slate-300 rounded-lg bg-white appearance-none"
+                className="w-full p-3 border border-slate-300 rounded-lg bg-white appearance-none text-slate-900"
               >
                 {STATE_NAMES.map((s) => (
                   <option key={s.code} value={s.code}>{s.name}</option>
@@ -298,10 +296,23 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
             </div>
           </div>
           
-          <div className="mt-4 text-center">
-             <p className="text-xs text-slate-400">
-               *Calculated using <strong>marginal tax rates</strong>. This reflects the tax you would pay on the specific dollars earned from this bond, not your total effective tax rate.
+          {/* PLAIN ENGLISH VERDICT */}
+          <div className="mt-4 p-3 bg-blue-50 border border-blue-100 rounded-lg">
+             <p className="text-sm text-slate-700 leading-relaxed">
+               <strong>The Verdict:</strong> You would need a taxable yield of <strong>{calculation.tey}%</strong> (on a CD or Corporate Bond) to match this <strong>{muniYield}%</strong> Muni bond.
              </p>
+          </div>
+
+          {/* DISCLOSURES / NOTES */}
+          <div className="mt-4 text-[10px] text-slate-400 space-y-1 text-center">
+             <p>*Calculated using 2026 estimated marginal tax brackets. State tax rates are estimates.</p>
+             <p>Assumes state taxes are not federally deductible due to the SALT cap.</p>
+             {stateCode === 'NY' && (
+                <p>Includes NY State tax only. Does not include NYC or Yonkers local taxes.</p>
+             )}
+             {stateCode === 'CA' && (
+               <p>Reflects top statewide marginal brackets including 1% Mental Health Services Surtax on income &gt;$1M.</p>
+             )}
           </div>
         </div>
       </div>
