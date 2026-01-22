@@ -143,7 +143,7 @@ export default function TEYPage() {
                 <Link href="/tax-equivalent-yield/hawaii" className="hover:text-blue-600 hover:underline transition-colors">Hawaii</Link>
                 <Link href="/tax-equivalent-yield/vermont" className="hover:text-blue-600 hover:underline transition-colors">Vermont</Link>
                 <Link href="/tax-equivalent-yield/connecticut" className="hover:text-blue-600 hover:underline transition-colors">Connecticut</Link>
-                <Link href="/tax-equivalent-yield/dc" className="hover:text-blue-600 hover:underline transition-colors">District of Columbia</Link>
+                <Link href="/tax-equivalent-yield/dc" className="hover:text-blue-600 hover:underline transition-colors">Washington, DC</Link>
               </div>
             </div>
           </div>
