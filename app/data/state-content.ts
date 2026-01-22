@@ -43,8 +43,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The SALT Floor Reality',
-      p1: 'While the 2026 SALT cap has risen to $40,400, California’s 13.3% top marginal rate means high earners exhaust this deduction almost immediately. For those with a MAGI over $505,000, the OBBBA phase-out can reduce your deduction back to a $10,000 floor.',
-      p2: 'Because the vast majority of your state tax bill remains non-deductible at the federal level, the tax-free status of California municipal bonds represents a pure, un-diluted saving that taxable bonds cannot match.',
+      p1: 'While the 2026 SALT cap has risen to $40,400, California’s 13.3% top marginal rate means high earners exhaust this deduction almost immediately. For those with a MAGI over $505,000, the OBBBA phase-out can reduce your deduction back to a permanent **$10,000 floor**.',
+      p2: 'Because the vast majority of your state tax bill remains non-deductible, the tax-exempt status of California municipal bonds represents a pure, un-diluted saving.',
     },
     example: {
       title: 'Example: California High Earner',
@@ -52,13 +52,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$800,000',
       muniYield: '4.50%',
       taxableYield: '9.80%',
-      takeaway: 'To match a 4.5% tax-free yield, you would need a taxable bond paying nearly 10%. In 2026, very few high-grade corporate bonds offer this return.',
+      takeaway: 'To match a 4.5% tax-free yield, a taxable bond would need to pay nearly 10%—a hurdle few corporate bonds can clear in the 2026 market.',
     },
     faqs: [
-      { q: 'How is the 13.3% rate calculated?', a: 'It combines the 12.3% base top marginal rate with the 1% Mental Health Services Surtax for taxable income exceeding $1 million.' },
-      { q: 'Do I pay CA tax on out-of-state bonds?', a: 'Yes. California taxes interest from municipal bonds issued by other states (e.g., Texas or New York).' },
-      { q: 'Is this applicable to CA-only Muni ETFs?', a: 'Yes. If you hold a California-specific fund, the interest is generally 100% exempt from both Federal and CA state taxes.' },
-      { q: 'What about the Alternative Minimum Tax (AMT)?', a: 'This calculator assumes "AMT-Free" bonds. If you purchase Private Activity Bonds subject to the AMT, your yield may be lower.' }
+      { q: 'How is the California tax rate in this calculator determined?', a: 'We use the highest projected 2026 marginal bracket of 13.3% (including the 1% Mental Health Services Surtax) to provide a conservative "ceiling" for high-earner estimation.' },
+      { q: 'Do I pay California tax on municipal bonds from other states?', a: 'Yes. California generally taxes interest from municipal bonds issued by any other state (e.g., Texas or New York). To capture the full yield shown here, you must hold California-issued bonds.' },
+      { q: 'How does the 2026 SALT cap affect my muni bond savings?', a: 'Under the OBBBA, the federal SALT deduction is capped at $40,400 for 2026. For high earners facing a steep phase-out, the vast majority of your state tax bill is not deductible, making in-state bonds a "pure" saving.' },
+      { q: 'Does the 1% Mental Health Services Tax apply to me?', a: 'California applies an additional 1% surtax on taxable income exceeding $1 million. Our calculator automatically includes this (bringing the top rate to 13.3%) when your input income exceeds that threshold.' }
     ]
   },
 
@@ -77,8 +77,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The Global Yield Benchmark',
-      p1: 'Living in NYC creates a combined tax drag of nearly <strong>52%</strong> (Federal + NY State + NYC City). This makes NYC municipal bonds some of the most sought-after fixed-income assets in the world.',
-      p2: 'For a Manhattan resident, a "Triple-Tax-Free" bond is the only defensive asset that escapes all three levels of government erosion, providing a yield that taxable CDs and Corporates cannot replicate.',
+      p1: 'Living in NYC creates a unique "Triple Tax" burden (Federal + State + City) totaling nearly <strong>52%</strong>. This makes NYC municipal bonds some of the most sought-after defensive assets globally.',
+      p2: 'For a Manhattan resident, a "Triple-Tax-Free" bond is the only defensive asset that escapes all three levels of government erosion, providing a yield that taxable alternatives cannot replicate.',
     },
     example: {
       title: 'Example: Manhattan High Earner',
@@ -86,13 +86,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$1.5M',
       muniYield: '4.00%',
       taxableYield: '8.86%',
-      takeaway: 'To keep 4% in your pocket, a taxable investment would need to pay you nearly 9%.',
+      takeaway: 'To keep 4% in your pocket, a NYC resident would need a taxable investment to pay nearly 9%.',
     },
     faqs: [
-      { q: 'What is the NYC local tax rate?', a: 'The NYC local income tax tops out at 3.876% for the highest earners in 2026.' },
-      { q: 'Are out-of-state bonds taxed by the city?', a: 'Yes. Interest from bonds issued outside of New York is fully taxable by both New York State and New York City.' },
-      { q: 'What is the difference between NYC GO and TFA bonds?', a: 'Both are typically triple-tax-free; GO bonds are backed by city taxing power, while TFA bonds are backed by specific tax revenues.' },
-      { q: 'Does this include the OBBBA AMT changes?', a: 'Yes, it assumes AMT-free bonds. The OBBBA adjusted AMT thresholds, so verify your specific status with a tax pro.' }
+      { q: 'How is the NYC rate determined?', a: 'We combine the 10.9% top New York State bracket with the 3.876% NYC local income tax to provide a conservative "ceiling" for estimation.' },
+      { q: 'Do I pay NYC tax on NY State bonds?', a: 'Generally, no. NY State bonds are exempt from City tax. However, bonds from other states (like Florida) are fully taxable by both NY State and NYC.' },
+      { q: 'How does the 2026 SALT cap affect NYC residents?', a: 'With a combined tax rate over 14%, most NYC investors far exceed the $40,400 SALT cap, making triple-tax-exempt income their only "leak-proof" yield.' },
+      { q: 'What is the difference between NYC GO and NYC TFA bonds?', a: 'General Obligation (GO) bonds are backed by city taxing power, while Transitional Finance Authority (TFA) bonds are backed by specific tax revenues. Both are typically triple-tax-free.' }
     ]
   },
 
@@ -112,7 +112,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     whySection: {
       title: 'Strategic Insight: Defeating the "Millionaire Tax"',
       p1: 'With New Jersey’s 10.75% marginal rate applying to income over $1 million, high earners lose over <strong>50%</strong> of taxable interest to combined taxes.',
-      p2: 'Because NJ state taxes are largely non-deductible under 2026 SALT rules, NJ-specific municipal bonds are the primary mechanism for preserving wealth at the top end of the income spectrum.',
+      p2: 'Because NJ state taxes are largely non-deductible under 2026 SALT rules, NJ-specific municipal bonds are the primary mechanism for preserving wealth at the highest end of the income spectrum.',
     },
     example: {
       title: 'Example: NJ High Earner',
@@ -120,13 +120,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$1.2M',
       muniYield: '4.00%',
       taxableYield: '8.26%',
-      takeaway: 'Few corporate bonds offer 8.26% with the same credit quality as a high-grade NJ muni.',
+      takeaway: 'A 4.00% tax-free yield is equivalent to an 8.26% taxable return—a high bar for investment-grade corporate debt.',
     },
     faqs: [
-      { q: 'How is the 10.75% rate applied?', a: 'It is a marginal rate applying to NJ taxable income exceeding $1 million.' },
-      { q: 'Do out-of-state bonds get taxed in NJ?', a: 'Yes. New Jersey taxes interest from municipal bonds issued by any other state.' },
-      { q: 'Does NJ tax Social Security?', a: 'No, but it does tax interest from taxable bonds (Corporates/CDs) while exempting NJ muni interest.' },
-      { q: 'What is the 2026 NJ SALT cap?', a: 'The Federal SALT cap is $40,400, but NJ residents often pay much more, making muni bonds essential for tax efficiency.' }
+      { q: 'How is the 10.75% NJ rate determined?', a: 'We use the highest projected 2026 marginal rate of 10.75% (for income over $1 million) to provide a conservative "ceiling" for estimation.' },
+      { q: 'Do I pay NJ tax on municipal bonds from other states?', a: 'Yes. New Jersey taxes interest income from any municipal bond issued outside of its borders.' },
+      { q: 'How does the 2026 SALT cap affect NJ muni bond savings?', a: 'Under the OBBBA, the $40,400 SALT cap phases down starting at $505,000 MAGI, ensuring the tax-free status of in-state bonds remains a "pure" saving.' },
+      { q: 'Does NJ tax Social Security or pension income?', a: 'NJ generally does not tax Social Security. However, it does tax interest from taxable bonds while exempting NJ-specific municipal interest.' }
     ]
   },
 
@@ -145,8 +145,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The 9% State Shield',
-      p1: 'The "Fair Share" surtax creates a permanent 4% additional drag for millionaires, effectively making the state tax burden <strong>9%</strong> for taxable interest.',
-      p2: 'For high earners, choosing in-state MA bonds is equivalent to an immediate 9% "bonus" compared to taxable alternatives like CDs or Corporate bonds.',
+      p1: 'The "Fair Share" surtax adds a permanent 4% drag for millionaires on top of the 5% flat tax. In-state Massachusetts bonds shield high earners from this entire <strong>9% total state drag</strong>.',
+      p2: 'Choosing in-state MA bonds provides an immediate 9% "bonus" compared to taxable alternatives like CDs or Corporate bonds.',
     },
     example: {
       title: 'Example: Boston Millionaire',
@@ -154,13 +154,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$1.5M',
       muniYield: '4.00%',
       taxableYield: '7.97%',
-      takeaway: 'The "Millionaire Tax" has fundamentally changed the math for fixed income in the Bay State.',
+      takeaway: 'Choosing in-state MA bonds provides an immediate 9% "bonus" compared to taxable alternatives like CDs or Corporate bonds.',
     },
     faqs: [
-      { q: 'How does the 9% rate work?', a: 'It combines the standard 5% flat tax with the 4% surtax on income exceeding $1 million.' },
-      { q: 'Are MA bonds exempt from the surtax?', a: 'Yes. In-state MA bonds escape both the 5% flat tax and the 4% surtax.' },
-      { q: 'Does the surtax apply to capital gains?', a: 'Yes. The 4% surtax applies to all taxable income over $1M, including bond sale gains.' },
-      { q: 'Are out-of-state munis taxed in MA?', a: 'Yes. Massachusetts taxes out-of-state muni interest at the full combined 9% rate for high earners.' }
+      { q: 'How is the 9% Massachusetts tax rate determined?', a: 'We use the combined 5% flat tax and 4% surtax (for income over $1 million) to provide a conservative "ceiling" for estimation.' },
+      { q: 'Do I pay MA tax on municipal bonds from other states?', a: 'Yes. Massachusetts taxes interest from municipal bonds issued by other states at the full combined rate (up to 9%).' },
+      { q: 'How does the 2026 SALT cap affect MA muni bond savings?', a: 'The $40,400 cap phase-out means millionaires cannot deduct most of their 9% state tax, making tax-free income highly efficient.' },
+      { q: 'Does the 4% surtax apply to capital gains?', a: 'Yes. The 4% "Fair Share" surtax applies to all taxable income over $1M, including gains from selling bonds.' }
     ]
   },
 
@@ -179,8 +179,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The "Early Trigger" Effect',
-      p1: 'Oregon’s top 9.9% rate is unique because it hits single filers at $125k and couples at $250k—far earlier than the $1M thresholds in CA or NJ.',
-      p2: 'This makes municipal bonds a critical preservation tool for "mass affluent" professionals, not just the ultra-wealthy, due to the high state tax drag on standard taxable bonds.',
+      p1: 'Oregon’s top 9.9% tax rate hits single filers at $125k and couples at $250k—far earlier than the $1M thresholds in other high-tax states.',
+      p2: 'This makes municipal bonds a critical preservation tool for "mass affluent" professionals, due to the high state tax drag on standard taxable bonds.',
     },
     example: {
       title: 'Example: Portland Professional',
@@ -188,13 +188,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$260k',
       muniYield: '4.00%',
       taxableYield: '8.11%',
-      takeaway: 'In Oregon, you don\'t need to be a millionaire to see massive benefits from tax-free income.',
+      takeaway: 'In Oregon, you don\'t need to be a millionaire to see massive taxable equivalent yields from tax-free income.',
     },
     faqs: [
-      { q: 'Why is the TEY so high for mid-career Oregonians?', a: 'The 9.9% rate starts early, meaning many professionals face a massive tax drag on taxable bonds.' },
-      { q: 'Do I pay OR tax on out-of-state bonds?', a: 'Yes. Oregon generally taxes interest from municipal bonds issued outside of the state.' },
-      { q: 'Does OR offer a credit for other state taxes?', a: 'Generally not for out-of-state bond interest.' },
-      { q: 'Is this calculator updated for OBBBA?', a: 'Yes. It uses 2026 Federal brackets and the expanded SALT cap phase-out logic.' }
+      { q: 'How is the Oregon tax rate in this calculator determined?', a: 'We use the 9.9% top marginal rate that applies to most high-earning professionals in the state.' },
+      { q: 'Do I pay OR tax on municipal bonds from other states?', a: 'Yes. Oregon taxes interest income from any municipal bond issued outside of its borders.' },
+      { q: 'How does the 2026 SALT cap affect Oregon muni bond savings?', a: 'The $40,400 cap provides relief, but many Oregon families quickly exceed this via combined income and property taxes.' },
+      { q: 'Why is the TEY so high for mid-career Oregonians?', a: 'Because the 9.9% rate kicks in at relatively low income levels, Oregon munis provide a massive "tax shield" earlier in a career.' }
     ]
   },
 
@@ -222,13 +222,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$400k',
       muniYield: '4.00%',
       taxableYield: '8.11%',
-      takeaway: 'By using MN munis, you avoid "donating" 10% of your yield to the state government.',
+      takeaway: 'By using MN-specific munis, you avoid "donating" nearly 10% of your total yield to the state government.',
     },
     faqs: [
-      { q: 'What is the Fourth Tier bracket?', a: 'It is MN\'s highest bracket of 9.85%, applying to single filers over ~$203,150 in 2026.' },
-      { q: 'Are out-of-state bonds taxed in MN?', a: 'Yes. Minnesota taxes interest from municipal bonds issued by other states.' },
-      { q: 'How do MN Muni ETFs work?', a: 'For national funds, only the MN-issued bond portion is exempt from state tax.' },
-      { q: 'Is MN tax deductible federally in 2026?', a: 'Only up to the SALT cap ($40,400), which high earners quickly exceed.' }
+      { q: 'How is the Minnesota tax rate in this calculator determined?', a: 'We use the highest projected 2026 marginal rate of 9.85% (Fourth Tier) to provide a conservative ceiling.' },
+      { q: 'Do I pay MN tax on municipal bonds from other states?', a: 'Yes. Minnesota taxes interest from municipal bonds issued by any other state.' },
+      { q: 'How does the 2026 SALT cap affect MN muni bond savings?', a: 'The $40,400 cap phase-out for high earners ensures the tax-free status of in-state bonds remains a "pure" saving.' },
+      { q: 'Is this applicable to MN-specific ETFs?', a: 'Yes. If you hold a fund composed of Minnesota debt, the interest is generally exempt from both Federal and MN tax.' }
     ]
   },
 
@@ -247,8 +247,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The Hidden Flat Tax',
-      p1: 'Connecticut’s "Benefit Recapture" effectively claws back the benefit of lower tax brackets for high earners, creating a higher marginal tax rate.',
-      p2: 'Since the SALT cap limits your federal deductions, avoiding this ~7% state drag is one of the only risk-free ways to boost your total fixed-income return.',
+      p1: 'Connecticut’s "Benefit Recapture" effectively claws back lower tax bracket benefits for high earners, creating a higher marginal tax rate than headlines imply.',
+      p2: 'Since the SALT cap limits federal deductions, avoiding this ~7% state drag is one of the only risk-free ways to boost your total fixed-income return.',
     },
     example: {
       title: 'Example: Greenwich Resident',
@@ -256,13 +256,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$750k',
       muniYield: '4.00%',
       taxableYield: '7.66%',
-      takeaway: 'At high income levels, CT effectively taxes your marginal interest dollar at the full 6.99%.',
+      takeaway: 'Avoiding the ~7% state tax drag is the most direct way to boost real-world yield for Greenwich investors.',
     },
     faqs: [
-      { q: 'What is Benefit Recapture?', a: 'It is CT\'s method of phasing out lower brackets for high earners, effectively flat-taxing your income.' },
-      { q: 'Are out-of-state munis taxed in CT?', a: 'Yes. Connecticut taxes interest from municipal bonds issued by other states.' },
-      { q: 'Why use CT munis vs. Treasuries?', a: 'Treasuries are federally taxable. CT munis are exempt from both federal and state tax.' },
-      { q: 'Does this calculator include NIIT?', a: 'Yes, it adds the 3.8% surtax for income over $200k/$250k.' }
+      { q: 'How is the Connecticut tax rate in this calculator determined?', a: 'We approximate the effective top 6.99% marginal rate, accounting for "Benefit Recapture" clawbacks.' },
+      { q: 'Do I pay CT tax on municipal bonds from other states?', a: 'Yes. Connecticut taxes interest from municipal bonds issued by any other state.' },
+      { q: 'How does the 2026 SALT cap affect CT muni bond savings?', a: 'The expanded $40,400 cap phases down starting at $505,000 MAGI, making CT muni exemption critical for top earners.' },
+      { q: 'Why use CT munis vs. Treasuries?', a: 'Treasuries are state-exempt but federally taxable. CT munis are exempt from both, providing a significantly higher TEY.' }
     ]
   },
 
@@ -282,7 +282,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     whySection: {
       title: 'Strategic Insight: The Reciprocity Trap',
       p1: 'DC’s repeal of universal tax-exemption for out-of-state bonds means residents can no longer "muni-shop" across the nation tax-free.',
-      p2: 'Residents must now focus exclusively on DC-issued debt or specific regional authorities to capture the full <strong>10.75%</strong> local tax benefit.',
+      p2: 'Residents must now focus specifically on DC-issued debt or regional authorities to capture the full <strong>10.75% local tax benefit</strong>.',
     },
     example: {
       title: 'Example: DC Resident',
@@ -290,13 +290,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$600k',
       muniYield: '4.00%',
       taxableYield: '8.26%',
-      takeaway: 'Sticking to DC-specific paper is now essential to avoid a surprise 10.75% tax bill.',
+      takeaway: 'Sticking to DC-issued paper is now essential to avoid losing nearly 11% of your yield to local taxes.',
     },
     faqs: [
-      { q: 'Can I buy MD or VA bonds tax-free?', a: 'Generally, no. Interest from MD or VA bonds is now taxable by the District.' },
-      { q: 'Which bonds ARE tax-free for DC?', a: 'Only those specifically issued by the District of Columbia or regional authorities like WMATA.' },
-      { q: 'What is the top DC tax rate?', a: 'It is 10.75% for taxable income exceeding $1 million.' },
-      { q: 'How does OBBBA affect DC filers?', a: 'It provides a permanent 37% federal cap and an expanded $40,400 SALT cap.' }
+      { q: 'How is the DC tax rate in this calculator determined?', a: 'We use the top marginal rate of 10.75% for taxable income exceeding $1 million.' },
+      { q: 'Do I pay DC tax on municipal bonds from other states?', a: 'Yes. DC repealed its universal exemption; interest from MD or VA bonds is now generally taxable.' },
+      { q: 'How does the 2026 SALT cap affect DC muni bond savings?', a: 'The federal cap rose to $40,400 but phases down for high earners, keeping DC tax avoidance a high priority.' },
+      { q: 'Which bonds ARE tax-free for DC?', a: 'Only bonds specifically issued by the District of Columbia or certain regional authorities like WMATA.' }
     ]
   },
 
@@ -315,8 +315,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The Paradise Tax',
-      p1: 'At 11%, Hawaii’s top rate is one of the highest in the nation. Because state taxes are largely non-deductible (SALT cap), this is a massive unrecoverable cost.',
-      p2: 'This 11% state drag makes tax-free bonds almost mandatory for high-bracket Honolulu residents looking to preserve fixed-income yield.',
+      p1: 'At 11%, Hawaii’s top rate is one of the highest in the nation. Because state taxes are largely non-deductible under 2026 rules, this is a massive unrecoverable cost.',
+      p2: 'This 11% state drag makes tax-free bonds almost mandatory for high-bracket Honolulu residents looking to preserve yield.',
     },
     example: {
       title: 'Example: Honolulu High Earner',
@@ -324,13 +324,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$450k',
       muniYield: '4.00%',
       taxableYield: '8.30%',
-      takeaway: 'HI munis offer high taxable equivalent yields with high-grade safety.',
+      takeaway: 'The 11% state tax drag makes tax-free bonds almost mandatory for high-bracket Honolulu residents.',
     },
     faqs: [
-      { q: 'How high is the HI top rate?', a: 'It is 11%, the highest in the US outside of CA and NYC.' },
-      { q: 'Do I pay HI tax on out-of-state bonds?', a: 'Yes. Hawaii taxes interest from municipal bonds issued by other states.' },
-      { q: 'Are HI munis triple tax-free?', a: 'No. Hawaii does not have a separate local income tax.' },
-      { q: 'What about the NIIT?', a: 'This calculator includes the 3.8% NIIT for investment income above thresholds.' }
+      { q: 'How is the Hawaii tax rate in this calculator determined?', a: 'We use the 11% top marginal rate—the highest in the U.S. outside of California and NYC.' },
+      { q: 'Do I pay HI tax on municipal bonds from other states?', a: 'Yes. Hawaii taxes interest income from municipal bonds issued by any other state.' },
+      { q: 'How does the 2026 SALT cap affect HI muni bond savings?', a: 'The expanded $40,400 cap phases down starting at $505k MAGI, making HI muni exemption critical for top earners.' },
+      { q: 'Are HI munis triple tax-free?', a: 'No. Hawaii does not have a separate city income tax; however, the 11% state exemption provides significant TEY value.' }
     ]
   },
 
@@ -349,8 +349,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: Passive Income Drag',
-      p1: 'Vermont is a high-tax jurisdiction for portfolio income, with a top rate of 8.75%.',
-      p2: 'Combining this with the 37% Federal bracket and 3.8% NIIT means you lose over half your interest to taxes. In-state bonds are a key preservation tool.',
+      p1: 'Vermont is a high-tax jurisdiction for portfolio income, with a top rate of 8.75%. Combining this with federal brackets means high earners lose over half their interest to taxes.',
+      p2: 'In-state bonds are a key preservation tool to protect your yield from one of the nation\'s steepest passive income tax burdens.',
     },
     example: {
       title: 'Example: Burlington Resident',
@@ -361,10 +361,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       takeaway: 'In high-tax Vermont, "yield" is not what you earn—it\'s what you keep.',
     },
     faqs: [
-      { q: 'What is the VT top rate?', a: 'It is 8.75% for the highest income earners in 2026.' },
-      { q: 'Are out-of-state bonds taxed?', a: 'Yes. Vermont taxes interest from municipal bonds issued outside of the state.' },
-      { q: 'Does VT tax bond capital gains?', a: 'Yes, gains are taxable, but in-state bond interest is exempt.' },
-      { q: 'Does this use 2026 Federal brackets?', a: 'Yes, it is fully updated for OBBBA rates.' }
+      { q: 'How is the Vermont tax rate in this calculator determined?', a: 'We use the top marginal 2026 bracket of 8.75% to provide a conservative estimate for high earners.' },
+      { q: 'Do I pay VT tax on municipal bonds from other states?', a: 'Yes. Vermont generally taxes interest from municipal bonds issued outside of the state.' },
+      { q: 'How does the 2026 SALT cap affect VT muni bond savings?', a: 'The $40,400 cap provides a higher ceiling, but high earners still face a phase-out to the $10,000 floor.' },
+      { q: 'Does VT tax all out-of-state muni interest?', a: 'Yes. To be exempt at both levels, you must hold bonds specifically issued by Vermont entities.' }
     ]
   },
 
@@ -383,8 +383,8 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     whySection: {
       title: 'Strategic Insight: The Double Tax-Free Advantage',
-      p1: 'While NYC residents get "Triple" savings, other NY state residents still capture significant "Double" tax-free value by avoiding the 10.9% state tax.',
-      p2: 'Because NY state taxes aren\'t federally deductible (SALT cap), this 10.9% saving is purely additive to your federal yield.',
+      p1: 'While NYC residents capture "Triple" savings, other NY state residents capture significant value by avoiding the 10.9% state tax.',
+      p2: 'Since NY state taxes aren\'t federally deductible (SALT cap), this 10.9% saving is purely additive to your federal yield.',
     },
     example: {
       title: 'Example: Westchester Resident',
@@ -392,13 +392,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$800k',
       muniYield: '4.25%',
       taxableYield: '8.80%',
-      takeaway: 'Finding safe corporate bonds yielding nearly 9% is difficult in 2026.',
+      takeaway: 'To match a 4.25% NY tax-free yield, a taxable bond would need to pay nearly 9%.',
     },
     faqs: [
-      { q: 'Is this different from the NYC calculator?', a: 'Yes. This excludes the NYC local tax for residents outside the five boroughs.' },
-      { q: 'Does this use the 10.9% bracket default?', a: 'Yes, it assumes the highest marginal tier for conservative estimation.' },
-      { q: 'Are out-of-state munis taxed?', a: 'Yes. NY State taxes interest from bonds issued in any other state.' },
-      { q: 'How does OBBBA affect NY filers?', a: 'It keeps the top federal rate at 37% and expands the SALT cap phase-out.' }
+      { q: 'How is the NY State tax rate in this calculator determined?', a: 'We use the highest projected marginal tier of 10.9% to provide a conservative ceiling.' },
+      { q: 'Do I pay NY tax on municipal bonds from other states?', a: 'Yes. New York State taxes interest income from any municipal bond issued outside the state.' },
+      { q: 'How does the 2026 SALT cap affect NY muni bond savings?', a: 'The $40,400 cap phases down to $10k for earners over $505k, keeping NY muni exemption essential.' },
+      { q: 'Are NY bonds Triple Tax-Free for me?', a: 'Only if you live within the five boroughs of NYC. Elsewhere, they are Double Tax-Free.' }
     ]
   }
 };
