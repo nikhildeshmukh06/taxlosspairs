@@ -312,10 +312,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     ]
   },
 
-  // --- DC (UPDATED) ---
+ // --- DC (UPDATED) ---
   'DC': {
     slug: 'dc',
-    name: 'Washington, DC', // Changed from "District of Columbia"
+    name: 'Washington, DC',
     metadata: {
       title: 'Washington, DC Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
       description: 'Calculate TEY for Washington, DC municipal bonds. Accounts for the repealed out-of-state bond exemption.',
@@ -341,4 +341,5 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     faqs: [
        { q: 'Can I still buy MD or VA bonds tax-free?', a: 'No. Unless they are specific bonds issued by certain regional authorities (like WMATA), bonds from Maryland or Virginia are now generally taxable for DC residents.' }
     ]
-  };
+  } // <--- NO SEMICOLON HERE
+}; // <--- End of STATE_CONTENT object
