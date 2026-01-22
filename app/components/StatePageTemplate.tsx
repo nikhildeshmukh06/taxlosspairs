@@ -15,6 +15,7 @@ interface Props {
 const SLUG_TO_CODE: Record<string, string> = {
   'california': 'CA',
   'new-york': 'NY',
+  'new-york-city': 'NYC',
   'new-jersey': 'NJ',
   'massachusetts': 'MA',
   'oregon': 'OR',
