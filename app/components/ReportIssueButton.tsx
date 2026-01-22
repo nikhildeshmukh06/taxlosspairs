@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-// FIX: Made ticker optional with '?'
+// FIX: Added '?' to make ticker optional
 interface Props {
   ticker?: string; 
 }
@@ -17,8 +17,9 @@ export default function ReportIssueButton({ ticker }: Props) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
-    console.log('Issue Reported:', { ticker: ticker || 'TEY/General', issueType, description });
+    console.log('Issue Reported:', { ticker: ticker || 'TEY-General', issueType, description });
     setIsSubmitting(false);
     setSubmitted(true);
     setTimeout(() => {
