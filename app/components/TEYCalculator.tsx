@@ -2,230 +2,226 @@
 
 import React, { useState, useEffect } from 'react';
 
-interface TEYCalculatorProps {
+// --- 1. REAL 2026 FEDERAL TAX DATA ---
+// Source: Projected 2026 Brackets based on inflation adjustments
+const TAX_BRACKETS_2026 = {
+  single: [
+    { threshold: 626350, rate: 0.37 },
+    { threshold: 250525, rate: 0.35 },
+    { threshold: 197300, rate: 0.32 },
+    { threshold: 103350, rate: 0.24 },
+    { threshold: 48475, rate: 0.22 },
+    { threshold: 11925, rate: 0.12 },
+    { threshold: 0, rate: 0.10 },
+  ],
+  married: [
+    { threshold: 751600, rate: 0.37 },
+    { threshold: 501050, rate: 0.35 },
+    { threshold: 394600, rate: 0.32 },
+    { threshold: 206700, rate: 0.24 },
+    { threshold: 96950, rate: 0.22 },
+    { threshold: 23850, rate: 0.12 },
+    { threshold: 0, rate: 0.10 },
+  ],
+};
+
+const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
+
+// --- 2. STATE DATA (Defaults) ---
+const STATE_DATA: Record<string, { name: string; topRate: number }> = {
+  'CA': { name: 'California', topRate: 13.3 },
+  'NY': { name: 'New York', topRate: 10.9 },
+  'NJ': { name: 'New Jersey', topRate: 10.75 },
+  'MA': { name: 'Massachusetts', topRate: 9.0 },
+  'OR': { name: 'Oregon', topRate: 9.9 },
+  'MN': { name: 'Minnesota', topRate: 9.85 },
+  'HI': { name: 'Hawaii', topRate: 11.0 },
+  'VT': { name: 'Vermont', topRate: 8.75 },
+  'CT': { name: 'Connecticut', topRate: 6.99 },
+  'DC': { name: 'Washington, DC', topRate: 10.75 },
+};
+
+interface Props {
   defaultState?: string;
 }
 
-export default function TEYCalculator({ defaultState = 'CA' }: TEYCalculatorProps) {
-  // 1. STATE MANAGEMENT
-  const [income, setIncome] = useState<number>(400000);
-  const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('married');
-  const [stateCode, setStateCode] = useState<string>(defaultState);
-  const [muniYield, setMuniYield] = useState<number>(3.50);
-  const [stateRateOverride, setStateRateOverride] = useState<string>(''); // Allow user override
+export default function TEYCalculator({ defaultState = 'CA' }: Props) {
+  const [selectedState, setSelectedState] = useState(defaultState);
+  const [muniYield, setMuniYield] = useState('3.50');
+  const [incomeStr, setIncomeStr] = useState('1000000');
+  const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('single');
+  const [customStateRate, setCustomStateRate] = useState<string>('');
 
-  // 2. CONSTANTS & DATA
-  const FED_BRACKETS_2026 = {
-    single: [
-      { max: 11925, rate: 0.10 },
-      { max: 48475, rate: 0.12 },
-      { max: 103350, rate: 0.22 },
-      { max: 197300, rate: 0.24 },
-      { max: 250525, rate: 0.32 },
-      { max: 626350, rate: 0.35 },
-      { max: Infinity, rate: 0.37 },
-    ],
-    married: [
-      { max: 23850, rate: 0.10 },
-      { max: 96950, rate: 0.12 },
-      { max: 206700, rate: 0.22 },
-      { max: 394600, rate: 0.24 },
-      { max: 501050, rate: 0.32 },
-      { max: 751600, rate: 0.35 },
-      { max: Infinity, rate: 0.37 },
-    ],
+  // Update selectedState if prop changes
+  useEffect(() => {
+    if (defaultState) setSelectedState(defaultState);
+  }, [defaultState]);
+
+  // --- LOGIC ENGINE ---
+  const income = parseFloat(incomeStr) || 0;
+
+  const getFedRate = () => {
+    const brackets = TAX_BRACKETS_2026[filingStatus];
+    const bracket = brackets.find((b) => income > b.threshold);
+    return bracket ? bracket.rate : 0.10;
   };
+  const fedRate = getFedRate();
 
-  const NIIT_THRESHOLD = filingStatus === 'single' ? 200000 : 250000;
+  const niitThreshold = NIIT_THRESHOLDS[filingStatus];
+  const niitRate = income > niitThreshold ? 0.038 : 0.0;
 
-  // Simple default top brackets for demo (User can override)
-  const STATE_TOP_RATES: Record<string, number> = {
-    CA: 13.3, NY: 10.9, NJ: 10.75, MA: 9.0, CT: 6.99,
-    HI: 11.0, MN: 9.85, OR: 9.9, VT: 8.75, DC: 10.75,
-    TX: 0, FL: 0, WA: 0, NV: 0
-  };
+  const defaultStateRate = STATE_DATA[selectedState]?.topRate || 0;
+  const activeStateRate = customStateRate !== '' 
+    ? parseFloat(customStateRate) / 100 
+    : defaultStateRate / 100;
 
-  // 3. CALCULATION LOGIC
-  const getFedRate = (inc: number, status: 'single' | 'married') => {
-    const brackets = FED_BRACKETS_2026[status];
-    for (const b of brackets) {
-      if (inc <= b.max) return b.rate;
-    }
-    return 0.37;
-  };
-
-  // Derived Values
-  const fedRate = getFedRate(income, filingStatus);
-  const niitRate = income > NIIT_THRESHOLD ? 0.038 : 0.0;
-  
-  // Use override if present, else default to known top rate
-  const activeStateRate = stateRateOverride !== '' 
-    ? parseFloat(stateRateOverride) / 100 
-    : (STATE_TOP_RATES[stateCode] || 0) / 100;
+  // Reset custom state rate when state changes
+  useEffect(() => {
+    setCustomStateRate('');
+  }, [selectedState]);
 
   const totalTaxRate = fedRate + niitRate + activeStateRate;
-  
-  // TEY Formula: MuniYield / (1 - TotalTaxRate)
-  // Safety check: max tax rate cap at 99% to prevent divide by zero
-  const safeTaxRate = Math.min(totalTaxRate, 0.99);
-  const tey = muniYield / (1 - safeTaxRate);
-
-  // 4. HANDLERS
-  const formatPercent = (val: number) => (val * 100).toFixed(2) + '%';
-  const formatCurrency = (val: number) => val.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
+  const muniVal = parseFloat(muniYield) || 0;
+  const tey = totalTaxRate < 1 ? muniVal / (1 - totalTaxRate) : 0;
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
-      
-      {/* HEADER */}
-      <div className="bg-slate-50 border-b border-slate-200 p-6 md:p-8">
-        <div className="flex justify-between items-center">
-          <h2 className="text-2xl font-black text-slate-800 flex items-center gap-2">
-            <span className="text-blue-600">Calculator</span>
-            <span className="text-slate-300 text-lg font-normal">|</span>
-            <span className="text-lg font-medium text-slate-500">2026 Estimate</span>
-          </h2>
-          {/* Result Badge (Mobile) */}
-          <div className="md:hidden bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">
-            {formatPercent(tey)}
-          </div>
-        </div>
-      </div>
-
-      <div className="flex flex-col md:flex-row">
+    <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto">
+      <div className="md:flex">
         
         {/* LEFT: INPUTS */}
-        <div className="p-6 md:p-8 space-y-6 flex-1">
+        <div className="p-6 md:p-8 md:w-1/2 space-y-5">
           
-          {/* State & Status Row */}
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">State</label>
-              <select 
-                value={stateCode} 
-                onChange={(e) => {
-                  setStateCode(e.target.value);
-                  setStateRateOverride(''); // Reset override on state change
-                }}
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">State</label>
+              <select
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
-                {Object.keys(STATE_TOP_RATES).map(s => <option key={s} value={s}>{s}</option>)}
+                {Object.entries(STATE_DATA).map(([code, data]) => (
+                  <option key={code} value={code}>{data.name}</option>
+                ))}
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Filing Status</label>
-              <select 
-                value={filingStatus} 
-                onChange={(e) => setFilingStatus(e.target.value as any)}
-                className="w-full p-3 bg-slate-50 border border-slate-200 rounded-lg font-semibold text-slate-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+              <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Status</label>
+              <select
+                value={filingStatus}
+                onChange={(e) => setFilingStatus(e.target.value as 'single' | 'married')}
+                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="single">Single</option>
-                <option value="married">Married (Joint)</option>
+                <option value="married">Married</option>
               </select>
             </div>
           </div>
 
-          {/* Income Input */}
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Taxable Income (After Deductions)</label>
-            <div className="relative">
-              <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
-              <input 
-                type="number" 
-                value={income}
-                onChange={(e) => setIncome(Number(e.target.value))}
-                className="w-full pl-8 p-3 bg-white border border-slate-200 rounded-lg text-lg font-bold text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-            </div>
+            {/* FIX: Updated Label for Clarity */}
+            <label className="block text-sm font-bold text-slate-700 mb-2">Taxable Income (After Deductions)</label>
+            <input
+              type="number"
+              value={incomeStr}
+              onChange={(e) => setIncomeStr(e.target.value)}
+              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg text-slate-900"
+              placeholder="e.g. 250000"
+            />
           </div>
 
-          {/* Muni Yield Input */}
           <div>
-            <label className="block text-xs font-bold text-slate-500 uppercase tracking-wider mb-2">Target Muni Yield (%)</label>
-            <div className="relative">
-              <input 
-                type="number" 
-                step="0.01"
-                value={muniYield}
-                onChange={(e) => setMuniYield(Number(e.target.value))}
-                className="w-full p-3 bg-white border border-slate-200 rounded-lg text-lg font-bold text-green-600 focus:ring-2 focus:ring-green-500 focus:outline-none"
-              />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">%</span>
-            </div>
+            <label className="block text-sm font-bold text-slate-700 mb-2">Muni Bond Yield (%)</label>
+            <input
+              type="number"
+              value={muniYield}
+              onChange={(e) => setMuniYield(e.target.value)}
+              className="block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 px-4 text-lg text-slate-900"
+              placeholder="3.50"
+              step="0.01"
+            />
           </div>
 
-          {/* Advanced: State Rate Override */}
-          <div className="pt-4 border-t border-slate-100">
-            <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">Manual State Rate (Optional)</label>
-              {stateRateOverride && (
-                <button 
-                  onClick={() => setStateRateOverride('')}
-                  className="text-[10px] text-blue-500 hover:underline font-medium"
-                >
-                  Reset to Default
-                </button>
-              )}
-            </div>
-            <div className="relative">
-              <input 
-                type="number" 
-                step="0.01"
-                placeholder={STATE_TOP_RATES[stateCode] + '%'}
-                value={stateRateOverride}
-                onChange={(e) => setStateRateOverride(e.target.value)}
-                className="w-full p-2 bg-slate-50 border border-slate-200 rounded text-sm text-slate-600 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs">%</span>
-            </div>
+          <div className="pt-2">
+             <label className="flex justify-between text-xs font-bold text-slate-500 uppercase mb-1">
+               <span>Marginal State Tax Rate (%)</span>
+               <span className="text-blue-600 cursor-pointer font-normal normal-case" onClick={() => setCustomStateRate(defaultStateRate.toString())}>
+                 Reset to Top ({defaultStateRate}%)
+               </span>
+             </label>
+             <input
+               type="number"
+               value={customStateRate !== '' ? customStateRate : defaultStateRate}
+               onChange={(e) => setCustomStateRate(e.target.value)}
+               className="block w-full rounded-md border-slate-300 bg-slate-50 py-2 px-3 text-sm text-slate-900 focus:bg-white transition-colors"
+               step="0.01"
+             />
+             <p className="text-[10px] text-slate-400 mt-1">
+               Defaults to top marginal state rate. Advanced users may override.
+             </p>
           </div>
 
         </div>
 
-        {/* RIGHT: RESULTS (DARK MODE) */}
-        <div className="bg-slate-900 p-6 md:p-8 md:w-5/12 text-white flex flex-col justify-center relative overflow-hidden">
+        {/* RIGHT: RESULTS */}
+        <div className="bg-slate-900 md:w-1/2 p-6 md:p-8 text-white flex flex-col justify-center relative">
           
-          {/* Background Decorative Blob */}
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-3xl opacity-20 -mr-16 -mt-16 pointer-events-none"></div>
-
-          <div className="relative z-10">
-            <div className="mb-2 text-blue-300 font-bold uppercase tracking-wider text-xs">Tax-Equivalent Yield</div>
-            <div className="text-5xl md:text-6xl font-black mb-1 tracking-tight">{formatPercent(tey)}</div>
-            <div className="text-slate-400 text-sm mb-8">
-              To match a {muniYield}% tax-free yield, a taxable bond must pay <b>{formatPercent(tey)}</b>.
+          <div className="text-center mb-8">
+            <div className="inline-block bg-slate-800 rounded-full px-3 py-1 mb-3">
+              <span className="text-[10px] font-bold text-slate-300 uppercase tracking-wide">
+                Based on Marginal Tax Bracket
+              </span>
             </div>
-
-            {/* BREAKDOWN TABLE */}
-            <div className="space-y-3 border-t border-slate-800 pt-6">
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">Fed Marginal Rate</span>
-                <span className="font-mono font-bold">{formatPercent(fedRate)}</span>
-              </div>
-              
-              {/* DYNAMIC NIIT ROW (THE FIX) */}
-              <div className={`flex justify-between text-sm ${niitRate === 0 ? 'opacity-50' : ''}`}>
-                <span className="text-slate-400 flex items-center gap-1">
-                  NIIT Surtax
-                  {niitRate === 0 && <span className="text-[10px] bg-slate-800 px-1 rounded">(Inactive)</span>}
-                </span>
-                <span className="font-mono font-bold">{formatPercent(niitRate)}</span>
-              </div>
-
-              <div className="flex justify-between text-sm">
-                <span className="text-slate-400">State Marginal Rate</span>
-                <span className="font-mono font-bold text-blue-400">{formatPercent(activeStateRate)}</span>
-              </div>
-              
-              <div className="h-px bg-slate-700 my-2"></div>
-              
-              <div className="flex justify-between text-base font-bold">
-                <span className="text-slate-200">Total Tax on Interest</span>
-                <span className="font-mono text-red-400">-{formatPercent(totalTaxRate)}</span>
-              </div>
+            <h3 className="text-slate-400 text-xs font-bold uppercase tracking-wider mb-2">
+              Tax-Equivalent Yield
+            </h3>
+            <div className="text-5xl md:text-6xl font-black text-green-400 tracking-tight">
+              {tey.toFixed(2)}%
             </div>
           </div>
 
+          <div className="space-y-3 text-sm border-t border-slate-800 pt-6">
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">Fed Marginal Rate (Next $1)</span>
+              <div className="text-right">
+                <span className="font-mono text-white block">{(fedRate * 100).toFixed(0)}%</span>
+              </div>
+            </div>
+            
+            <div className="flex justify-between items-center group relative cursor-help" title="Net Investment Income Tax (3.8%) applies to investment income above $200k (single) or $250k (married).">
+              <div className="flex items-center gap-1">
+                <span className="text-slate-400 border-b border-slate-700 border-dotted">NIIT Surtax</span>
+                <span className="text-slate-600 text-[10px]">(?)</span>
+              </div>
+              <span className={`font-mono ${niitRate > 0 ? 'text-orange-400' : 'text-slate-600'}`}>
+                {(niitRate * 100).toFixed(1)}%
+              </span>
+            </div>
+
+            <div className="flex justify-between items-center">
+              <span className="text-slate-400">State Marginal Rate</span>
+              <span className="font-mono text-green-400">{(activeStateRate * 100).toFixed(2)}%</span>
+            </div>
+            <div className="flex justify-between items-center pt-3 border-t border-slate-800 font-bold text-lg">
+              <span>Total Tax on Interest</span>
+              <span>{(totalTaxRate * 100).toFixed(2)}%</span>
+            </div>
+          </div>
+
+          <div className="mt-8 bg-slate-800/50 p-3 rounded-lg border border-slate-700 text-center">
+             <p className="text-xs text-slate-300">
+               To match a <strong>{muniYield}%</strong> tax-free yield, you need <strong>{tey.toFixed(2)}%</strong> in a taxable bond.
+             </p>
+          </div>
+
         </div>
+      </div>
+      
+      <div className="bg-slate-50 px-6 py-4 border-t border-slate-100">
+        <p className="text-[10px] text-slate-400 text-center leading-relaxed">
+          This calculator estimates tax-equivalent yield using 2026 estimated marginal tax rates. 
+          It does not compute total tax liability and does not replace professional tax advice. 
+          Assumes in-state municipal bond (exempt from Federal & State tax).
+        </p>
       </div>
     </div>
   );
