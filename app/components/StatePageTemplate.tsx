@@ -26,7 +26,8 @@ const SLUG_TO_CODE: Record<string, string> = {
   'dc': 'DC'
 };
 
-export default function StatePageTemplate({ content }: Props) {
+// FIX: Removed 'default'. Now it matches what your pages expect.
+export function StatePageTemplate({ content }: Props) {
   // Determine the correct calculator code (Default to CA if missing)
   const calcCode = SLUG_TO_CODE[content.slug] || 'CA';
 
@@ -66,7 +67,6 @@ export default function StatePageTemplate({ content }: Props) {
 
       {/* 3. CALCULATOR SECTION */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 relative z-10 mb-20">
-        {/* Pass the correct state code (e.g., 'NY') to the calculator */}
         <TEYCalculator defaultState={calcCode} />
       </div>
 
