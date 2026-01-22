@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { StateContent } from '../data/state-content';
+import { StateContent, STATE_CONTENT } from '../data/state-content'; // <--- FIX: Import STATE_CONTENT for links
 import TEYCalculator from './TEYCalculator';
 import BackButton from './BackButton';
-import Footer from './Footer'; // <--- NEW SHARED FOOTER
+import Footer from './Footer';
 
 interface Props {
   content: StateContent;
@@ -68,13 +68,20 @@ export function StatePageTemplate({ content, stateCode }: Props) {
           </div>
         </div>
 
-        {/* CALCULATOR */}
+        {/* CALCULATOR SECTION */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 relative z-10 mb-20">
           <TEYCalculator defaultState={calcCode} />
+          
+          {/* NEW: FORMULA TEXT (SEO Trust Signal) */}
+          <div className="text-center mt-6">
+            <p className="text-xs text-slate-400 font-mono bg-slate-100 inline-block px-3 py-1 rounded border border-slate-200">
+              Formula: TEY = Muni Yield ÷ (1 − (Federal Rate + NIIT + State Rate))
+            </p>
+          </div>
         </div>
 
         {/* CONTENT */}
-        <div className="max-w-3xl mx-auto px-6 pb-24 space-y-20">
+        <div className="max-w-3xl mx-auto px-6 pb-20 space-y-20">
           <section>
             <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
               <span className="bg-green-100 text-green-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">1</span>
@@ -131,9 +138,28 @@ export function StatePageTemplate({ content, stateCode }: Props) {
             </div>
           </section>
         </div>
+
+        {/* NEW: INTERNAL LINKS GRID (SEO) */}
+        <div className="max-w-7xl mx-auto px-6 pb-20 border-t border-slate-200 pt-16">
+          <h3 className="text-xl font-bold text-slate-900 mb-8 text-center">Compare Other States</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {Object.values(STATE_CONTENT).map((state) => (
+              <Link 
+                key={state.slug} 
+                href={`/tax-equivalent-yield/${state.slug}`}
+                className="group block bg-white p-4 rounded-xl border border-slate-200 hover:border-blue-500 hover:shadow-md transition-all text-center"
+              >
+                <div className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors text-sm">
+                  {state.name}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
       </div>
 
-   {/* REUSABLE FOOTER (With Tax Disclaimer) */}
+      {/* REUSABLE FOOTER */}
       <Footer variant="tey" />
     </main>
   );
