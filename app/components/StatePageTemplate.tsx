@@ -10,7 +10,7 @@ import DisclaimerModal from './DisclaimerModal';
 
 interface Props {
   content: StateContent;
-  stateCode?: string; // FIX: Added this back so your pages stop crashing
+  stateCode?: string;
 }
 
 const SLUG_TO_CODE: Record<string, string> = {
@@ -26,7 +26,6 @@ const SLUG_TO_CODE: Record<string, string> = {
   'dc': 'DC'
 };
 
-// FIX: Named Export (no 'default') to match your imports
 export function StatePageTemplate({ content, stateCode }: Props) {
   const calcCode = stateCode || SLUG_TO_CODE[content.slug] || 'CA';
 
