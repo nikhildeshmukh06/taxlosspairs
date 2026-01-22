@@ -26,6 +26,7 @@ const TAX_BRACKETS_2026 = {
 
 const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
+// --- 2. STATE DATA (All 50 States + DC + NYC) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'CA': { name: 'California', topRate: 13.3 },
   'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 },
@@ -83,15 +84,13 @@ const STATE_DATA: Record<string, { name: string; topRate: number }> = {
 
 interface Props {
   defaultState?: string;
+  isLocked?: boolean;
 }
 
-export default function TEYCalculator({ defaultState = 'CA' }: Props) {
+export default function TEYCalculator({ defaultState = 'CA', isLocked = false }: Props) {
   const [selectedState, setSelectedState] = useState(defaultState);
   const [muniYield, setMuniYield] = useState('3.50');
-  
-  // POLISH 1: Handle Income as formatted string
   const [incomeStr, setIncomeStr] = useState('1,000,000');
-  
   const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('single');
   const [customStateRate, setCustomStateRate] = useState<string>('');
 
@@ -99,14 +98,13 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
     if (defaultState) setSelectedState(defaultState);
   }, [defaultState]);
 
-  // Helper: Format number with commas
+  // Helper: Format with commas
   const formatWithCommas = (val: string) => {
     const num = val.replace(/,/g, '');
     if (isNaN(Number(num))) return val;
     return Number(num).toLocaleString('en-US');
   };
 
-  // Helper: Strip commas for math
   const getRawIncome = () => parseFloat(incomeStr.replace(/,/g, '')) || 0;
 
   // --- LOGIC ENGINE ---
@@ -148,12 +146,20 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
-                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                disabled={isLocked}
+                className={`block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
+                  isLocked ? 'bg-slate-100 cursor-not-allowed opacity-75' : 'bg-white'
+                }`}
               >
                 {Object.entries(STATE_DATA).map(([code, data]) => (
                   <option key={code} value={code}>{data.name}</option>
                 ))}
               </select>
+              {isLocked && (
+                <p className="text-[9px] text-blue-600 font-bold mt-1 uppercase tracking-tighter">
+                  Locked to {STATE_DATA[selectedState]?.name}
+                </p>
+              )}
             </div>
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase mb-1">Status</label>
@@ -211,9 +217,8 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
                className="block w-full rounded-md border-slate-300 bg-slate-50 py-2 px-3 text-sm text-slate-900 focus:bg-white transition-colors"
                step="0.01"
              />
-             {/* POLISH 2: Restore Helper Text */}
              <p className="text-[10px] text-slate-400 mt-1">
-               Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.87% local tax."}
+               Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.876% local tax."}
              </p>
           </div>
 
@@ -257,7 +262,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               <span className="font-mono text-blue-400 font-bold">{(activeStateRate * 100).toFixed(2)}%</span>
             </div>
 
-            {/* POLISH 3: Rename "Combined Drag" to "Total Marginal Tax" */}
             <div className="flex justify-between items-center pt-4 border-t border-slate-800 font-black text-xl">
               <span className="text-slate-200 uppercase text-xs tracking-wider">Total Marginal Tax</span>
               <span className="text-red-400 font-mono">{(totalTaxRate * 100).toFixed(2)}%</span>
