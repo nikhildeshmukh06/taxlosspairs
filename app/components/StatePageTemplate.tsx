@@ -10,7 +10,7 @@ import DisclaimerModal from './DisclaimerModal';
 
 interface Props {
   content: StateContent;
-  stateCode?: string;
+  stateCode?: string; // FIX: Added this back so your pages stop crashing
 }
 
 const SLUG_TO_CODE: Record<string, string> = {
@@ -26,6 +26,7 @@ const SLUG_TO_CODE: Record<string, string> = {
   'dc': 'DC'
 };
 
+// FIX: Named Export (no 'default') to match your imports
 export function StatePageTemplate({ content, stateCode }: Props) {
   const calcCode = stateCode || SLUG_TO_CODE[content.slug] || 'CA';
 
@@ -78,4 +79,62 @@ export function StatePageTemplate({ content, stateCode }: Props) {
 
         <section>
           <h2 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
-            <span className="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center
+            <span className="bg-blue-100 text-blue-700 w-8 h-8 rounded-full flex items-center justify-center text-sm">2</span>
+            {content.example.title}
+          </h2>
+          <div className="bg-slate-900 text-white rounded-2xl p-8 shadow-xl overflow-hidden relative">
+            <div className="relative z-10">
+              <p className="text-lg text-slate-300 mb-8 leading-relaxed" 
+                 dangerouslySetInnerHTML={{ __html: content.example.description }} 
+              />
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                  <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Annual Income</div>
+                  <div className="text-xl font-mono font-bold">{content.example.income}</div>
+                </div>
+                <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                  <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Muni Yield</div>
+                  <div className="text-xl font-mono font-bold text-green-400">{content.example.muniYield}</div>
+                </div>
+                <div className="bg-slate-800 p-4 rounded-lg border border-slate-700">
+                  <div className="text-xs text-slate-400 uppercase tracking-wider mb-1">Taxable Equiv.</div>
+                  <div className="text-xl font-mono font-bold text-white">{content.example.taxableYield}</div>
+                </div>
+              </div>
+
+              <div className="bg-blue-600/20 border border-blue-500/30 p-4 rounded-lg flex gap-4 items-start">
+                <div className="text-2xl">💡</div>
+                <p className="text-sm text-blue-100 leading-relaxed italic">
+                  "{content.example.takeaway}"
+                </p>
+              </div>
+            </div>
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full blur-3xl opacity-10 -mr-32 -mt-32"></div>
+          </div>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h2>
+          <div className="space-y-4">
+            {content.faqs.map((faq, i) => (
+              <div key={i} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <h3 className="font-bold text-slate-900 mb-2 text-lg">{faq.q}</h3>
+                <p className="text-slate-600 leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+        
+        <div className="flex justify-center pt-8">
+          <ReportIssueButton />
+        </div>
+
+      </div>
+
+      <div className="text-center py-8">
+        <DisclaimerModal />
+      </div>
+    </main>
+  );
+}
