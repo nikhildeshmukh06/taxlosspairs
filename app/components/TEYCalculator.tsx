@@ -2,30 +2,32 @@
 
 import React, { useState, useEffect } from 'react';
 
-// --- 1. REAL 2026 FEDERAL TAX DATA ---
+// --- 1. REAL 2026 FEDERAL TAX DATA (Audited for OBBBA) ---
+// Note: OBBBA permanently set the top rate at 37% and adjusted brackets for 2026 inflation.
 const TAX_BRACKETS_2026 = {
   single: [
-    { threshold: 626350, rate: 0.37 },
-    { threshold: 250525, rate: 0.35 },
-    { threshold: 197300, rate: 0.32 },
-    { threshold: 103350, rate: 0.24 },
-    { threshold: 48475, rate: 0.22 },
-    { threshold: 11925, rate: 0.12 },
+    { threshold: 640600, rate: 0.37 }, //
+    { threshold: 256225, rate: 0.35 },
+    { threshold: 201775, rate: 0.32 },
+    { threshold: 105700, rate: 0.24 },
+    { threshold: 50400, rate: 0.22 },
+    { threshold: 12400, rate: 0.12 },
     { threshold: 0, rate: 0.10 },
   ],
   married: [
-    { threshold: 751600, rate: 0.37 },
-    { threshold: 501050, rate: 0.35 },
-    { threshold: 394600, rate: 0.32 },
-    { threshold: 206700, rate: 0.24 },
-    { threshold: 96950, rate: 0.22 },
-    { threshold: 23850, rate: 0.12 },
+    { threshold: 768700, rate: 0.37 }, //
+    { threshold: 512450, rate: 0.35 },
+    { threshold: 403550, rate: 0.32 },
+    { threshold: 211400, rate: 0.24 },
+    { threshold: 100800, rate: 0.22 },
+    { threshold: 24800, rate: 0.12 },
     { threshold: 0, rate: 0.10 },
   ],
 };
 
 const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
+// --- 2. STATE DATA (50 States + DC + NYC) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'CA': { name: 'California', topRate: 13.3 },
   'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 },
@@ -97,6 +99,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
     if (defaultState) setSelectedState(defaultState);
   }, [defaultState]);
 
+  // Comma formatting helper
   const formatWithCommas = (val: string) => {
     const num = val.replace(/,/g, '');
     if (isNaN(Number(num))) return val;
@@ -131,14 +134,14 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
   const muniVal = parseFloat(muniYield) || 0;
   const tey = totalTaxRate < 1 ? muniVal / (1 - totalTaxRate) : 0;
 
-  // Visual Helper: Shared Input Styles
-  const inputBaseClasses = "block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 text-lg text-slate-900 font-bold placeholder-slate-400";
+  // Unified visual style for inputs
+  const inputBaseClasses = "block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 text-lg text-slate-900 font-bold placeholder-slate-400 transition-all";
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto font-sans">
       <div className="md:flex">
         
-        {/* LEFT: INPUTS (NOW UNIFIED) */}
+        {/* LEFT PANEL: INPUTS */}
         <div className="p-6 md:p-8 md:w-1/2 space-y-6 border-r border-slate-100 bg-white">
           
           <div className="grid grid-cols-2 gap-4">
@@ -149,7 +152,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                 onChange={(e) => setSelectedState(e.target.value)}
                 disabled={isLocked}
                 className={`block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 font-bold shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                  isLocked ? 'bg-slate-50 cursor-not-allowed' : 'bg-white'
+                  isLocked ? 'bg-slate-50 cursor-not-allowed opacity-80' : 'bg-white'
                 }`}
               >
                 {Object.entries(STATE_DATA).map(([code, data]) => (
@@ -225,7 +228,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
 
         </div>
 
-        {/* RIGHT: RESULTS (PREVIOUSLY CORRECT) */}
+        {/* RIGHT PANEL: RESULTS */}
         <div className="bg-slate-900 md:w-1/2 p-6 md:p-8 text-white flex flex-col justify-center relative overflow-hidden">
           
           <div className="text-center mb-8 relative z-10">
@@ -281,7 +284,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
       
       <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-2">
         <p className="text-[10px] text-slate-400 text-center md:text-left leading-relaxed max-w-2xl">
-          Estimates based on projected 2026 marginal tax brackets. Assumes in-state municipal bond (exempt from Federal & State tax). Does not include AMT considerations. Consult a tax professional for specific advice.
+          Estimates based on projected 2026 marginal tax brackets under OBBBA guidelines. Assumes in-state municipal bond (exempt from Federal & State tax). Consult a tax professional for specific advice.
         </p>
         <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
           TaxLossPairs.com
