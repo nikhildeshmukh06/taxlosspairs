@@ -30,8 +30,7 @@ export interface StateContent {
 export const STATE_CONTENT: Record<string, StateContent> = {
   // --- CALIFORNIA ---
   // RATE: 13.3% (12.3% Top Bracket + 1% Mental Health Surtax)
-  // MATH: 4.50 / (1 - (0.37 + 0.038 + 0.133)) = 4.50 / 0.459 = 9.8039%
-  'CA': {
+  'california': {
     slug: 'california',
     name: 'California',
     metadata: {
@@ -59,32 +58,63 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     faqs: [
       { q: 'Do I pay CA tax on out-of-state bonds?', a: 'Yes. California generally taxes interest from municipal bonds issued by other states. To be fully tax-free, you typically need to buy bonds issued by California agencies.' },
       { q: 'Does the 1% Mental Health Services Tax apply?', a: 'Yes. For taxable incomes over $1 million, California adds a 1% surtax. Our calculator automatically includes this 13.3% top bracket when your income exceeds the threshold.' },
-      { q: 'Why isn\'t my "Effective Tax Rate" used?', a: 'Investment decisions happen at the margin. The IRS taxes your next dollar of interest at your highest bracket, not your average rate. Using effective rate underestimates your tax burden.' }
+      { q: 'Why isn\'t my "Effective Tax Rate" used?', a: 'Investment decisions happen at the margin. The IRS taxes your next dollar of interest at your highest bracket, not your average rate.' }
     ]
   },
 
-  // --- NEW YORK ---
-  // RATE: 10.9% (State Top Bracket)
-  // MATH: 4.25 / (1 - (0.37 + 0.038 + 0.109)) = 4.25 / 0.483 = 8.799%
-  'NY': {
+  // --- NEW YORK CITY (Triple Tax Free) ---
+  // RATE: 14.77% (10.9% State + 3.87% City)
+  'new-york-city': {
+    slug: 'new-york-city',
+    name: 'New York City',
+    metadata: {
+      title: 'NYC Tax-Equivalent Yield Calculator (Triple Tax Free) | TaxLossPairs',
+      description: 'Calculate the true tax-equivalent yield for New York City residents. Accounts for Federal, NY State, and NYC Local taxes (Triple Tax).',
+      keywords: 'NYC tax equivalent yield, New York City municipal bonds, triple tax free calculator, NYC income tax rate 2026',
+    },
+    hero: {
+      title: 'New York City Tax-Equivalent Yield Calculator',
+      description: 'Living in NYC means facing the "Triple Tax": Federal, State, and City. <br/><br/>This calculator adjusts for the unique <strong>NYC Local Income Tax</strong> (up to 3.88%) to show the true value of "Triple-Exempt" municipal bonds.',
+    },
+    whySection: {
+      title: 'The NYC "Triple Tax" Threat',
+      p1: 'New York City residents face one of the highest combined tax burdens in the world. You pay Federal tax (up to 37%), NY State tax (up to 10.9%), <strong>PLUS</strong> a distinct NYC local income tax (up to ~3.88%).',
+      p2: 'This brings the combined top marginal rate on investment income to nearly <strong>52%</strong> (including NIIT). For NYC residents, a "Triple-Tax-Free" bond (issued by NYC entities) is the only way to escape all three levels of taxation.',
+    },
+    example: {
+      title: 'Example: Manhattan High Earner',
+      description: 'A married couple in Tribeca earning <strong>$1,500,000</strong> faces the full force of the triple tax. A <strong>4.00% NYC "Triple-Exempt" bond</strong> is their benchmark.',
+      income: '$1.5M',
+      muniYield: '4.00%',
+      taxableYield: '8.86%',
+      takeaway: 'To match a 4% tax-free yield, a NYC resident would need a taxable return of nearly 9%. This is why NYC munis trade at such a premium.',
+    },
+    faqs: [
+      { q: 'What counts as "Triple Tax-Free"?', a: 'Bonds issued by New York City entities (e.g., NYC GOs, NYC Water Finance Authority) are typically exempt from Federal, NY State, and NYC City taxes.' },
+      { q: 'Do I pay NYC tax on NY State bonds?', a: 'Generally, no. Interest from New York State municipal bonds is exempt from NYC local tax. However, bonds from OTHER states (like California) are fully taxable by NYC.' }
+    ]
+  },
+
+  // --- NEW YORK (STATE) ---
+  'new-york': {
     slug: 'new-york',
     name: 'New York',
     metadata: {
       title: 'New York Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
       description: 'Calculate the tax-equivalent yield for New York municipal bonds. Accounts for NY State rates (10.9%) and federal taxes.',
-      keywords: 'New York tax equivalent yield calculator, NY muni bond calculator, triple tax free bonds NY',
+      keywords: 'New York tax equivalent yield calculator, NY muni bond calculator, NY double tax free bonds',
     },
     hero: {
       title: 'New York Tax-Equivalent Yield Calculator (2026)',
       description: 'New York has some of the highest income taxes in the nation. This calculator shows the taxable yield required to match a <strong>New York in-state municipal bond</strong>, based on your 2026 marginal tax bracket.',
     },
     whySection: {
-      title: 'The "Triple Tax-Free" Advantage',
+      title: 'The "Double Tax-Free" Advantage',
       p1: 'New York State’s top marginal income tax rate is <strong>10.9%</strong>. Since state taxes are generally not deductible at the federal level due to the SALT cap, this tax hit is purely additive.',
-      p2: '<strong>NYC Residents:</strong> If you live in New York City, you pay an additional local tax (up to ~3.8%), bringing your combined burden closer to <strong>14.8%</strong>. <em>Note: This calculator uses State rates (10.9%) as a conservative baseline.</em>',
+      p2: 'For high earners outside of NYC, in-state municipal bonds avoid this 10.9% drag entirely. <em>Note: NYC residents should use the NYC-specific calculator for Triple Tax-Free results.</em>',
     },
     example: {
-      title: 'Example: New York High Earner',
+      title: 'Example: New York State Resident',
       description: 'Using the calculator above, a married New York State resident earning <strong>$800,000</strong> and considering a <strong>4.25% NY municipal bond</strong> would need a taxable yield of approximately <strong>8.80%</strong> to break even.',
       income: '$800,000',
       muniYield: '4.25%',
@@ -92,15 +122,13 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       takeaway: 'Finding a safe corporate bond yielding nearly 9% is difficult in today\'s market, highlighting why NY munis are a staple for high-net-worth portfolios.',
     },
     faqs: [
-      { q: 'Are NY munis triple tax-free?', a: 'Often, yes. If you live in NYC and buy "Triple Tax-Free" bonds (exempt from Federal, NY State, and NYC local taxes), your savings are maximized.' },
+      { q: 'Are NY munis triple tax-free?', a: 'Only if you live in NYC. For state residents outside the five boroughs, bonds are double tax-free (Federal and State).' },
       { q: 'Do I pay NY tax on out-of-state bonds?', a: 'Yes. New York generally taxes interest from municipal bonds issued by other states.' }
     ]
   },
 
   // --- NEW JERSEY ---
-  // RATE: 10.75% (Income > $1M)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.1075)) = 4.00 / 0.4845 = 8.2559%
-  'NJ': {
+  'new-jersey': {
     slug: 'new-jersey',
     name: 'New Jersey',
     metadata: {
@@ -127,14 +155,12 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     },
     faqs: [
       { q: 'Do I pay NJ tax on out-of-state bonds?', a: 'Yes. New Jersey taxes interest from municipal bonds issued by other states.' },
-      { q: 'Does the 10.75% rate apply to all income?', a: 'No, it is a marginal rate. In 2026, the 10.75% rate applies to taxable income exceeding $1 million.' }
+      { q: 'Does the 10.75% rate apply to all income?', a: 'No. In 2026, the 10.75% rate applies to taxable income exceeding $1 million.' }
     ]
   },
 
   // --- MASSACHUSETTS ---
-  // RATE: 9.0% (5% Flat + 4% Surtax)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.09)) = 4.00 / 0.502 = 7.968%
-  'MA': {
+  'massachusetts': {
     slug: 'massachusetts',
     name: 'Massachusetts',
     metadata: {
@@ -166,9 +192,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- OREGON ---
-  // RATE: 9.9% (Starts at $125k Single / $250k Joint)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.099)) = 4.00 / 0.493 = 8.113%
-  'OR': {
+  'oregon': {
     slug: 'oregon',
     name: 'Oregon',
     metadata: {
@@ -199,9 +223,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- MINNESOTA ---
-  // RATE: 9.85% (Fourth Tier)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0985)) = 4.00 / 0.4935 = 8.105%
-  'MN': {
+  'minnesota': {
     slug: 'minnesota',
     name: 'Minnesota',
     metadata: {
@@ -232,9 +254,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- HAWAII ---
-  // RATE: 11.0% (Highest outside CA/NYC)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.11)) = 4.00 / 0.482 = 8.298%
-  'HI': {
+  'hawaii': {
     slug: 'hawaii',
     name: 'Hawaii',
     metadata: {
@@ -257,7 +277,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$450k',
       muniYield: '4.00%',
       taxableYield: '8.30%',
-      takeaway: 'Finding an 8.30% yield in the corporate bond market usually requires taking on significant credit risk. Hawaii munis offer this yield with high-grade safety.',
+      takeaway: 'Hawaii munis offer high taxable equivalent yields with high-grade safety.',
     },
     faqs: [
       { q: 'Do I pay HI tax on out-of-state bonds?', a: 'Yes. Hawaii taxes interest from municipal bonds issued by other states.' }
@@ -265,9 +285,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
   },
 
   // --- VERMONT ---
-  // RATE: 8.75%
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0875)) = 4.00 / 0.5045 = 7.928%
-  'VT': {
+  'vermont': {
     slug: 'vermont',
     name: 'Vermont',
     metadata: {
@@ -293,14 +311,12 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       takeaway: 'In high-tax states like Vermont, "yield" is not what you earn—it\'s what you keep.',
     },
     faqs: [
-       { q: 'Do I pay VT tax on out-of-state bonds?', a: 'Yes. Vermont taxes interest from municipal bonds issued by other states.' }
+      { q: 'Do I pay VT tax on out-of-state bonds?', a: 'Yes. Vermont taxes interest from municipal bonds issued by other states.' }
     ]
   },
 
   // --- CONNECTICUT ---
-  // RATE: 6.99% (Benefit Recapture)
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.0699)) = 4.00 / 0.5221 = 7.661%
-  'CT': {
+  'connecticut': {
     slug: 'connecticut',
     name: 'Connecticut',
     metadata: {
@@ -326,14 +342,12 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       takeaway: 'With the SALT cap limiting deductions, avoiding this ~7% state drag is the only risk-free way to boost yield.',
     },
     faqs: [
-       { q: 'Do I pay CT tax on out-of-state bonds?', a: 'Yes. Connecticut taxes interest from municipal bonds issued by other states.' }
+      { q: 'Do I pay CT tax on out-of-state bonds?', a: 'Yes. Connecticut taxes interest from municipal bonds issued by other states.' }
     ]
   },
 
   // --- WASHINGTON, DC ---
-  // RATE: 10.75%
-  // MATH: 4.00 / (1 - (0.37 + 0.038 + 0.1075)) = 4.00 / 0.4845 = 8.2559%
-  'DC': {
+  'dc': {
     slug: 'dc',
     name: 'Washington, DC',
     metadata: {
@@ -356,10 +370,10 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       income: '$600k',
       muniYield: '4.00%',
       taxableYield: '8.26%',
-      takeaway: 'Buying a Virginia bond instead would likely trigger a surprise tax bill. Sticking to DC paper is now essential for tax efficiency.',
+      takeaway: 'Buying a Virginia bond instead would likely trigger a surprise tax bill. Sticking to DC paper is now essential.',
     },
     faqs: [
-       { q: 'Can I still buy MD or VA bonds tax-free?', a: 'No. Unless they are specific bonds issued by certain regional authorities (like WMATA), bonds from Maryland or Virginia are now generally taxable for DC residents.' }
+      { q: 'Can I still buy MD or VA bonds tax-free?', a: 'No. Unless they are specific regional authorities, bonds from Maryland or Virginia are now generally taxable for DC residents.' }
     ]
   }
 };
