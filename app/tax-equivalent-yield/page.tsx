@@ -4,9 +4,9 @@ import type { Metadata } from 'next';
 import TEYCalculator from '../components/TEYCalculator';
 
 export const metadata: Metadata = {
-  title: 'Tax Equivalent Yield Calculator (2025) | California, NY, NJ',
-  description: 'Calculate the true tax-equivalent yield for municipal bonds in high-tax states like California, New York, and New Jersey. Includes 2025 marginal brackets and NIIT.',
-  keywords: 'California muni bond calculator, New York tax equivalent yield, NJ municipal bonds, NIIT tax calculator, tax free yield 2025',
+  title: 'Tax Equivalent Yield Calculator (2026) | California, NY, NJ',
+  description: 'Calculate the true tax-equivalent yield for municipal bonds in high-tax states like California, New York, and New Jersey. Includes 2026 marginal brackets and NIIT.',
+  keywords: 'California muni bond calculator, New York tax equivalent yield, NJ municipal bonds, NIIT tax calculator, tax free yield 2026',
 };
 
 export default function TEYPage() {
@@ -39,7 +39,6 @@ export default function TEYPage() {
         </div>
 
         {/* The Calculator Component */}
-        {/* We let it default to CA, or we could force it to any default. */}
         <TEYCalculator />
 
         {/* SEO CONTENT BLOCK */}
@@ -47,11 +46,14 @@ export default function TEYPage() {
           
           {/* State Comparison Table */}
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">
-              2025 Yield Guide: High-Tax States
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">
+              2026 Yield Guide: High-Tax States
             </h3>
-            <p className="text-slate-700 mb-6">
-              For a high earner (37% Federal + 3.8% NIIT), here is how a <strong>3.50% Muni Bond</strong> compares to taxable equivalents in top states:
+            
+            {/* THE NEW CLARIFYING SENTENCE */}
+            <p className="text-slate-700 mb-8 max-w-2xl">
+              Not sure if your result makes sense? Here is how a <strong>3.50% Muni Bond</strong> compares for high earners in the highest-tax states. 
+              This helps validate why tax-free yields are so powerful in these specific regions.
             </p>
             
             <div className="grid gap-4 md:grid-cols-3">
