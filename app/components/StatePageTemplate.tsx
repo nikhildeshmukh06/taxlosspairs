@@ -26,8 +26,8 @@ const SLUG_TO_CODE: Record<string, string> = {
 };
 
 export function StatePageTemplate({ content, stateCode }: Props) {
+  // Determine correct state code for calculator
   const calcCode = stateCode || SLUG_TO_CODE[content.slug] || 'CA';
-  const isNYC = content.slug === 'new-york-city';
 
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
@@ -76,7 +76,8 @@ export function StatePageTemplate({ content, stateCode }: Props) {
 
         {/* CALCULATOR SECTION */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 -mt-8 relative z-10 mb-20">
-          <TEYCalculator defaultState={calcCode} />
+          {/* FUNCTIONAL FIX: Added isLocked={true} to keep state focused */}
+          <TEYCalculator defaultState={calcCode} isLocked={true} />
           
           {/* TRUST ANCHOR: FORMULA & INTENT */}
           <div className="max-w-2xl mx-auto mt-8 text-center space-y-4">
@@ -126,6 +127,7 @@ export function StatePageTemplate({ content, stateCode }: Props) {
                    dangerouslySetInnerHTML={{ __html: content.example.description }} 
                 />
                 
+                {/* POLISH: Glassmorphic stat blocks maintained */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
                   <div className="bg-white/5 backdrop-blur-sm p-6 rounded-2xl border border-white/10">
                     <div className="text-[10px] text-slate-400 uppercase tracking-widest font-bold mb-2">Annual Income</div>
@@ -149,7 +151,6 @@ export function StatePageTemplate({ content, stateCode }: Props) {
                   </div>
                 </div>
               </div>
-              {/* Decorative background element */}
               <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600 rounded-full blur-[120px] opacity-20 -mr-48 -mt-48 pointer-events-none"></div>
             </div>
           </section>
@@ -197,7 +198,6 @@ export function StatePageTemplate({ content, stateCode }: Props) {
 
       </div>
 
-      {/* SHARED FOOTER */}
       <Footer variant="tey" />
     </main>
   );
