@@ -312,27 +312,27 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     ]
   },
 
-  // --- DC ---
+  // --- DC (UPDATED) ---
   'DC': {
     slug: 'dc',
-    name: 'District of Columbia',
+    name: 'Washington, DC', // Changed from "District of Columbia"
     metadata: {
-      title: 'DC Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
-      description: 'Calculate TEY for Washington DC muni bonds. Accounts for the repealed out-of-state bond exemption.',
-      keywords: 'DC tax equivalent yield calculator, DC muni bond calculator, DC income tax 2026',
+      title: 'Washington, DC Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
+      description: 'Calculate TEY for Washington, DC municipal bonds. Accounts for the repealed out-of-state bond exemption.',
+      keywords: 'Washington DC tax equivalent yield calculator, DC muni bond calculator, Washington DC income tax 2026',
     },
     hero: {
-      title: 'DC Tax-Equivalent Yield Calculator (2026)',
+      title: 'Washington, DC Tax-Equivalent Yield Calculator (2026)',
       description: 'DC recently changed its rules: out-of-state bonds are no longer tax-free. This calculator shows the yield required to match a <strong>DC-issued municipal bond</strong>.',
     },
     whySection: {
       title: 'The "Repealed Exemption" Trap',
-      p1: 'For years, DC residents enjoyed tax-free income on municipal bonds from <em>any</em> state. That is no longer true.',
+      p1: 'For years, Washington, DC residents enjoyed tax-free income on municipal bonds from <em>any</em> state. That is no longer true.',
       p2: 'Today, DC only exempts interest from bonds issued by the District of Columbia. If you buy a bond from Virginia or Maryland, you owe DC income tax (up to 10.75%).',
     },
     example: {
       title: 'Example: DC Resident',
-      description: 'A DC resident earning <strong>$600,000</strong> facing the 10.75% top rate and considering a <strong>4.00% DC municipal bond</strong> would need a taxable yield of approximately <strong>7.21%</strong> to break even.',
+      description: 'A Washington, DC resident earning <strong>$600,000</strong> facing the 10.75% top rate and considering a <strong>4.00% DC municipal bond</strong> would need a taxable yield of approximately <strong>7.21%</strong> to break even.',
       income: '$600k',
       muniYield: '4.00%',
       taxableYield: '7.21%',
@@ -341,5 +341,4 @@ export const STATE_CONTENT: Record<string, StateContent> = {
     faqs: [
        { q: 'Can I still buy MD or VA bonds tax-free?', a: 'No. Unless they are specific bonds issued by certain regional authorities (like WMATA), bonds from Maryland or Virginia are now generally taxable for DC residents.' }
     ]
-  }
-};
+  };
