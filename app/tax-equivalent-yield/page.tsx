@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function TEYPage() {
   return (
-    <main className="min-h-screen bg-slate-50">
+    <main className="min-h-screen bg-slate-50 flex flex-col">
       
       {/* Navigation Bar */}
       <nav className="bg-white border-b border-slate-200">
@@ -26,7 +26,7 @@ export default function TEYPage() {
       </nav>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-4xl mx-auto px-4 py-12 flex-grow">
         
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
@@ -50,7 +50,6 @@ export default function TEYPage() {
               2026 Yield Guide: High-Tax States
             </h3>
             
-            {/* The Clarifying Sentence */}
             <p className="text-slate-700 mb-8 max-w-2xl">
               Not sure if your result makes sense? Here is how a <strong>3.50% Muni Bond</strong> compares for high earners in the highest-tax states. 
               This helps validate why tax-free yields are so powerful in these specific regions.
@@ -58,16 +57,14 @@ export default function TEYPage() {
             
             <div className="grid gap-4 md:grid-cols-3">
               
-              {/* California Card -> LINKED TO /california */}
+              {/* California Card */}
               <Link 
                 href="/tax-equivalent-yield/california"
                 className="group block bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all relative overflow-hidden"
               >
-                 {/* Subtle "Click Me" Background Hint */}
                  <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                  </div>
-
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🐻</span>
                   <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">California</h4>
@@ -84,29 +81,41 @@ export default function TEYPage() {
                 </div>
               </Link>
 
-              {/* New York City Card (Static) */}
-              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm opacity-90">
+              {/* New York Card */}
+              <Link 
+                href="/tax-equivalent-yield/new-york"
+                className="group block bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </div>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🍎</span>
-                  <h4 className="font-bold text-slate-900">New York City</h4>
+                  <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">New York</h4>
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-slate-600">
                     <span>Top Tax Rate</span>
-                    <span className="font-mono font-bold text-red-500">14.7%</span>
+                    <span className="font-mono font-bold text-red-500">10.9%</span>
                   </div>
                   <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
                     <span className="font-semibold text-slate-900">Taxable Equiv.</span>
-                    <span className="text-xl font-bold text-green-600">7.86%</span>
+                    <span className="text-xl font-bold text-green-600">7.65%</span>
                   </div>
                 </div>
-              </div>
+              </Link>
 
-              {/* New Jersey Card (Static) */}
-              <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm opacity-90">
+              {/* New Jersey Card */}
+              <Link 
+                href="/tax-equivalent-yield/new-jersey"
+                className="group block bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:border-blue-300 hover:shadow-md transition-all relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 p-2 opacity-0 group-hover:opacity-100 transition-opacity text-blue-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </div>
                 <div className="flex items-center gap-2 mb-3">
                   <span className="text-2xl">🛣️</span>
-                  <h4 className="font-bold text-slate-900">New Jersey</h4>
+                  <h4 className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">New Jersey</h4>
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-slate-600">
@@ -115,9 +124,25 @@ export default function TEYPage() {
                   </div>
                   <div className="pt-2 border-t border-slate-100 flex justify-between items-center">
                     <span className="font-semibold text-slate-900">Taxable Equiv.</span>
-                    <span className="text-xl font-bold text-green-600">7.21%</span>
+                    <span className="text-xl font-bold text-green-600">7.76%</span>
                   </div>
                 </div>
+              </Link>
+            </div>
+
+            {/* --- NEW: SECONDARY STATE LINK CLUSTER --- */}
+            <div className="mt-8 text-center bg-white/50 p-4 rounded-lg border border-slate-100">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-3">
+                Also available for these high-tax states
+              </p>
+              <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm font-medium text-slate-600">
+                <Link href="/tax-equivalent-yield/massachusetts" className="hover:text-blue-600 hover:underline transition-colors">Massachusetts</Link>
+                <Link href="/tax-equivalent-yield/oregon" className="hover:text-blue-600 hover:underline transition-colors">Oregon</Link>
+                <Link href="/tax-equivalent-yield/minnesota" className="hover:text-blue-600 hover:underline transition-colors">Minnesota</Link>
+                <Link href="/tax-equivalent-yield/hawaii" className="hover:text-blue-600 hover:underline transition-colors">Hawaii</Link>
+                <Link href="/tax-equivalent-yield/vermont" className="hover:text-blue-600 hover:underline transition-colors">Vermont</Link>
+                <Link href="/tax-equivalent-yield/connecticut" className="hover:text-blue-600 hover:underline transition-colors">Connecticut</Link>
+                <Link href="/tax-equivalent-yield/dc" className="hover:text-blue-600 hover:underline transition-colors">District of Columbia</Link>
               </div>
             </div>
           </div>
@@ -125,7 +150,6 @@ export default function TEYPage() {
           {/* FAQ Section */}
           <div className="border-t border-slate-200 pt-10">
             <h3 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h3>
-            
             <div className="space-y-8">
               <div>
                 <h4 className="font-bold text-lg text-slate-800 mb-2">What is the NIIT Surtax?</h4>
@@ -134,7 +158,6 @@ export default function TEYPage() {
                   for high earners (AGI over $200k/$250k). Our calculator automatically adds this surtax to give you the real cost of taxable bonds.
                 </p>
               </div>
-
               <div>
                 <h4 className="font-bold text-lg text-slate-800 mb-2">Why isn't my "Effective Tax Rate" used?</h4>
                 <p className="text-slate-600 leading-relaxed">
@@ -142,7 +165,6 @@ export default function TEYPage() {
                   not your average rate. Using your effective rate would underestimate your tax burden and lead to poor investment choices.
                 </p>
               </div>
-              
               <div>
                 <h4 className="font-bold text-lg text-slate-800 mb-2">Do I pay state tax on out-of-state Munis?</h4>
                 <p className="text-slate-600 leading-relaxed">
@@ -179,6 +201,53 @@ export default function TEYPage() {
         </div>
 
       </div>
+
+      {/* --- PRO FOOTER (Identical to Homepage but with TEY-specific disclaimer) --- */}
+      <footer className="bg-slate-50 border-t border-slate-200 py-12">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <p className="text-slate-400 text-sm mb-4">
+            Built for the Bogleheads community. Open Source.
+          </p>
+          
+          {/* TEY-SPECIFIC DISCLAIMER */}
+          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
+            DISCLAIMER: Tax-equivalent yield calculations are estimates based on 2026 marginal tax brackets and public bond data. 
+            They do not constitute financial or tax advice. Actual tax liability depends on your specific situation. 
+            Past performance does not guarantee future results.
+          </p>
+
+          <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
+            <Link href="/" className="hover:text-blue-600">Home</Link>
+            
+            <a 
+              href="https://github.com/nikhildeshmukh06/taxlosspairs" 
+              target="_blank" 
+              rel="noreferrer" 
+              className="hover:text-blue-600"
+            >
+              GitHub
+            </a>
+
+            <Link href="/legal" className="hover:text-blue-600 hover:underline">
+              Legal & Privacy
+            </Link>
+
+            <button 
+              data-tally-open="68Kqjo" 
+              data-tally-layout="modal"
+              data-tally-emoji-text="👋"
+              data-tally-emoji-animation="wave"
+              className="hover:text-blue-600 bg-transparent border-none cursor-pointer p-0 font-medium text-slate-500"
+            >
+              Report an Issue
+            </button>
+
+            <span className="text-slate-300">|</span>
+            
+            <span>Data updated: Jan 2026</span>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
