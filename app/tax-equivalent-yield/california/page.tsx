@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import TEYCalculator from '../../components/TEYCalculator'; // Note the double ../
 
 export const metadata: Metadata = {
-  title: 'California Tax-Equivalent Yield Calculator (2025) | TaxLossPairs',
+  title: 'California Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
   description: 'Calculate the true tax-equivalent yield for California municipal bonds using 2026 marginal tax brackets (14.4%) and NIIT. See if a muni beats a CD.',
   keywords: 'California tax equivalent yield calculator, CA muni bond calculator, California marginal tax rate 2026, double tax free bonds CA',
 };
@@ -28,100 +28,70 @@ export default function CaliforniaTEYPage() {
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 py-12">
         
-        {/* State-Specific Header */}
+        {/* CALIFORNIA-SPECIFIC HEADER */}
         <div className="text-center mb-10">
           <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
-            California Tax-Equivalent Yield Calculator (2025)
+            California Tax-Equivalent Yield Calculator (2026)
           </h1>
           <p className="text-lg text-slate-600 max-w-2xl mx-auto">
-            If you live in California, taxes can quietly destroy your investment returns. 
-            With a top marginal rate of <strong>14.4%</strong> plus federal tax, a "good" taxable yield often isn't good at all.
+            California has the highest state income tax in the country. 
+            This calculator shows the taxable yield required to match a <strong>California "Double Tax-Free" Municipal Bond</strong>, based on your specific 2026 tax bracket.
           </p>
         </div>
 
-        {/* The Calculator (Forced to CA) */}
+        {/* The Calculator (Pre-selected to CA) */}
         <TEYCalculator defaultState="CA" />
 
-        {/* Results Explanation */}
-        <div className="mt-8 p-6 bg-white rounded-xl border border-slate-200 shadow-sm max-w-2xl mx-auto">
-          <h3 className="text-lg font-bold text-slate-900 mb-2">How to interpret your result</h3>
-          <p className="text-slate-600">
-            The <strong>Tax-Equivalent Yield (TEY)</strong> shown above is the taxable yield you would need to earn 
-            (from a CD, Treasury, or Corporate Bond) to match the tax-free income from a California municipal bond. 
-            If your taxable option pays <em>less</em> than this number, the Muni bond is the mathematical winner.
-          </p>
-        </div>
-
-        {/* SEO Content Block */}
+        {/* SEO CONTENT BLOCK (Specific to California) */}
         <div className="mt-16 max-w-3xl mx-auto space-y-12">
           
-          {/* Concrete Example */}
+          {/* Why it matters in CA */}
           <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-6">Example: California Investor ($150k Income)</h3>
-            <div className="bg-white p-6 rounded-xl border border-slate-200">
-              <ul className="space-y-3 text-slate-700 mb-6">
-                <li className="flex justify-between border-b border-slate-100 pb-2">
-                  <span>California Muni Yield</span>
-                  <span className="font-mono font-bold">3.50%</span>
-                </li>
-                <li className="flex justify-between border-b border-slate-100 pb-2">
-                  <span>Federal Marginal Rate</span>
-                  <span className="font-mono">24.0%</span>
-                </li>
-                <li className="flex justify-between border-b border-slate-100 pb-2">
-                  <span>CA Marginal Rate</span>
-                  <span className="font-mono">9.3%</span>
-                </li>
-                <li className="flex justify-between pt-1">
-                  <span className="font-bold text-slate-900">Total Tax Hit</span>
-                  <span className="font-mono font-bold text-red-500">~33.3%</span>
-                </li>
-              </ul>
-              <div className="bg-green-50 p-4 rounded-lg text-green-900 text-sm">
-                <strong>The Verdict:</strong> A 3.50% CA Muni is equivalent to a <strong>5.25% Taxable Bond</strong>. 
-                This means a 5.0% Corporate Bond actually puts <em>less</em> money in your pocket than the Muni.
+            <h3 className="text-2xl font-bold text-slate-900 mb-4">Why Tax-Equivalent Yield Matters More in California</h3>
+            <p className="text-slate-700 leading-relaxed mb-4">
+              California’s top marginal income tax rate is <strong>14.4%</strong> (including the Mental Health Services Surtax). Since state taxes are generally not deductible at the federal level due to the SALT cap, this hit is purely additive.
+            </p>
+            <p className="text-slate-700 leading-relaxed">
+              That means a California resident in the top bracket loses over <strong>50%</strong> of every additional dollar of taxable interest. 
+              For high earners, in-state municipal bonds are often the only way to preserve yield without taking on equity risk.
+            </p>
+          </div>
+
+          {/* California-Specific Example */}
+          <div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-6">Example: California High Earner</h3>
+            <div className="bg-white p-6 rounded-xl border border-slate-200 shadow-sm">
+              <p className="text-slate-700 mb-4">
+                A married California resident earning <strong>$650,000</strong> and considering a <strong>4.50% California municipal bond</strong> would need a taxable yield of approximately <strong>8.67%</strong> to break even.
+              </p>
+              <div className="bg-blue-50 p-4 rounded-lg text-blue-900 text-sm font-medium border border-blue-100">
+                <strong>Reality Check:</strong> Very few investment-grade corporate bonds offer an 8.67% yield. This highlights why high-net-worth Californians heavily favor munis.
               </div>
             </div>
           </div>
 
-          {/* Marginal vs Effective */}
-          <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">Why we use Marginal Rates</h3>
-            <p className="text-slate-700 leading-relaxed mb-4">
-              Most online calculators use your effective (average) tax rate. <strong>That is incorrect for investment decisions.</strong>
-            </p>
-            <p className="text-slate-700 leading-relaxed">
-              When you earn new investment income, the IRS taxes that income at your <strong>marginal rate</strong>—the rate on your next dollar. 
-              Using effective rates understates your real tax bill and makes taxable bonds look better than they actually are.
-            </p>
-          </div>
-
-          {/* CA Specific Nuance */}
-          <div>
-            <h3 className="text-2xl font-bold text-slate-900 mb-4">The "Double Tax-Free" Advantage</h3>
-            <p className="text-slate-700 leading-relaxed">
-              California residents benefit from "double tax-free" status when buying California-issued municipal bonds. 
-              These are exempt from both Federal income tax AND California state income tax. In high brackets, this makes CA Munis 
-              one of the most efficient assets available.
-            </p>
-          </div>
-
-          {/* FAQs */}
+          {/* California-Specific FAQs */}
           <div className="border-t border-slate-200 pt-8">
             <h3 className="text-2xl font-bold text-slate-900 mb-6">Frequently Asked Questions</h3>
             <div className="space-y-6">
               <div>
-                <h4 className="font-bold text-lg text-slate-800 mb-1">Do California munis avoid NIIT?</h4>
-                <p className="text-slate-600">Yes. Interest from municipal bonds is generally exempt from the 3.8% Net Investment Income Tax.</p>
+                <h4 className="font-bold text-lg text-slate-800 mb-1">Do I pay CA tax on out-of-state bonds?</h4>
+                <p className="text-slate-600">
+                  Yes. California generally taxes interest from municipal bonds issued by other states (e.g., a New York muni bond is taxable in CA). 
+                  To be fully tax-free, you typically need to buy bonds issued by California agencies.
+                </p>
               </div>
               <div>
-                <h4 className="font-bold text-lg text-slate-800 mb-1">Who should not use muni bonds?</h4>
-                <p className="text-slate-600">Lower-income investors, or those investing via tax-advantaged accounts (IRAs/401ks), generally do not benefit from the lower yields of municipal bonds.</p>
+                <h4 className="font-bold text-lg text-slate-800 mb-1">Does the 1% Mental Health Services Tax apply?</h4>
+                <p className="text-slate-600">
+                  Yes. For taxable incomes over $1 million, California adds a 1% surtax. 
+                  Our calculator automatically includes this 14.4% top bracket when your income exceeds the threshold.
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Cross-Sell Box */}
+          {/* Cross-Sell */}
           <div className="bg-white p-8 rounded-2xl border border-blue-100 shadow-sm mt-12">
             <div className="flex items-start gap-4">
               <div className="p-3 bg-blue-100 rounded-lg text-blue-600 shrink-0">
@@ -129,10 +99,10 @@ export default function CaliforniaTEYPage() {
               </div>
               <div>
                 <h4 className="text-xl font-bold text-slate-900 mb-2">
-                  Already Maximized Your Yields?
+                  Optimized Your Yield? Now Optimize Your Gains.
                 </h4>
                 <p className="text-slate-600 mb-6">
-                  Reducing taxes on bond income is step one. Step two is <strong>Harvesting Losses</strong> in your stock portfolio to offset your other capital gains.
+                  Avoiding tax on interest is step one. Step two is using <strong>Tax-Loss Harvesting</strong> to offset your stock market gains.
                 </p>
                 <Link 
                   href="/"
