@@ -3,8 +3,14 @@
 import React, { useEffect } from 'react';
 import Link from 'next/link';
 
-export default function Footer() {
-  // Load Tally script dynamically to ensure the popup works
+// Define the shape of the props
+interface FooterProps {
+  variant?: 'standard' | 'tey'; // Default is 'standard'
+}
+
+export default function Footer({ variant = 'standard' }: FooterProps) {
+  
+  // Load Tally script dynamically
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "https://tally.so/widgets/embed.js";
@@ -23,12 +29,22 @@ export default function Footer() {
           Built for the Bogleheads community. Open Source.
         </p>
         
-        {/* GLOBAL DISCLAIMER */}
-        <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
-          DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
-          They are approximations, not guarantees, and may change over time. Leveraged products often use swaps/derivatives 
-          resulting in low physical overlap despite high correlation. Past performance does not guarantee future results.
-        </p>
+        {/* DYNAMIC DISCLAIMER SWITCH */}
+        {variant === 'standard' ? (
+          // OPTION A: ETF / CORRELATION DISCLAIMER (Main Site)
+          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
+            DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
+            They are approximations, not guarantees, and may change over time. Leveraged products often use swaps/derivatives 
+            resulting in low physical overlap despite high correlation. Past performance does not guarantee future results.
+          </p>
+        ) : (
+          // OPTION B: TAX / BOND DISCLAIMER (TEY Pages)
+          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
+            DISCLAIMER: Tax-equivalent yield calculations are estimates based on projected 2026 federal marginal rates and state tax brackets. 
+            This tool does not compute total tax liability, does not account for AMT, and is not a substitute for professional tax advice. 
+            All investment decisions should be discussed with a qualified financial advisor.
+          </p>
+        )}
 
         <div className="flex flex-wrap justify-center items-center gap-x-6 gap-y-2 text-sm font-medium text-slate-500">
           <Link href="/" className="hover:text-blue-600 transition-colors">Home</Link>
