@@ -7,7 +7,6 @@ type TaxBracket = { limit: number; rate: number };
 type TaxSchedule = { SINGLE: TaxBracket[]; MARRIED: TaxBracket[] };
 
 // --- FEDERAL DATA (2026 Estimated based on Inflation Adjs) ---
-// Source: Tax Foundation / IRS Rev. Proc. projections for 2026
 const FED_BRACKETS: TaxSchedule = {
   SINGLE: [
     { limit: 640600, rate: 0.37 },
@@ -40,7 +39,6 @@ const STATE_DATA: Record<string, TaxSchedule> = {
   'AK': zero, 'FL': zero, 'NV': zero, 'NH': zero, 'SD': zero, 
   'TN': zero, 'TX': zero, 'WA': zero, 'WY': zero,
 
-  // Flat & Simple States
   'AZ': flat(0.025), 'CO': flat(0.044), 'IL': flat(0.0495), 
   'IN': flat(0.0305), 'KY': flat(0.04), 'MI': flat(0.0425),
   'MS': flat(0.047), 'NC': flat(0.045), 'PA': flat(0.0307), 
@@ -56,7 +54,7 @@ const STATE_DATA: Record<string, TaxSchedule> = {
   // Progressive States
   'CA': {
     SINGLE: [
-      { limit: 1000000, rate: 0.144 }, // 13.3% + 1.1% SDI/MHSA proxy
+      { limit: 1000000, rate: 0.144 }, 
       { limit: 677275, rate: 0.123 },
       { limit: 406364, rate: 0.113 }, { limit: 338639, rate: 0.103 },
       { limit: 68350, rate: 0.093 }, { limit: 54081, rate: 0.08 },
@@ -64,7 +62,7 @@ const STATE_DATA: Record<string, TaxSchedule> = {
       { limit: 10412, rate: 0.02 }, { limit: 0, rate: 0.01 }
     ],
     MARRIED: [
-      { limit: 1000000, rate: 0.144 }, // FIXED: Surtax hits Married at $1M too
+      { limit: 1000000, rate: 0.144 }, 
       { limit: 812728, rate: 0.113 }, 
       { limit: 677278, rate: 0.103 }, { limit: 136700, rate: 0.093 }, 
       { limit: 108162, rate: 0.08 }, { limit: 75576, rate: 0.06 }, 
@@ -266,6 +264,10 @@ export default function TEYCalculator({ defaultState = 'CA' }: { defaultState?: 
                 <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
               </div>
             </div>
+            {/* NEW: Inline Helper Text */}
+            <p className="text-[10px] text-slate-400 mt-1">
+              Assumes the municipal bond is issued by your home state.
+            </p>
           </div>
         </div>
 
