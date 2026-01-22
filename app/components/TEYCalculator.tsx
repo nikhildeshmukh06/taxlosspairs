@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 
 // --- 1. REAL 2026 FEDERAL TAX DATA ---
 // Source: Projected 2026 Brackets based on inflation adjustments
-// Ordered Highest to Lowest for precise marginal lookup
 const TAX_BRACKETS_2026 = {
   single: [
     { threshold: 626350, rate: 0.37 },
@@ -26,11 +25,7 @@ const TAX_BRACKETS_2026 = {
   ],
 };
 
-// NIIT Thresholds (Net Investment Income Tax)
-const NIIT_THRESHOLDS = {
-  single: 200000,
-  married: 250000,
-};
+const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
 // --- 2. STATE DATA (Defaults) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
@@ -51,47 +46,42 @@ interface Props {
 }
 
 export default function TEYCalculator({ defaultState = 'CA' }: Props) {
-  // Inputs
   const [selectedState, setSelectedState] = useState(defaultState);
   const [muniYield, setMuniYield] = useState('3.50');
   const [incomeStr, setIncomeStr] = useState('1000000');
   const [filingStatus, setFilingStatus] = useState<'single' | 'married'>('single');
-  
-  // Calculated Rates (State is editable)
   const [customStateRate, setCustomStateRate] = useState<string>('');
+
+  // Update selectedState if prop changes
+  useEffect(() => {
+    if (defaultState) setSelectedState(defaultState);
+  }, [defaultState]);
 
   // --- LOGIC ENGINE ---
   const income = parseFloat(incomeStr) || 0;
 
-  // 1. Calculate Federal Marginal Rate
   const getFedRate = () => {
     const brackets = TAX_BRACKETS_2026[filingStatus];
-    // Find the first bracket where income > threshold
     const bracket = brackets.find((b) => income > b.threshold);
     return bracket ? bracket.rate : 0.10;
   };
   const fedRate = getFedRate();
 
-  // 2. Calculate NIIT
   const niitThreshold = NIIT_THRESHOLDS[filingStatus];
   const niitRate = income > niitThreshold ? 0.038 : 0.0;
 
-  // 3. Determine State Rate
-  // If user hasn't customized it, use the State's Top Rate as a default
   const defaultStateRate = STATE_DATA[selectedState]?.topRate || 0;
   const activeStateRate = customStateRate !== '' 
     ? parseFloat(customStateRate) / 100 
     : defaultStateRate / 100;
 
-  // Reset custom state rate when state changes (UX Safety)
+  // Reset custom state rate when state changes
   useEffect(() => {
     setCustomStateRate('');
   }, [selectedState]);
 
-  // 4. Final TEY Math
   const totalTaxRate = fedRate + niitRate + activeStateRate;
   const muniVal = parseFloat(muniYield) || 0;
-  // Prevent divide by zero if tax is 100% (unlikely but safe)
   const tey = totalTaxRate < 1 ? muniVal / (1 - totalTaxRate) : 0;
 
   return (
@@ -101,7 +91,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
         {/* LEFT: INPUTS */}
         <div className="p-6 md:p-8 md:w-1/2 space-y-5">
           
-          {/* Row 1: State & Status */}
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-bold text-slate-500 uppercase mb-1">State</label>
@@ -128,9 +117,9 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             </div>
           </div>
 
-          {/* Income Input */}
           <div>
-            <label className="block text-sm font-bold text-slate-700 mb-2">Taxable Income ($)</label>
+            {/* FIX: Updated Label for Clarity */}
+            <label className="block text-sm font-bold text-slate-700 mb-2">Taxable Income (After Deductions)</label>
             <input
               type="number"
               value={incomeStr}
@@ -140,7 +129,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             />
           </div>
 
-          {/* Muni Yield Input */}
           <div>
             <label className="block text-sm font-bold text-slate-700 mb-2">Muni Bond Yield (%)</label>
             <input
@@ -153,7 +141,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
             />
           </div>
 
-          {/* Advanced: Editable State Rate */}
           <div className="pt-2">
              <label className="flex justify-between text-xs font-bold text-slate-500 uppercase mb-1">
                <span>Marginal State Tax Rate (%)</span>
@@ -200,7 +187,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
               </div>
             </div>
             
-            {/* NIIT ROW with TOOLTIP */}
             <div className="flex justify-between items-center group relative cursor-help" title="Net Investment Income Tax (3.8%) applies to investment income above $200k (single) or $250k (married).">
               <div className="flex items-center gap-1">
                 <span className="text-slate-400 border-b border-slate-700 border-dotted">NIIT Surtax</span>
@@ -230,7 +216,6 @@ export default function TEYCalculator({ defaultState = 'CA' }: Props) {
         </div>
       </div>
       
-      {/* REQUIRED DISCLAIMER FOOTER */}
       <div className="bg-slate-50 px-6 py-4 border-t border-slate-100">
         <p className="text-[10px] text-slate-400 text-center leading-relaxed">
           This calculator estimates tax-equivalent yield using 2026 estimated marginal tax rates. 
