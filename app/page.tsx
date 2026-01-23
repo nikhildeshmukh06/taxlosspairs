@@ -3,7 +3,9 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import pairsData from './pairs.json';
-import Footer from './components/Footer'; // <--- Import the new Footer
+import Footer from './components/Footer'; 
+import TEYCalculator from './components/TEYCalculator'; // Added TEY Calculator import
+import { STATE_CONTENT } from './data/state-content'; // Added State Content import
 
 // Define the order for the "Bloomberg Terminal" clusters
 const CATEGORY_ORDER = [
@@ -49,6 +51,11 @@ export default function Home() {
   }, [filteredTickers]);
 
   const hasResults = Object.values(groupedTickers).some(group => group.length > 0);
+
+  // --- NEW HUB LOGIC ---
+  const hubData = STATE_CONTENT['hub'];
+  // Filter out 'hub' so it doesn't appear in the state list buttons
+  const stateKeys = Object.keys(STATE_CONTENT).filter((key) => key !== 'hub');
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900 flex flex-col">
@@ -184,37 +191,53 @@ export default function Home() {
           </div>
         )}
 
-        {/* --- RELATED TAX TOOLS --- */}
-        <section className="mt-20 pt-10 border-t border-slate-200">
+        {/* --- RELATED TAX TOOLS (TEY HUB PREVIEW) --- */}
+        <section className="mt-20 pt-10 border-t border-slate-200" id="tey-calculator">
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xl font-bold text-slate-800 uppercase tracking-wide">
-              Related Tax-Smart Tools
+              Tax-Equivalent Yield Calculator (2026)
             </h2>
+            <div className="inline-block bg-blue-600/10 text-blue-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded-full">
+               Updated for OBBBA
+            </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Link 
-              href="/tax-equivalent-yield" 
-              className="group block p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <span className="text-6xl">🏛️</span>
-              </div>
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl text-slate-600 group-hover:bg-blue-100 group-hover:text-blue-600 transition-colors">
-                  %
-                </div>
-                <h3 className="font-bold text-lg text-slate-900 group-hover:text-blue-600 transition-colors">
-                  TEY Calculator
-                </h3>
-              </div>
-              <p className="text-slate-600 text-sm leading-relaxed mb-3">
-                Compare tax-free municipal bonds to taxable CDs and corporate bonds using your marginal federal and state tax rates.
-              </p>
-              <span className="text-blue-600 text-sm font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                Calculate Yield &rarr;
-              </span>
-            </Link>
+          {/* CALCULATOR EMBED */}
+          <div className="mb-10">
+             <TEYCalculator />
+          </div>
+
+          {/* STATE LINKS GRID */}
+          <div className="mb-12">
+            <h3 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">
+              Select Your High-Tax Jurisdiction
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              {stateKeys.map((slug) => (
+                <Link 
+                  key={slug} 
+                  href={`/${slug}`}
+                  className="group flex items-center justify-center p-3 bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-500/30 transition-all"
+                >
+                  <span className="text-sm font-bold text-slate-700 group-hover:text-blue-600 transition-colors">
+                    {STATE_CONTENT[slug].name}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
+
+          {/* DYNAMIC HUB FAQs */}
+          <div className="max-w-3xl mx-auto">
+             <h3 className="text-lg font-bold text-slate-900 mb-6">Frequently Asked Questions</h3>
+             <div className="space-y-4">
+               {hubData.faqs.map((faq, i) => (
+                 <div key={i} className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+                   <h4 className="text-md font-bold text-slate-900 mb-2">{faq.q}</h4>
+                   <p className="text-slate-600 text-sm leading-relaxed">{faq.a}</p>
+                 </div>
+               ))}
+             </div>
           </div>
         </section>
 
@@ -229,36 +252,6 @@ export default function Home() {
           </p>
         </div>
       </div>
-
-      {/* --- FAQ SECTION --- */}
-      <section className="bg-white py-16">
-        <div className="max-w-3xl mx-auto px-6">
-          <h2 className="text-2xl font-bold text-slate-900 mb-8 text-center">Frequently Asked Questions</h2>
-          <div className="space-y-8">
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">What is "Overlap"?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                Overlap reflects the percentage of shared securities based on the latest publicly reported holdings. 
-                Values are estimates and may lag actual current holdings.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">How is Correlation calculated?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                We utilize 2 years of historical daily price returns to calculate the correlation coefficient. 
-                A value of 1.00 indicates perfect positive correlation.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2">Is this investment advice?</h3>
-              <p className="text-slate-600 leading-relaxed">
-                No. This tool displays historical market data only. It does not provide tax, legal, or investment advice. 
-                You should consult a qualified professional before making trading decisions.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* --- REUSABLE FOOTER COMPONENT --- */}
       <Footer />
