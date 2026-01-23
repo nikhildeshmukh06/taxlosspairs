@@ -2,11 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 
-// --- 1. REAL 2026 FEDERAL TAX DATA (Audited for OBBBA) ---
-// Note: OBBBA permanently set the top rate at 37% and adjusted brackets for 2026 inflation.
+// --- AUDITED 2026 FEDERAL TAX DATA (OBBBA) ---
 const TAX_BRACKETS_2026 = {
   single: [
-    { threshold: 640600, rate: 0.37 }, //
+    { threshold: 640600, rate: 0.37 },
     { threshold: 256225, rate: 0.35 },
     { threshold: 201775, rate: 0.32 },
     { threshold: 105700, rate: 0.24 },
@@ -15,7 +14,7 @@ const TAX_BRACKETS_2026 = {
     { threshold: 0, rate: 0.10 },
   ],
   married: [
-    { threshold: 768700, rate: 0.37 }, //
+    { threshold: 768700, rate: 0.37 },
     { threshold: 512450, rate: 0.35 },
     { threshold: 403550, rate: 0.32 },
     { threshold: 211400, rate: 0.24 },
@@ -27,7 +26,6 @@ const TAX_BRACKETS_2026 = {
 
 const NIIT_THRESHOLDS = { single: 200000, married: 250000 };
 
-// --- 2. STATE DATA (50 States + DC + NYC) ---
 const STATE_DATA: Record<string, { name: string; topRate: number }> = {
   'CA': { name: 'California', topRate: 13.3 },
   'NYC': { name: 'New York City (Triple Tax)', topRate: 14.77 },
@@ -99,7 +97,6 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
     if (defaultState) setSelectedState(defaultState);
   }, [defaultState]);
 
-  // Comma formatting helper
   const formatWithCommas = (val: string) => {
     const num = val.replace(/,/g, '');
     if (isNaN(Number(num))) return val;
@@ -134,16 +131,15 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
   const muniVal = parseFloat(muniYield) || 0;
   const tey = totalTaxRate < 1 ? muniVal / (1 - totalTaxRate) : 0;
 
-  // Unified visual style for inputs
-  const inputBaseClasses = "block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 text-lg text-slate-900 font-bold placeholder-slate-400 transition-all";
+  // UNIFIED STYLING: Ensures Selects and Inputs look exactly the same
+  const commonFieldClasses = "block w-full rounded-lg border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 py-3 text-lg text-slate-900 font-bold font-sans transition-all";
 
   return (
     <div className="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden max-w-4xl mx-auto font-sans">
       <div className="md:flex">
         
-        {/* LEFT PANEL: INPUTS */}
+        {/* LEFT PANEL */}
         <div className="p-6 md:p-8 md:w-1/2 space-y-6 border-r border-slate-100 bg-white">
-          
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">State / Locality</label>
@@ -151,9 +147,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
                 disabled={isLocked}
-                className={`block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 font-bold shadow-sm focus:ring-blue-500 focus:border-blue-500 ${
-                  isLocked ? 'bg-slate-50 cursor-not-allowed opacity-80' : 'bg-white'
-                }`}
+                className={`${commonFieldClasses} px-3 ${isLocked ? 'bg-slate-50 cursor-not-allowed opacity-80' : 'bg-white'}`}
               >
                 {Object.entries(STATE_DATA).map(([code, data]) => (
                   <option key={code} value={code}>{data.name}</option>
@@ -170,7 +164,7 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
               <select
                 value={filingStatus}
                 onChange={(e) => setFilingStatus(e.target.value as 'single' | 'married')}
-                className="block w-full rounded-md border-slate-300 py-2 px-3 text-sm text-slate-900 font-bold bg-white shadow-sm focus:ring-blue-500 focus:border-blue-500"
+                className={`${commonFieldClasses} px-3 bg-white`}
               >
                 <option value="single">Single</option>
                 <option value="married">Married (Joint)</option>
@@ -181,12 +175,12 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
           <div>
             <label className="block text-sm font-black text-slate-900 mb-2">Taxable Income (After Deductions)</label>
             <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-900 font-bold">$</span>
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-900 font-bold text-lg">$</span>
               <input
                 type="text"
                 value={incomeStr}
                 onChange={(e) => setIncomeStr(formatWithCommas(e.target.value))}
-                className={`${inputBaseClasses} pl-8 pr-4`}
+                className={`${commonFieldClasses} pl-8 pr-4`}
                 placeholder="e.g. 250,000"
               />
             </div>
@@ -199,11 +193,11 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                 type="number"
                 value={muniYield}
                 onChange={(e) => setMuniYield(e.target.value)}
-                className={`${inputBaseClasses} px-4`}
+                className={`${commonFieldClasses} px-4`}
                 placeholder="3.50"
                 step="0.01"
               />
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-900 font-bold">%</span>
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-900 font-bold text-lg">%</span>
             </div>
           </div>
 
@@ -218,19 +212,17 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                type="number"
                value={customStateRate !== '' ? customStateRate : defaultStateRate}
                onChange={(e) => setCustomStateRate(e.target.value)}
-               className="block w-full rounded-md border-slate-300 bg-slate-50 py-3 px-4 text-lg text-slate-900 font-bold focus:bg-white transition-colors focus:ring-2 focus:ring-blue-500 focus:outline-none"
+               className={`${commonFieldClasses} bg-slate-50 focus:bg-white px-4`}
                step="0.01"
              />
              <p className="text-[10px] text-slate-500 font-medium mt-2 leading-relaxed">
                Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.876% local tax."}
              </p>
           </div>
-
         </div>
 
-        {/* RIGHT PANEL: RESULTS */}
+        {/* RIGHT PANEL */}
         <div className="bg-slate-900 md:w-1/2 p-6 md:p-8 text-white flex flex-col justify-center relative overflow-hidden">
-          
           <div className="text-center mb-8 relative z-10">
             <div className="inline-block bg-blue-600/20 border border-blue-500/30 rounded-full px-3 py-1 mb-3">
               <span className="text-[10px] font-bold text-blue-300 uppercase tracking-widest">
@@ -250,7 +242,6 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
               <span className="text-slate-400">Federal Marginal Rate</span>
               <span className="font-mono text-white font-bold">{(fedRate * 100).toFixed(0)}%</span>
             </div>
-            
             <div className="flex justify-between items-center group relative cursor-help" title="Net Investment Income Tax applies above $200k/$250k income.">
               <div className="flex items-center gap-1">
                 <span className="text-slate-400 border-b border-slate-700 border-dotted">NIIT Surtax</span>
@@ -260,12 +251,10 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                 {(niitRate * 100).toFixed(1)}%
               </span>
             </div>
-
             <div className="flex justify-between items-center">
               <span className="text-slate-400">State Marginal Rate</span>
               <span className="font-mono text-blue-400 font-bold">{(activeStateRate * 100).toFixed(2)}%</span>
             </div>
-
             <div className="flex justify-between items-center pt-4 border-t border-slate-800 font-black text-xl">
               <span className="text-slate-200 uppercase text-xs tracking-wider">Total Marginal Tax</span>
               <span className="text-red-400 font-mono">{(totalTaxRate * 100).toFixed(2)}%</span>
@@ -277,14 +266,13 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
                To match a <strong>{muniYield}%</strong> tax-free yield, a taxable bond must pay <strong>{tey.toFixed(2)}%</strong>.
              </p>
           </div>
-
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
         </div>
       </div>
       
       <div className="bg-slate-50 px-6 py-4 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-2">
         <p className="text-[10px] text-slate-400 text-center md:text-left leading-relaxed max-w-2xl">
-          Estimates based on projected 2026 marginal tax brackets under OBBBA guidelines. Assumes in-state municipal bond (exempt from Federal & State tax). Consult a tax professional for specific advice.
+          Estimates based on projected 2026 marginal tax brackets. Assumes in-state municipal bond (exempt from Federal & State tax). Consult a tax professional for specific advice.
         </p>
         <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest whitespace-nowrap">
           TaxLossPairs.com
