@@ -3,18 +3,18 @@ import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import { STATE_CONTENT } from '../../data/state-content'; 
-import TEYCalculator from '../../components/TEYCalculator'; // Ensure path is correct
+import TEYCalculator from '../../components/TEYCalculator'; 
+import Footer from '../../components/Footer'; // <--- IMPORT SHARED FOOTER
 
 // Helper to find state data by URL slug
 function getStateContent(slug: string) {
-  // We use direct lookup now to be safer with the record key
   return STATE_CONTENT[slug];
 }
 
-// 1. GENERATE STATIC PARAMS (Now Filters out 'hub')
+// 1. GENERATE STATIC PARAMS (Filters out 'hub')
 export async function generateStaticParams() {
   return Object.keys(STATE_CONTENT)
-    .filter((key) => key !== 'hub') // FIX: Don't build a page for the Hub data
+    .filter((key) => key !== 'hub') 
     .map((slug) => ({
       state: slug,
     }));
@@ -45,7 +45,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
   // Generate State List for Bottom Nav (Excludes 'hub' and current state)
   const otherStates = Object.keys(STATE_CONTENT).filter(k => k !== 'hub' && k !== params.state);
 
-  // Logic to map URL slug to Calculator State Code (e.g. 'california' -> 'CA')
+  // Map URL slug to Calculator State Code
   const stateCodeMap: Record<string, string> = {
     'california': 'CA', 'new-york-city': 'NYC', 'new-york': 'NY',
     'new-jersey': 'NJ', 'massachusetts': 'MA', 'connecticut': 'CT',
@@ -55,13 +55,14 @@ export default function DynamicStatePage({ params }: { params: { state: string }
   const calcCode = stateCodeMap[params.state] || 'CA';
 
   return (
-    <main className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100">
+    <main className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100 flex flex-col">
       
       {/* HERO SECTION */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
-          <Link href="/" className="inline-block mb-8 text-xs font-black text-slate-400 hover:text-blue-600 uppercase tracking-widest transition-colors">
-            ← Back to National Hub
+          {/* FIX: Corrected Link to TEY Hub */}
+          <Link href="/tax-equivalent-yield" className="inline-block mb-8 text-xs font-black text-slate-400 hover:text-blue-600 uppercase tracking-widest transition-colors">
+            ← Back to TEY Hub
           </Link>
           <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
             {content.hero.title}
@@ -77,13 +78,12 @@ export default function DynamicStatePage({ params }: { params: { state: string }
         <TEYCalculator defaultState={calcCode} isLocked={true} />
       </div>
 
-      {/* MACRO PERSPECTIVE (Single Column - Example Card Removed) */}
+      {/* MACRO PERSPECTIVE (Centered - Example Card Removed) */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div className="inline-block bg-purple-100 text-purple-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded mb-4">
             Tax Logic
           </div>
-          {/* Using content.whySection.title ("Macro Tax Perspective") */}
           <h2 className="text-xl font-black text-slate-900 mb-4 tracking-tight">
             {content.whySection.title}
           </h2>
@@ -96,7 +96,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
       </div>
 
       {/* STATE SPECIFIC FAQs */}
-      <div className="max-w-3xl mx-auto px-6 pb-24">
+      <div className="max-w-3xl mx-auto px-6 pb-24 flex-grow">
         <h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">
           Local Tax FAQs
         </h2>
@@ -113,7 +113,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
           ))}
         </div>
 
-        {/* FOOTER STATE LINKS (Preserved) */}
+        {/* COMPARE OTHER STATES LINKS */}
         <div className="mt-16 pt-8 border-t border-slate-200">
            <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Compare Other Jurisdictions</h4>
            <div className="flex flex-wrap gap-2">
@@ -126,6 +126,8 @@ export default function DynamicStatePage({ params }: { params: { state: string }
         </div>
       </div>
 
+      {/* FIX: SHARED FOOTER RESTORED */}
+      <Footer variant="tey" />
     </main>
   );
 }
