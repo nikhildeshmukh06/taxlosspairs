@@ -4,27 +4,17 @@ export interface StateContent {
   slug: string;
   name: string;
   metadata: Metadata;
-  hero: {
-    title: string;
-    description: string;
+  hero: { title: string; description: string; };
+  whySection: { title: string; p1: string; p2: string; };
+  example: { 
+    title: string; 
+    description: string; 
+    income: string; 
+    muniYield: string; 
+    taxableYield: string; 
+    takeaway: string; 
   };
-  whySection: {
-    title: string;
-    p1: string;
-    p2: string;
-  };
-  example: {
-    title: string;
-    description: string;
-    income: string;
-    muniYield: string;
-    taxableYield: string;
-    takeaway: string;
-  };
-  faqs: {
-    q: string;
-    a: string;
-  }[];
+  faqs: { q: string; a: string; }[];
 }
 
 export const STATE_CONTENT: Record<string, StateContent> = {
@@ -41,7 +31,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Compare tax-free municipal bonds against taxable alternatives. This tool is updated for the <strong>2026 One Big Beautiful Bill Act (OBBBA)</strong> thresholds.',
     },
     whySection: {
-      title: 'Strategic Insight: The 2026 Marginal Advantage',
+      title: 'Macro Tax Perspective: The 2026 Marginal Advantage',
       p1: 'Investment decisions should be made at the margin. In 2026, the OBBBA permanently capped the top federal rate at 37%, but inflation-adjusted thresholds mean more income is protected in lower brackets before the top hit occurs.',
       p2: 'By focusing on your marginal rate rather than your average (effective) rate, this calculator reveals the true "hurdle rate" a taxable bond must clear to outperform a tax-free municipal bond.',
     },
@@ -74,7 +64,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Find the taxable yield required to match a <strong>California in-state municipal bond</strong>, exempt from Federal, NIIT, and CA income tax.',
     },
     whySection: {
-      title: 'Strategic Insight: The SALT Floor Reality',
+      title: 'Macro Tax Perspective: The SALT Floor Reality',
       p1: 'California’s 13.3% top rate means high earners exhaust the $40,400 SALT deduction almost immediately. For those with a MAGI over $505,000, the OBBBA phase-out can reduce your deduction back to a permanent $10,000 floor.',
       p2: 'Because the vast majority of your CA state tax bill remains non-deductible at the federal level, the tax-exempt status of California municipal bonds represents a "pure" saving that taxable bonds cannot match.',
     },
@@ -107,7 +97,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'NYC residents face a unique "Triple Tax" burden. This calculator accounts for the <strong>NYC Local Income Tax</strong> (up to 3.876%) to show the value of triple-exempt bonds.',
     },
     whySection: {
-      title: 'Strategic Insight: The Global Yield Benchmark',
+      title: 'Macro Tax Perspective: The Global Yield Benchmark',
       p1: 'Living in NYC creates a unique "Triple Tax" burden (Federal + State + City) totaling nearly 52%. This makes NYC municipal bonds some of the most sought-after defensive assets globally.',
       p2: 'Because NYC state and local taxes are largely non-deductible due to the SALT cap, every dollar of "Triple-Tax-Free" interest provides a leak-proof return that taxable CDs and Corporates cannot replicate.',
     },
@@ -140,7 +130,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Calculate the taxable yield required to match a <strong>New Jersey in-state municipal bond</strong> using 2026 marginal brackets.',
     },
     whySection: {
-      title: 'Strategic Insight: Defeating the "Millionaire Tax"',
+      title: 'Macro Tax Perspective: Defeating the "Millionaire Tax"',
       p1: 'With NJ’s 10.75% marginal rate applying to income over $1 million, high earners lose over 50% of taxable interest to combined taxes.',
       p2: 'Because NJ state taxes are largely non-deductible under 2026 SALT rules, NJ-specific municipal bonds are the primary mechanism for preserving yield at the highest end of the income spectrum.',
     },
@@ -156,7 +146,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       { q: 'How is the 10.75% NJ rate determined?', a: 'We use the highest projected 2026 marginal rate of 10.75% (for income over $1 million). You can manually adjust this if you are in a lower bracket.' },
       { q: 'Do out-of-state bonds get taxed in NJ?', a: 'Yes. New Jersey taxes interest income from any municipal bond issued outside of its borders.' },
       { q: 'How does the 2026 SALT cap affect NJ muni bond savings?', a: 'The Federal SALT cap rose to $40,400 in 2026, but high earners face a phase-out starting at $505,000 MAGI, making NJ muni exemptions critical for tax efficiency.' },
-      { q: 'Does NJ tax Social Security or pension income?', a: 'NJ generally does not tax Social Security. However, it *does* tax interest from taxable bonds while exempting NJ-specific municipal interest.' }
+      { q: 'Does New Jersey tax bond capital gains?', a: 'Yes. While NJ municipal bond interest is 100% exempt from NJ tax, any capital gains realized from selling bonds at a profit are taxable at standard NJ rates.' }
     ]
   },
 
@@ -173,7 +163,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Includes the 4% "Fair Share" surtax to show the true value of <strong>MA in-state municipal bonds</strong> for high earners.',
     },
     whySection: {
-      title: 'Strategic Insight: The 9% State Shield',
+      title: 'Macro Tax Perspective: The 9% State Shield',
       p1: 'The "Fair Share" surtax creates a permanent 4% additional drag for millionaires on top of the 5% flat tax. In-state Massachusetts bonds shield high earners from this entire 9% total state drag.',
       p2: 'Because these state taxes are largely non-deductible at the federal level, choosing in-state MA bonds provides an immediate 9% "bonus" compared to taxable alternatives.',
     },
@@ -206,7 +196,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Oregon’s 9.9% rate hits much earlier than other states. Find your taxable equivalent for <strong>Oregon muni bonds</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: The "Early Trigger" Effect',
+      title: 'Macro Tax Perspective: The "Early Trigger" Effect',
       p1: 'Oregon’s top 9.9% tax rate hits single filers at $125k and couples at $250k—far earlier than the $1M thresholds in CA or NJ.',
       p2: 'This makes municipal bonds a critical preservation tool for "mass affluent" professionals who face a massive state tax drag on standard taxable bonds like CDs or Treasuries.',
     },
@@ -239,7 +229,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Find the taxable yield required to match a <strong>Minnesota in-state municipal bond</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: Yield Erosion Defense',
+      title: 'Macro Tax Perspective: Yield Erosion Defense',
       p1: 'The 9.85% "Fourth Tier" state tax is a massive unrecoverable cost. In-state municipal bonds are specifically designed to bypass this erosion.',
       p2: 'Because MN state taxes are largely non-deductible under the SALT cap, every dollar of MN muni interest provides a "Double Tax-Free" benefit that taxable CDs simply cannot match.',
     },
@@ -272,7 +262,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Accounts for CT’s unique "Benefit Recapture" to show true yield for <strong>CT muni bonds</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: The Hidden Flat Tax',
+      title: 'Macro Tax Perspective: The Hidden Flat Tax',
       p1: 'Connecticut’s "Benefit Recapture" effectively claws back lower tax bracket benefits for high earners. This creates a higher marginal tax rate than headlines imply.',
       p2: 'Since the SALT cap limits federal deductions, avoiding this ~7% state drag via CT-specific munis is the only risk-free way to boost your real-world yield.',
     },
@@ -305,7 +295,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'DC rules have changed. Find the yield required to match a <strong>DC-issued municipal bond</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: The Reciprocity Trap',
+      title: 'Macro Tax Perspective: The Reciprocity Trap',
       p1: 'DC’s repeal of universal tax-exemption for out-of-state bonds means residents can no longer "muni-shop" across the nation tax-free.',
       p2: 'Residents must now focus specifically on DC-issued debt or regional authorities to capture the full 10.75% local tax benefit.',
     },
@@ -338,7 +328,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Find the taxable yield required to match a <strong>Hawaii in-state municipal bond</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: The Paradise Tax',
+      title: 'Macro Tax Perspective: The Paradise Tax',
       p1: 'At 11%, Hawaii’s top rate is the highest in the nation outside CA and NYC. Because state taxes are largely non-deductible, this is a massive unrecoverable cost.',
       p2: 'This 11% state drag makes tax-free bonds almost mandatory for high-bracket Honolulu residents looking to preserve real-world yield.',
     },
@@ -371,7 +361,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'Find the taxable yield required to match a <strong>Vermont in-state municipal bond</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: Passive Income Drag',
+      title: 'Macro Tax Perspective: Passive Income Drag',
       p1: 'Vermont is a high-tax jurisdiction for portfolio income, with a top rate of 8.75%. Combining this with federal brackets means high earners lose over half their interest to taxes.',
       p2: 'In-state bonds are the primary preservation tool to protect your yield from one of the nation\'s steepest passive income tax burdens.',
     },
@@ -404,7 +394,7 @@ export const STATE_CONTENT: Record<string, StateContent> = {
       description: 'For NY residents outside NYC. Find the yield for <strong>NY in-state municipal bonds</strong>.',
     },
     whySection: {
-      title: 'Strategic Insight: The Double Tax-Free Advantage',
+      title: 'Macro Tax Perspective: The Double Tax-Free Advantage',
       p1: 'While NYC residents capture "Triple" savings, other NY state residents still capture significant value by avoiding the 10.9% state tax.',
       p2: 'Since NY state taxes aren\'t federally deductible (SALT cap), this 10.9% saving is purely additive to your federal yield, making in-state bonds highly efficient.',
     },
