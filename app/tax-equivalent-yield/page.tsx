@@ -78,43 +78,46 @@ export default function TEYHubPage() {
           </div>
         </div>
 
-        {/* YIELD GUIDE (Preserved Static Table) */}
+        {/* YIELD GUIDE (With Mobile Scroll Fix) */}
         <div className="bg-white py-20 border-t border-slate-200">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
               2026 Yield Guide (High-Tax States)
             </h2>
-            <div className="overflow-hidden bg-slate-50 border border-slate-200 rounded-2xl shadow-sm">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-slate-100 border-b border-slate-200 text-slate-500 uppercase font-bold text-xs">
-                  <tr>
-                    <th className="px-6 py-4">State</th>
-                    <th className="px-6 py-4">Top Rate</th>
-                    <th className="px-6 py-4 text-right">If Muni Yield is 3.50%...</th>
-                    <th className="px-6 py-4 text-right">Taxable Equiv.</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-200">
-                  <tr>
-                    <td className="px-6 py-4 font-bold text-slate-900">California</td>
-                    <td className="px-6 py-4 text-slate-500">13.3%</td>
-                    <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
-                    <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.63%</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 font-bold text-slate-900">New York (NYC)</td>
-                    <td className="px-6 py-4 text-slate-500">14.8%</td>
-                    <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
-                    <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.84%</td>
-                  </tr>
-                  <tr>
-                    <td className="px-6 py-4 font-bold text-slate-900">New Jersey</td>
-                    <td className="px-6 py-4 text-slate-500">10.75%</td>
-                    <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
-                    <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.21%</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
+              {/* FIX: Added overflow-x-auto wrapper for mobile responsiveness */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-sm whitespace-nowrap md:whitespace-normal">
+                  <thead className="bg-slate-100 border-b border-slate-200 text-slate-500 uppercase font-bold text-xs">
+                    <tr>
+                      <th className="px-6 py-4">State</th>
+                      <th className="px-6 py-4">Top Rate</th>
+                      <th className="px-6 py-4 text-right">If Muni Yield is 3.50%...</th>
+                      <th className="px-6 py-4 text-right">Taxable Equiv.</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-200">
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">California</td>
+                      <td className="px-6 py-4 text-slate-500">13.3%</td>
+                      <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
+                      <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.63%</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">New York (NYC)</td>
+                      <td className="px-6 py-4 text-slate-500">14.8%</td>
+                      <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
+                      <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.84%</td>
+                    </tr>
+                    <tr>
+                      <td className="px-6 py-4 font-bold text-slate-900">New Jersey</td>
+                      <td className="px-6 py-4 text-slate-500">10.75%</td>
+                      <td className="px-6 py-4 text-right font-mono text-slate-600">3.50%</td>
+                      <td className="px-6 py-4 text-right font-mono font-bold text-green-600">7.21%</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
