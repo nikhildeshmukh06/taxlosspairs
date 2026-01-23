@@ -230,7 +230,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             </div>
         </div>
 
-        {/* --- CROSS-SELL BANNER (NEW) --- */}
+        {/* --- CROSS-SELL BANNER (UPDATED COPY - OPTION A) --- */}
         <div className="mb-12 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
@@ -238,17 +238,17 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                 New Tool
               </div>
               <h3 className="text-xl font-bold text-white mb-2">
-                High Earner? Optimize your Bond Yields.
+                Is a 4% Tax-Free Bond Better than a 7% CD?
               </h3>
               <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-                You are looking to harvest equity losses. Ensure your fixed income isn't leaking money to taxes. Calculate your Tax-Equivalent Yield (TEY) now.
+                Don't guess. Compare municipal bonds against taxable alternatives using your exact 2026 federal and state tax bracket.
               </p>
             </div>
             <Link
               href="/tax-equivalent-yield"
-              className="whitespace-nowrap px-5 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg hover:bg-blue-50 transition-colors shadow-md flex items-center gap-2"
+              className="w-full md:w-auto text-center px-5 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg hover:bg-blue-50 transition-colors shadow-md flex justify-center items-center gap-2"
             >
-              Open 2026 Calculator →
+              Check My Tax-Equivalent Yield →
             </Link>
           </div>
           {/* Decorative Circle */}
