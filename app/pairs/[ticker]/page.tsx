@@ -145,14 +145,14 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                   
                   {/* DYNAMIC PARTNER TEXT */}
                   <div className="text-sm text-gray-600 mb-4 font-medium leading-relaxed">
-                     <span dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }} />
-                     
-                     {/* EXPLICIT OVERLAP DATA POINT (NEW) */}
-                     <div className="mt-2 flex items-center gap-2">
+                      <span dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }} />
+                      
+                      {/* EXPLICIT OVERLAP DATA POINT (NEW) */}
+                      <div className="mt-2 flex items-center gap-2">
                         <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
                           Overlap: {overlapDisplay}
                         </span>
-                     </div>
+                      </div>
                   </div>
 
                   <div className="flex gap-4 items-center">
@@ -230,20 +230,45 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             </div>
         </div>
 
+        {/* --- CROSS-SELL BANNER (NEW) --- */}
+        <div className="mb-12 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="inline-block bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">
+                New Tool
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                High Earner? Optimize your Bond Yields.
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed max-w-md">
+                You are looking to harvest equity losses. Ensure your fixed income isn't leaking money to taxes. Calculate your Tax-Equivalent Yield (TEY) now.
+              </p>
+            </div>
+            <Link
+              href="/tax-equivalent-yield"
+              className="whitespace-nowrap px-5 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg hover:bg-blue-50 transition-colors shadow-md flex items-center gap-2"
+            >
+              Open 2026 Calculator →
+            </Link>
+          </div>
+          {/* Decorative Circle */}
+          <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity"></div>
+        </div>
+
         {/* FOOTER */}
         <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
           <p>© {new Date().getFullYear()} TaxLossPairs.com • Research Utility</p>
           
           <div className="mt-4 mb-4 flex flex-wrap justify-center items-center gap-x-4">
-             <Link href="/" className="hover:text-blue-600 hover:underline">Home</Link>
-             <Link href="/legal" className="hover:text-blue-600 hover:underline">Legal & Privacy</Link>
-             <button 
-               data-tally-open="68Kqjo" 
-               data-tally-layout="modal"
-               className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
-             >
-               Report data issue for {etf.ticker}
-             </button>
+              <Link href="/" className="hover:text-blue-600 hover:underline">Home</Link>
+              <Link href="/legal" className="hover:text-blue-600 hover:underline">Legal & Privacy</Link>
+              <button 
+                data-tally-open="68Kqjo" 
+                data-tally-layout="modal"
+                className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
+              >
+                Report data issue for {etf.ticker}
+              </button>
           </div>
 
           <p className="mt-2 max-w-lg mx-auto leading-relaxed italic">
@@ -251,7 +276,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             They are approximations, not guarantees. Leveraged products often use swaps/derivatives resulting in low physical overlap.
             Not financial, tax, or legal advice.
           </p>
-           <p className="mt-4">
+            <p className="mt-4">
             <Link href="/" className="text-blue-600 hover:underline">Back to Global Search</Link>
           </p>
         </div>
