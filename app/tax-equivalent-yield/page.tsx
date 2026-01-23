@@ -1,21 +1,21 @@
 import React from 'react';
-import { Metadata } from 'next';
 import Link from 'next/link';
 import TEYCalculator from '../components/TEYCalculator';
 import { STATE_CONTENT } from '../data/state-content';
-import Footer from '../components/Footer'; // <--- NEW SHARED FOOTER
+import Footer from '../components/Footer'; 
 
-export const metadata: Metadata = {
-  title: 'Tax-Equivalent Yield Calculator (2026) | TaxLossPairs',
-  description: 'Calculate the true after-tax return of municipal bonds vs taxable corporate bonds. Supports 2026 federal brackets, NIIT, and state-specific taxes.',
-  keywords: 'tax equivalent yield calculator, muni bond calculator, tax free yield',
-};
+// 1. Dynamic Metadata (Pulls directly from your central data file)
+export const metadata = STATE_CONTENT['hub'].metadata;
 
 export default function TEYHubPage() {
+  // 2. Get Hub Data & Filter out the Hub itself from state links
+  const hubData = STATE_CONTENT['hub'];
+  const stateLinks = Object.values(STATE_CONTENT).filter((s) => s.slug !== 'hub');
+
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
       
-      {/* NAV BAR */}
+      {/* NAV BAR (Preserved) */}
       <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-6">
@@ -34,18 +34,18 @@ export default function TEYHubPage() {
       </nav>
 
       <div className="flex-grow">
-        {/* HERO */}
+        {/* HERO (Now Dynamic) */}
         <div className="bg-white border-b border-slate-200 py-16">
           <div className="max-w-4xl mx-auto px-6 text-center">
             <div className="inline-block bg-blue-50 text-blue-700 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide mb-6">
               2026 Tax Outlook
             </div>
             <h1 className="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-6">
-              Is a Tax-Free Bond Better?
+              {hubData.hero.title}
             </h1>
-            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-              High earners often lose 50%+ of their income to taxes. Use this calculator to see if a Municipal Bond beats a standard CD or Corporate Bond.
-            </p>
+            <p className="text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto"
+               dangerouslySetInnerHTML={{ __html: hubData.hero.description }}
+            />
           </div>
         </div>
 
@@ -54,14 +54,14 @@ export default function TEYHubPage() {
           <TEYCalculator defaultState="CA" />
         </div>
 
-        {/* STATE LINKS */}
+        {/* STATE LINKS (Filtered) */}
         <div className="max-w-7xl mx-auto px-6 pb-20">
           <div className="text-center mb-10">
             <h2 className="text-2xl font-bold text-slate-900">State-Specific Calculators</h2>
             <p className="text-slate-600 mt-2">Get precise tax rates and analysis for your state.</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-            {Object.values(STATE_CONTENT).map((state) => (
+            {stateLinks.map((state) => (
               <Link 
                 key={state.slug} 
                 href={`/tax-equivalent-yield/${state.slug}`}
@@ -78,7 +78,7 @@ export default function TEYHubPage() {
           </div>
         </div>
 
-        {/* YIELD GUIDE */}
+        {/* YIELD GUIDE (Preserved Static Table) */}
         <div className="bg-white py-20 border-t border-slate-200">
           <div className="max-w-4xl mx-auto px-6">
             <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
@@ -119,27 +119,23 @@ export default function TEYHubPage() {
           </div>
         </div>
 
-        {/* FAQS */}
+        {/* FAQS (Now Dynamic & Correct) */}
         <div className="max-w-3xl mx-auto px-6 py-20">
           <h2 className="text-2xl font-bold text-slate-900 mb-8">Frequently Asked Questions</h2>
           <div className="space-y-4">
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-slate-900 mb-2">What is Tax-Equivalent Yield (TEY)?</h3>
-              <p className="text-slate-600 leading-relaxed text-sm">
-                TEY represents the pre-tax yield you would need on a taxable bond (like a Corporate Bond or CD) to match the tax-free yield of a Municipal Bond. It helps you compare "apples to apples."
-              </p>
-            </div>
-            <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-              <h3 className="font-bold text-slate-900 mb-2">Does this calculator include NIIT?</h3>
-              <p className="text-slate-600 leading-relaxed text-sm">
-                Yes. If your income exceeds $200k (Single) or $250k (Married), our calculator automatically adds the 3.8% Net Investment Income Tax (NIIT) to your federal rate.
-              </p>
-            </div>
+            {hubData.faqs.map((faq, i) => (
+              <div key={i} className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
+                <h3 className="font-bold text-slate-900 mb-2">{faq.q}</h3>
+                <p className="text-slate-600 leading-relaxed text-sm">
+                  {faq.a}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* REUSABLE FOOTER (With Tax Disclaimer) */}
+      {/* REUSABLE FOOTER */}
       <Footer variant="tey" />
     </main>
   );
