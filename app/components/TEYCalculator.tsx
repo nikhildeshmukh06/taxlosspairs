@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link'; // Added Link for cross-sell navigation
 
 // --- AUDITED 2026 FEDERAL TAX DATA (OBBBA) ---
 const TAX_BRACKETS_2026 = {
@@ -202,22 +203,22 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
           </div>
 
           <div className="pt-2">
-             <label className="flex justify-between text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">
-               <span>Marginal State Tax Rate (%)</span>
-               <span className="text-blue-600 cursor-pointer font-bold normal-case hover:underline" onClick={() => setCustomStateRate(defaultStateRate.toString())}>
-                 Reset ({defaultStateRate}%)
-               </span>
-             </label>
-             <input
-               type="number"
-               value={customStateRate !== '' ? customStateRate : defaultStateRate}
-               onChange={(e) => setCustomStateRate(e.target.value)}
-               className={`${commonFieldClasses} bg-slate-50 focus:bg-white px-4`}
-               step="0.01"
-             />
-             <p className="text-[10px] text-slate-500 font-medium mt-2 leading-relaxed">
-               Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.876% local tax."}
-             </p>
+              <label className="flex justify-between text-xs font-black text-slate-900 uppercase mb-2 tracking-wide">
+                <span>Marginal State Tax Rate (%)</span>
+                <span className="text-blue-600 cursor-pointer font-bold normal-case hover:underline" onClick={() => setCustomStateRate(defaultStateRate.toString())}>
+                  Reset ({defaultStateRate}%)
+                </span>
+              </label>
+              <input
+                type="number"
+                value={customStateRate !== '' ? customStateRate : defaultStateRate}
+                onChange={(e) => setCustomStateRate(e.target.value)}
+                className={`${commonFieldClasses} bg-slate-50 focus:bg-white px-4`}
+                step="0.01"
+              />
+              <p className="text-[10px] text-slate-500 font-medium mt-2 leading-relaxed">
+                Defaults to top marginal bracket. Advanced users may edit or change. {selectedState === 'NYC' && "Includes NYC 3.876% local tax."}
+              </p>
           </div>
         </div>
 
@@ -262,10 +263,25 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
           </div>
 
           <div className="mt-10 bg-blue-600/10 border border-blue-500/20 p-4 rounded-xl text-center relative z-10">
-             <p className="text-xs text-blue-100 leading-relaxed">
-               To match a <strong>{muniYield}%</strong> tax-free yield, a taxable bond must pay <strong>{tey.toFixed(2)}%</strong>.
-             </p>
+              <p className="text-xs text-blue-100 leading-relaxed">
+                To match a <strong>{muniYield}%</strong> tax-free yield, a taxable bond must pay <strong>{tey.toFixed(2)}%</strong>.
+              </p>
           </div>
+
+          {/* --- REVERSE CROSS-SELL (ADVISORY LOOP) --- */}
+          <div className="mt-8 pt-8 border-t border-slate-800/60 text-center relative z-10">
+              <p className="text-[10px] text-slate-400 mb-4 leading-relaxed max-w-xs mx-auto">
+                <strong className="text-slate-300 block mb-1">Tax efficiency applies to both income and capital gains.</strong>
+                If you are optimizing after-tax bond income, you may also benefit from reviewing ETF correlation data for tax-loss harvesting.
+              </p>
+              <Link 
+                href="/" 
+                className="inline-block px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-bold text-slate-200 transition-all hover:border-slate-600 hover:text-white"
+              >
+                Explore ETF Tax-Loss Pairs →
+              </Link>
+          </div>
+
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
         </div>
       </div>
