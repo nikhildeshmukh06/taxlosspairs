@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Link from 'next/link'; // Added Link for cross-sell navigation
+import Link from 'next/link';
 
 // --- AUDITED 2026 FEDERAL TAX DATA (OBBBA) ---
 const TAX_BRACKETS_2026 = {
@@ -268,18 +268,33 @@ export default function TEYCalculator({ defaultState = 'CA', isLocked = false }:
               </p>
           </div>
 
-          {/* --- REVERSE CROSS-SELL (ADVISORY LOOP) --- */}
-          <div className="mt-8 pt-8 border-t border-slate-800/60 text-center relative z-10">
-              <p className="text-[10px] text-slate-400 mb-4 leading-relaxed max-w-xs mx-auto">
-                <strong className="text-slate-300 block mb-1">Tax efficiency applies to both income and capital gains.</strong>
-                If you are optimizing after-tax bond income, you may also benefit from reviewing ETF correlation data for tax-loss harvesting.
-              </p>
-              <Link 
-                href="/" 
-                className="inline-block px-4 py-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg text-xs font-bold text-slate-200 transition-all hover:border-slate-600 hover:text-white"
-              >
-                Explore ETF Tax-Loss Pairs →
-              </Link>
+          {/* --- REVERSE CROSS-SELL (High Contrast Version) --- */}
+          <div className="mt-8 p-6 bg-slate-800/50 rounded-xl border border-slate-700/50 text-center relative z-10 backdrop-blur-sm">
+              <div className="flex flex-col items-center gap-4">
+                  <div className="flex items-start gap-3 text-left">
+                    <div className="flex-shrink-0 mt-1">
+                       {/* Lightbulb Icon for "Insight" */}
+                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 text-yellow-400">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-1.242c.29-.329.58-.668.75-.928a.75.75 0 00.057-.944 2.25 2.25 0 00-3.3 2.1c.105.515.228 1.033.404 1.5M12 18V21m0-2.25C13.5 19.5 16.5 18 16.5 18c0-3.75-3-6-6-6-3.75 0-6 2.25-6 6 0 0 3 1.5 4.5 3.75m4.5-8.25a2.25 2.25 0 10-4.5 0" />
+                        </svg>
+                    </div>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                        <strong className="text-white block mb-1">Tax efficiency applies to both income and capital gains.</strong>
+                        If you are optimizing after-tax bond income, you may also benefit from reviewing ETF correlation data for tax-loss harvesting.
+                    </p>
+                  </div>
+
+                  <Link 
+                    href="/" 
+                    className="w-full py-3 bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm rounded-lg shadow-lg transition-all transform hover:scale-[1.02] flex items-center justify-center gap-2"
+                  >
+                    Explore ETF Tax-Loss Pairs
+                    {/* Arrow Right Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 text-slate-400">
+                      <path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd" />
+                    </svg>
+                  </Link>
+              </div>
           </div>
 
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[100px] opacity-20 -mr-20 -mt-20 pointer-events-none"></div>
