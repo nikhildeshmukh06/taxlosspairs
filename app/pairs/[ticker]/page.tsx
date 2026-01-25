@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
+import WashSaleCalculator from '../../components/WashSaleCalculator'; // <--- NEW IMPORT
 
 // 1. GENERATE STATIC PARAMS
 export async function generateStaticParams() {
@@ -253,6 +254,11 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           </div>
           {/* Decorative Circle */}
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity"></div>
+        </div>
+
+        {/* --- WASH SALE CALCULATOR (NEW) --- */}
+        <div className="mb-12">
+            <WashSaleCalculator ticker={ticker} />
         </div>
 
         {/* FOOTER */}
