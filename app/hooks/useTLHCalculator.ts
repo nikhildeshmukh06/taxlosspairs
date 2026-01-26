@@ -13,7 +13,7 @@ export interface CalculatorInputs {
 export interface ScenarioOutcome {
   projectedBenefit: number;
   netResult: number;
-  verdict: 'DANGEROUS' | 'SAFE' | 'EFFICIENT' | 'INEFFICIENT' | 'OPTIMAL';
+  verdict: 'NET POSITIVE' | 'NET NEGATIVE' | 'VALUE ADDITIVE'; // Institutional labeling
   breakdownText: string;
   isPositive: boolean;
 }
@@ -81,7 +81,8 @@ export function useTLHCalculator() {
       projectedBenefit: cashNet,
       netResult: cashNet,
       isPositive: cashNet > 0,
-      verdict: cashNet > 0 ? 'SAFE' : 'DANGEROUS',
+      // Replaced emotional "SAFE/DANGEROUS" with analytical "NET POSITIVE/NEGATIVE"
+      verdict: cashNet > 0 ? 'NET POSITIVE' : 'NET NEGATIVE',
       breakdownText: cashNet > 0
         ? `Savings cover the missed growth.`
         : `Tax savings wiped out by market recovery.`
@@ -91,7 +92,8 @@ export function useTLHCalculator() {
       projectedBenefit: switchNet,
       netResult: switchNet,
       isPositive: true,
-      verdict: recommendation === 'switch' ? 'OPTIMAL' : 'INEFFICIENT',
+      // "VALUE ADDITIVE" is precise and non-emotional
+      verdict: 'VALUE ADDITIVE',
       breakdownText: `You capture tax value while staying invested.`
     };
 
