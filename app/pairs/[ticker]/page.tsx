@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import BackButton from '../../components/BackButton';
-import WashSaleCalculator from '../../components/WashSaleCalculator'; // <--- NEW IMPORT
+import WashSaleCalculator from '../../components/WashSaleCalculator';
+import Footer from '../../components/Footer'; // <--- Ensure Footer is imported if not already
 
 // 1. GENERATE STATIC PARAMS
 export async function generateStaticParams() {
@@ -148,7 +149,7 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
                   <div className="text-sm text-gray-600 mb-4 font-medium leading-relaxed">
                       <span dangerouslySetInnerHTML={{ __html: PartnerText(partner.ticker, etf.ticker, partner.overlap_estimate) }} />
                       
-                      {/* EXPLICIT OVERLAP DATA POINT (NEW) */}
+                      {/* EXPLICIT OVERLAP DATA POINT */}
                       <div className="mt-2 flex items-center gap-2">
                         <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
                           Overlap: {overlapDisplay}
@@ -231,8 +232,8 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             </div>
         </div>
 
-        {/* --- CROSS-SELL BANNER (UPDATED COPY - OPTION A) --- */}
-        <div className="mb-12 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
+        {/* --- CROSS-SELL BANNER (TEY) --- */}
+        <div className="mb-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
           <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
             <div>
               <div className="inline-block bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">
@@ -256,36 +257,35 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity"></div>
         </div>
 
-        {/* --- WASH SALE CALCULATOR (NEW) --- */}
+        {/* --- DECISION ENGINE CTA (NEW) --- */}
+        <div className="mb-12 p-1 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 shadow-sm">
+            <div className="bg-white rounded-[10px] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                <div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-1 flex items-center gap-2">
+                        <span>Thinking of selling {ticker}?</span>
+                        <span className="text-xs bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded-full uppercase tracking-wide">Beta</span>
+                    </h3>
+                    <p className="text-sm text-slate-600 max-w-md">
+                        Avoid the <strong>"Cash Trap"</strong>. Calculate if the tax deduction is worth the risk of missing a market rebound.
+                    </p>
+                </div>
+                <Link 
+                    href="/decision-engine"
+                    className="whitespace-nowrap px-4 py-2 bg-emerald-600 text-white text-sm font-bold rounded-lg hover:bg-emerald-700 transition-colors shadow-sm flex items-center gap-2"
+                >
+                    Run the Math
+                    <span className="text-emerald-200">→</span>
+                </Link>
+            </div>
+        </div>
+
+        {/* --- WASH SALE CALCULATOR --- */}
         <div className="mb-12">
             <WashSaleCalculator ticker={ticker} />
         </div>
 
         {/* FOOTER */}
-        <div className="border-t border-gray-200 pt-8 text-center text-xs text-gray-400">
-          <p>© {new Date().getFullYear()} TaxLossPairs.com • Research Utility</p>
-          
-          <div className="mt-4 mb-4 flex flex-wrap justify-center items-center gap-x-4">
-              <Link href="/" className="hover:text-blue-600 hover:underline">Home</Link>
-              <Link href="/legal" className="hover:text-blue-600 hover:underline">Legal & Privacy</Link>
-              <button 
-                data-tally-open="68Kqjo" 
-                data-tally-layout="modal"
-                className="text-gray-400 hover:text-blue-600 hover:underline bg-transparent border-none cursor-pointer p-0 font-medium"
-              >
-                Report data issue for {etf.ticker}
-              </button>
-          </div>
-
-          <p className="mt-2 max-w-lg mx-auto leading-relaxed italic">
-            DISCLAIMER: Correlation and overlap estimates are based on historical data, index methodology, and public holdings. 
-            They are approximations, not guarantees. Leveraged products often use swaps/derivatives resulting in low physical overlap.
-            Not financial, tax, or legal advice.
-          </p>
-            <p className="mt-4">
-            <Link href="/" className="text-blue-600 hover:underline">Back to Global Search</Link>
-          </p>
-        </div>
+        <Footer />
 
       </main>
     </div>
