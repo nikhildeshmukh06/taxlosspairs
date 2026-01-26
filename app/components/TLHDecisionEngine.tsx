@@ -6,12 +6,25 @@ import { useTLHCalculator } from '../hooks/useTLHCalculator';
 export default function TLHDecisionEngine() {
   const { inputs, setInputs, results } = useTLHCalculator();
 
-  const handleInputChange = (field: keyof typeof inputs, value: number | boolean) => {
+  // Helper to handle comma inputs (e.g. "100,000")
+  const handleNumberInput = (field: keyof typeof inputs, rawValue: string) => {
+    // Remove commas to get raw number
+    const numericValue = Number(rawValue.replace(/,/g, ''));
+    if (!isNaN(numericValue)) {
+      setInputs(prev => ({ ...prev, [field]: numericValue }));
+    }
+  };
+
+  const handleInputChange = (field: keyof typeof inputs, value: any) => {
     setInputs(prev => ({ ...prev, [field]: value }));
   };
 
   const formatCurrency = (val: number) => 
     new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(val);
+  
+  // Helper for input display (adds commas)
+  const formatInputDisplay = (val: number) => 
+    val.toLocaleString('en-US');
 
   return (
     <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
@@ -25,22 +38,22 @@ export default function TLHDecisionEngine() {
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Cost Basis ($)</label>
               <input 
-                type="number" 
-                min="0"
-                value={inputs.costBasis}
-                onChange={(e) => handleInputChange('costBasis', Number(e.target.value))}
-                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                type="text" 
+                inputMode="numeric"
+                value={formatInputDisplay(inputs.costBasis)}
+                onChange={(e) => handleNumberInput('costBasis', e.target.value)}
+                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-slate-900"
               />
             </div>
             
             <div>
               <label className="block text-sm font-semibold text-slate-700 mb-1">Current Value ($)</label>
               <input 
-                type="number" 
-                min="0"
-                value={inputs.currentValue}
-                onChange={(e) => handleInputChange('currentValue', Number(e.target.value))}
-                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                type="text"
+                inputMode="numeric"
+                value={formatInputDisplay(inputs.currentValue)}
+                onChange={(e) => handleNumberInput('currentValue', e.target.value)}
+                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-slate-900"
               />
             </div>
 
@@ -55,7 +68,7 @@ export default function TLHDecisionEngine() {
                 max={60}
                 value={inputs.taxRate}
                 onChange={(e) => handleInputChange('taxRate', Number(e.target.value))}
-                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                className="w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none text-slate-900"
               />
               <p className="text-xs text-slate-500 mt-1">Use Income Rate (e.g. 37%) for Short Term, Capital Rate (20%) for Long Term.</p>
             </div>
@@ -79,8 +92,10 @@ export default function TLHDecisionEngine() {
             {/* SLIDER: Market Recovery */}
             <div>
               <div className="flex justify-between mb-2">
-                <label className="block text-sm font-semibold text-slate-700">Market Recovery (Next 30 Days)</label>
-                <span className="text-sm font-bold text-blue-600">{inputs.marketRecoveryRate > 0 ? '+' : ''}{inputs.marketRecoveryRate}%</span>
+                <label className="block text-sm font-semibold text-slate-700">Market Recovery Expectation (30 Days)</label>
+                <span className={`text-sm font-bold ${inputs.marketRecoveryRate < 0 ? 'text-red-600' : 'text-blue-600'}`}>
+                    {inputs.marketRecoveryRate > 0 ? '+' : ''}{inputs.marketRecoveryRate}%
+                </span>
               </div>
               <input 
                 type="range" 
@@ -91,10 +106,10 @@ export default function TLHDecisionEngine() {
                 onChange={(e) => handleInputChange('marketRecoveryRate', Number(e.target.value))}
                 className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
               />
-              <div className="flex justify-between text-xs text-slate-400 mt-1">
-                <span>Flat (0%)</span>
-                <span>Moderate (+2%)</span>
-                <span>Rally (+10%)</span>
+              <div className="flex justify-between text-xs text-slate-400 mt-1 font-mono">
+                <span>-5%</span>
+                <span>0%</span>
+                <span>+10%</span>
               </div>
             </div>
           </div>
@@ -126,60 +141,105 @@ export default function TLHDecisionEngine() {
                 </div>
               )}
 
-              {/* CARD A: CASH TRAP */}
-              <div className={`p-5 rounded-xl border-2 transition-all ${
-                results.cashOutcome.isPositive ? 'border-yellow-400 bg-yellow-50' : 'border-red-200 bg-red-50'
+              {/* CARD A: CASH TRAP (Dynamic Styling based on Recommendation) */}
+              <div className={`p-5 rounded-xl border-2 transition-all relative ${
+                results.recommendation === 'cash' 
+                  ? 'border-slate-900 bg-slate-900 text-white shadow-xl' // Highlighting Cash if Recommended
+                  : results.cashOutcome.isPositive 
+                    ? 'border-yellow-400 bg-yellow-50' 
+                    : 'border-red-200 bg-red-50'
               }`}>
+                {results.recommendation === 'cash' && (
+                  <div className="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    RECOMMENDED
+                  </div>
+                )}
+                
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-slate-800">Strategy A: Sell to Cash</h3>
+                  <h3 className={`font-bold ${results.recommendation === 'cash' ? 'text-slate-100' : 'text-slate-800'}`}>
+                    Strategy A: Sell to Cash
+                  </h3>
                   <span className={`px-2 py-1 rounded text-xs font-bold ${
-                    results.cashOutcome.isPositive ? 'bg-yellow-200 text-yellow-800' : 'bg-red-200 text-red-800'
+                    results.recommendation === 'cash'
+                        ? 'bg-slate-700 text-slate-300'
+                        : results.cashOutcome.isPositive ? 'bg-yellow-200 text-yellow-800' : 'bg-red-200 text-red-800'
                   }`}>
                     {results.cashOutcome.verdict}
                   </span>
                 </div>
-                <div className="text-2xl font-black text-slate-900 mb-1">
+                <div className={`text-2xl font-black mb-1 ${results.recommendation === 'cash' ? 'text-white' : 'text-slate-900'}`}>
                   {formatCurrency(results.cashOutcome.projectedBenefit)}
                 </div>
-                <p className="text-xs font-bold text-slate-500 uppercase tracking-wide mb-2">Projected Net Benefit</p>
-                <p className="text-sm text-slate-600 leading-snug">
+                <p className={`text-xs font-bold uppercase tracking-wide mb-2 ${results.recommendation === 'cash' ? 'text-slate-400' : 'text-slate-500'}`}>
+                    Projected Net Benefit
+                </p>
+                <p className={`text-sm leading-snug ${results.recommendation === 'cash' ? 'text-slate-300' : 'text-slate-600'}`}>
                   {results.cashOutcome.isPositive 
-                    ? "You save enough tax to cover the market rally." 
+                    ? "Savings cover the market move." 
                     : <span>Warning: You save taxes, but <strong>miss out on {formatCurrency(inputs.currentValue * inputs.marketRecoveryRate/100)}</strong> of growth.</span>
                   }
                 </p>
               </div>
 
-              {/* CARD B: SMART SWITCH */}
-              <div className="p-5 rounded-xl border-2 border-slate-900 bg-slate-900 text-white relative shadow-lg">
-                <div className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-                  RECOMMENDED
-                </div>
+              {/* CARD B: SMART SWITCH (Dynamic Styling) */}
+              <div className={`p-5 rounded-xl border-2 transition-all relative ${
+                 results.recommendation === 'switch'
+                 ? 'border-slate-900 bg-slate-900 text-white shadow-xl' // Highlight Switch if Recommended
+                 : 'border-slate-200 bg-white text-slate-900 opacity-60' // Dim if not recommended
+              }`}>
+                {results.recommendation === 'switch' && (
+                  <div className="absolute top-0 right-0 bg-green-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                    RECOMMENDED
+                  </div>
+                )}
+
                 <div className="flex justify-between items-start mb-2">
-                  <h3 className="font-bold text-slate-100">Strategy B: Smart Switch</h3>
-                  <span className="px-2 py-1 rounded text-xs font-bold bg-green-900 text-green-300 border border-green-700">
-                    EFFICIENT
+                  <h3 className={`font-bold ${results.recommendation === 'switch' ? 'text-slate-100' : 'text-slate-800'}`}>
+                    Strategy B: Smart Switch
+                  </h3>
+                  <span className={`px-2 py-1 rounded text-xs font-bold ${
+                      results.recommendation === 'switch' 
+                      ? 'bg-green-900 text-green-300 border border-green-700' 
+                      : 'bg-slate-100 text-slate-500'
+                  }`}>
+                    {results.switchOutcome.verdict}
                   </span>
                 </div>
-                <div className="text-3xl font-black text-white mb-1">
+                <div className={`text-3xl font-black mb-1 ${results.recommendation === 'switch' ? 'text-white' : 'text-slate-900'}`}>
                   +{formatCurrency(results.switchOutcome.projectedBenefit)}
                 </div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-wide mb-2">Projected Net Benefit</p>
+                <p className={`text-xs font-bold uppercase tracking-wide mb-2 ${results.recommendation === 'switch' ? 'text-slate-400' : 'text-slate-500'}`}>
+                    Projected Net Benefit
+                </p>
                 
                 {/* Carry Forward Display */}
                 {!inputs.hasRealizedGains && results.carryForward > 0 && (
-                  <div className="mb-3 text-xs text-slate-400 bg-slate-800 p-2 rounded border border-slate-700">
+                  <div className={`mb-3 text-xs p-2 rounded border ${
+                      results.recommendation === 'switch' 
+                      ? 'text-slate-400 bg-slate-800 border-slate-700' 
+                      : 'text-slate-600 bg-slate-50 border-slate-200'
+                  }`}>
                     <span>+ {formatCurrency(results.carryForward)} loss carried forward</span>
                   </div>
                 )}
 
-                <p className="text-sm text-slate-300 leading-snug mb-4">
+                <p className={`text-sm leading-snug mb-4 ${results.recommendation === 'switch' ? 'text-slate-300' : 'text-slate-600'}`}>
                   Projected tax savings captured while staying invested in the market recovery.
                 </p>
                 
-                {/* CTA */}
-                <a href="/" className="block w-full text-center bg-white text-slate-900 font-bold py-3 rounded-lg hover:bg-slate-100 transition-colors">
-                  Find a Replacement Pair →
+                {/* SAFE LEGAL CTA */}
+                <div className={`p-3 rounded-lg text-sm mb-3 ${
+                    results.recommendation === 'switch' ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-600'
+                }`}>
+                    When harvesting losses on individual stocks, investors often use sector ETFs to maintain exposure while avoiding wash sales.
+                </div>
+
+                <a href="/" className={`block w-full text-center font-bold py-3 rounded-lg transition-colors ${
+                    results.recommendation === 'switch'
+                    ? 'bg-white text-slate-900 hover:bg-slate-100'
+                    : 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                }`}>
+                  Find a Replacement ETF Pair →
                 </a>
               </div>
             </>
