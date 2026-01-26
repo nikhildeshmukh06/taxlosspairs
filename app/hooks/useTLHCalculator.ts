@@ -22,10 +22,12 @@ export interface CalculatorResult {
   loss: number;
   hasLoss: boolean;
   taxSavings: number;
-  carryForward: number;
+  carryForward: number; // The amount unused this year
+  modeledMissedGrowth: number; // Renamed from missedGain for clarity
+  effectiveTaxRateUsed: number; // For auditing/debugging
   cashOutcome: ScenarioOutcome;
   switchOutcome: ScenarioOutcome;
-  recommendation: 'cash' | 'switch'; // NEW: Tells UI which card wins
+  recommendation: 'cash' | 'switch'; // Pure math recommendation
   breakEvenRate: number;
   isValid: boolean;
   validationError?: string;
@@ -60,16 +62,17 @@ export function useTLHCalculator() {
 
     const taxSavings = effectiveDeduction * (taxRate / 100);
 
-    // 3. Opportunity Cost (Cash Drag)
-    const missedGain = currentValue * (marketRecoveryRate / 100);
+    // 3. Opportunity Cost (Modeled Missed Growth)
+    // "Modeled" name implies this is an assumption, not a forecast.
+    const modeledMissedGrowth = currentValue * (marketRecoveryRate / 100);
 
     // 4. Scenario A: Cash Trap
-    const cashNet = taxSavings - missedGain;
+    const cashNet = taxSavings - modeledMissedGrowth;
     
     // 5. Scenario B: Smart Switch
     const switchNet = taxSavings; 
 
-    // 6. Determine Recommendation
+    // 6. Determine Recommendation (Pure Math)
     // If market is going DOWN (recovery < 0), Cash is mathematically better.
     // If market is going UP or Flat, Switching is better.
     const recommendation = cashNet > switchNet ? 'cash' : 'switch';
@@ -88,7 +91,7 @@ export function useTLHCalculator() {
       projectedBenefit: switchNet,
       netResult: switchNet,
       isPositive: true,
-      verdict: recommendation === 'switch' ? 'OPTIMAL' : 'INEFFICIENT', // Update verdict text
+      verdict: recommendation === 'switch' ? 'OPTIMAL' : 'INEFFICIENT',
       breakdownText: `You capture tax value while staying invested.`
     };
 
@@ -99,6 +102,8 @@ export function useTLHCalculator() {
       hasLoss,
       taxSavings,
       carryForward,
+      modeledMissedGrowth,
+      effectiveTaxRateUsed: taxRate,
       cashOutcome,
       switchOutcome,
       recommendation,
