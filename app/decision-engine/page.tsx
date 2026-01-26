@@ -3,6 +3,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import TLHDecisionEngine from '../components/TLHDecisionEngine';
 import Footer from '../components/Footer';
+import Navbar from '../components/Navbar'; // <--- NEW IMPORT
 
 export const metadata: Metadata = {
   title: 'Tax-Loss Harvesting Decision Engine | Should I Sell?',
@@ -13,15 +14,8 @@ export default function DecisionEnginePage() {
   return (
     <div className="flex flex-col min-h-screen bg-slate-50">
       
-      {/* NAV (Simple Back Button) */}
-      <nav className="bg-white border-b border-gray-200 px-4 py-4">
-        <div className="max-w-5xl mx-auto flex items-center justify-between">
-          <Link href="/" className="text-sm font-bold text-slate-500 hover:text-blue-600 flex items-center gap-1 transition-colors">
-            ← Back to Global Search
-          </Link>
-          <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
-        </div>
-      </nav>
+      {/* GLOBAL NAVBAR */}
+      <Navbar />
 
       <main className="flex-grow py-12 px-4 sm:px-6">
         <div className="max-w-5xl mx-auto">
