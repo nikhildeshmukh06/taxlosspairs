@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 // Define the shape of the props
 interface FooterProps {
-  variant?: 'standard' | 'tey'; // Default is 'standard'
+  variant?: 'standard' | 'tey' | 'decision'; // Added 'decision' variant
 }
 
 export default function Footer({ variant = 'standard' }: FooterProps) {
@@ -37,12 +37,19 @@ export default function Footer({ variant = 'standard' }: FooterProps) {
             They are approximations, not guarantees, and may change over time. Leveraged products often use swaps/derivatives 
             resulting in low physical overlap despite high correlation. Past performance does not guarantee future results.
           </p>
-        ) : (
+        ) : variant === 'tey' ? (
           // OPTION B: TAX / BOND DISCLAIMER (TEY Pages)
           <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
             DISCLAIMER: Tax-equivalent yield calculations are estimates based on projected 2026 federal marginal rates and state tax brackets. 
             This tool does not compute total tax liability, does not account for AMT, and is not a substitute for professional tax advice. 
             All investment decisions should be discussed with a qualified financial advisor.
+          </p>
+        ) : (
+          // OPTION C: DECISION ENGINE DISCLAIMER (New)
+          <p className="text-slate-500 text-xs max-w-2xl mx-auto mb-6 leading-relaxed">
+            DISCLAIMER: This decision engine provides educational estimates based on user inputs and simplified market assumptions 
+            (e.g., linear recovery, full liquidation of a single tax lot). It does not constitute tax advice, does not account for 
+            complex wash sale chains, and is not a substitute for professional CPA guidance. Consult a tax professional before selling.
           </p>
         )}
 
