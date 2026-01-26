@@ -13,7 +13,7 @@ export interface CalculatorInputs {
 export interface ScenarioOutcome {
   projectedBenefit: number;
   netResult: number;
-  verdict: 'NET POSITIVE' | 'NET NEGATIVE' | 'VALUE ADDITIVE'; // Institutional labeling
+  verdict: 'NET POSITIVE' | 'NET NEGATIVE' | 'NEUTRAL'; // Standardized labels
   breakdownText: string;
   isPositive: boolean;
 }
@@ -63,7 +63,6 @@ export function useTLHCalculator() {
     const taxSavings = effectiveDeduction * (taxRate / 100);
 
     // 3. Opportunity Cost (Modeled Missed Growth)
-    // "Modeled" name implies this is an assumption, not a forecast.
     const modeledMissedGrowth = currentValue * (marketRecoveryRate / 100);
 
     // 4. Scenario A: Cash Trap
@@ -72,17 +71,21 @@ export function useTLHCalculator() {
     // 5. Scenario B: Smart Switch
     const switchNet = taxSavings; 
 
-    // 6. Determine Recommendation (Pure Math)
-    // If market is going DOWN (recovery < 0), Cash is mathematically better.
-    // If market is going UP or Flat, Switching is better.
+    // 6. Determine Recommendation
     const recommendation = cashNet > switchNet ? 'cash' : 'switch';
+
+    // Helper for standardized verdicts
+    const getVerdict = (val: number) => {
+        if (val > 0) return 'NET POSITIVE';
+        if (val < 0) return 'NET NEGATIVE';
+        return 'NEUTRAL';
+    };
 
     const cashOutcome: ScenarioOutcome = {
       projectedBenefit: cashNet,
       netResult: cashNet,
       isPositive: cashNet > 0,
-      // Replaced emotional "SAFE/DANGEROUS" with analytical "NET POSITIVE/NEGATIVE"
-      verdict: cashNet > 0 ? 'NET POSITIVE' : 'NET NEGATIVE',
+      verdict: getVerdict(cashNet),
       breakdownText: cashNet > 0
         ? `Savings cover the missed growth.`
         : `Tax savings wiped out by market recovery.`
@@ -92,8 +95,7 @@ export function useTLHCalculator() {
       projectedBenefit: switchNet,
       netResult: switchNet,
       isPositive: true,
-      // "VALUE ADDITIVE" is precise and non-emotional
-      verdict: 'VALUE ADDITIVE',
+      verdict: getVerdict(switchNet), // Now consistent with Cash card
       breakdownText: `You capture tax value while staying invested.`
     };
 
