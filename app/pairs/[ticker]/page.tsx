@@ -4,7 +4,7 @@ import Link from 'next/link';
 import pairsData from '../../pairs.json';
 import WashSaleCalculator from '../../components/WashSaleCalculator';
 import Footer from '../../components/Footer';
-import Navbar from '../../components/Navbar'; // <--- NEW IMPORT
+import Navbar from '../../components/Navbar';
 
 // 1. GENERATE STATIC PARAMS
 export async function generateStaticParams() {
@@ -199,60 +199,12 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
           </div>
         </div>
 
-        {/* DEFINITIONS & SEO CONTENT BLOCK */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
-                <h3 className="text-sm font-bold text-gray-900 mb-2">What is Correlation?</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                    Correlation measures the historical relationship between two assets. A value of 1.00 (100%) means they move perfectly in sync. For tax loss harvesting, high correlation is generally desired to stay in the market while realizing a loss.
-                </p>
-            </div>
-            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
-                <h3 className="text-sm font-bold text-gray-900 mb-2">Index Methodology</h3>
-                <p className="text-xs text-gray-600 leading-relaxed">
-                    Under the wash sale rule, "substantially identical" assets are disallowed for loss claims. Many investors argue that ETFs tracking different indices (e.g., S&P 500 vs. Russell 1000) are not substantially identical.
-                </p>
-            </div>
+        {/* --- 1. WASH SALE CALCULATOR (Moved Up for Utility) --- */}
+        <div className="mb-8">
+            <WashSaleCalculator ticker={ticker} />
         </div>
 
-        {/* RELATED RESEARCH */}
-        <div className="mb-12">
-            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Related ETF Research</h4>
-            <div className="flex flex-wrap gap-2">
-                {['VOO', 'IVV', 'SPY', 'QQQ', 'VTI'].filter(t => t !== ticker).map(t => (
-                    <Link key={t} href={`/pairs/${t}`} className="px-3 py-1 bg-white border border-gray-200 rounded text-xs text-blue-600 hover:border-blue-300 transition-colors font-medium">
-                        {t} Metrics
-                    </Link>
-                ))}
-            </div>
-        </div>
-
-        {/* --- CROSS-SELL BANNER (TEY) --- */}
-        <div className="mb-8 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
-          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-            <div>
-              <div className="inline-block bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">
-                New Tool
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">
-                Is a 4% Tax-Free Bond Better than a 7% CD?
-              </h3>
-              <p className="text-slate-300 text-sm leading-relaxed max-w-md">
-                Don't guess. Compare municipal bonds against taxable alternatives using your exact 2026 federal and state tax bracket.
-              </p>
-            </div>
-            <Link
-              href="/tax-equivalent-yield"
-              className="w-full md:w-auto text-center px-5 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg hover:bg-blue-50 transition-colors shadow-md flex justify-center items-center gap-2"
-            >
-              Check My Tax-Equivalent Yield →
-            </Link>
-          </div>
-          {/* Decorative Circle */}
-          <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity"></div>
-        </div>
-
-        {/* --- DECISION ENGINE CTA (NEW) --- */}
+        {/* --- 2. DECISION ENGINE CTA (Contextual Strategy) --- */}
         <div className="mb-12 p-1 rounded-xl bg-gradient-to-r from-emerald-400 via-teal-400 to-emerald-500 shadow-sm">
             <div className="bg-white rounded-[10px] p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div>
@@ -274,9 +226,57 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
             </div>
         </div>
 
-        {/* --- WASH SALE CALCULATOR --- */}
+        {/* RELATED RESEARCH (Nav) */}
         <div className="mb-12">
-            <WashSaleCalculator ticker={ticker} />
+            <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Related ETF Research</h4>
+            <div className="flex flex-wrap gap-2">
+                {['VOO', 'IVV', 'SPY', 'QQQ', 'VTI'].filter(t => t !== ticker).map(t => (
+                    <Link key={t} href={`/pairs/${t}`} className="px-3 py-1 bg-white border border-gray-200 rounded text-xs text-blue-600 hover:border-blue-300 transition-colors font-medium">
+                        {t} Metrics
+                    </Link>
+                ))}
+            </div>
+        </div>
+
+        {/* DEFINITIONS & SEO CONTENT BLOCK (Text Filler) */}
+        <div className="grid md:grid-cols-2 gap-6 mb-12">
+            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 className="text-sm font-bold text-gray-900 mb-2">What is Correlation?</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                    Correlation measures the historical relationship between two assets. A value of 1.00 (100%) means they move perfectly in sync. For tax loss harvesting, high correlation is generally desired to stay in the market while realizing a loss.
+                </p>
+            </div>
+            <div className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 className="text-sm font-bold text-gray-900 mb-2">Index Methodology</h3>
+                <p className="text-xs text-gray-600 leading-relaxed">
+                    Under the wash sale rule, "substantially identical" assets are disallowed for loss claims. Many investors argue that ETFs tracking different indices (e.g., S&P 500 vs. Russell 1000) are not substantially identical.
+                </p>
+            </div>
+        </div>
+
+        {/* --- 3. CROSS-SELL BANNER (Moved to Bottom) --- */}
+        <div className="mb-12 bg-gradient-to-br from-slate-900 to-slate-800 rounded-xl p-6 md:p-8 text-white shadow-lg relative overflow-hidden group">
+          <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div>
+              <div className="inline-block bg-blue-500/20 border border-blue-400/30 text-blue-200 text-[10px] font-bold px-2 py-1 rounded mb-3 uppercase tracking-wider">
+                New Tool
+              </div>
+              <h3 className="text-xl font-bold text-white mb-2">
+                Is a 4% Tax-Free Bond Better than a 7% CD?
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed max-w-md">
+                Don't guess. Compare municipal bonds against taxable alternatives using your exact 2026 federal and state tax bracket.
+              </p>
+            </div>
+            <Link
+              href="/tax-equivalent-yield"
+              className="w-full md:w-auto text-center px-5 py-3 bg-white text-slate-900 font-bold text-sm rounded-lg hover:bg-blue-50 transition-colors shadow-md flex justify-center items-center gap-2"
+            >
+              Check My Tax-Equivalent Yield →
+            </Link>
+          </div>
+          {/* Decorative Circle */}
+          <div className="absolute -top-12 -right-12 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-20 pointer-events-none group-hover:opacity-30 transition-opacity"></div>
         </div>
 
         {/* FOOTER */}
