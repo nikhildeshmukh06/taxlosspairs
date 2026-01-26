@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 import BackButton from '../components/BackButton';
 
 export const metadata = {
@@ -23,29 +22,32 @@ export default function LegalPage() {
 
         <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-8 text-slate-700 leading-relaxed">
           
-          {/* SECTION 1: NO ADVICE (Updated for TEY) */}
+          {/* SECTION 1: NO ADVICE (Updated for Decision Engine) */}
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">1. No Investment or Tax Advice</h2>
             <p>
-              The content provided on <strong>TaxLossPairs.com</strong> is for informational and research purposes only. 
+              The content provided on <strong>TaxLossPairs.com</strong> is for informational, educational, and research purposes only. 
               It does <strong>not</strong> constitute financial, investment, tax, or legal advice.
             </p>
             <p className="mt-2">
-              We are not financial advisors or tax professionals. The tools on this site—including ETF correlation metrics and 
-              Tax-Equivalent Yield (TEY) calculators—are based on historical data, public filings, and estimated projections. 
+              We are not financial advisors or tax professionals. The tools on this site—including the ETF correlation matrix, 
+              Tax-Equivalent Yield (TEY) calculator, and <strong>Tax-Loss Harvesting Decision Engine</strong>—are based on historical data, 
+              public filings, and simplified mathematical models.
+            </p>
+            <p className="mt-2">
               You should consult a qualified professional (CPA, CFP, or attorney) before making any investment decisions, 
-              especially regarding tax-loss harvesting, municipal bond selection, or tax planning.
+              especially regarding tax-loss harvesting, wash sales, municipal bond selection, or tax planning.
             </p>
           </section>
 
-          {/* SECTION 2: DATA ACCURACY (Updated for Tax Rates) */}
+          {/* SECTION 2: DATA ACCURACY (Updated for Projections) */}
           <section>
             <h2 className="text-xl font-bold text-slate-900 mb-3">2. No Warranty of Accuracy</h2>
             <p>
               All data is provided "as is" without warranty of any kind. We make no representations regarding the accuracy, 
               completeness, or timeliness of the information.
             </p>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
+            <ul className="list-disc pl-5 mt-2 space-y-2">
               <li>
                 <strong>ETF Data:</strong> Correlation and overlap estimates are algorithmically generated and may contain errors.
               </li>
@@ -54,7 +56,10 @@ export default function LegalPage() {
                 inflation projections or current statutes. Actual tax rates for future tax years (e.g., 2026) may differ due to legislative changes.
               </li>
               <li>
-                <strong>Bond Rules:</strong> State-specific tax rules (e.g., AMT liability, reciprocity) are complex and subject to change.
+                <strong>Hypothetical Projections:</strong> The Decision Engine uses simplified assumptions (e.g., linear market recovery, 
+                full liquidation of a single tax lot) to model potential outcomes. These are hypothetical scenarios based entirely on user inputs 
+                and do not account for complex variables like transaction costs, bid-ask spreads, or multi-lot wash sale rules. 
+                Results labeled "Net Positive" or "Higher Net Value" are mathematical comparisons, not investment recommendations.
               </li>
             </ul>
           </section>
