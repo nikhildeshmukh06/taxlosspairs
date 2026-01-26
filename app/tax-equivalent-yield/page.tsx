@@ -3,6 +3,7 @@ import Link from 'next/link';
 import TEYCalculator from '../components/TEYCalculator';
 import { STATE_CONTENT } from '../data/state-content';
 import Footer from '../components/Footer'; 
+import Navbar from '../components/Navbar'; // <--- NEW IMPORT
 
 // 1. Dynamic Metadata (Pulls directly from your central data file)
 export const metadata = STATE_CONTENT['hub'].metadata;
@@ -15,23 +16,8 @@ export default function TEYHubPage() {
   return (
     <main className="min-h-screen bg-slate-50 flex flex-col">
       
-      {/* NAV BAR (Preserved) */}
-      <nav className="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <Link href="/" className="text-lg font-black text-slate-900 tracking-tight hover:text-blue-600 transition-colors">
-              TaxLossPairs
-            </Link>
-            <div className="h-6 w-px bg-slate-200 hidden md:block" />
-            <span className="font-semibold text-slate-900 text-sm">
-              Tax-Equivalent Yield Calculator
-            </span>
-          </div>
-          <div className="hidden md:block text-xs font-mono text-slate-400">
-            2026 Tax Outlook
-          </div>
-        </div>
-      </nav>
+      {/* GLOBAL NAVBAR */}
+      <Navbar />
 
       <div className="flex-grow">
         {/* HERO (Now Dynamic) */}
@@ -135,6 +121,31 @@ export default function TEYHubPage() {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+
+      {/* --- TAX STRATEGY TOOLKIT --- */}
+      <div className="bg-slate-900 py-12 px-6 mt-auto">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-left">
+                <div className="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">
+                    Advanced Tax Strategy
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2">
+                    Optimize Your Capital Gains
+                </h3>
+                <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                    High earners often pair tax-free income with strategic loss harvesting. 
+                    Have realized losses? Use our decision engine to check if you should harvest.
+                </p>
+            </div>
+            <Link 
+                href="/decision-engine"
+                className="whitespace-nowrap px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-lg transition-colors shadow-lg flex items-center gap-2"
+            >
+                Open Decision Engine
+                <span>→</span>
+            </Link>
         </div>
       </div>
 

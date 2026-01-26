@@ -3,7 +3,8 @@
 import React, { useState, useMemo } from 'react';
 import Link from 'next/link';
 import pairsData from './pairs.json';
-import Footer from './components/Footer'; // <--- Import the new Footer
+import Footer from './components/Footer';
+import Navbar from './components/Navbar'; // <--- NEW IMPORT
 
 // Define the order for the "Bloomberg Terminal" clusters
 const CATEGORY_ORDER = [
@@ -59,6 +60,9 @@ export default function Home() {
           ⚠️ Market Data Only. Not financial, tax, or investment advice. Past correlation does not guarantee future results.
         </p>
       </div>
+
+      {/* --- NEW: GLOBAL NAVBAR --- */}
+      <Navbar />
 
       {/* --- HERO SECTION --- */}
       <header className="bg-white border-b border-slate-200">
@@ -193,6 +197,8 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* TOOL 1: TEY CALCULATOR */}
             <Link 
               href="/tax-equivalent-yield" 
               className="group block p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-blue-400 transition-all relative overflow-hidden"
@@ -215,6 +221,33 @@ export default function Home() {
                 Calculate Yield &rarr;
               </span>
             </Link>
+
+            {/* TOOL 2: DECISION ENGINE (NEW) */}
+            <Link 
+              href="/decision-engine" 
+              className="group block p-6 bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md hover:border-emerald-400 transition-all relative overflow-hidden"
+            >
+              <div className="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <span className="text-6xl">📉</span>
+              </div>
+              <div className="flex items-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-slate-100 rounded-lg flex items-center justify-center text-xl text-slate-600 group-hover:bg-emerald-100 group-hover:text-emerald-600 transition-colors">
+                  ⚖️
+                </div>
+                {/* --- UPDATE: SIMPLIFIED COPY --- */}
+                <h3 className="font-bold text-lg text-slate-900 group-hover:text-emerald-600 transition-colors">
+                  Should I harvest my loss?
+                </h3>
+              </div>
+              {/* --- UPDATE: PAIN POINT FOCUSED --- */}
+              <p className="text-slate-600 text-sm leading-relaxed mb-3">
+                The market is down. Should you sell to cash or swap to a partner? Calculate the risk of missing the rebound before you trade.
+              </p>
+              <span className="text-emerald-600 text-sm font-semibold flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                Run the Calculator &rarr;
+              </span>
+            </Link>
+
           </div>
         </section>
 
