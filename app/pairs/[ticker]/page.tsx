@@ -2,9 +2,9 @@ import React from 'react';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import pairsData from '../../pairs.json';
-import BackButton from '../../components/BackButton';
 import WashSaleCalculator from '../../components/WashSaleCalculator';
-import Footer from '../../components/Footer'; // <--- Ensure Footer is imported if not already
+import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar'; // <--- NEW IMPORT
 
 // 1. GENERATE STATIC PARAMS
 export async function generateStaticParams() {
@@ -65,13 +65,8 @@ export default function TickerPage({ params }: { params: { ticker: string } }) {
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       
-      {/* NAV */}
-      <nav className="bg-white border-b border-gray-200 px-4 py-4">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <BackButton />
-          <div className="text-sm font-semibold text-gray-500 tracking-tight">TaxLossPairs.com</div>
-        </div>
-      </nav>
+      {/* GLOBAL NAVBAR */}
+      <Navbar />
 
       <main className="max-w-3xl mx-auto px-4 py-12">
         
