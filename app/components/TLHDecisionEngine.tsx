@@ -97,7 +97,8 @@ export default function TLHDecisionEngine() {
                 <div className="text-sm text-slate-700">
                   <span>I have other <strong>Realized Gains</strong> to offset.</span>
                   <div className="text-xs text-slate-500 mt-1 space-y-1">
-                    <p>• <strong>Checked:</strong> Unlimited deduction against gains.</p>
+                    {/* UPDATED TEXT BELOW */}
+                    <p>• <strong>Checked:</strong> Offsets gains (assumes sufficient gains to cover entire loss).</p>
                     <p>• <strong>Unchecked:</strong> Deduction capped at $3,000/year (IRS Limit).</p>
                   </div>
                 </div>
