@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { STATE_CONTENT } from '../../data/state-content'; 
 import TEYCalculator from '../../components/TEYCalculator'; 
 import Footer from '../../components/Footer';
+import Navbar from '../../components/Navbar'; // <--- NEW IMPORT
 
 // Helper to find state data by URL slug
 function getStateContent(slug: string) {
@@ -57,12 +58,14 @@ export default function DynamicStatePage({ params }: { params: { state: string }
   return (
     <main className="min-h-screen bg-slate-50 font-sans selection:bg-blue-100 flex flex-col">
       
+      {/* GLOBAL NAVBAR */}
+      <Navbar />
+
       {/* HERO SECTION */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
-          <Link href="/tax-equivalent-yield" className="inline-block mb-8 text-xs font-black text-slate-400 hover:text-blue-600 uppercase tracking-widest transition-colors">
-            ← Back to TEY Hub
-          </Link>
+          {/* REMOVED: "Back to TEY Hub" Link (Replaced by Navbar) */}
+          
           <h1 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
             {content.hero.title}
           </h1>
@@ -124,7 +127,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
         </div>
       </div>
 
-      {/* --- NEW: TAX STRATEGY TOOLKIT --- */}
+      {/* --- TAX STRATEGY TOOLKIT --- */}
       <div className="bg-slate-900 py-12 px-6 mt-auto">
         <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="text-left">
