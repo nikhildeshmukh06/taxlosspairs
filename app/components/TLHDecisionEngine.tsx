@@ -10,7 +10,7 @@ export default function TLHDecisionEngine() {
   const handleNumberInput = (field: keyof typeof inputs, rawValue: string) => {
     // 1. Handle empty input explicitly to avoid defaulting to 0
     if (rawValue.trim() === '') {
-      setInputs(prev => ({ ...prev, [field]: 0 })); // Or keep as 0, strictly typed
+      setInputs(prev => ({ ...prev, [field]: 0 })); 
       return;
     }
 
@@ -260,13 +260,13 @@ export default function TLHDecisionEngine() {
                    }`}>
                     Find a Replacement ETF Pair →
                   </a>
-                  
-                  {/* Assumptions Footer (Legal Safety) */}
-                  <p className="text-[10px] text-slate-500 text-center mt-3 leading-tight">
+                </div>
+
+                {/* Legal Assumptions Footer (Moved to Bottom) */}
+                <p className="text-[10px] text-slate-500 text-center mt-6 leading-tight max-w-xs mx-auto">
                     *Assumes full liquidation of a single tax lot at the provided tax rate. 
                     Transaction costs excluded. Estimates are for educational purposes only.
-                  </p>
-                </div>
+                </p>
 
               </div>
               {/* END RESULTS WRAPPER */}
