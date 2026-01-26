@@ -26,7 +26,7 @@ export default function DecisionEnginePage() {
         <TLHDecisionEngine />
 
         {/* SEO Content / FAQ (Static HTML for Googlebot) */}
-        <div className="mt-16 max-w-3xl mx-auto prose prose-slate">
+        <div className="mt-16 max-w-3xl mx-auto prose prose-slate prose-headings:text-slate-900 prose-p:text-slate-600 prose-li:text-slate-600 prose-strong:text-slate-900">
           <h3>How this tool works</h3>
           <p>
             Most investors hesitate to harvest losses because they worry about selling at the bottom. 
