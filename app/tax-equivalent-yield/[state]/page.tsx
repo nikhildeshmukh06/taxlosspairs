@@ -4,7 +4,7 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { STATE_CONTENT } from '../../data/state-content'; 
 import TEYCalculator from '../../components/TEYCalculator'; 
-import Footer from '../../components/Footer'; // <--- IMPORT SHARED FOOTER
+import Footer from '../../components/Footer';
 
 // Helper to find state data by URL slug
 function getStateContent(slug: string) {
@@ -60,7 +60,6 @@ export default function DynamicStatePage({ params }: { params: { state: string }
       {/* HERO SECTION */}
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-4xl mx-auto px-6 py-12 md:py-16 text-center">
-          {/* FIX: Corrected Link to TEY Hub */}
           <Link href="/tax-equivalent-yield" className="inline-block mb-8 text-xs font-black text-slate-400 hover:text-blue-600 uppercase tracking-widest transition-colors">
             ← Back to TEY Hub
           </Link>
@@ -78,7 +77,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
         <TEYCalculator defaultState={calcCode} isLocked={true} />
       </div>
 
-      {/* MACRO PERSPECTIVE (Centered - Example Card Removed) */}
+      {/* MACRO PERSPECTIVE */}
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
           <div className="inline-block bg-purple-100 text-purple-700 text-[10px] font-black uppercase tracking-widest px-2 py-1 rounded mb-4">
@@ -87,7 +86,6 @@ export default function DynamicStatePage({ params }: { params: { state: string }
           <h2 className="text-xl font-black text-slate-900 mb-4 tracking-tight">
             {content.whySection.title}
           </h2>
-          {/* Font color forced to text-slate-900 for readability */}
           <div className="space-y-4 text-sm leading-relaxed text-slate-900 font-medium">
             <p>{content.whySection.p1}</p>
             <p>{content.whySection.p2}</p>
@@ -96,7 +94,7 @@ export default function DynamicStatePage({ params }: { params: { state: string }
       </div>
 
       {/* STATE SPECIFIC FAQs */}
-      <div className="max-w-3xl mx-auto px-6 pb-24 flex-grow">
+      <div className="max-w-3xl mx-auto px-6 pb-16 flex-grow">
         <h2 className="text-2xl font-black text-slate-900 mb-8 tracking-tight">
           Local Tax FAQs
         </h2>
@@ -126,7 +124,32 @@ export default function DynamicStatePage({ params }: { params: { state: string }
         </div>
       </div>
 
-      {/* FIX: SHARED FOOTER RESTORED */}
+      {/* --- NEW: TAX STRATEGY TOOLKIT --- */}
+      <div className="bg-slate-900 py-12 px-6 mt-auto">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-left">
+                <div className="text-emerald-400 text-xs font-bold uppercase tracking-widest mb-2">
+                    Advanced Tax Strategy
+                </div>
+                <h3 className="text-2xl font-black text-white mb-2">
+                    Optimize Your Capital Gains
+                </h3>
+                <p className="text-slate-400 text-sm max-w-md leading-relaxed">
+                    High earners often pair tax-free income with strategic loss harvesting. 
+                    Have realized losses? Use our decision engine to check if you should harvest.
+                </p>
+            </div>
+            <Link 
+                href="/decision-engine"
+                className="whitespace-nowrap px-6 py-3 bg-emerald-500 hover:bg-emerald-400 text-slate-900 font-bold rounded-lg transition-colors shadow-lg flex items-center gap-2"
+            >
+                Open Decision Engine
+                <span>→</span>
+            </Link>
+        </div>
+      </div>
+
+      {/* FOOTER */}
       <Footer variant="tey" />
     </main>
   );
