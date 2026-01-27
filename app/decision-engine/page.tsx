@@ -3,11 +3,12 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import TLHDecisionEngine from '../components/TLHDecisionEngine';
 import Footer from '../components/Footer';
-import Navbar from '../components/Navbar'; // <--- NEW IMPORT
+import Navbar from '../components/Navbar';
 
 export const metadata: Metadata = {
-  title: 'Tax-Loss Harvesting Decision Engine | Should I Sell?',
-  description: 'Calculate if tax-loss harvesting is worth it for your specific portfolio. Compare selling to cash vs. switching to a replacement pair.',
+  // AUDIT FIX: Hybrid Title Tag (Calculator + Human Hook + ETF Specificity)
+  title: 'Tax-Loss Harvesting Calculator: Should I Sell or Swap ETFs? | TaxLossPairs',
+  description: 'Free tax-loss harvesting calculator. Quantify the "Cash Trap" risk, compare selling to cash vs. swapping ETFs, and avoid wash sales. Optimize your 2026 tax strategy.',
 };
 
 export default function DecisionEnginePage() {
@@ -36,7 +37,7 @@ export default function DecisionEnginePage() {
           {/* The Calculator Component */}
           <TLHDecisionEngine />
 
-          {/* --- NEW: NEXT STEPS (Closing the Loop) --- */}
+          {/* --- NEXT STEPS (Closing the Loop) --- */}
           <div className="mt-16 pt-12 border-t border-slate-200">
             <h3 className="text-xl font-bold text-slate-900 mb-8 text-center uppercase tracking-widest text-sm text-slate-400">
               Take Action on Your Results
